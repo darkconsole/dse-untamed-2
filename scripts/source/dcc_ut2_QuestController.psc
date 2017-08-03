@@ -16,22 +16,26 @@ dcc_ut2_QuestConfig Property Config Auto
 dcc_ut2_QuestInterfaceXP Property XPBar Auto
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; form references ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Actor Property Player Auto
-
-Keyword Property KeywordActorTypeAnimal Auto
-Keyword Property KeywordActorTypeCreature Auto
-
-Faction Property FactionPredator Auto
-Faction Property FactionTamed Auto
-Faction Property FactionPackStay Auto
-
-Package Property PackageDoNothing Auto
-Package Property PackageFollow Auto
-Package Property PackagePackStay Auto
-
-Static Property StaticX Auto
+Actor   Property Player Auto                   ;; skyrim.esm
+Keyword Property KeywordActorTypeAnimal Auto   ;; skyrim.esm
+Keyword Property KeywordActorTypeCreature Auto ;; skyrim.esm
+Faction Property FactionPredator Auto          ;; skyrim.esm
+Faction Property FactionTamed Auto             ;; untamed
+Faction Property FactionPackStay Auto          ;; untamed
+Package Property PackageDoNothing Auto         ;; untamed
+Package Property PackageFollow Auto            ;; untamed
+Package Property PackagePackStay Auto          ;; untamed
+Perk    Property PerkCrossbreeder Auto         ;; untamed
+Perk    Property PerkDenMother Auto            ;; untamed
+Perk    Property PerkExperienced Auto          ;; untamed
+Perk    Property PerkPackLeader1 Auto          ;; untamed
+Perk    Property PerkPackLeader2 Auto          ;; untamed
+Perk    Property PerkPackLeader3 Auto          ;; untamed
+Perk    Property PerkResistantHide Auto        ;; untamed
+Perk    Property PerkThickHide Auto            ;; untamed
+Static  Property StaticX Auto                  ;; skyrim.esm
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; mod management api ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

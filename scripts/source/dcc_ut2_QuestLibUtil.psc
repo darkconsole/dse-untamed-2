@@ -239,9 +239,11 @@ EndFunction
 Float Function GetExperienceMax(Actor Who)
 {get the maximum amount of xp this actor can store at once.}
 
-	Float Max = 100.0
+	Float Max = Untamed.Config.OptExperienceMax
 
-	;; @todo - allow perks to adjust the max xp an actor can have stored.
+	If(Who.HasPerk(Untamed.PerkExperienced))
+		Max += Untamed.Config.OptPerkExperiencedAdd
+	EndIf
 
 	Return Max
 EndFunction

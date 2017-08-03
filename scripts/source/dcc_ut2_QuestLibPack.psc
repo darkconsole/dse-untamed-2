@@ -42,12 +42,15 @@ EndFunction
 Int Function GetMemberCountMax()
 {fetch the maximum number of things that can be in our pack.}
 
-	Int Count = 3
+	If(Untamed.Player.HasPerk(Untamed.PerkPackLeader3))
+		Return Untamed.Config.OptPerkPackLeader3
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader2))
+		Return Untamed.Config.OptPerkPackLeader2
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader1))
+		Return Untamed.Config.OptPerkPackLeader1
+	EndIf
 
-	;; @todo - check for various perks on the player which we
-	;; will use to modify this value.
-
-	Return Count
+	Return Untamed.Config.OptPerkPackLeader0
 EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
