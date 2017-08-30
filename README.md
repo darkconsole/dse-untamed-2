@@ -1,5 +1,9 @@
 # Untamed 2
 
+# Talent Trees
+
+![Talent Trees](https://raw.githubusercontent.com/darkconsole/untamed2/master/talents.png)
+
 # Current Status
 
 ## Core Mod Mechanics
