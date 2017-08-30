@@ -71,9 +71,13 @@ Function OnLameEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 	Untamed.Util.PrintDebug("Player Humanoid Ending")
 
 	;; you get negative xp for every humanoid involved when there are no
-	;; beasts involved.
+	;; beasts involved, unless you have the cross breeder perk.
 
 	Float XP = ((((Actors.Length - 1) * Untamed.Config.OptEncounterXP) * -1) * Untamed.Config.OptEncounterHumanoidMult)
+
+	If(Untamed.Player.HasPerk(Untamed.PerkCrossbreeder))
+		XP = 0
+	EndIf
 
 	Untamed.Experience(Untamed.Player,XP)
 

@@ -14,7 +14,7 @@
 	✔️ NiO Actor size equalisation
 	✔️ NiO HH canceller
 	✔️ Dual animation system
-	✔️️️️️️️ Sexlab integration
+	✔️ Sexlab integration
 	✔️ +XP for beastial encounters
 	✔️ -XP for humanoid encounters
 	✔️ Tame actors
@@ -64,12 +64,16 @@
 	✔️ Thick Hide
 	✔️ Resistant Hide
 	❌ Shout: Stampede
-	❌ Cross Breeder
+	✔️ Cross Breeder
 	✔️ Experienced
 	✔️ Pack Leader 1
 	✔️ Pack Leader 2
 	✔️ Pack Leader 3
 	❌ Den Mother
+
+## Trainer Dialog
+
+	❌ Not Yet Designed
 
 ## Pack Member Dialog (All Beasts)
 
