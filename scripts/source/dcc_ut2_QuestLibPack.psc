@@ -53,6 +53,12 @@ Int Function GetMemberCountMax()
 	Return Untamed.Config.OptPerkPackLeader0
 EndFunction
 
+Bool Function HasOpenSlot()
+{determine if there is room in the pack for this.}
+
+	Return (self.GetMemberCount() < self.GetMemberCountMax())
+EndFunction
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

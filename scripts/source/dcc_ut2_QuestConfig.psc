@@ -2,6 +2,11 @@ Scriptname dcc_ut2_QuestConfig extends SKI_ConfigBase Conditional
 
 dcc_ut2_QuestController Property Untamed Auto
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; dependency states.
+
 Bool Property HasNIO = FALSE Auto
 Bool Property HasUIE = FALSE Auto
 Bool Property HasSL = FALSE Auto
@@ -14,21 +19,25 @@ Bool Property HasSLA = FALSE Auto
 
 ;; leveling settings.
 
+Int Property Difficulty = 100 Auto Hidden
+;; this value should only be changed via the config menu, as it is used to
+;; recalculate other settings, and its changed value used to reset them later
+;; if desired. it is intended this is a multiplier, divide by 100 first.
+;; larger numbers make it "easier" while smaller numbers make it "harder"
+;; @todo all the above.
+
 Float Property OptExperienceMax = 100.0 Auto Hidden
 Float Property OptPerkExperiencedAdd = 20.0 Auto Hidden
-
+Float Property OptEncounterHumanoidMult = 0.5 Auto Hidden
 Float Property OptEncounterXP = 5.0 Auto Hidden
 Float Property OptFondleXP = 2.5 Auto Hidden
 Float Property OptPlayXP = 2.5 Auto Hidden
-
-Float Property OptEncounterHumanoidMult = 0.5 Auto Hidden
-
-;; pack leader settings.
-
 Int   Property OptPerkPackLeader0 = 1 Auto Hidden
 Int   Property OptPerkPackLeader1 = 3 Auto Hidden
 Int   Property OptPerkPackLeader2 = 6 Auto Hidden
 Int   Property OptPerkPackLeader3 = 12 Auto Hidden
+Float Property OptPerkFeatThickHideMult = 4.0 Auto Hidden
+Float Property OptPerkFeatResistantHideMult = 0.60 Auto Hidden
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -36,8 +45,32 @@ Int   Property OptPerkPackLeader3 = 12 Auto Hidden
 ;; general mod options
 
 Bool Property Enabled = TRUE Auto Hidden
-
 Bool Property OptIncludeActorTypeCreature = FALSE Auto Hidden
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Event OnInit()
+
+	self.Enabled = TRUE
+	self.Difficulty = 100
+	self.OptExperienceMax = 100.0
+	self.OptPerkExperiencedAdd = 20.0
+	self.OptEncounterHumanoidMult = 0.5
+	self.OptEncounterXP = 5.0
+	self.OptFondleXP = 2.5
+	self.OptPlayXP = 2.5
+	self.OptPerkPackLeader0 = 1
+	self.OptPerkPackLeader1 = 3
+	self.OptPerkPackLeader2 = 6
+	self.OptPerkPackLeader3 = 12
+	self.OptPerkFeatThickHideMult = 4.0
+	self.OptPerkFeatResistantHideMult = 0.60
+	self.OptIncludeActorTypeCreature = FALSE
+
+	Untamed.Util.PrintDebug("Configuration Reset")
+	Return
+EndEvent
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

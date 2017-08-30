@@ -264,6 +264,14 @@ Function SetExperience(Actor Who, Float XP)
 
 	If(Who == Untamed.Player)
 		Untamed.XPBar.SetPercent((XP / Max) * 100)
+
+		If(Who.HasPerk(Untamed.PerkFeatThickHide))
+			Untamed.Feat.UpdateThickHide(Who)
+		EndIf
+
+		If(Who.HasPerk(Untamed.PerkFeatResistantHide))
+			Untamed.Feat.UpdateResistantHide(Who)
+		EndIf
 	EndIf
 
 	Return
@@ -274,3 +282,42 @@ Function UpdateExperienceBar()
 
 	Untamed.XPBar.SetPercent(self.GetExperiencePercent(Untamed.Player))
 EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; perk functions
+
+Function ReapplyPerk(Actor Who, Perk Feat)
+{remove and reapply the specified perk. mostly for changing the strength of
+the effects given.}
+
+	;; i know perks can only be dynamically added and removed from the player
+	;; and not npcs, but i prefer to code as though it can be done on anyone
+	;; just in case that magically changes in the future with some skse magic.
+
+	Who.RemovePerk(Feat)
+	Who.AddPerk(Feat)	
+	Return
+EndFunction
+
+Function UpdateFeatThickHide(Actor Who)
+{update the thick hide perk.}
+
+	Float Value = (self.GetExperience(Who) * Untamed.Config.OptPerkFeatThickHideMult)
+
+	Untamed.PerkFeatThickHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
+	self.ReapplyPerk(Who,Untamed.PerkFeatThickHide)
+	Return
+EndFunction
+
+Function UpdateFeatResistantHide(Actor Who)
+{update the resistant hide perk.}
+	
+	Float Value = (self.GetExperience(Who) * Untamed.Config.OptPerkFeatResistantHideMult)
+
+	Untamed.PerkFeatResistantHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
+	self.ReapplyPerk(Who,Untamed.PerkFeatResistantHide)
+	Return
+EndFunction
+

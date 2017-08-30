@@ -5,8 +5,9 @@ Int Version = 1
 ;; libraries ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 dcc_ut2_QuestLibAnimate   Property Anim Auto
-dcc_ut2_QuestLibEncounter Property Sexl Auto
+dcc_ut2_QuestLibTrainer   Property Feat Auto
 dcc_ut2_QuestLibPack      Property Pack Auto
+dcc_ut2_QuestLibEncounter Property Sexl Auto
 dcc_ut2_QuestLibUtil      Property Util Auto
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -18,24 +19,26 @@ dcc_ut2_QuestInterfaceXP Property XPBar Auto
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; form references ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Actor   Property Player Auto                   ;; skyrim.esm
-Keyword Property KeywordActorTypeAnimal Auto   ;; skyrim.esm
-Keyword Property KeywordActorTypeCreature Auto ;; skyrim.esm
-Faction Property FactionPredator Auto          ;; skyrim.esm
-Faction Property FactionTamed Auto             ;; untamed
-Faction Property FactionPackStay Auto          ;; untamed
-Package Property PackageDoNothing Auto         ;; untamed
-Package Property PackageFollow Auto            ;; untamed
-Package Property PackagePackStay Auto          ;; untamed
-Perk    Property PerkCrossbreeder Auto         ;; untamed
-Perk    Property PerkDenMother Auto            ;; untamed
-Perk    Property PerkExperienced Auto          ;; untamed
-Perk    Property PerkPackLeader1 Auto          ;; untamed
-Perk    Property PerkPackLeader2 Auto          ;; untamed
-Perk    Property PerkPackLeader3 Auto          ;; untamed
-Perk    Property PerkResistantHide Auto        ;; untamed
-Perk    Property PerkThickHide Auto            ;; untamed
-Static  Property StaticX Auto                  ;; skyrim.esm
+Actor        Property Player Auto                   ;; skyrim.esm
+ActorBase    Property ActorTrainer Auto             ;; untamed
+Keyword      Property KeywordActorTypeAnimal Auto   ;; skyrim.esm
+Keyword      Property KeywordActorTypeCreature Auto ;; skyrim.esm
+Faction      Property FactionPredator Auto          ;; skyrim.esm
+Faction      Property FactionTamed Auto             ;; untamed
+Faction      Property FactionPackStay Auto          ;; untamed
+Package      Property PackageDoNothing Auto         ;; untamed
+Package      Property PackageFollow Auto            ;; untamed
+Package      Property PackagePackStay Auto          ;; untamed
+Perk         Property PerkCrossbreeder Auto         ;; untamed
+Perk         Property PerkDenMother Auto            ;; untamed
+Perk         Property PerkExperienced Auto          ;; untamed
+Perk         Property PerkPackLeader1 Auto          ;; untamed
+Perk         Property PerkPackLeader2 Auto          ;; untamed
+Perk         Property PerkPackLeader3 Auto          ;; untamed
+Perk         Property PerkFeatResistantHide Auto    ;; untamed
+Perk         Property PerkFeatThickHide Auto        ;; untamed
+Static       Property StaticX Auto                  ;; skyrim.esm
+VisualEffect Property VfxTeleportIn Auto            ;; untamed
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; mod management api ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -81,6 +84,8 @@ Function ResetMod_Subsystems()
 		(Systems[Iter] as Quest).Reset()
 		(Systems[Iter] as Quest).Stop()
 		(Systems[Iter] as Quest).Start()
+
+		Iter += 1
 	EndWhile
 
 	Return

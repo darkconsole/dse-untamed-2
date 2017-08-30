@@ -32,34 +32,8 @@ EndFunction
 Event OnWidgetReset()
 {when a widget is turned on}
 
-	Utility.Wait(1)
-
 	parent.OnWidgetReset()
-
-	;/*
-	Float[] Floats = new Float[6]
-	Floats[0] = 200.0 ;; w
-	Floats[1] = 24.0  ;; h
-	Floats[2] = 0x123456
-	Floats[3] = 0x654321
-	Floats[4] = -1
-	Floats[5] = 1.0
-
-	String[] Strings = new String[1]
-	Strings[0] = "center"
-
-	UI.InvokeFloatA(HUD_MENU, GetMethod("initNumbers"), Floats)
-	UI.InvokeStringA(HUD_MENU, GetMethod("initStrings"), Strings)
-	*/;
-
 	UI.Invoke(HUD_MENU, GetMethod(".initCommit"))
-
-	;;;;;;;;
-
-	;;While(!self.Ready)
-	;;	dcc_ut2_QuestController.Get().Util.PrintDebug("waiting on widget")
-	;;	Utility.Wait(1)
-	;;EndWhile
 
 	Int[] Colours = new Int[3]
 	Colours[0] = 0xFF00FF
