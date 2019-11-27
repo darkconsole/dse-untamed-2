@@ -35,8 +35,8 @@ Perk         Property PerkExperienced Auto          ;; untamed
 Perk         Property PerkPackLeader1 Auto          ;; untamed
 Perk         Property PerkPackLeader2 Auto          ;; untamed
 Perk         Property PerkPackLeader3 Auto          ;; untamed
-Perk         Property PerkFeatResistantHide Auto    ;; untamed
-Perk         Property PerkFeatThickHide Auto        ;; untamed
+Perk         Property PerkResistantHide Auto    ;; untamed
+Perk         Property PerkThickHide Auto        ;; untamed
 Static       Property StaticX Auto                  ;; skyrim.esm
 VisualEffect Property VfxTeleportIn Auto            ;; untamed
 

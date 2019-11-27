@@ -265,11 +265,11 @@ Function SetExperience(Actor Who, Float XP)
 	If(Who == Untamed.Player)
 		Untamed.XPBar.SetPercent((XP / Max) * 100)
 
-		If(Who.HasPerk(Untamed.PerkFeatThickHide))
+		If(Who.HasPerk(Untamed.PerkThickHide))
 			Untamed.Feat.UpdateThickHide(Who)
 		EndIf
 
-		If(Who.HasPerk(Untamed.PerkFeatResistantHide))
+		If(Who.HasPerk(Untamed.PerkResistantHide))
 			Untamed.Feat.UpdateResistantHide(Who)
 		EndIf
 	EndIf
@@ -304,20 +304,20 @@ EndFunction
 Function UpdateFeatThickHide(Actor Who)
 {update the thick hide perk.}
 
-	Float Value = (self.GetExperience(Who) * Untamed.Config.OptPerkFeatThickHideMult)
+	Float Value = (self.GetExperience(Who) * Untamed.Config.OptPerkThickHideMult)
 
-	Untamed.PerkFeatThickHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
-	self.ReapplyPerk(Who,Untamed.PerkFeatThickHide)
+	Untamed.PerkThickHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
+	self.ReapplyPerk(Who,Untamed.PerkThickHide)
 	Return
 EndFunction
 
 Function UpdateFeatResistantHide(Actor Who)
 {update the resistant hide perk.}
 	
-	Float Value = (self.GetExperience(Who) * Untamed.Config.OptPerkFeatResistantHideMult)
+	Float Value = (self.GetExperience(Who) * Untamed.Config.OptPerkResistantHideMult)
 
-	Untamed.PerkFeatResistantHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
-	self.ReapplyPerk(Who,Untamed.PerkFeatResistantHide)
+	Untamed.PerkResistantHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
+	self.ReapplyPerk(Who,Untamed.PerkResistantHide)
 	Return
 EndFunction
 

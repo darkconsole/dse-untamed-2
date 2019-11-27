@@ -36,8 +36,8 @@ Int   Property OptPerkPackLeader0 = 1 Auto Hidden
 Int   Property OptPerkPackLeader1 = 3 Auto Hidden
 Int   Property OptPerkPackLeader2 = 6 Auto Hidden
 Int   Property OptPerkPackLeader3 = 12 Auto Hidden
-Float Property OptPerkFeatThickHideMult = 4.0 Auto Hidden
-Float Property OptPerkFeatResistantHideMult = 0.60 Auto Hidden
+Float Property OptPerkThickHideMult = 4.0 Auto Hidden
+Float Property OptPerkResistantHideMult = 0.60 Auto Hidden
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -64,8 +64,8 @@ Event OnInit()
 	self.OptPerkPackLeader1 = 3
 	self.OptPerkPackLeader2 = 6
 	self.OptPerkPackLeader3 = 12
-	self.OptPerkFeatThickHideMult = 4.0
-	self.OptPerkFeatResistantHideMult = 0.60
+	self.OptPerkThickHideMult = 4.0
+	self.OptPerkResistantHideMult = 0.60
 	self.OptIncludeActorTypeCreature = FALSE
 
 	Untamed.Util.PrintDebug("Configuration Reset")
