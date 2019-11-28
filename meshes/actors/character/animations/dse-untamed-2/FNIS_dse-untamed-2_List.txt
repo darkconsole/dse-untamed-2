@@ -16,4 +16,4 @@ Version 100
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '' WOLF RELATIONSHIP ANIMATIONS '''''''''''''''''''''''''''''''''''''''''''''''
 
-b -ac ut-wolf-love1-s1-a2 ut-wolf-love1-s1-a2.hkx
+b ut2-wolflove01-s1-human ut2-wolflove01-s1-human.hkx

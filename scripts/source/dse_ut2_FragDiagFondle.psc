@@ -8,7 +8,7 @@ Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
 dse_ut2_QuestController Untamed = dse_ut2_QuestController.Get()
 
-Untamed.Anim.PlayDualAnimation(Untamed.Player,"ut-wolf-love1-s1-a2",akSpeaker,"ut-wolf-love1-s1-a1")
+Untamed.Anim.PlayDualAnimation(Untamed.Player,"ut2-wolflove01-s1-human",akSpeaker,"ut2-wolflove01-s1-wolf")
 Utility.Wait(10)
 Untamed.Experience(Untamed.Player,Untamed.Config.OptFondleXP)
 Untamed.Anim.StopDualAnimation(Untamed.Player,akSpeaker)

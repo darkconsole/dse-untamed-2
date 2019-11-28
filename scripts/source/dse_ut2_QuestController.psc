@@ -88,6 +88,9 @@ Function ResetMod_Subsystems()
 		Iter += 1
 	EndWhile
 
+	self.UnregisterForModEvent("SexLabOrgasm")
+	self.RegisterForModEvent("SexLabOrgasm","OnModEvent_SexLabOrgasm")
+
 	Return
 EndFunction
 
@@ -132,3 +135,13 @@ EndFunction
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+Function OnModEvent_SexLabOrgasm(Form Whom, Int Enjoy, Int OCount)
+{handler for sexlab orgasm events.}
+
+
+
+	Return
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
