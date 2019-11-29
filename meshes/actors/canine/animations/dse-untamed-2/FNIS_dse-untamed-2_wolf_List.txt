@@ -7,13 +7,19 @@ Version 100
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-'' b   = idle
-'' o   = idle+ao
-'' -ac = animated camera
-'' -k  = hkx comes from another mod.
+'' b  = idle
+'' o  = idle+ao
+'' -k = hkx comes from another mod.
 '' -AVbHumanoidFootIKDisable = disable foot falls
+'' -AVIbHeadTrackSpine = keep torso locked if head tracking enabled
+'' -h = head tracking enabled
+'' -a = acyclic (don't loop)
+'' -ac = animated camera
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '' WOLF RELATIONSHIP ANIMATIONS '''''''''''''''''''''''''''''''''''''''''''''''
 
-b ut2-wolflove01-s1-wolf ut2-wolflove01-s1-wolf.hkx
+s -a,AVbFootIKDisable ut2-wolflove01-s1-wolf ut2-wolflove01-s1-wolf.hkx
++    ut2-wolflove01-s2-wolf ut2-wolflove01-s2-wolf.hkx
++ -a ut2-wolflove01-s3-wolf ut2-wolflove01-s2-wolf.hkx
+

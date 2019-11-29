@@ -56,9 +56,12 @@ Function PlayDualAnimation(Actor Who1, String Ani1, Actor Who2, String Ani2)
 	Debug.SendAnimationEvent(Who2,Ani2)
 
 	;; yoink.
-	Who1.SetVehicle(None)
-	Who2.SetVehicle(None)
-	Here.Delete()
+	;;Who1.SetVehicle(None)
+	;;Who2.SetVehicle(None)
+	;;Here.Delete()
+
+	StorageUtil.SetFormValue(Who1,"UT2.Ani.Vehicle",Here)
+	StorageUtil.SetFormValue(Who2,"UT2.Ani.Vehicle",Here)
 
 	;; honestly i think the vehicle trick may not even be needed here.
 	;; i just emulated this after sexlab and cleaned it up a bit. the
@@ -70,8 +73,30 @@ EndFunction
 Function StopDualAnimation(Actor Who1, Actor Who2)
 {stop animation for two actors.}
 
+	ObjectReference Here
+
 	self.StopAnimation(Who1)
 	self.StopAnimation(Who2)
+
+	;; dismount from vehicle.
+	
+	Here = StorageUtil.GetFormValue(Who1,"UT2.Ani.Vehicle") As ObjectReference
+	If(Here != NONE)
+		Here.Disable()
+		Here.Delete()
+	EndIf
+
+	Here = StorageUtil.GetFormValue(Who2,"UT2.Ani.Vehicle") As ObjectReference
+	If(Here != NONE)
+		Here.Disable()
+		Here.Delete()
+	EndIf
+
+	StorageUtil.UnsetFormValue(Who1,"UT2.Ani.Vehicle")
+	StorageUtil.UnsetFormValue(Who2,"UT2.Ani.Vehicle")
+
+	Who1.SetVehicle(NONE)
+	Who2.SetVehicle(NONE)
 
 	Return
 EndFunction

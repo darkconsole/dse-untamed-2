@@ -15,6 +15,7 @@ dse_ut2_QuestLibUtil      Property Util Auto
 
 dse_ut2_QuestConfig Property Config Auto
 dse_ut2_QuestInterfaceXP Property XPBar Auto
+dse_ut2_QuestLove01 Property QuestLove01 Auto
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; form references ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

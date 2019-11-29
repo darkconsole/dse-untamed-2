@@ -6,8 +6,7 @@ Scriptname dse_ut2_FragDiagPackStay_Stay Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
-dse_ut2_QuestController Untamed = dse_ut2_QuestController.Get()
-akSpeaker.AddToFaction(Untamed.FactionPackStay)
+akSpeaker.AddToFaction(dse_ut2_QuestController.Get().FactionPackStay)
 akSpeaker.EvaluatePackage()
 ;END CODE
 EndFunction
