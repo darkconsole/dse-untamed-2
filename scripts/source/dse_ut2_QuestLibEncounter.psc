@@ -18,7 +18,7 @@ EndEvent
 Event OnEncounterEnding(String EventName, String Args, Float Argc, Form From)
 {detect when a sex scene ends.}
 
-	If(!Untamed.Config.Enabled)
+	If(!Untamed.Menu.Enabled)
 		Return
 	EndIf
 
@@ -58,7 +58,7 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	;; you get positive xp for every beast involved when there are beasts
 	;; involved.
 
-	Float XP = (BeastCount * Untamed.Config.OptEncounterXP)
+	Float XP = (BeastCount * Untamed.Menu.OptEncounterXP)
 
 	Untamed.Experience(Untamed.Player,XP)
 
@@ -73,7 +73,7 @@ Function OnLameEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 	;; you get negative xp for every humanoid involved when there are no
 	;; beasts involved, unless you have the cross breeder perk.
 
-	Float XP = ((((Actors.Length - 1) * Untamed.Config.OptEncounterXP) * -1) * Untamed.Config.OptEncounterHumanoidMult)
+	Float XP = ((((Actors.Length - 1) * Untamed.Menu.OptEncounterXP) * -1) * Untamed.Menu.OptEncounterHumanoidMult)
 
 	If(Untamed.Player.HasPerk(Untamed.PerkCrossbreeder))
 		XP = 0
@@ -115,7 +115,7 @@ Int Function CountBeastsInvolved(Actor[] Actors)
 	While(Iter < Actors.Length)
 		If(Actors[Iter].HasKeyword(Untamed.KeywordActorTypeAnimal))
 			Count += 1
-		ElseIf(Untamed.Config.OptIncludeActorTypeCreature)
+		ElseIf(Untamed.Menu.OptIncludeActorTypeCreature)
 			If(Actors[Iter].HasKeyword(Untamed.KeywordActorTypeCreature))
 				Count += 1
 			EndIf

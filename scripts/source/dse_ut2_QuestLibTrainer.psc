@@ -91,7 +91,7 @@ EndFunction
 Function UpdateThickHide(Actor Who)
 {update the thick hide perk.}
 
-	Float Value = (Untamed.Util.GetExperience(Who) * Untamed.Config.OptPerkThickHideMult)
+	Float Value = (Untamed.Util.GetExperience(Who) * Untamed.Menu.OptPerkThickHideMult)
 
 	Untamed.PerkThickHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
 	Untamed.Util.ReapplyPerk(Who,Untamed.PerkThickHide)
@@ -101,7 +101,7 @@ EndFunction
 Function UpdateResistantHide(Actor Who)
 {update the resistant hide perk.}
 	
-	Float Value = (Untamed.Util.GetExperience(Who) * Untamed.Config.OptPerkResistantHideMult)
+	Float Value = (Untamed.Util.GetExperience(Who) * Untamed.Menu.OptPerkResistantHideMult)
 
 	Untamed.PerkResistantHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
 	Untamed.Util.ReapplyPerk(Who,Untamed.PerkResistantHide)

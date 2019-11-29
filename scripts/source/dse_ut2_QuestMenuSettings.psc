@@ -1,1 +1,0 @@
-ScriptName dse_ut2_QuestMenuSettings extends Quest

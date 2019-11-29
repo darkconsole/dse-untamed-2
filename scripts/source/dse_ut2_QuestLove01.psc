@@ -67,14 +67,16 @@ EndFunction
 
 Function HandleIter()
 
+	Float XP = Untamed.Config.GetFloat(".PackLoveIterXP")
+
 	If(self.Iter > 10)
 		;;Untamed.Anim.PlayDualAnimation(self.Sub,"ut2-wolflove01-s3-wolf",self.Dom,"ut2-wolflove01-s3-human")
 		;;Utility.Wait(2)
 		self.AnimateEnd()
 	EndIf
 
-	Untamed.Experience(Untamed.Player,Untamed.Config.OptFondleXP)
-	Untamed.Util.Print("QuestLove01 " + self.Iter + " XP +" + Untamed.Config.OptFondleXP)
+	Untamed.Experience(Untamed.Player,XP)
+	Untamed.Util.Print("QuestLove01 " + self.Iter + " XP +" + XP)
 	self.Iter += 1
 
 	Return

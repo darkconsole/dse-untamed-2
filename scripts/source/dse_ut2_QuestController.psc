@@ -14,6 +14,7 @@ dse_ut2_QuestLibUtil      Property Util Auto
 ;; subsystems ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 dse_ut2_QuestConfig Property Config Auto
+dse_ut2_QuestMCM Property Menu Auto
 dse_ut2_QuestInterfaceXP Property XPBar Auto
 dse_ut2_QuestLove01 Property QuestLove01 Auto
 
@@ -73,7 +74,7 @@ Function ResetMod_Subsystems()
 	Int Iter = 0
 	Form[] Systems = new Form[7]
 
-	Systems[0] = self.Config
+	Systems[0] = self.Menu
 	Systems[1] = self.Util
 	Systems[2] = self.Anim
 	Systems[3] = self.Sexl
