@@ -17,15 +17,9 @@ Bool Property HasSLA = FALSE Auto
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; leveling settings.
+;; all of these properties need to go away we are using the new json config.
 
-Int Property Difficulty = 100 Auto Hidden
-;; this value should only be changed via the config menu, as it is used to
-;; recalculate other settings, and its changed value used to reset them later
-;; if desired. it is intended this is a multiplier, divide by 100 first.
-;; larger numbers make it "easier" while smaller numbers make it "harder"
-;; @todo all the above.
-
+Int   Property Difficulty = 100 Auto Hidden
 Float Property OptExperienceMax = 100.0 Auto Hidden
 Float Property OptPerkExperiencedAdd = 20.0 Auto Hidden
 Float Property OptEncounterHumanoidMult = 0.5 Auto Hidden
@@ -38,6 +32,7 @@ Int   Property OptPerkPackLeader2 = 6 Auto Hidden
 Int   Property OptPerkPackLeader3 = 12 Auto Hidden
 Float Property OptPerkThickHideMult = 4.0 Auto Hidden
 Float Property OptPerkResistantHideMult = 0.60 Auto Hidden
+Bool  Property OptIncludeActorTypeCreature = FALSE Auto Hidden
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -45,28 +40,11 @@ Float Property OptPerkResistantHideMult = 0.60 Auto Hidden
 ;; general mod options
 
 Bool Property Enabled = TRUE Auto Hidden
-Bool Property OptIncludeActorTypeCreature = FALSE Auto Hidden
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Event OnInit()
-
-	self.Enabled = TRUE
-	self.Difficulty = 100
-	self.OptExperienceMax = 100.0
-	self.OptPerkExperiencedAdd = 20.0
-	self.OptEncounterHumanoidMult = 0.5
-	self.OptEncounterXP = 5.0
-	self.OptFondleXP = 2.5
-	self.OptPlayXP = 2.5
-	self.OptPerkPackLeader0 = 1
-	self.OptPerkPackLeader1 = 3
-	self.OptPerkPackLeader2 = 6
-	self.OptPerkPackLeader3 = 12
-	self.OptPerkThickHideMult = 4.0
-	self.OptPerkResistantHideMult = 0.60
-	self.OptIncludeActorTypeCreature = FALSE
 
 	Untamed.Util.PrintDebug("Configuration Reset")
 	Return
@@ -80,7 +58,7 @@ EndEvent
 Bool Function IsInstalledNiOverride(Bool Popup=TRUE)
 {make sure NiOverride is installed and active.}
 
-	If(SKSE.GetPluginVersion("NiOverride") == -1)
+	If(NiOverride.GetScriptVersion() < 6)
 		If(Popup)
 			Debug.MessageBox("NiOverride not installed. Install it by installing RaceMenu or by installing it standalone from the Nexus.")
 		EndIf
@@ -192,8 +170,8 @@ Event OnConfigInit()
 
 	self.Pages = new String[2]
 	
-	self.Pages[0] = "Splash"
-	self.Pages[1] = "General"
+	self.Pages[0] = "$UT2_Menu_General"
+	self.Pages[1] = "$UT2_Menu_Splash"
 
 	Return
 EndEvent
@@ -216,12 +194,31 @@ Event OnPageReset(String Page)
 
 	self.UnloadCustomContent()
 
-	If(Page == "Splash")
-		;;
-	ElseIf(Page == "General")
-		;;
+	If(Page == "$UT2_Menu_General")
+		self.ShowPageGeneral()
+	Else
+		self.ShowPageSplash()
 	EndIf
 
 	Return
 EndEvent
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Function ShowPageGeneral()
+
+	Return
+EndFunction
+
+Function ShowPageSplash()
+
+	Int Selected
+	String[] Graphics = new String[1]
+
+	Graphics[0] = "dse-untamed-2/splash01.dds"
+	Selected = Utility.RandomInt(1,Graphics.Length) - 1
+
+	self.LoadCustomContent(Graphics[Selected])
+	Return
+EndFunction
