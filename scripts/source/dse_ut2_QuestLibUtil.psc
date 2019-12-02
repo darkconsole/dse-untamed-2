@@ -31,6 +31,36 @@ EndFunction
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; maths
+
+Float[] Function GetPositionData(ObjectReference What)
+{get an object's positional data.}
+
+	Float[] Output = new Float[4]
+
+	Output[0] = What.GetAngleZ()
+	Output[1] = What.GetPositionX()
+	Output[2] = What.GetPositionY()
+	Output[3] = What.GetPositionZ()
+
+	Return Output
+EndFunction
+
+Float[] Function GetPositionAtDistance(ObjectReference What, Float Dist)
+{get an objects positional data if it was to be pushed away the specified
+distance from itself.}
+
+	Float[] Data = self.GetPositionData(What)
+
+	Data[1] = Data[1] + (Math.Sin(Data[0]) * Dist)
+	Data[2] = Data[2] + (Math.Cos(Data[0]) * Dist)
+
+	Return Data
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; Public Actor API.
 ;; These functions are intended for direct use for complete manipulation of
 ;; actor features.
@@ -265,13 +295,13 @@ Function SetExperience(Actor Who, Float XP)
 	If(Who == Untamed.Player)
 		Untamed.XPBar.SetPercent((XP / Max) * 100)
 
-		If(Who.HasPerk(Untamed.PerkThickHide))
-			Untamed.Feat.UpdateThickHide(Who)
-		EndIf
+		;;If(Who.HasPerk(Untamed.PerkThickHide))
+		;;	Untamed.Feat.UpdateThickHide(Who)
+		;;EndIf
 
-		If(Who.HasPerk(Untamed.PerkResistantHide))
-			Untamed.Feat.UpdateResistantHide(Who)
-		EndIf
+		;;If(Who.HasPerk(Untamed.PerkResistantHide))
+		;;	Untamed.Feat.UpdateResistantHide(Who)
+		;;EndIf
 	EndIf
 
 	Return
@@ -319,5 +349,32 @@ Function UpdateFeatResistantHide(Actor Who)
 	Untamed.PerkResistantHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
 	self.ReapplyPerk(Who,Untamed.PerkResistantHide)
 	Return
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Bool Function IsFormInList(Form What, FormList Where)
+{determine if something is in a form list.}
+
+	Return (Where.Find(What) >= 0)
+EndFunction
+
+Int Function GetAnimalType(Actor Who)
+{determine what kind of broad animal type this is. fourth party mods can add
+support for any custom versions they may create with unique races by adding
+those races to these formlists.}
+
+	Race What = Who.GetRace()
+
+	If(self.IsFormInList(What,Untamed.ListRaceWolves))
+		Return Untamed.KeyRaceWolf
+	ElseIf(self.IsFormInList(What,Untamed.ListRaceBears))
+		Return Untamed.KeyRaceBear
+	ElseIf(self.IsFormInList(What,Untamed.ListRaceSabercats))
+		Return Untamed.KeyRaceSabercat
+	EndIf
+
+	Return 0
 EndFunction
 

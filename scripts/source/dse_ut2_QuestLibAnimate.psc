@@ -33,39 +33,72 @@ Function PlaySexlab(Actor Who, Actor With)
 	Return
 EndFunction
 
-Function PlayDualAnimation(Actor Who1, String Ani1, Actor Who2, String Ani2)
-{rig up and play stacked dual animations. sex without the lab.}
+Function DualSlowmoRoto(Actor Who1, Actor Who2)
 
-	ObjectReference Here = Who1.PlaceAtMe(Untamed.StaticX)
+	ObjectReference Here
+
+	;;;;;;;;
+
+	Here = Who1.PlaceAtMe(Untamed.StaticX)
 	Who1.SetVehicle(Here)
 	Who2.SetVehicle(Here)
-
-	;; equalise sizes...
-	self.ForceActorSize(Who1)
-	self.ForceActorSize(Who2)
+	StorageUtil.SetFormValue(Who1,"UT2.Ani.Vehicle",Here)
+	StorageUtil.SetFormValue(Who2,"UT2.Ani.Vehicle",Here)
 
 	;; about face...
 	Who2.SetAngle(Who1.GetAngleX(),Who1.GetAngleY(),Who1.GetAngleZ())
 
 	;; commit hillarious collision hack: the slomoroto
-	Who1.SplineTranslateTo(Here.GetPositionX(),Here.GetPositionY(),Here.GetPositionZ(),Here.GetAngleX(),Here.GetAngleY(),(Here.GetAngleZ() + 0.01),1.0,500,0.001)
-	Who2.SplineTranslateTo(Here.GetPositionX(),Here.GetPositionY(),Here.GetPositionZ(),Here.GetAngleX(),Here.GetAngleY(),(Here.GetAngleZ() + 0.01),1.0,500,0.001)
+	Who1.TranslateTo(               \
+		Here.GetPositionX(),       \
+		Here.GetPositionY(),       \
+		Here.GetPositionZ(),       \
+		Here.GetAngleX(),          \
+		Here.GetAngleY(),          \
+		(Here.GetAngleZ() + 0.01), \
+		10000,0.000001             \
+	)
+	Who2.TranslateTo(               \
+		Here.GetPositionX(),       \
+		Here.GetPositionY(),       \
+		Here.GetPositionZ(),       \
+		Here.GetAngleX(),          \
+		Here.GetAngleY(),          \
+		(Here.GetAngleZ() + 0.01), \
+		10000,0.000001             \
+	)
 
-	;; and animate.
+	Return
+EndFunction
+
+Function PlayDualAnimation(Actor Who1, String Ani1, Actor Who2, String Ani2)
+{rig up and play stacked dual animations. sex without the lab.}
+
+	;; if the actors are not mounted to a marker then they should not be in an
+	;; animation yet, so go ahead and do an initization.
+
+	If(StorageUtil.GetFormValue(Who1,"UT2.Ani.Vehicle") == None)
+		If(Who1 == Untamed.Player || Who2 == Untamed.Player)
+			Game.ForceThirdPerson()
+			Game.SetPlayerAIDriven(TRUE)
+			Game.DisablePlayerControls(FALSE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,TRUE,0)
+		EndIf
+
+		Untamed.Util.SheatheWeapons(Who1,FALSE)
+		Untamed.Util.SheatheWeapons(Who2,TRUE)
+		self.ForceActorSize(Who1)
+		self.ForceActorSize(Who2)
+		self.DualSlowmoRoto(Who1,Who2)
+		Utility.Wait(1.5)
+		self.ResetActor(Who1)
+		self.ResetActor(Who2)
+		Utility.Wait(0.5)
+	EndIf
+
+	;; trigger the animation.
+
 	Debug.SendAnimationEvent(Who1,Ani1)
 	Debug.SendAnimationEvent(Who2,Ani2)
-
-	;; yoink.
-	;;Who1.SetVehicle(None)
-	;;Who2.SetVehicle(None)
-	;;Here.Delete()
-
-	StorageUtil.SetFormValue(Who1,"UT2.Ani.Vehicle",Here)
-	StorageUtil.SetFormValue(Who2,"UT2.Ani.Vehicle",Here)
-
-	;; honestly i think the vehicle trick may not even be needed here.
-	;; i just emulated this after sexlab and cleaned it up a bit. the
-	;; slomoroto is the key here.
 
 	Return
 EndFunction
@@ -98,6 +131,11 @@ Function StopDualAnimation(Actor Who1, Actor Who2)
 	Who1.SetVehicle(NONE)
 	Who2.SetVehicle(NONE)
 
+	If(Who1 == Untamed.Player || Who2 == Untamed.Player)
+		Game.SetPlayerAIDriven(FALSE)
+		Game.EnablePlayerControls()
+	EndIf
+
 	Return
 EndFunction
 
@@ -110,7 +148,14 @@ Function StopAnimation(Actor Who)
 	;; stop the slowmo roto...
 	Who.StopTranslation()
 
-	;; reset the states.
+	self.ResetActor(Who)
+
+	Return
+EndFunction
+
+Function ResetActor(Actor Who)
+{trigger animation events that should cause most actors to reset to normal.}
+
 	Debug.SendAnimationEvent(Who,"IdleForceDefaultState") ;; general npcs
 	Debug.SendAnimationEvent(Who,"returnToDefault") ;; lots of animals
 	Debug.SendAnimationEvent(Who,"RESET_GRAPH") ;; werewolves
