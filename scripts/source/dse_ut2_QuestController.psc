@@ -56,6 +56,10 @@ Int Property KeyRaceWolf = 1 AutoReadOnly Hidden
 Int Property KeyRaceBear = 2 AutoReadOnly Hidden
 Int Property KeyRaceSabercat = 3 AutoReadOnly Hidden
 
+String Property KeyESP = "dse-soulgem-oven.esp" AutoReadOnly Hidden
+String Property KeySplashGraphic = "dse-soulgem-oven/splash.dds" AutoReadOnly Hidden
+Bool Property OptValidateActor = TRUE Auto Hidden
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; mod management api ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -154,7 +158,40 @@ EndFunction
 Function OnModEvent_SexLabOrgasm(Form Whom, Int Enjoy, Int OCount)
 {handler for sexlab orgasm events.}
 
+	sslThreadController Thread
+	sslBaseAnimation Animation
+	Actor[] ActorList
+	Int ActorIter = 0
+	Bool Bestial = FALSE
+	Actor Who = Whom As Actor
+	SexLabFramework SexLab = Util.GetFormFrom("SexLab.esm",0xd62) As SexLabFramework
 
+	;;;;;;;;
+
+	Thread = SexLab.GetActorController(Who)
+
+	If(Thread == None)
+		Util.PrintDebug("Failed to get SexLab thread controller.")
+	EndIf
+
+	Animation = Thread.Animation
+	ActorList = Thread.Positions
+
+	;;;;;;;;
+
+	ActorIter = 0
+	While(ActorIter < ActorList.Length)
+		If(ActorList[ActorIter].HasKeyword(KeywordActorTypeAnimal))
+			Bestial = TRUE
+		EndIf
+		ActorIter += 1
+	EndWhile
+
+	;;;;;;;;
+
+	If(Bestial && Who == self.Player)
+		;; @todo
+	EndIf
 
 	Return
 EndFunction

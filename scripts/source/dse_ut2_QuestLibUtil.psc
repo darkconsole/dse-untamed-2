@@ -7,6 +7,8 @@ dse_ut2_QuestController Property Untamed Auto
 
 String Property KeyXP = "UT2.Actor.Experience" Auto Hidden
 
+String Property FileStrings = "../../../configs/dse-untamed-2/translations/English.json" AutoReadOnly Hidden
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -26,6 +28,27 @@ Function PrintDebug(String Msg)
 
 	MiscUtil.PrintConsole("[UT2] " + Msg)
 	Return
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; mostly game data related.
+
+Form Function GetForm(Int FormID)
+{get a specific form from the soulgem oven esp.}
+
+	Return Game.GetFormFromFile(FormID,Untamed.KeyESP)
+EndFunction
+
+Form Function GetFormFrom(String ModName, Int FormID)
+{gets a form from a specific mod.}
+
+	If(!Game.IsPluginInstalled(ModName))
+		Return NONE
+	EndIf
+
+	Return Game.GetFormFromFile(FormID,ModName)
 EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
