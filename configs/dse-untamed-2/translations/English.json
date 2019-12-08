@@ -1,0 +1,7 @@
+{
+	"UntamedStart": "Untamed has started.",
+	"UntamedStartCloseMenu": "Please close all the MCM menus to allow Untamed to start.",
+	"ErrorCannotAnimateOverride": "%1 appears to be forcefully controlled by another mod, skipping the animations.",
+	"ErrorNoTarget": "Nobody has been targeted.",
+	"ErrorNotValid": "%1 is not valid for targeting."
+}
