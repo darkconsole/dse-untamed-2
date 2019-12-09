@@ -58,3 +58,20 @@ Event OnLocationChange(Location LocPrev, Location LocNew)
 	Return
 EndEvent
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Event OnCombatStateChanged(Actor Who, Int CombatState)
+
+	;; when entering combat i want to experiment with sending out an aoe that hits hostiles.
+	;; this aoe would place a long duration spell on targets so we can catch who does damage
+	;; and kills them so we can make some stats and grant pets additional xp.
+
+	; 0 - not in combat
+	; 1 - in combat
+	; 2 - searching
+
+	Return
+EndEvent
+
+
