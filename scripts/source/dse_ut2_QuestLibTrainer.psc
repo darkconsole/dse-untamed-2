@@ -1,109 +1,115 @@
 Scriptname dse_ut2_QuestLibTrainer extends Quest
 
 dse_ut2_QuestController Property Untamed Auto
-ReferenceAlias Property Trainer Auto
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ActorBase Property TrainerType01 Auto
+ActorBase Property TrainerType02 Auto
+ActorBase Property TrainerType03 Auto
+ActorBase Property TrainerType04 Auto
 
-Event OnUpdate()
-{used to delete the trainer after a while.}
+ReferenceAlias Property Trainer01 Auto
+ReferenceAlias Property Trainer02 Auto
+ReferenceAlias Property Trainer03 Auto
+ReferenceAlias Property Trainer04 Auto
 
-	Actor Who = self.Trainer.GetActorRef()
+Event OnInit()
 
-	If(Who == NONE)
-		;; make sure its really empty and not just pointing at a deleted
-		;; space that may be reused by the game then bail.
-		self.Trainer.Clear()
-		Return
+	If(self.IsStarting() || self.IsRunning())
+		self.SpawnTrainers()
+		Utility.Wait(20)
+		self.DespawnTrainers()
 	EndIf
 
-	self.DeleteTrainer()
 	Return
 EndEvent
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Function SpawnTrainers()
 
-Function SpawnTrainer()
-{place the trainer actor in the world.}
+	ObjectReference[] Who = new ObjectReference[4]
+	Float Rot = Untamed.Player.GetAngleZ()
+	Actor[] Trainer = new Actor[4]
+	Float[] X = new Float[4]
+	Float[] Y = new Float[4]
+	Int Titer = 0
 
-	Actor Old = self.Trainer.GetActorRef()
-	Actor Who
-	ObjectReference Here
+	;;;;;;;;
 
-	If(Old != NONE)
-		self.UnregisterForUpdate()
-		self.DeleteTrainer()
-	EndIf
+	self.DespawnTrainers()
 
-	;; try and place the actor underground.
-	Here = Untamed.Player.PlaceAtMe(Untamed.StaticX)
-	Here.SetPosition(Here.GetPositionX(),Here.GetPositionY(),(Here.GetPositionZ() - 1000))
+	X[0] = 0.0
+	X[1] = 0.0
+	X[2] = 150.0
+	X[3] = -150.0
 
-	Who = Here.PlaceAtMe(Untamed.ActorTrainer,1,FALSE,TRUE) as Actor
-	Who.SetVehicle(Here)
-	Who.MoveTo(Here)
+	Y[0] = 150.0
+	Y[1] = -150.0
+	Y[2] = 0.0
+	Y[3] = 0.0
 
-	;; enable them.
-	self.Trainer.ForceRefTo(Who)
-	Who.Enable(FALSE)
+	;;;;;;;;
 
-	;; wait for it.
-	While(!Who.Is3dLoaded())
-		Utility.Wait(0.1)
-		Untamed.Util.PrintDebug("Waiting on Trainer 3D")
+	self.Trainer01.ForceRefTo(Untamed.Player.PlaceAtMe(self.TrainerType01,1,TRUE,TRUE))
+	self.Trainer02.ForceRefTo(Untamed.Player.PlaceAtMe(self.TrainerType02,1,TRUE,TRUE))
+	self.Trainer03.ForceRefTo(Untamed.Player.PlaceAtMe(self.TrainerType03,1,TRUE,TRUE))
+	self.Trainer04.ForceRefTo(Untamed.Player.PlaceAtMe(self.TrainerType04,1,TRUE,TRUE))
+
+	Trainer[0] = self.Trainer01.GetActorRef()
+	Trainer[1] = self.Trainer02.GetActorRef()
+	Trainer[2] = self.Trainer03.GetActorRef()
+	Trainer[3] = self.Trainer04.GetActorRef()
+
+	;;;;;;;;
+
+	;; get all the trainers ready.
+
+	Titer = 0
+	While(Titer < Trainer.Length)
+		Untamed.Util.SetTamed(Trainer[Titer],TRUE)
+		Untamed.Util.FixAnimalActor(Trainer[Titer])
+		Trainer[Titer].MoveTo(Untamed.Player,X[Titer],Y[Titer],0.0)
+		Trainer[Titer].SetAngle(0.0,0.0,(Untamed.Player.GetHeadingAngle(Trainer[Titer]) + Rot + 180))
+		Titer += 1
 	EndWhile
 
-	;; fade them in.
-	Untamed.VfxTeleportIn.Play(Who,4.0,Untamed.Player)
+	;;;;;;;;
 
-	;; move them up and dismount them.
-	Here.SetPosition(Here.GetPositionX(),Here.GetPositionY(),(Here.GetPositionZ() + 1000))
-	Who.MoveTo(Here)
-	Who.SetVehicle(NONE)
-	Here.Delete()
+	;; enable all the trainers.
 
-	Untamed.Util.PrintDebug("Trainer Spawned")
-	self.RegisterForSingleUpdate(30)
+	Titer = 0
+	While(Titer < Trainer.Length)
+		Trainer[Titer].Enable(TRUE)
+		Titer += 1
+	EndWhile
+
 	Return
 EndFunction
 
-Function DeleteTrainer()
-{remove the trainer actor from the world.}
+Function DespawnTrainers()
 
-	Actor Who = self.Trainer.GetActorRef()
+	If(self.Trainer01.GetRef() != NONE)
+		self.Trainer01.GetRef().Disable()
+		self.Trainer01.GetRef().Delete()
+		self.Trainer01.Clear()
+	EndIf
 
-	;; teleport out fx
-	;; Utility.Wait(2)
+	If(self.Trainer02.GetRef() != NONE)
+		self.Trainer02.GetRef().Disable()
+		self.Trainer02.GetRef().Delete()
+		self.Trainer02.Clear()
+	EndIf
 
-	Who.Disable()
-	self.Trainer.Clear()
+	If(self.Trainer03.GetRef() != NONE)
+		self.Trainer03.GetRef().Disable()
+		self.Trainer03.GetRef().Delete()
+		self.Trainer03.Clear()
+	EndIf
 
-	Who.Delete()
-	Untamed.Util.PrintDebug("Trainer Despawned")
+	If(self.Trainer04.GetRef() != NONE)
+		self.Trainer04.GetRef().Disable()
+		self.Trainer04.GetRef().Delete()
+		self.Trainer04.Clear()
+	EndIf
+
 	Return
 EndFunction
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-Function UpdateThickHide(Actor Who)
-{update the thick hide perk.}
-
-	Float Value = (Untamed.Util.GetExperience(Who) * Untamed.Menu.OptPerkThickHideMult)
-
-	Untamed.PerkThickHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
-	Untamed.Util.ReapplyPerk(Who,Untamed.PerkThickHide)
-	Return
-EndFunction
-
-Function UpdateResistantHide(Actor Who)
-{update the resistant hide perk.}
-	
-	Float Value = (Untamed.Util.GetExperience(Who) * Untamed.Menu.OptPerkResistantHideMult)
-
-	Untamed.PerkResistantHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
-	Untamed.Util.ReapplyPerk(Who,Untamed.PerkResistantHide)
-	Return
-EndFunction
