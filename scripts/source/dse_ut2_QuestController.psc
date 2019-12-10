@@ -52,9 +52,13 @@ FormList Property ListRaceSabercats Auto
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; data keys ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Int Property KeyRaceWolf = 1 AutoReadOnly Hidden
-Int Property KeyRaceBear = 2 AutoReadOnly Hidden
-Int Property KeyRaceSabercat = 3 AutoReadOnly Hidden
+Int Property KeyRaceWolf       = 1 AutoReadOnly Hidden
+Int Property KeyRaceBear       = 2 AutoReadOnly Hidden
+Int Property KeyRaceSabercat   = 3 AutoReadOnly Hidden
+Int Property KeyPackLeaderMax0 = 1 AutoReadOnly Hidden
+Int Property KeyPackLeaderMax1 = 3 AutoReadOnly Hidden
+Int Property KeyPackLeaderMax2 = 6 AutoReadOnly Hidden
+Int Property KeyPackLeaderMax3 = 12 AutoReadOnly Hidden
 
 String Property KeyESP = "dse-soulgem-oven.esp" AutoReadOnly Hidden
 String Property KeySplashGraphic = "dse-soulgem-oven/splash.dds" AutoReadOnly Hidden
@@ -108,9 +112,6 @@ Function ResetMod_Subsystems()
 		Iter += 1
 	EndWhile
 
-	self.UnregisterForModEvent("SexLabOrgasm")
-	self.RegisterForModEvent("SexLabOrgasm","OnModEvent_SexLabOrgasm")
-
 	Return
 EndFunction
 
@@ -150,50 +151,6 @@ Float Function Experience(Actor Who, Float Amount=0.0)
 	EndIf
 
 	Return self.Util.GetExperience(Who)
-EndFunction
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-Function OnModEvent_SexLabOrgasm(Form Whom, Int Enjoy, Int OCount)
-{handler for sexlab orgasm events.}
-
-	sslThreadController Thread
-	sslBaseAnimation Animation
-	Actor[] ActorList
-	Int ActorIter = 0
-	Bool Bestial = FALSE
-	Actor Who = Whom As Actor
-	SexLabFramework SexLab = Util.GetFormFrom("SexLab.esm",0xd62) As SexLabFramework
-
-	;;;;;;;;
-
-	Thread = SexLab.GetActorController(Who)
-
-	If(Thread == None)
-		Util.PrintDebug("Failed to get SexLab thread controller.")
-	EndIf
-
-	Animation = Thread.Animation
-	ActorList = Thread.Positions
-
-	;;;;;;;;
-
-	ActorIter = 0
-	While(ActorIter < ActorList.Length)
-		If(ActorList[ActorIter].HasKeyword(KeywordActorTypeAnimal))
-			Bestial = TRUE
-		EndIf
-		ActorIter += 1
-	EndWhile
-
-	;;;;;;;;
-
-	If(Bestial && Who == self.Player)
-		;; @todo
-	EndIf
-
-	Return
 EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
