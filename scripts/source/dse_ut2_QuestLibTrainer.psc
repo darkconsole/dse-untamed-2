@@ -2,10 +2,10 @@ Scriptname dse_ut2_QuestLibTrainer extends Quest
 
 dse_ut2_QuestController Property Untamed Auto
 
-ActorBase Property TrainerType01 Auto
-ActorBase Property TrainerType02 Auto
-ActorBase Property TrainerType03 Auto
-ActorBase Property TrainerType04 Auto
+ActorBase Property TrainerType01 Auto ;; essence
+ActorBase Property TrainerType02 Auto ;; ferocity
+ActorBase Property TrainerType03 Auto ;; tenacity
+ActorBase Property TrainerType04 Auto ;; mastery
 
 ReferenceAlias Property Trainer01 Auto
 ReferenceAlias Property Trainer02 Auto
@@ -13,12 +13,6 @@ ReferenceAlias Property Trainer03 Auto
 ReferenceAlias Property Trainer04 Auto
 
 Event OnInit()
-
-	If(self.IsStarting() || self.IsRunning())
-		self.SpawnTrainers()
-		Utility.Wait(20)
-		self.DespawnTrainers()
-	EndIf
 
 	Return
 EndEvent
