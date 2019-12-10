@@ -43,14 +43,14 @@ Int Function GetMemberCountMax()
 {fetch the maximum number of things that can be in our pack.}
 
 	If(Untamed.Player.HasPerk(Untamed.PerkPackLeader3))
-		Return Untamed.Menu.OptPerkPackLeader3
+		Return Untamed.KeyPackLeaderMax3
 	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader2))
-		Return Untamed.Menu.OptPerkPackLeader2
+		Return Untamed.KeyPackLeaderMax2
 	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader1))
-		Return Untamed.Menu.OptPerkPackLeader1
+		Return Untamed.KeyPackLeaderMax1
 	EndIf
 
-	Return Untamed.Menu.OptPerkPackLeader0
+	Return Untamed.KeyPackLeaderMax0
 EndFunction
 
 Bool Function HasOpenSlot()
