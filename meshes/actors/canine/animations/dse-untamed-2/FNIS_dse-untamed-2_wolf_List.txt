@@ -19,6 +19,8 @@ Version 100
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '' WOLF RELATIONSHIP ANIMATIONS '''''''''''''''''''''''''''''''''''''''''''''''
 
+b -AVbFootIKDisable ut2-wolfoffset01-s1-wolf ut2-wolfoffset01-s1-wolf.hkx
+
 so -a,AVbFootIKDisable ut2-wolflove01-s1-wolf ut2-wolflove01-s1-wolf.hkx
 + ut2-wolflove01-s2-wolf ut2-wolflove01-s2-wolf.hkx
 + ut2-wolflove01-s3-wolf ut2-wolflove01-s3-wolf.hkx

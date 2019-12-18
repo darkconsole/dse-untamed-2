@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="ascii"?>
+<hktagfile version="1">
+  <class name="hkRootLevelContainer" version="0">
+    <member name="namedVariants" type="struct" array="true" class="hkRootLevelContainerNamedVariant"/>
+  </class>
+  <class name="hkRootLevelContainerNamedVariant" version="1">
+    <member name="name" type="string"/>
+    <member name="className" type="string"/>
+    <member name="variant" type="ref" class="hkReferencedObject"/>
+  </class>
+  <class name="hkBaseObject" version="0">
+  </class>
+  <class name="hkReferencedObject" version="0" parent="hkBaseObject">
+    <member name="memSizeAndFlags" type="void"/>
+    <member name="referenceCount" type="void"/>
+  </class>
+  <class name="hkaAnimationContainer" version="1" parent="hkReferencedObject">
+    <member name="skeletons" type="ref" array="true" class="hkaSkeleton"/>
+    <member name="animations" type="ref" array="true" class="hkaAnimation"/>
+    <member name="bindings" type="ref" array="true" class="hkaAnimationBinding"/>
+    <member name="attachments" type="ref" array="true" class="hkaBoneAttachment"/>
+    <member name="skins" type="ref" array="true" class="hkaMeshBinding"/>
+  </class>
+  <class name="hkaSkeleton" version="3" parent="hkReferencedObject">
+    <member name="name" type="string"/>
+    <member name="parentIndices" type="int" array="true"/>
+    <member name="bones" type="struct" array="true" class="hkaBone"/>
+    <member name="referencePose" type="vec12" array="true"/>
+    <member name="referenceFloats" type="real" array="true"/>
+    <member name="floatSlots" type="string" array="true"/>
+    <member name="localFrames" type="struct" array="true" class="hkaSkeletonLocalFrameOnBone"/>
+  </class>
+  <class name="hkaBone" version="0">
+    <member name="name" type="string"/>
+    <member name="lockTranslation" type="byte"/>
+  </class>
+  <class name="hkaSkeletonLocalFrameOnBone" version="0">
+    <member name="localFrame" type="ref" class="hkLocalFrame"/>
+    <member name="boneIndex" type="int"/>
+  </class>
+  <class name="hkLocalFrame" version="0" parent="hkReferencedObject">
+  </class>
+  <class name="hkaAnimation" version="3" parent="hkReferencedObject">
+    <member name="type" type="int"/>
+    <member name="duration" type="real"/>
+    <member name="numberOfTransformTracks" type="int"/>
+    <member name="numberOfFloatTracks" type="int"/>
+    <member name="extractedMotion" type="ref" class="hkaAnimatedReferenceFrame"/>
+    <member name="annotationTracks" type="struct" array="true" class="hkaAnnotationTrack"/>
+  </class>
+  <class name="hkaAnimatedReferenceFrame" version="0" parent="hkReferencedObject">
+  </class>
+  <class name="hkaAnnotationTrack" version="0">
+    <member name="trackName" type="string"/>
+    <member name="annotations" type="struct" array="true" class="hkaAnnotationTrackAnnotation"/>
+  </class>
+  <class name="hkaAnnotationTrackAnnotation" version="0">
+    <member name="time" type="real"/>
+    <member name="text" type="string"/>
+  </class>
+  <class name="hkaAnimationBinding" version="1" parent="hkReferencedObject">
+    <member name="originalSkeletonName" type="string"/>
+    <member name="animation" type="ref" class="hkaAnimation"/>
+    <member name="transformTrackToBoneIndices" type="int" array="true"/>
+    <member name="floatTrackToFloatSlotIndices" type="int" array="true"/>
+    <member name="blendHint" type="int"/>
+  </class>
+  <class name="hkaBoneAttachment" version="2" parent="hkReferencedObject">
+    <member name="originalSkeletonName" type="string"/>
+    <member name="boneFromAttachment" type="vec16"/>
+    <member name="attachment" type="ref" class="hkReferencedObject"/>
+    <member name="name" type="string"/>
+    <member name="boneIndex" type="int"/>
+  </class>
+  <class name="hkaMeshBinding" version="3" parent="hkReferencedObject">
+    <member name="mesh" type="ref" class="hkxMesh"/>
+    <member name="originalSkeletonName" type="string"/>
+    <member name="name" type="string"/>
+    <member name="skeleton" type="ref" class="hkaSkeleton"/>
+    <member name="mappings" type="struct" array="true" class="hkaMeshBindingMapping"/>
+    <member name="boneFromSkinMeshTransforms" type="vec16" array="true"/>
+  </class>
+  <class name="hkxMesh" version="1" parent="hkReferencedObject">
+    <member name="sections" type="ref" array="true" class="hkxMeshSection"/>
+    <member name="userChannelInfos" type="ref" array="true" class="hkxMeshUserChannelInfo"/>
+  </class>
+  <class name="hkxMeshSection" version="2" parent="hkReferencedObject">
+    <member name="vertexBuffer" type="ref" class="hkxVertexBuffer"/>
+    <member name="indexBuffers" type="ref" array="true" class="hkxIndexBuffer"/>
+    <member name="material" type="ref" class="hkxMaterial"/>
+    <member name="userChannels" type="ref" array="true" class="hkReferencedObject"/>
+  </class>
+  <class name="hkxVertexBuffer" version="1" parent="hkReferencedObject">
+    <member name="data" type="struct" class="hkxVertexBufferVertexData"/>
+    <member name="desc" type="struct" class="hkxVertexDescription"/>
+  </class>
+  <class name="hkxVertexBufferVertexData" version="0">
+    <member name="vectorData" type="vec4" array="true"/>
+    <member name="floatData" type="real" array="true"/>
+    <member name="uint32Data" type="int" array="true"/>
+    <member name="uint16Data" type="int" array="true"/>
+    <member name="uint8Data" type="byte" array="true"/>
+    <member name="numVerts" type="int"/>
+    <member name="vectorStride" type="int"/>
+    <member name="floatStride" type="int"/>
+    <member name="uint32Stride" type="int"/>
+    <member name="uint16Stride" type="int"/>
+    <member name="uint8Stride" type="int"/>
+  </class>
+  <class name="hkxVertexDescription" version="1">
+    <member name="decls" type="struct" array="true" class="hkxVertexDescriptionElementDecl"/>
+  </class>
+  <class name="hkxVertexDescriptionElementDecl" version="2">
+    <member name="byteOffset" type="int"/>
+    <member name="type" type="int"/>
+    <member name="usage" type="int"/>
+    <member name="byteStride" type="int"/>
+    <member name="numElements" type="byte"/>
+  </class>
+  <class name="hkxIndexBuffer" version="1" parent="hkReferencedObject">
+    <member name="indexType" type="int"/>
+    <member name="indices16" type="int" array="true"/>
+    <member name="indices32" type="int" array="true"/>
+    <member name="vertexBaseOffset" type="int"/>
+    <member name="length" type="int"/>
+  </class>
+  <class name="hkxAttributeHolder" version="2" parent="hkReferencedObject">
+    <member name="attributeGroups" type="struct" array="true" class="hkxAttributeGroup"/>
+  </class>
+  <class name="hkxAttributeGroup" version="0">
+    <member name="name" type="string"/>
+    <member name="attributes" type="struct" array="true" class="hkxAttribute"/>
+  </class>
+  <class name="hkxAttribute" version="1">
+    <member name="name" type="string"/>
+    <member name="value" type="ref" class="hkReferencedObject"/>
+  </class>
+  <class name="hkxMaterial" version="2" parent="hkxAttributeHolder">
+    <member name="name" type="string"/>
+    <member name="stages" type="struct" array="true" class="hkxMaterialTextureStage"/>
+    <member name="diffuseColor" type="vec4"/>
+    <member name="ambientColor" type="vec4"/>
+    <member name="specularColor" type="vec4"/>
+    <member name="emissiveColor" type="vec4"/>
+    <member name="subMaterials" type="ref" array="true" class="hkxMaterial"/>
+    <member name="extraData" type="ref" class="hkReferencedObject"/>
+    <member name="properties" type="struct" array="true" class="hkxMaterialProperty"/>
+  </class>
+  <class name="hkxMaterialTextureStage" version="1">
+    <member name="texture" type="ref" class="hkReferencedObject"/>
+    <member name="usageHint" type="int"/>
+    <member name="tcoordChannel" type="int"/>
+  </class>
+  <class name="hkxMaterialProperty" version="0">
+    <member name="key" type="int"/>
+    <member name="value" type="int"/>
+  </class>
+  <class name="hkxMeshUserChannelInfo" version="0" parent="hkxAttributeHolder">
+    <member name="name" type="string"/>
+    <member name="className" type="string"/>
+  </class>
+  <class name="hkaMeshBindingMapping" version="0">
+    <member name="mapping" type="int" array="true"/>
+  </class>
+  <class name="hkaInterleavedUncompressedAnimation" version="0" parent="hkaAnimation">
+    <member name="transforms" type="vec12" array="true"/>
+    <member name="floats" type="real" array="true"/>
+  </class>
+
+  <object id="#0001" type="hkRootLevelContainer">
+    <array name="namedVariants" size="1">
+      <struct>
+        <string name="name">Animation Container</string>
+        <string name="className">hkaAnimationContainer</string>
+        <ref name="variant">#0002</ref>
+      </struct>
+    </array>
+  </object>
+  <object id="#0002" type="hkaAnimationContainer">
+    <array name="animations" size="1">
+      <ref>#0003</ref>
+    </array>
+    <array name="bindings" size="1">
+      <ref>#0004</ref>
+    </array>
+  </object>
+  <object id="#0003" type="hkaInterleavedUncompressedAnimation">
+    <int name="type">1</int>
+    <real name="duration">x3d088889 <!-- 0.0333333 --></real>
+    <int name="numberOfTransformTracks">50</int>
+    <array name="annotationTracks" size="50">
+      <struct>
+        <string name="trackName">NPC Root [Root]_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_COM_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Pelvis_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Spine1_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Spine2_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Spine3_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Ribcage_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Neck1_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Neck2_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Head_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LFrontLegShoulderblade_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_RFrontLegShoulderblade_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LFrontLeg1_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_RFrontLeg1_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LBackLeg1_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_RBackLeg1_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LFrontLeg2_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_RFrontLeg2_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LBackLeg2_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_RBackLeg2_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LFrontLegPalm_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_RFrontLegPalm_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LBackLegPalm_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_RBackLegPalm_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Tail1_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Tail2_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Tail3_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LFrontLegToe_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_RFrontLegToe_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LBackLegToe_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_RBackLegToe_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_JawBone_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LEar_Wolf_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_REar_Wolf_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LEar01_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LEar02_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_REar01_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_REar02_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Dog_LEyelid_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Dog_REyelid_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LEye_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_REye_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_FrontLip_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Tongue01_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Tongue02_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Tongue03_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_LUpperLip_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_RUpperLip_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Dog_LBrow_W</string>
+      </struct>
+      <struct>
+        <string name="trackName">Canine_Dog_RBrow_W</string>
+      </struct>
+    </array>
+    <array name="transforms" size="100">
+      <vec12>x00000000 <!-- 0.0 --> x00000000 <!-- 0.0 --> x00000000 <!-- 0.0 --> x00000000 <!-- 0.0 --> x32ffff87 <!-- 2.98021e-008 --> x333bbd2e <!-- 4.37114e-008 --> x33a2216a <!-- 7.54979e-008 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x35cd7360 <!-- 1.53073e-006 --> xc21668a0 <!-- -37.6022 --> x4267fa8f <!-- 57.9947 --> xb6b60000 <!-- -5.42402e-006 --> xbf1249a9 <!-- -0.571436 --> x31f9d180 <!-- 7.27067e-009 --> xb3bab138 <!-- -8.69354e-008 --> x3f5215de <!-- 0.820646 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2ce00000 <!-- 6.36646e-012 --> xb8400000 <!-- -4.57764e-005 --> xb7000000 <!-- -7.62939e-006 --> x37c14000 <!-- 2.30372e-005 --> xb3000000 <!-- -2.98023e-008 --> xa72002ea <!-- -2.2206e-015 --> xa7496b47 <!-- -2.79525e-015 --> x3f800000 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2cc00000 <!-- 5.45697e-012 --> xb8600000 <!-- -5.34058e-005 --> xb7600000 <!-- -1.33514e-005 --> x37c14000 <!-- 2.30372e-005 --> xbe07ec7e <!-- -0.132738 --> xb18770c6 <!-- -3.94184e-009 --> x32fcd511 <!-- 2.94336e-008 --> x3f7dbc14 <!-- 0.991151 --> x3f800001 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6583386 <!-- -3.22165e-006 --> x37000000 <!-- 7.62939e-006 --> x417e2dca <!-- 15.8862 --> x378e1000 <!-- 1.69352e-005 --> xbd06f238 <!-- -0.0329458 --> x321662a3 <!-- 8.75358e-009 --> xb2f3c16c <!-- -2.83769e-008 --> x3f7fdc6a <!-- 0.999457 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x367e3644 <!-- 3.78805e-006 --> xb7400000 <!-- -1.14441e-005 --> x417e2dcc <!-- 15.8862 --> x37b11400 <!-- 2.11094e-005 --> x33800000 <!-- 5.96046e-008 --> xa9a11626 <!-- -7.15368e-014 --> xa6371040 <!-- -6.35129e-016 --> x3f800000 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb3242000 <!-- -3.82133e-008 --> x36800000 <!-- 3.8147e-006 --> x417e2dce <!-- 15.8862 --> x37d12c00 <!-- 2.49352e-005 --> x3e2949b8 <!-- 0.16532 --> x297a8acf <!-- 5.56315e-014 --> xa841e920 <!-- -1.07642e-014 --> x3f7c7a36 <!-- 0.98624 --> x3f800001 <!-- 1.0 --> x3f800004 <!-- 1.0 --> x3f800004 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2c400000 <!-- 2.72848e-012 --> xb7400000 <!-- -1.14441e-005 --> x36800000 <!-- 3.8147e-006 --> x37a80000 <!-- 2.00272e-005 --> x3ded2640 <!-- 0.115796 --> x2f5e45cc <!-- 2.02156e-010 --> xadcf4cc9 <!-- -2.35673e-011 --> x3f7e4724 <!-- 0.993273 --> x3f800001 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x33443a00 <!-- 4.56876e-008 --> x37400000 <!-- 1.14441e-005 --> x4190fbb8 <!-- 18.1229 --> x37430000 <!-- 1.16229e-005 --> xbd253768 <!-- -0.040336 --> xaf5bacc4 <!-- -1.99793e-010 --> x2e2a9b5c <!-- 3.87915e-011 --> x3f7fcaaa <!-- 0.999186 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x32e95800 <!-- 2.71648e-008 --> xb7800000 <!-- -1.52588e-005 --> x41330ea0 <!-- 11.1911 --> x37358000 <!-- 1.08182e-005 --> xbeaf8ae0 <!-- -0.342856 --> x260ac5c4 <!-- 4.81464e-016 --> xa6148e5c <!-- -5.15407e-016 --> x3f707bb7 <!-- 0.939388 --> x3f7fff05 <!-- 0.999985 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc0a3d228 <!-- -5.1194 --> xbfebf320 <!-- -1.84336 --> x3fb156c0 <!-- 1.38546 --> xc099a567 <!-- -4.80144 --> xbe14c378 <!-- -0.145277 --> x3f129f48 <!-- 0.572743 --> x3f42ff3d <!-- 0.761707 --> xbe881a15 <!-- -0.265824 --> x3fd55558 <!-- 1.66667 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x40a3d228 <!-- 5.1194 --> xbfebf2e0 <!-- -1.84335 --> x3fb156e0 <!-- 1.38546 --> x4099a5bb <!-- 4.80148 --> x3e14c363 <!-- 0.145277 --> x3f129f48 <!-- 0.572743 --> x3f42ff3b <!-- 0.761707 --> x3e881a1f <!-- 0.265824 --> x3f800000 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7ffff8 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x37800000 <!-- 1.52588e-005 --> x36800000 <!-- 3.8147e-006 --> x410ef400 <!-- 8.93457 --> x4217b926 <!-- 37.9308 --> x3eb3e292 <!-- 0.351338 --> xbeb28ad8 <!-- -0.348716 --> x3e2e2462 <!-- 0.170061 --> x3f5a21d4 <!-- 0.852079 --> x3f199999 <!-- 0.6 --> x3f800002 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36800000 <!-- 3.8147e-006 --> x36800000 <!-- 3.8147e-006 --> x410ef400 <!-- 8.93457 --> xc217b924 <!-- -37.9308 --> x3eb3e28b <!-- 0.351338 --> x3eb28af5 <!-- 0.348716 --> xbe2e246b <!-- -0.170061 --> x3f5a21d4 <!-- 0.852079 --> x3f7ffffc <!-- 1.0 --> x3f800000 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc10e8002 <!-- -8.90625 --> xc09c2680 <!-- -4.8797 --> xbfaf8df0 <!-- -1.37152 --> xc105a651 <!-- -8.3531 --> xbb1270b0 <!-- -0.0022345 --> x3f28408b <!-- 0.657235 --> x3f40f146 <!-- 0.753682 --> xba979094 <!-- -0.00115635 --> x3f800001 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x410e8002 <!-- 8.90625 --> xc09c2680 <!-- -4.8797 --> xbfaf8df0 <!-- -1.37152 --> x4105a67d <!-- 8.35315 --> x3b8c3c12 <!-- 0.00427962 --> x3f28400b <!-- 0.657227 --> x3f40f130 <!-- 0.75368 --> x38f88720 <!-- 0.000118507 --> x3f800000 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36a00000 <!-- 4.76837e-006 --> x36980000 <!-- 4.52995e-006 --> x41c18534 <!-- 24.19 --> xc1ebaa58 <!-- -29.4582 --> xbe01fb1d <!-- -0.126934 --> x3b0ccb58 <!-- 0.00214835 --> x3a6ebc8a <!-- 0.000910707 --> x3f7dedb4 <!-- 0.991908 --> x3f800003 <!-- 1.0 --> x3f800003 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6e00000 <!-- -6.67572e-006 --> x37640000 <!-- 1.35899e-005 --> x41c18532 <!-- 24.19 --> x41ebaa6a <!-- 29.4582 --> xbe01fa98 <!-- -0.126933 --> xbb0ccdb0 <!-- -0.00214849 --> xba6ebc60 <!-- -0.000910705 --> x3f7dedb6 <!-- 0.991908 --> x3f800003 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x3f800004 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6800000 <!-- -3.8147e-006 --> xb7280000 <!-- -1.00136e-005 --> x41e054a4 <!-- 28.0413 --> x40a89f66 <!-- 5.26946 --> x3f18c598 <!-- 0.596765 --> x347b2000 <!-- 2.33878e-007 --> x34a87400 <!-- 3.13768e-007 --> x3f4d6b23 <!-- 0.802416 --> x3f7ffffd <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6000000 <!-- -1.90735e-006 --> xb7280000 <!-- -1.00136e-005 --> x41e054a6 <!-- 28.0413 --> xc0a7c80f <!-- -5.24317 --> x3f18c594 <!-- 0.596765 --> xb8927c1d <!-- -6.98494e-005 --> x37ab7ade <!-- 2.0442e-005 --> x3f4d6b25 <!-- 0.802416 --> x3f800002 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6400000 <!-- -2.86102e-006 --> xb6000000 <!-- -1.90735e-006 --> x41bfbec6 <!-- 23.9682 --> xbf12583e <!-- -0.571659 --> xbea229e5 <!-- -0.316726 --> x3d8c673f <!-- 0.0685563 --> xbe2c1d16 <!-- -0.16808 --> x3f6e5511 <!-- 0.930986 --> x3f7fffff <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36800000 <!-- 3.8147e-006 --> x37700000 <!-- 1.43051e-005 --> x41bfbec5 <!-- 23.9681 --> x3f1257b2 <!-- 0.571651 --> xbea22a76 <!-- -0.31673 --> xbd8c66e4 <!-- -0.0685556 --> x3e2c1d6b <!-- 0.168081 --> x3f6e54f4 <!-- 0.930984 --> x3f800001 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36400000 <!-- 2.86102e-006 --> xb7800000 <!-- -1.52588e-005 --> x41b3569f <!-- 22.4173 --> xbd103f40 <!-- -0.0352166 --> xbf0fb120 <!-- -0.561296 --> x00000000 <!-- 0.0 --> xafa00000 <!-- -2.91038e-010 --> x3f53de91 <!-- 0.827615 --> x3f800004 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb5800000 <!-- -9.53674e-007 --> xb6800000 <!-- -3.8147e-006 --> x41b3569e <!-- 22.4173 --> xbe2d2cc4 <!-- -0.169116 --> xbf0fb11e <!-- -0.561296 --> xb6b63200 <!-- -5.42984e-006 --> x36688800 <!-- 3.46499e-006 --> x3f53de92 <!-- 0.827615 --> x3f7ffffd <!-- 1.0 --> x3f800005 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb3975000 <!-- -7.04604e-008 --> xc0984d00 <!-- -4.7594 --> xc12e6278 <!-- -10.899 --> x37a98000 <!-- 2.0206e-005 --> x3f7465ba <!-- 0.954677 --> xa64337f0 <!-- -6.773e-016 --> x267e7540 <!-- 8.82829e-016 --> x3e98649e <!-- 0.297643 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2c000000 <!-- 1.81899e-012 --> xb7a00000 <!-- -1.90735e-005 --> x4178c1ac <!-- 15.5473 --> xb7e54000 <!-- -2.73287e-005 --> xbe31d0ca <!-- -0.173648 --> xa5f13610 <!-- -4.18435e-016 --> xa7931330 <!-- -4.08215e-015 --> x3f7c1c5c <!-- 0.984808 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb51150e0 <!-- -5.41344e-007 --> x37400000 <!-- 1.14441e-005 --> x418559a4 <!-- 16.6688 --> xb7ca8000 <!-- -2.41399e-005 --> xb4000000 <!-- -1.19209e-007 --> xa698e30a <!-- -1.06087e-015 --> x27935eff <!-- 4.09037e-015 --> x3f7fffff <!-- 1.0 --> x3f800000 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x00000000 <!-- 0.0 --> xb5800000 <!-- -9.53674e-007 --> x41102601 <!-- 9.00928 --> x3e5caf70 <!-- 0.215513 --> xbefffe8e <!-- -0.499989 --> x3bee8415 <!-- 0.00727893 --> x3b89b217 <!-- 0.00420214 --> x3f5db192 <!-- 0.865991 --> x3f800002 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f800005 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6e00000 <!-- -6.67572e-006 --> xb7300000 <!-- -1.04904e-005 --> x41102602 <!-- 9.00928 --> xbe5c9adc <!-- -0.215434 --> xbefffde4 <!-- -0.499984 --> xbbec067f <!-- -0.00720292 --> xbb884956 <!-- -0.00415913 --> x3f5db1d2 <!-- 0.865995 --> x3f800000 <!-- 1.0 --> x3f800004 <!-- 1.0 --> x3f800003 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36e00000 <!-- 6.67572e-006 --> x36000000 <!-- 1.90735e-006 --> x41a0c7ec <!-- 20.0976 --> xbdd469d0 <!-- -0.103717 --> xbf0d0bb2 <!-- -0.55096 --> xbb158489 <!-- -0.00228146 --> xba3d8347 <!-- -0.000722934 --> x3f55a3a5 <!-- 0.834528 --> x3f7ffff9 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x35800000 <!-- 9.53674e-007 --> xb7200000 <!-- -9.53674e-006 --> x41a0c7e7 <!-- 20.0976 --> x3eb16c68 <!-- 0.34653 --> xbf0d0b43 <!-- -0.550953 --> x3b0e9edd <!-- 0.00217622 --> x39969d96 <!-- 0.000287276 --> x3f55a3f7 <!-- 0.834533 --> x3f800002 <!-- 1.0 --> x3f7ffffd <!-- 1.0 --> x3f800006 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x3591d408 <!-- 1.08651e-006 --> x40e38370 <!-- 7.10979 --> x40c47c20 <!-- 6.14015 --> x38037000 <!-- 3.13371e-005 --> xbd07ec08 <!-- -0.0331841 --> x318be560 <!-- 4.07151e-009 --> x33038153 <!-- 3.06184e-008 --> x3f7fdbe6 <!-- 0.999449 --> x3f80007e <!-- 1.00002 --> x3f800002 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc0a4f2ab <!-- -5.15462 --> xbff15980 <!-- -1.88554 --> x4062d378 <!-- 3.54416 --> xc0a1d896 <!-- -5.05769 --> x3f27a54d <!-- 0.654866 --> xbea109df <!-- -0.314528 --> xbe9853df <!-- -0.297515 --> x3f1e93b0 <!-- 0.619441 --> x3f80007f <!-- 1.00002 --> x3f800002 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x40a4f2aa <!-- 5.15462 --> xbff159c0 <!-- -1.88555 --> x4062d390 <!-- 3.54416 --> x40a1d916 <!-- 5.05775 --> x3f27a550 <!-- 0.654866 --> x3ea109d7 <!-- 0.314528 --> x3e9853cc <!-- 0.297514 --> x3f1e93b2 <!-- 0.619441 --> x3f800080 <!-- 1.00002 --> x3f800003 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc0afb51d <!-- -5.49086 --> xbfbd7ac0 <!-- -1.48031 --> x400be498 <!-- 2.18583 --> xc0ac6740 <!-- -5.3876 --> x3de965f0 <!-- 0.113964 --> xbf107033 <!-- -0.564212 --> xbdc46c44 <!-- -0.0959096 --> x3f4fe4a6 <!-- 0.812083 --> x3f80007f <!-- 1.00002 --> x3f800003 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x00000000 <!-- 0.0 --> xb7c00000 <!-- -2.28882e-005 --> x40ad9020 <!-- 5.42384 --> xc219bf60 <!-- -38.4369 --> xbe2f2142 <!-- -0.171025 --> xb4100000 <!-- -1.3411e-007 --> xb2800000 <!-- -1.49012e-008 --> x3f7c3a6e <!-- 0.985267 --> x3f800002 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x40afb51f <!-- 5.49086 --> xbfbd7ac0 <!-- -1.48031 --> x400be4a8 <!-- 2.18583 --> x40ac67c4 <!-- 5.38767 --> x3de965ec <!-- 0.113964 --> x3f107034 <!-- 0.564212 --> x3dc46c4a <!-- 0.0959097 --> x3f4fe4a6 <!-- 0.812083 --> x3f800080 <!-- 1.00002 --> x3f800003 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36800000 <!-- 3.8147e-006 --> xb7c00000 <!-- -2.28882e-005 --> x40ad9028 <!-- 5.42385 --> x4219bf6c <!-- 38.4369 --> xbe2f2148 <!-- -0.171025 --> x33400000 <!-- 4.47035e-008 --> x33400000 <!-- 4.47035e-008 --> x3f7c3a6e <!-- 0.985267 --> x3f7fffff <!-- 1.0 --> x3f7ffffc <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc04aac63 <!-- -3.16677 --> xbeb23c00 <!-- -0.348114 --> x412929d4 <!-- 10.5727 --> xc046dc81 <!-- -3.10721 --> x3eaa33bc <!-- 0.332426 --> xbd80a5e6 <!-- -0.0628164 --> x3e19fdfc <!-- 0.150383 --> x3f6dcf18 <!-- 0.928941 --> x3f80007e <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x404aac63 <!-- 3.16677 --> xbeb23c00 <!-- -0.348114 --> x412929d4 <!-- 10.5727 --> x4046dd7f <!-- 3.10727 --> x3ec2845d <!-- 0.379916 --> x3dbd72ec <!-- 0.0925044 --> xbe95bcc0 <!-- -0.292456 --> x3f5f682d <!-- 0.872683 --> x3f800080 <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800003 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc04aac63 <!-- -3.16677 --> xbeb23c00 <!-- -0.348114 --> x412929d4 <!-- 10.5727 --> xc046dc81 <!-- -3.10721 --> x3ded1838 <!-- 0.115769 --> xbdb70e92 <!-- -0.0893833 --> x3c74e98c <!-- 0.0149483 --> x3f7d37d6 <!-- 0.989133 --> x3f80007f <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x404aac64 <!-- 3.16677 --> xbeb23c00 <!-- -0.348114 --> x412929d4 <!-- 10.5727 --> x4046dd80 <!-- 3.10727 --> x3ded1834 <!-- 0.115769 --> x3db70ea0 <!-- 0.0893834 --> xbc74e988 <!-- -0.0149483 --> x3f7d37d7 <!-- 0.989133 --> x3f800080 <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xbdfe918e <!-- -0.124301 --> x40920bc0 <!-- 4.56393 --> x41b2800d <!-- 22.3125 --> xbdf9b88a <!-- -0.121934 --> x00000000 <!-- 0.0 --> x1fe58000 <!-- 9.7197e-020 --> x1f7d0000 <!-- 5.35748e-020 --> x3f7ffffe <!-- 1.0 --> x3f80007e <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xac400000 <!-- -2.72848e-012 --> x3f181100 <!-- 0.594009 --> x40625870 <!-- 3.53665 --> x37dfc000 <!-- 2.66731e-005 --> x3e5c477a <!-- 0.215116 --> xa8200000 <!-- -8.88178e-015 --> xa7e00000 <!-- -6.21725e-015 --> x3f7a01b0 <!-- 0.976588 --> x3f800000 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2c000000 <!-- 1.81899e-012 --> xb7000000 <!-- -7.62939e-006 --> x408a9b20 <!-- 4.33144 --> x379c2000 <!-- 1.86116e-005 --> xbe23bbe0 <!-- -0.159896 --> x32411322 <!-- 1.12384e-008 --> x32dd20c3 <!-- 2.57427e-008 --> x3f7cb4cb <!-- 0.987134 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2b000000 <!-- 4.54747e-013 --> xb7000000 <!-- -7.62939e-006 --> x40626770 <!-- 3.53756 --> x379c6000 <!-- 1.86414e-005 --> xbd550e50 <!-- -0.0520156 --> xb22f26d4 <!-- -1.01952e-008 --> xb14456b8 <!-- -2.8571e-009 --> x3f7fa746 <!-- 0.998646 --> x3f800000 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc084ca9b <!-- -4.14973 --> x40a729f0 <!-- 5.22387 --> x418fa621 <!-- 17.9561 --> xc0824b48 <!-- -4.07169 --> x3e0e8368 <!-- 0.139173 --> x329fa894 <!-- 1.85867e-008 --> x337bad66 <!-- 5.85982e-008 --> x3f7d8234 <!-- 0.990268 --> x3f80007e <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x4084ca9b <!-- 4.14973 --> x40a729f0 <!-- 5.22387 --> x418fa621 <!-- 17.9561 --> x40824bc8 <!-- 4.07175 --> x34600000 <!-- 2.08616e-007 --> x3228662e <!-- 9.80212e-009 --> x339d948c <!-- 7.3379e-008 --> x3f7fffff <!-- 1.0 --> x3f80007e <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc02b7a54 <!-- -2.67934 --> xc05a3860 <!-- -3.40969 --> x413de366 <!-- 11.868 --> xc0284093 <!-- -2.62894 --> x3c2bd080 <!-- 0.0104867 --> xbe4e3364 <!-- -0.201368 --> xbd50a550 <!-- -0.0509389 --> x3f7a66fd <!-- 0.978134 --> x3f80007f <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x402b7a53 <!-- 2.67934 --> xc05a38c0 <!-- -3.40971 --> x413de36e <!-- 11.868 --> x40284192 <!-- 2.629 --> x3c2bd080 <!-- 0.0104867 --> x3e4e3364 <!-- 0.201368 --> x3d50a550 <!-- 0.0509389 --> x3f7a66fd <!-- 0.978134 --> x3f80007f <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x00000000 <!-- 0.0 --> x00000000 <!-- 0.0 --> x00000000 <!-- 0.0 --> x00000000 <!-- 0.0 --> x32ffff87 <!-- 2.98021e-008 --> x333bbd2e <!-- 4.37114e-008 --> x33a2216a <!-- 7.54979e-008 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x35cd7360 <!-- 1.53073e-006 --> xc21668a0 <!-- -37.6022 --> x4267fa8f <!-- 57.9947 --> xb6b60000 <!-- -5.42402e-006 --> xbf1249a9 <!-- -0.571436 --> x31f9d180 <!-- 7.27067e-009 --> xb3bab138 <!-- -8.69354e-008 --> x3f5215de <!-- 0.820646 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2ce00000 <!-- 6.36646e-012 --> xb8400000 <!-- -4.57764e-005 --> xb7000000 <!-- -7.62939e-006 --> x37c14000 <!-- 2.30372e-005 --> xb3000000 <!-- -2.98023e-008 --> xa72002ea <!-- -2.2206e-015 --> xa7496b47 <!-- -2.79525e-015 --> x3f800000 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2cc00000 <!-- 5.45697e-012 --> xb8600000 <!-- -5.34058e-005 --> xb7600000 <!-- -1.33514e-005 --> x37c14000 <!-- 2.30372e-005 --> xbe07ec7e <!-- -0.132738 --> xb18770c6 <!-- -3.94184e-009 --> x32fcd511 <!-- 2.94336e-008 --> x3f7dbc14 <!-- 0.991151 --> x3f800001 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6583386 <!-- -3.22165e-006 --> x37000000 <!-- 7.62939e-006 --> x417e2dca <!-- 15.8862 --> x378e1000 <!-- 1.69352e-005 --> xbd06f238 <!-- -0.0329458 --> x321662a3 <!-- 8.75358e-009 --> xb2f3c16c <!-- -2.83769e-008 --> x3f7fdc6a <!-- 0.999457 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x367e3644 <!-- 3.78805e-006 --> xb7400000 <!-- -1.14441e-005 --> x417e2dcc <!-- 15.8862 --> x37b11400 <!-- 2.11094e-005 --> x33800000 <!-- 5.96046e-008 --> xa9a11626 <!-- -7.15368e-014 --> xa6371040 <!-- -6.35129e-016 --> x3f800000 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb3242000 <!-- -3.82133e-008 --> x36800000 <!-- 3.8147e-006 --> x417e2dce <!-- 15.8862 --> x37d12c00 <!-- 2.49352e-005 --> x3e2949b8 <!-- 0.16532 --> x297a8acf <!-- 5.56315e-014 --> xa841e920 <!-- -1.07642e-014 --> x3f7c7a36 <!-- 0.98624 --> x3f800001 <!-- 1.0 --> x3f800004 <!-- 1.0 --> x3f800004 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2c400000 <!-- 2.72848e-012 --> xb7400000 <!-- -1.14441e-005 --> x36800000 <!-- 3.8147e-006 --> x37a80000 <!-- 2.00272e-005 --> x3ded2640 <!-- 0.115796 --> x2f5e45cc <!-- 2.02156e-010 --> xadcf4cc9 <!-- -2.35673e-011 --> x3f7e4724 <!-- 0.993273 --> x3f800001 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x33443a00 <!-- 4.56876e-008 --> x37400000 <!-- 1.14441e-005 --> x4190fbb8 <!-- 18.1229 --> x37430000 <!-- 1.16229e-005 --> xbd253768 <!-- -0.040336 --> xaf5bacc4 <!-- -1.99793e-010 --> x2e2a9b5c <!-- 3.87915e-011 --> x3f7fcaaa <!-- 0.999186 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x32e95800 <!-- 2.71648e-008 --> xb7800000 <!-- -1.52588e-005 --> x41330ea0 <!-- 11.1911 --> x37358000 <!-- 1.08182e-005 --> xbeaf8ae0 <!-- -0.342856 --> x260ac5c4 <!-- 4.81464e-016 --> xa6148e5c <!-- -5.15407e-016 --> x3f707bb7 <!-- 0.939388 --> x3f7fff05 <!-- 0.999985 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc0a3d228 <!-- -5.1194 --> xbfebf320 <!-- -1.84336 --> x3fb156c0 <!-- 1.38546 --> xc099a567 <!-- -4.80144 --> xbe14c378 <!-- -0.145277 --> x3f129f48 <!-- 0.572743 --> x3f42ff3d <!-- 0.761707 --> xbe881a15 <!-- -0.265824 --> x3fd55558 <!-- 1.66667 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x40a3d228 <!-- 5.1194 --> xbfebf2e0 <!-- -1.84335 --> x3fb156e0 <!-- 1.38546 --> x4099a5bb <!-- 4.80148 --> x3e14c363 <!-- 0.145277 --> x3f129f48 <!-- 0.572743 --> x3f42ff3b <!-- 0.761707 --> x3e881a1f <!-- 0.265824 --> x3f800000 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7ffff8 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x37800000 <!-- 1.52588e-005 --> x36800000 <!-- 3.8147e-006 --> x410ef400 <!-- 8.93457 --> x4217b926 <!-- 37.9308 --> x3eb3e292 <!-- 0.351338 --> xbeb28ad8 <!-- -0.348716 --> x3e2e2462 <!-- 0.170061 --> x3f5a21d4 <!-- 0.852079 --> x3f199999 <!-- 0.6 --> x3f800002 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36800000 <!-- 3.8147e-006 --> x36800000 <!-- 3.8147e-006 --> x410ef400 <!-- 8.93457 --> xc217b924 <!-- -37.9308 --> x3eb3e28b <!-- 0.351338 --> x3eb28af5 <!-- 0.348716 --> xbe2e246b <!-- -0.170061 --> x3f5a21d4 <!-- 0.852079 --> x3f7ffffc <!-- 1.0 --> x3f800000 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc10e8002 <!-- -8.90625 --> xc09c2680 <!-- -4.8797 --> xbfaf8df0 <!-- -1.37152 --> xc105a651 <!-- -8.3531 --> xbb1270b0 <!-- -0.0022345 --> x3f28408b <!-- 0.657235 --> x3f40f146 <!-- 0.753682 --> xba979094 <!-- -0.00115635 --> x3f800001 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x410e8002 <!-- 8.90625 --> xc09c2680 <!-- -4.8797 --> xbfaf8df0 <!-- -1.37152 --> x4105a67d <!-- 8.35315 --> x3b8c3c12 <!-- 0.00427962 --> x3f28400b <!-- 0.657227 --> x3f40f130 <!-- 0.75368 --> x38f88720 <!-- 0.000118507 --> x3f800000 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36a00000 <!-- 4.76837e-006 --> x36980000 <!-- 4.52995e-006 --> x41c18534 <!-- 24.19 --> xc1ebaa58 <!-- -29.4582 --> xbe01fb1d <!-- -0.126934 --> x3b0ccb58 <!-- 0.00214835 --> x3a6ebc8a <!-- 0.000910707 --> x3f7dedb4 <!-- 0.991908 --> x3f800003 <!-- 1.0 --> x3f800003 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6e00000 <!-- -6.67572e-006 --> x37640000 <!-- 1.35899e-005 --> x41c18532 <!-- 24.19 --> x41ebaa6a <!-- 29.4582 --> xbe01fa98 <!-- -0.126933 --> xbb0ccdb0 <!-- -0.00214849 --> xba6ebc60 <!-- -0.000910705 --> x3f7dedb6 <!-- 0.991908 --> x3f800003 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x3f800004 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6800000 <!-- -3.8147e-006 --> xb7280000 <!-- -1.00136e-005 --> x41e054a4 <!-- 28.0413 --> x40a89f66 <!-- 5.26946 --> x3f18c598 <!-- 0.596765 --> x347b2000 <!-- 2.33878e-007 --> x34a87400 <!-- 3.13768e-007 --> x3f4d6b23 <!-- 0.802416 --> x3f7ffffd <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6000000 <!-- -1.90735e-006 --> xb7280000 <!-- -1.00136e-005 --> x41e054a6 <!-- 28.0413 --> xc0a7c80f <!-- -5.24317 --> x3f18c594 <!-- 0.596765 --> xb8927c1d <!-- -6.98494e-005 --> x37ab7ade <!-- 2.0442e-005 --> x3f4d6b25 <!-- 0.802416 --> x3f800002 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6400000 <!-- -2.86102e-006 --> xb6000000 <!-- -1.90735e-006 --> x41bfbec6 <!-- 23.9682 --> xbf12583e <!-- -0.571659 --> xbea229e5 <!-- -0.316726 --> x3d8c673f <!-- 0.0685563 --> xbe2c1d16 <!-- -0.16808 --> x3f6e5511 <!-- 0.930986 --> x3f7fffff <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36800000 <!-- 3.8147e-006 --> x37700000 <!-- 1.43051e-005 --> x41bfbec5 <!-- 23.9681 --> x3f1257b2 <!-- 0.571651 --> xbea22a76 <!-- -0.31673 --> xbd8c66e4 <!-- -0.0685556 --> x3e2c1d6b <!-- 0.168081 --> x3f6e54f4 <!-- 0.930984 --> x3f800001 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36400000 <!-- 2.86102e-006 --> xb7800000 <!-- -1.52588e-005 --> x41b3569f <!-- 22.4173 --> xbd103f40 <!-- -0.0352166 --> xbf0fb120 <!-- -0.561296 --> x00000000 <!-- 0.0 --> xafa00000 <!-- -2.91038e-010 --> x3f53de91 <!-- 0.827615 --> x3f800004 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb5800000 <!-- -9.53674e-007 --> xb6800000 <!-- -3.8147e-006 --> x41b3569e <!-- 22.4173 --> xbe2d2cc4 <!-- -0.169116 --> xbf0fb11e <!-- -0.561296 --> xb6b63200 <!-- -5.42984e-006 --> x36688800 <!-- 3.46499e-006 --> x3f53de92 <!-- 0.827615 --> x3f7ffffd <!-- 1.0 --> x3f800005 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb3975000 <!-- -7.04604e-008 --> xc0984d00 <!-- -4.7594 --> xc12e6278 <!-- -10.899 --> x37a98000 <!-- 2.0206e-005 --> x3f7465ba <!-- 0.954677 --> xa64337f0 <!-- -6.773e-016 --> x267e7540 <!-- 8.82829e-016 --> x3e98649e <!-- 0.297643 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2c000000 <!-- 1.81899e-012 --> xb7a00000 <!-- -1.90735e-005 --> x4178c1ac <!-- 15.5473 --> xb7e54000 <!-- -2.73287e-005 --> xbe31d0ca <!-- -0.173648 --> xa5f13610 <!-- -4.18435e-016 --> xa7931330 <!-- -4.08215e-015 --> x3f7c1c5c <!-- 0.984808 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb51150e0 <!-- -5.41344e-007 --> x37400000 <!-- 1.14441e-005 --> x418559a4 <!-- 16.6688 --> xb7ca8000 <!-- -2.41399e-005 --> xb4000000 <!-- -1.19209e-007 --> xa698e30a <!-- -1.06087e-015 --> x27935eff <!-- 4.09037e-015 --> x3f7fffff <!-- 1.0 --> x3f800000 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x00000000 <!-- 0.0 --> xb5800000 <!-- -9.53674e-007 --> x41102601 <!-- 9.00928 --> x3e5caf70 <!-- 0.215513 --> xbefffe8e <!-- -0.499989 --> x3bee8415 <!-- 0.00727893 --> x3b89b217 <!-- 0.00420214 --> x3f5db192 <!-- 0.865991 --> x3f800002 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f800005 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xb6e00000 <!-- -6.67572e-006 --> xb7300000 <!-- -1.04904e-005 --> x41102602 <!-- 9.00928 --> xbe5c9adc <!-- -0.215434 --> xbefffde4 <!-- -0.499984 --> xbbec067f <!-- -0.00720292 --> xbb884956 <!-- -0.00415913 --> x3f5db1d2 <!-- 0.865995 --> x3f800000 <!-- 1.0 --> x3f800004 <!-- 1.0 --> x3f800003 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36e00000 <!-- 6.67572e-006 --> x36000000 <!-- 1.90735e-006 --> x41a0c7ec <!-- 20.0976 --> xbdd469d0 <!-- -0.103717 --> xbf0d0bb2 <!-- -0.55096 --> xbb158489 <!-- -0.00228146 --> xba3d8347 <!-- -0.000722934 --> x3f55a3a5 <!-- 0.834528 --> x3f7ffff9 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x35800000 <!-- 9.53674e-007 --> xb7200000 <!-- -9.53674e-006 --> x41a0c7e7 <!-- 20.0976 --> x3eb16c68 <!-- 0.34653 --> xbf0d0b43 <!-- -0.550953 --> x3b0e9edd <!-- 0.00217622 --> x39969d96 <!-- 0.000287276 --> x3f55a3f7 <!-- 0.834533 --> x3f800002 <!-- 1.0 --> x3f7ffffd <!-- 1.0 --> x3f800006 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x3591d408 <!-- 1.08651e-006 --> x40e38370 <!-- 7.10979 --> x40c47c20 <!-- 6.14015 --> x38037000 <!-- 3.13371e-005 --> xbd07ec08 <!-- -0.0331841 --> x318be560 <!-- 4.07151e-009 --> x33038153 <!-- 3.06184e-008 --> x3f7fdbe6 <!-- 0.999449 --> x3f80007e <!-- 1.00002 --> x3f800002 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc0a4f2ab <!-- -5.15462 --> xbff15980 <!-- -1.88554 --> x4062d378 <!-- 3.54416 --> xc0a1d896 <!-- -5.05769 --> x3f27a54d <!-- 0.654866 --> xbea109df <!-- -0.314528 --> xbe9853df <!-- -0.297515 --> x3f1e93b0 <!-- 0.619441 --> x3f80007f <!-- 1.00002 --> x3f800002 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x40a4f2aa <!-- 5.15462 --> xbff159c0 <!-- -1.88555 --> x4062d390 <!-- 3.54416 --> x40a1d916 <!-- 5.05775 --> x3f27a550 <!-- 0.654866 --> x3ea109d7 <!-- 0.314528 --> x3e9853cc <!-- 0.297514 --> x3f1e93b2 <!-- 0.619441 --> x3f800080 <!-- 1.00002 --> x3f800003 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc0afb51d <!-- -5.49086 --> xbfbd7ac0 <!-- -1.48031 --> x400be498 <!-- 2.18583 --> xc0ac6740 <!-- -5.3876 --> x3de965f0 <!-- 0.113964 --> xbf107033 <!-- -0.564212 --> xbdc46c44 <!-- -0.0959096 --> x3f4fe4a6 <!-- 0.812083 --> x3f80007f <!-- 1.00002 --> x3f800003 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x00000000 <!-- 0.0 --> xb7c00000 <!-- -2.28882e-005 --> x40ad9020 <!-- 5.42384 --> xc219bf60 <!-- -38.4369 --> xbe2f2142 <!-- -0.171025 --> xb4100000 <!-- -1.3411e-007 --> xb2800000 <!-- -1.49012e-008 --> x3f7c3a6e <!-- 0.985267 --> x3f800002 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x40afb51f <!-- 5.49086 --> xbfbd7ac0 <!-- -1.48031 --> x400be4a8 <!-- 2.18583 --> x40ac67c4 <!-- 5.38767 --> x3de965ec <!-- 0.113964 --> x3f107034 <!-- 0.564212 --> x3dc46c4a <!-- 0.0959097 --> x3f4fe4a6 <!-- 0.812083 --> x3f800080 <!-- 1.00002 --> x3f800003 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x36800000 <!-- 3.8147e-006 --> xb7c00000 <!-- -2.28882e-005 --> x40ad9028 <!-- 5.42385 --> x4219bf6c <!-- 38.4369 --> xbe2f2148 <!-- -0.171025 --> x33400000 <!-- 4.47035e-008 --> x33400000 <!-- 4.47035e-008 --> x3f7c3a6e <!-- 0.985267 --> x3f7fffff <!-- 1.0 --> x3f7ffffc <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc04aac63 <!-- -3.16677 --> xbeb23c00 <!-- -0.348114 --> x412929d4 <!-- 10.5727 --> xc046dc81 <!-- -3.10721 --> x3eaa33bc <!-- 0.332426 --> xbd80a5e6 <!-- -0.0628164 --> x3e19fdfc <!-- 0.150383 --> x3f6dcf18 <!-- 0.928941 --> x3f80007e <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x404aac63 <!-- 3.16677 --> xbeb23c00 <!-- -0.348114 --> x412929d4 <!-- 10.5727 --> x4046dd7f <!-- 3.10727 --> x3ec2845d <!-- 0.379916 --> x3dbd72ec <!-- 0.0925044 --> xbe95bcc0 <!-- -0.292456 --> x3f5f682d <!-- 0.872683 --> x3f800080 <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800003 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc04aac63 <!-- -3.16677 --> xbeb23c00 <!-- -0.348114 --> x412929d4 <!-- 10.5727 --> xc046dc81 <!-- -3.10721 --> x3ded1838 <!-- 0.115769 --> xbdb70e92 <!-- -0.0893833 --> x3c74e98c <!-- 0.0149483 --> x3f7d37d6 <!-- 0.989133 --> x3f80007f <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x404aac64 <!-- 3.16677 --> xbeb23c00 <!-- -0.348114 --> x412929d4 <!-- 10.5727 --> x4046dd80 <!-- 3.10727 --> x3ded1834 <!-- 0.115769 --> x3db70ea0 <!-- 0.0893834 --> xbc74e988 <!-- -0.0149483 --> x3f7d37d7 <!-- 0.989133 --> x3f800080 <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800002 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xbdfe918e <!-- -0.124301 --> x40920bc0 <!-- 4.56393 --> x41b2800d <!-- 22.3125 --> xbdf9b88a <!-- -0.121934 --> x00000000 <!-- 0.0 --> x1fe58000 <!-- 9.7197e-020 --> x1f7d0000 <!-- 5.35748e-020 --> x3f7ffffe <!-- 1.0 --> x3f80007e <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xac400000 <!-- -2.72848e-012 --> x3f181100 <!-- 0.594009 --> x40625870 <!-- 3.53665 --> x37dfc000 <!-- 2.66731e-005 --> x3e5c477a <!-- 0.215116 --> xa8200000 <!-- -8.88178e-015 --> xa7e00000 <!-- -6.21725e-015 --> x3f7a01b0 <!-- 0.976588 --> x3f800000 <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x3f7fffff <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2c000000 <!-- 1.81899e-012 --> xb7000000 <!-- -7.62939e-006 --> x408a9b20 <!-- 4.33144 --> x379c2000 <!-- 1.86116e-005 --> xbe23bbe0 <!-- -0.159896 --> x32411322 <!-- 1.12384e-008 --> x32dd20c3 <!-- 2.57427e-008 --> x3f7cb4cb <!-- 0.987134 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x2b000000 <!-- 4.54747e-013 --> xb7000000 <!-- -7.62939e-006 --> x40626770 <!-- 3.53756 --> x379c6000 <!-- 1.86414e-005 --> xbd550e50 <!-- -0.0520156 --> xb22f26d4 <!-- -1.01952e-008 --> xb14456b8 <!-- -2.8571e-009 --> x3f7fa746 <!-- 0.998646 --> x3f800000 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc084ca9b <!-- -4.14973 --> x40a729f0 <!-- 5.22387 --> x418fa621 <!-- 17.9561 --> xc0824b48 <!-- -4.07169 --> x3e0e8368 <!-- 0.139173 --> x329fa894 <!-- 1.85867e-008 --> x337bad66 <!-- 5.85982e-008 --> x3f7d8234 <!-- 0.990268 --> x3f80007e <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x4084ca9b <!-- 4.14973 --> x40a729f0 <!-- 5.22387 --> x418fa621 <!-- 17.9561 --> x40824bc8 <!-- 4.07175 --> x34600000 <!-- 2.08616e-007 --> x3228662e <!-- 9.80212e-009 --> x339d948c <!-- 7.3379e-008 --> x3f7fffff <!-- 1.0 --> x3f80007e <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800001 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>xc02b7a54 <!-- -2.67934 --> xc05a3860 <!-- -3.40969 --> x413de366 <!-- 11.868 --> xc0284093 <!-- -2.62894 --> x3c2bd080 <!-- 0.0104867 --> xbe4e3364 <!-- -0.201368 --> xbd50a550 <!-- -0.0509389 --> x3f7a66fd <!-- 0.978134 --> x3f80007f <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+      <vec12>x402b7a53 <!-- 2.67934 --> xc05a38c0 <!-- -3.40971 --> x413de36e <!-- 11.868 --> x40284192 <!-- 2.629 --> x3c2bd080 <!-- 0.0104867 --> x3e4e3364 <!-- 0.201368 --> x3d50a550 <!-- 0.0509389 --> x3f7a66fd <!-- 0.978134 --> x3f80007f <!-- 1.00002 --> x3f800001 <!-- 1.0 --> x3f800000 <!-- 1.0 --> x00000000 <!-- 0.0 --></vec12>
+    </array>
+  </object>
+  <object id="#0004" type="hkaAnimationBinding">
+    <string name="originalSkeletonName">NPC Root [Root]_W</string>
+    <ref name="animation">#0003</ref>
+  </object>
+</hktagfile>

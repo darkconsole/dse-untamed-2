@@ -8,9 +8,11 @@ Int Property Iter Auto Hidden
 String Property DomAnim1 Auto Hidden
 String Property DomAnim2 Auto Hidden
 String Property DomAnim3 Auto Hidden
+String Property DomOff   Auto Hidden
 String Property SubAnim1 Auto Hidden
 String Property SubAnim2 Auto Hidden
 String Property SubAnim3 Auto Hidden
+String Property SubOff   Auto Hidden
 
 Event OnAnimationEvent(ObjectReference What, String EvName)
 {watch for animation events we use to progress the system.}
@@ -60,9 +62,11 @@ will kick off the animation system for this action.}
 	AnimalType = Untamed.Util.GetAnimalType(self.Sub)
 
 	If(AnimalType == Untamed.KeyRaceWolf)
+		self.DomOff   = "ut2-wolfoffset01-s1-human"
 		self.DomAnim1 = "ut2-wolflove01-s1-human"
 		self.DomAnim2 = "ut2-wolflove01-s3-human"
 		self.DomAnim3 = "ut2-wolflove01-s4-human"
+		self.SubOff   = "ut2-wolfoffset01-s1-wolf"
 		self.SubAnim1 = "ut2-wolflove01-s1-wolf"
 		self.SubAnim2 = "ut2-wolflove01-s3-wolf"
 		self.SubAnim3 = "ut2-wolflove01-s4-wolf"
@@ -90,15 +94,15 @@ Function AnimateStart()
 
 	;; kick off the animationing.
 
-	Untamed.Anim.StopDualAnimation(self.Sub,self.Dom)
-	Untamed.Anim.PlayDualAnimation(self.Sub,self.SubAnim1,self.Dom,self.DomAnim1)
+	;;Untamed.Anim.StopDualAnimation(self.Sub,self.Dom)
+	Untamed.Anim.PlayDualAnimation(self.Dom,self.DomAnim1,self.Sub,self.SubAnim1,self.DomOff,self.SubOff)
 
 	Return
 EndFunction
 
 Function AnimateEnd()
 
-	Float[] Where = Untamed.Util.GetPositionAtDistance(self.Sub,125)
+	Float[] Where = Untamed.Util.GetPositionAtDistance(self.Dom,125)
 
 	;; stop watching the animation events.
 
@@ -108,12 +112,12 @@ Function AnimateEnd()
 
 	;; put the player in front of and facing the animal.
 
-	self.Dom.TranslateTo(Where[1],Where[2],Where[3],self.Dom.GetAngleX(),self.Dom.GetAngleY(),(self.Dom.GetAngleZ()+180.0),10000,0)
-	self.Dom.SetAngle(0.0,0.0,(self.Dom.GetAngleZ() + 180.0))
+	;;self.Dom.TranslateTo(Where[1],Where[2],Where[3],self.Dom.GetAngleX(),self.Dom.GetAngleY(),(self.Dom.GetAngleZ()+180.0),10000,0)
+	;;self.Dom.SetAngle(0.0,0.0,(self.Dom.GetAngleZ() + 180.0))
 
 	;; shut down the animation system.
 
-	Untamed.Anim.StopDualAnimation(self.Sub,self.Dom)
+	Untamed.Anim.StopDualAnimation(self.Dom,self.Sub)
 
 	;; clean up the data.
 
