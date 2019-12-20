@@ -21,10 +21,10 @@ Version 100
 
 b ut2-wolfoffset01-s1-human ut2-wolfoffset01-s1-human.hkx
 
-s -a ut2-wolflove01-s1-human ut2-wolflove01-s1-human.hkx
+s -a,ac1 ut2-wolflove01-s1-human ut2-wolflove01-s1-human.hkx
 + ut2-wolflove01-s2-human ut2-wolflove01-s2-human.hkx
 + ut2-wolflove01-s3-human ut2-wolflove01-s3-human.hkx
-+ -a ut2-wolflove01-s4-human ut2-wolflove01-s4-human.hkx
++ -a,ac0 ut2-wolflove01-s4-human ut2-wolflove01-s4-human.hkx
 
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
