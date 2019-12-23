@@ -48,6 +48,7 @@ VisualEffect Property VfxTeleportIn Auto            ;; untamed
 FormList Property ListRaceWolves Auto
 FormList Property ListRaceBears Auto
 FormList Property ListRaceSabercats Auto
+FormList Property ListRaceHorses Auto
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; data keys ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,6 +56,8 @@ FormList Property ListRaceSabercats Auto
 Int Property KeyRaceWolf       = 1 AutoReadOnly Hidden
 Int Property KeyRaceBear       = 2 AutoReadOnly Hidden
 Int Property KeyRaceSabercat   = 3 AutoReadOnly Hidden
+Int Property KeyRaceHorse      = 4 AutoReadOnly Hidden
+
 Int Property KeyPackLeaderMax0 = 1 AutoReadOnly Hidden
 Int Property KeyPackLeaderMax1 = 3 AutoReadOnly Hidden
 Int Property KeyPackLeaderMax2 = 6 AutoReadOnly Hidden

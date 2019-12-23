@@ -471,6 +471,8 @@ those races to these formlists.}
 		Return Untamed.KeyRaceBear
 	ElseIf(self.IsFormInList(What,Untamed.ListRaceSabercats))
 		Return Untamed.KeyRaceSabercat
+	ElseIf(self.IsFormInList(What,Untamed.ListRaceHorses))
+		Return Untamed.KeyRaceHorse
 	EndIf
 
 	Return 0
