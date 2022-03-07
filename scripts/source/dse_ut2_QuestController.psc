@@ -16,6 +16,7 @@ dse_ut2_QuestLibUtil      Property Util Auto
 dse_ut2_QuestConfig Property Config Auto
 dse_ut2_QuestMCM Property Menu Auto
 dse_ut2_QuestInterfaceXP Property XPBar Auto
+dse_ut2_QuestRideThings Property Ride Auto
 dse_ut2_QuestLove01 Property QuestLove01 Auto
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -28,6 +29,10 @@ Keyword      Property KeywordActorTypeCreature Auto ;; skyrim.esm
 Faction      Property FactionPredator Auto          ;; skyrim.esm
 Faction      Property FactionTamed Auto             ;; untamed
 Faction      Property FactionPackStay Auto          ;; untamed
+Faction      Property FactionClassBear Auto         ;; untamed
+Faction      Property FactionClassHorse Auto        ;; untamed
+Faction      Property FactionClassSaberCat Auto     ;; untamed
+Faction      Property FactionClassWolf Auto         ;; untamed
 Package      Property PackageDoNothing Auto         ;; untamed
 Package      Property PackageFollow Auto            ;; untamed
 Package      Property PackagePackStay Auto          ;; untamed
@@ -37,6 +42,19 @@ Perk         Property PerkExperienced Auto          ;; untamed
 Perk         Property PerkPackLeader1 Auto          ;; untamed
 Perk         Property PerkPackLeader2 Auto          ;; untamed
 Perk         Property PerkPackLeader3 Auto          ;; untamed
+Perk         Property PerkPackFerocious1 Auto       ;; untamed
+Perk         Property PerkPackFerocious2 Auto       ;; untamed
+Perk         Property PerkPackFerocious3 Auto       ;; untamed
+Perk         Property PerkPackResistantHide1 Auto   ;; untamed
+Perk         Property PerkPackResistantHide2 Auto   ;; untamed
+Perk         Property PerkPackResistantHide3 Auto   ;; untamed
+Perk         Property PerkPackResistantHide4 Auto   ;; untamed
+Perk         Property PerkPackResistantHide5 Auto   ;; untamed
+Perk         Property PerkPackThickHide1 Auto       ;; untamed
+Perk         Property PerkPackThickHide2 Auto       ;; untamed
+Perk         Property PerkPackThickHide3 Auto       ;; untamed
+Perk         Property PerkPackThickHide4 Auto       ;; untamed
+Perk         Property PerkPackThickHide5 Auto       ;; untamed
 Perk         Property PerkResistantHide Auto        ;; untamed
 Perk         Property PerkThickHide Auto            ;; untamed
 Static       Property StaticX Auto                  ;; skyrim.esm

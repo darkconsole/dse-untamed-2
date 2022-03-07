@@ -1,4 +1,4 @@
-Scriptname dse_ut2_QuestLibPack_AliasMember extends ReferenceAlias
+ Scriptname dse_ut2_QuestLibPack_AliasMember extends ReferenceAlias
 
 dse_ut2_QuestController Property Untamed Auto
 
@@ -17,7 +17,8 @@ EndEvent
 
 Event OnDying(Actor Killer)
 	Actor Me = self.GetActorReference()
-	Untamed.Util.Print(Me.GetDisplayName() + " is dying!")
+	Untamed.Util.Print(Me.GetDisplayName() + " is dead!")
+	Untamed.Pack.RemoveMember(Me)
 	Return
 EndEvent
 

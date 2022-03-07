@@ -169,28 +169,32 @@ Function SetTamed(Actor Who, Bool Enable)
 		self.PrintDebug("Taming " + Who.GetDisplayName())
 
 		;; stop being a dick to everything.
+
 		Who.RemoveFromFaction(Untamed.FactionPredator)
-		Who.SetAV("Aggression",1)
+		Who.SetAV("Aggression", 1)
 
 		;; stop being a dick to the player.
+
 		Who.AddToFaction(Untamed.FactionTamed)
-		Who.SetFactionRank(Untamed.FactionTamed,1)
-		Who.SetRelationshipRank(Untamed.Player,3)
-		Who.SetPlayerTeammate(TRUE,TRUE)
+		Who.SetFactionRank(Untamed.FactionTamed, 1)
+		Who.SetRelationshipRank(Untamed.Player, 3)
+		Who.SetPlayerTeammate(TRUE, TRUE)
 		Who.AllowPCDialogue(TRUE)
+
 		self.StopCombat(Who)
+
 		Untamed.Anim.ResetActor(Who)
 		Untamed.Util.AddToClassFaction(Who)
 	Else
 		self.PrintDebug("Untaming " + Who.GetDisplayName())
 		Who.RemoveFromFaction(Untamed.FactionTamed)
-		Who.SetPlayerTeammate(FALSE,FALSE)
+		Who.SetPlayerTeammate(FALSE, FALSE)
 		Who.AllowPCDialogue(FALSE)
 		Untamed.Util.RemoveFromClassFaction(Who)
 	EndIf
 
-	self.SetPersistHack(Who,Enable)
-	self.SetPassive(Who,Enable)
+	self.SetPersistHack(Who, Enable)
+	self.SetPassive(Who, Enable)
 
 	Return
 EndFunction
@@ -218,11 +222,12 @@ Function SetPassive(Actor Who, Bool Enable)
 {make an actor passive by forcing a nothing package.}
 
 	If(Enable)
-		ActorUtil.AddPackageOverride(Who,Untamed.PackageDoNothing,99)
+		ActorUtil.AddPackageOverride(Who, Untamed.PackageDoNothing, 100)
 	Else
-		ActorUtil.RemovePackageOverride(Who,Untamed.PackageDoNothing)
+		ActorUtil.RemovePackageOverride(Who, Untamed.PackageDoNothing)
 	EndIf
 
+	Who.EvaluatePackage()
 	Return
 EndFunction
 

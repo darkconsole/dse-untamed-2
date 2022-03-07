@@ -85,13 +85,7 @@ Bool Function AddMember(Actor Who)
 if the pack is already full.}
 
 	Int Iter = self.Members.Length - 1
-
-	;; make sure that we are not already at the limit of the number of
-	;; members we can have.
-	If(self.GetMemberCount() >= self.GetMemberCountMax())
-		Untamed.Util.PrintDebug("Pack is full")
-		Return FALSE
-	EndIf
+	Int MaxMemberCount = self.GetMemberCountMax()
 
 	;; if they are already in the pack just pretend that we added them
 	;; this should not really happen unless we lol'd somewhere.
@@ -100,21 +94,27 @@ if the pack is already full.}
 		Return TRUE
 	EndIf
 
-	While(Iter >= 0)
+	;; make sure that we are not already at the limit of the number of
+	;; members we can have.
+	If(self.GetMemberCount() >= MaxMemberCount)
+		Untamed.Util.PrintDebug("Pack is full")
+		Return FALSE
+	EndIf
+
+	Iter = 0
+	While(Iter < MaxMemberCount)
 		If(self.Members[Iter].GetReference() == None)
 			self.Members[Iter].ForceRefTo(Who)
-
 			Who.SetDoingFavor(FALSE)
-			Untamed.Util.SetPassive(Who,FALSE)
-
 			Untamed.Util.SendActorEvent(Who,"UT2.Pack.MemberJoin")
 			Untamed.Util.PrintDebug(Who.GetDisplayName() + " added to pack as Member" + Iter)
+			Untamed.Util.SetPassive(Who, FALSE)
 			Return TRUE
 		EndIf
 
-		Iter -= 1
+		Iter += 1
 	EndWhile
-	
+
 	Return FALSE
 EndFunction
 

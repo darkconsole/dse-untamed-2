@@ -113,7 +113,7 @@ Function StopDualAnimation(Actor Who1, Actor Who2)
 	self.StopAnimation(Who2)
 
 	;; dismount from vehicle.
-	
+
 	Here = StorageUtil.GetFormValue(Who1,"UT2.Ani.Vehicle") As ObjectReference
 	If(Here != NONE)
 		Here.Disable()

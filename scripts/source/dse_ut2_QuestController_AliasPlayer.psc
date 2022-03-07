@@ -11,13 +11,6 @@ Event OnPlayerLoadGame()
 	;; make sure our pack is ready.
 	Untamed.Pack.FixMembers()
 
-	;; prepare the xp widget.
-	While(!Untamed.XPBar.Ready)
-		Utility.Wait(1)
-	EndWhile
-	Untamed.Util.SetExperience(Untamed.Player,0.0)
-	Untamed.Util.UpdateExperienceBar()
-
 	;;;;;;;;
 
 	Untamed.Util.PrintDebug("Game Load Script Complete")
