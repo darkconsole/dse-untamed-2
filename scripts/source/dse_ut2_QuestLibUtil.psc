@@ -116,7 +116,7 @@ String Function StringInsert(String Format, String InputList="")
 				Format = StringUtil.Substring(Format,0,Pos) + Inputs[Iter] + StringUtil.Substring(Format,(Pos+2))
 			Else
 				Format = Inputs[Iter] + StringUtil.Substring(Format,(Pos+2))
-			EndIf			
+			EndIf
 		EndIf
 
 		Iter += 1
@@ -180,11 +180,13 @@ Function SetTamed(Actor Who, Bool Enable)
 		Who.AllowPCDialogue(TRUE)
 		self.StopCombat(Who)
 		Untamed.Anim.ResetActor(Who)
+		Untamed.Util.AddToClassFaction(Who)
 	Else
 		self.PrintDebug("Untaming " + Who.GetDisplayName())
 		Who.RemoveFromFaction(Untamed.FactionTamed)
 		Who.SetPlayerTeammate(FALSE,FALSE)
 		Who.AllowPCDialogue(FALSE)
+		Untamed.Util.RemoveFromClassFaction(Who)
 	EndIf
 
 	self.SetPersistHack(Who,Enable)
@@ -277,6 +279,40 @@ without having to edit their forms causing conflicts.}
 	Untamed.Util.CanTalk(Who)
 
 	Untamed.Util.PrintDebug("Fix Animal Actor: " + Who.GetDisplayName())
+	Return
+EndFunction
+
+Function AddToClassFaction(Actor Who)
+{add the animals to some factions we can use as single test points in various
+condition checks.}
+
+	Int Type = self.GetAnimalType(Who)
+
+	If(Type == Untamed.KeyRaceBear)
+		Who.AddToFaction(Untamed.FactionClassBear)
+		Who.SetFactionRank(Untamed.FactionClassBear,1)
+	ElseIf(Type == Untamed.KeyRaceHorse)
+		Who.AddToFaction(Untamed.FactionClassHorse)
+		Who.SetFactionRank(Untamed.FactionClassHorse,1)
+	ElseIf(Type == Untamed.KeyRaceSaberCat)
+		Who.AddToFaction(Untamed.FactionClassSaberCat)
+		Who.SetFactionRank(Untamed.FactionClassSaberCat,1)
+	ElseIf(Type == Untamed.KeyRaceWolf)
+		Who.AddToFaction(Untamed.FactionClassWolf)
+		Who.SetFactionRank(Untamed.FactionClassWolf,1)
+	EndIf
+
+	Return
+EndFunction
+
+Function RemoveFromClassFaction(Actor Who)
+{remove the animal from all the class factions.}
+
+	Who.RemoveFromFaction(Untamed.FactionClassBear)
+	Who.RemoveFromFaction(Untamed.FactionClassHorse)
+	Who.RemoveFromFaction(Untamed.FactionClassSaberCat)
+	Who.RemoveFromFaction(Untamed.FactionClassWolf)
+
 	Return
 EndFunction
 
@@ -384,14 +420,14 @@ EndFunction
 
 Function SetExperience(Actor Who, Float XP)
 {set the amount of xp this actor has.}
-	
+
 	Float Max = self.GetExperienceMax(Who)
 	XP = PapyrusUtil.ClampFloat(XP,0.0,Max)
 
 	StorageUtil.SetFloatValue(Who,self.KeyXP,XP)
 
 	If(Who == Untamed.Player)
-		Untamed.XPBar.SetPercent((XP / Max) * 100)
+		;; Untamed.XPBar.SetPercent((XP / Max) * 100)
 
 		;;If(Who.HasPerk(Untamed.PerkThickHide))
 		;;	Untamed.Feat.UpdateThickHide(Who)
@@ -408,7 +444,7 @@ EndFunction
 Function UpdateExperienceBar()
 {update xp bar with current value.}
 
-	Untamed.XPBar.SetPercent(self.GetExperiencePercent(Untamed.Player))
+	;; Untamed.XPBar.SetPercent(self.GetExperiencePercent(Untamed.Player))
 EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -425,7 +461,7 @@ the effects given.}
 	;; just in case that magically changes in the future with some skse magic.
 
 	Who.RemovePerk(Feat)
-	Who.AddPerk(Feat)	
+	Who.AddPerk(Feat)
 	Return
 EndFunction
 
@@ -441,7 +477,7 @@ EndFunction
 
 Function UpdateFeatResistantHide(Actor Who)
 {update the resistant hide perk.}
-	
+
 	Float Value = (self.GetExperience(Who) * Untamed.Menu.OptPerkResistantHideMult)
 
 	Untamed.PerkResistantHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
