@@ -152,14 +152,14 @@ EndEvent
 Function Tame(Actor Who, Bool AddToPack=TRUE)
 {shortcut for SetTamed to force an actor friendly.}
 
-	self.Util.SetTamed(Who,TRUE)
+	self.Util.SetTamed(Who, TRUE)
 	Return
 EndFunction
 
-Function Untame(Actor Who, Bool RemoveFromiPack=TRUE)
+Function Untame(Actor Who, Bool RemoveFromPack=TRUE)
 {shortcut for SetTamed to reset an actor to untamed behaviour.}
 
-	self.Util.SetTamed(Who,FALSE)
+	self.Util.SetTamed(Who, FALSE)
 	Return
 EndFunction
 

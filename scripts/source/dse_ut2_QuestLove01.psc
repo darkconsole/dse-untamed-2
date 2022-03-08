@@ -1,28 +1,135 @@
 ScriptName dse_ut2_QuestLove01 extends Quest
 
 dse_ut2_QuestController Property Untamed Auto
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 Actor Property Dom Auto Hidden
 Actor Property Sub Auto Hidden
-Int Property Iter Auto Hidden
 
-String Property DomAnim1 Auto Hidden
-String Property DomAnim2 Auto Hidden
-String Property DomAnim3 Auto Hidden
-String Property DomOff   Auto Hidden
-String Property SubAnim1 Auto Hidden
-String Property SubAnim2 Auto Hidden
-String Property SubAnim3 Auto Hidden
-String Property SubOff   Auto Hidden
+Int Property DomType Auto Hidden
+Int Property SubType Auto Hidden
+
+String[] Property DomStep Auto Hidden
+String[] Property SubStep Auto Hidden
+
+Int Property Stage = 0 Auto Hidden
+Int Property Iter = 0 Auto Hidden
+
+Int Property KeyPrev = 0 Auto Hidden
+Int Property KeyNext = 0 Auto Hidden
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Function Begin()
+{calling this function after setting the dom and sub properties
+will kick off the animation system for this action.}
+
+	If(self.Dom == NONE)
+		Untamed.Util.Print("QuestLove01 missing Dom property.")
+		Return
+	EndIf
+
+	If(self.Sub == NONE)
+		Untamed.Util.Print("QuestLove01 missing Sub property.")
+		Return
+	EndIf
+
+	;;;;;;;;
+
+	self.DomType = Untamed.Util.GetAnimalType(self.Dom)
+	self.DomStep = self.GetAnimationSet(self.DomType)
+
+	self.SubType = Untamed.Util.GetAnimalType(self.Sub)
+	self.SubStep = self.GetAnimationSet(self.SubType)
+
+	self.AnimateStart()
+	Return
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+String[] Function GetAnimationSet(Int ActorType)
+{return the list of keys for the animation.}
+
+	String[] Output = Utility.CreateStringArray(4)
+
+	If(ActorType == 0)
+		Output[0] = "ut2-wolflove01-s1-human"
+		Output[1] = "ut2-wolflove01-s2-human"
+		Output[2] = "ut2-wolflove01-s3-human"
+		Output[3] = "ut2-wolflove01-s4-human"
+	ElseIf(ActorType == Untamed.KeyRaceWolf)
+		Output[0] = "ut2-wolflove01-s1-wolf"
+		Output[1] = "ut2-wolflove01-s2-wolf"
+		Output[2] = "ut2-wolflove01-s3-wolf"
+		Output[3] = "ut2-wolflove01-s4-wolf"
+	EndIf
+
+	Return Output
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Function AnimateStart()
+{trigger starting an animated sequence.}
+
+	;; register for animation events on the humanoid actor.
+
+	self.RegisterForAnimationEvent(self.Dom, "UT2.LoopIter")
+	self.RegisterForAnimationEvent(self.Dom, "UT2.Stage")
+	self.RegisterForAnimationEvent(self.Dom, "UT2.End")
+	self.RegisterForSceneControls()
+
+	;; kick off the animationing.
+
+	self.Stage = 0
+	self.Iter = 0
+
+	Untamed.Anim.StopDualAnimation(self.Dom, self.Sub)
+	Untamed.Anim.PlayDualAnimation(self.Dom, self.DomStep[0], self.Sub, self.SubStep[0])
+
+	Return
+EndFunction
+
+Function AnimateEnd()
+{trigger releasing an animated sequence.}
+
+	Float[] Where = Untamed.Util.GetPositionAtDistance(self.Dom,125)
+
+	;; stop watching the animation events.
+
+	self.UnregisterForAnimationEvent(self.Dom,"UT2.LoopIter")
+	self.UnregisterForAnimationEvent(self.Dom,"UT2.Stage")
+	self.UnregisterForAnimationEvent(self.Dom,"UT2.End")
+	self.UnregisterForSceneControls()
+
+	;; put the player in front of and facing the animal.
+
+	;;self.Dom.TranslateTo(Where[1],Where[2],Where[3],self.Dom.GetAngleX(),self.Dom.GetAngleY(),(self.Dom.GetAngleZ()+180.0),10000,0)
+	;;self.Dom.SetAngle(0.0,0.0,(self.Dom.GetAngleZ() + 180.0))
+
+	;; shut down the animation system.
+
+	Untamed.Anim.StopDualAnimation(self.Dom, self.Sub)
+
+	Return
+EndFunction
 
 Event OnAnimationEvent(ObjectReference What, String EvName)
 {watch for animation events we use to progress the system.}
 
 	If(EvName == "UT2.Stage")
+		self.OnAnimationStage()
 		Return
 	EndIf
 
 	If(EvName == "UT2.LoopIter")
-		self.HandleIter()
+		self.OnAnimationIter()
 		Return
 	EndIf
 
@@ -34,123 +141,76 @@ Event OnAnimationEvent(ObjectReference What, String EvName)
 	Return
 EndEvent
 
-Event OnUpdate()
-{kick off the animation system on a delay.}
+Function OnAnimationStage()
+{watch for animation stage advancements.}
 
-	self.AnimateStart()
+	If(self.Stage == 0)
+		self.Stage += 1
+		self.Iter = 0
+	EndIf
+
+	Untamed.Util.PrintDebug("AnimateStage " + self.Stage)
+	Return
+EndFunction
+
+Function OnAnimationIter()
+{watch for animation iter advancements.}
+
+	self.Iter += 1
+
+	Untamed.Util.PrintDebug("AnimateIter " + self.Iter)
+	Return
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Function RegisterForSceneControls()
+{regsiter for input control.}
+
+	self.KeyPrev = Input.GetMappedKey("Strafe Left")
+	self.KeyNext = Input.GetMappedKey("Strafe Right")
+
+	self.RegisterForKey(self.KeyPrev)
+	self.RegisterForKey(self.KeyNext)
+
+	Return
+EndFunction
+
+Function UnregisterForSceneControls()
+{release input control.}
+
+	self.UnregisterForKey(self.KeyPrev)
+	self.UnregisterForKey(self.KeyNext)
+
+	Return
+EndFunction
+
+Event OnKeyDown(Int KeyCode)
+{when control pressed.}
+
 	Return
 EndEvent
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Event OnKeyUp(int KeyCode, Float Dur)
+{when control released.}
 
-Function Begin()
-{calling this function after setting the dom and sub properties
-will kick off the animation system for this action.}
+	Untamed.Util.PrintDebug("[QuestLove01.OnKeyUp] " + KeyCode)
 
-	Int AnimalType
-
-	;;;;;;;;
-
-	If(self.Dom == None || self.Sub == None)
-		Untamed.Util.Print("QuestLove01 halted due to missing input.")
-		Return
+	If(KeyCode == self.KeyPrev)
+		If(self.Stage > 1)
+			self.Stage -= 1
+			self.Iter = 0
+			Untamed.Anim.PlayDualAnimation(self.Dom, self.DomStep[self.Stage], self.Sub, self.SubStep[self.Stage])
+		EndIf
+	ElseIf(KeyCode == self.KeyNext)
+		If(self.Stage < (self.DomStep.Length - 1))
+			self.Stage += 1
+			self.Iter = 0
+			Untamed.Anim.PlayDualAnimation(self.Dom, self.DomStep[self.Stage], self.Sub, self.SubStep[self.Stage])
+		EndIf
 	EndIf
 
-	;;;;;;;;
-
-	AnimalType = Untamed.Util.GetAnimalType(self.Sub)
-
-	If(AnimalType == Untamed.KeyRaceWolf)
-		self.DomOff   = "ut2-wolfoffset01-s1-human"
-		self.DomAnim1 = "ut2-wolflove01-s1-human"
-		self.DomAnim2 = "ut2-wolflove01-s3-human"
-		self.DomAnim3 = "ut2-wolflove01-s4-human"
-		self.SubOff   = "ut2-wolfoffset01-s1-wolf"
-		self.SubAnim1 = "ut2-wolflove01-s1-wolf"
-		self.SubAnim2 = "ut2-wolflove01-s3-wolf"
-		self.SubAnim3 = "ut2-wolflove01-s4-wolf"
-	Else
-		Untamed.Util.PrintDebug("QuestLove01 unable to determine animal type.")
-		Return
-	EndIf
-
-	;;;;;;;;
-
-	self.Iter = 0
-	self.RegisterForSingleUpdate(1.5)
-
-	Untamed.Util.Print(self.Dom.GetDisplayName() + " is loving " + self.Sub.GetDisplayName())
 	Return
-EndFunction
+EndEvent
 
-Function AnimateStart()
-
-	;; register for animation events on the humanoid actor.
-
-	self.RegisterForAnimationEvent(self.Dom,"UT2.LoopIter")
-	self.RegisterForAnimationEvent(self.Dom,"UT2.Stage")
-	self.RegisterForAnimationEvent(self.Dom,"UT2.End")
-
-	;; kick off the animationing.
-
-	;;Untamed.Anim.StopDualAnimation(self.Sub,self.Dom)
-	Untamed.Anim.PlayDualAnimation(self.Dom,self.DomAnim1,self.Sub,self.SubAnim1,self.DomOff,self.SubOff)
-
-	Return
-EndFunction
-
-Function AnimateEnd()
-
-	Float[] Where = Untamed.Util.GetPositionAtDistance(self.Dom,125)
-
-	;; stop watching the animation events.
-
-	self.UnregisterForAnimationEvent(self.Dom,"UT2.LoopIter")
-	self.UnregisterForAnimationEvent(self.Dom,"UT2.Stage")
-	self.UnregisterForAnimationEvent(self.Dom,"UT2.End")
-
-	;; put the player in front of and facing the animal.
-
-	;;self.Dom.TranslateTo(Where[1],Where[2],Where[3],self.Dom.GetAngleX(),self.Dom.GetAngleY(),(self.Dom.GetAngleZ()+180.0),10000,0)
-	;;self.Dom.SetAngle(0.0,0.0,(self.Dom.GetAngleZ() + 180.0))
-
-	;; shut down the animation system.
-
-	Untamed.Anim.StopDualAnimation(self.Dom,self.Sub)
-
-	;; clean up the data.
-
-	self.Dom = None
-	self.DomAnim1 = ""
-	self.DomAnim2 = ""
-	self.DomAnim3 = ""
-	self.Sub = None
-	self.SubAnim1 = ""
-	self.SubAnim2 = ""
-	self.SubAnim3 = ""
-
-	Return
-EndFunction
-
-Function HandleIter()
-
-	Float XP = Untamed.Config.GetFloat(".PackLoveIterXP")
-
-	If(self.Iter == 7)
-		;; after a few iteration of the slow animation kick off the fast animation.
-		Untamed.Anim.PlayDualAnimation(self.Sub,self.SubAnim2,self.Dom,self.DomAnim2)
-	ElseIf(self.Iter == 17)
-		;; after a few iteration of the fast animation kick off the finisher animation.
-		self.UnregisterForAnimationEvent(self.Dom,"UT2.LoopIter")
-		self.UnregisterForAnimationEvent(self.Dom,"UT2.Stage")
-		Untamed.Anim.PlayDualAnimation(self.Sub,self.SubAnim3,self.Dom,self.DomAnim3)
-	EndIf
-
-	;; award the player untamed xp for the iteration.
-
-	Untamed.Experience(Untamed.Player,XP)
-
-	self.Iter += 1
-	Return
-EndFunction
