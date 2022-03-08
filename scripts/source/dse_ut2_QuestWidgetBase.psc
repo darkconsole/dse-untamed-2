@@ -3,7 +3,7 @@ Scriptname dse_ut2_QuestWidgetBase extends Quest
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-dse_ut2_QuestController Property UT2 Auto
+dse_ut2_QuestController Property Untamed Auto
 ReferenceAlias Property Target Auto
 
 iWant_Widgets Property iWant Auto Hidden
@@ -23,7 +23,7 @@ Event OnInit()
 	self.Title = 0
 	self.TitleShadow = 0
 
-	UT2.Util.PrintDebug("[WidgetBase] OnInit")
+	Untamed.Util.PrintDebug("[WidgetBase] OnInit")
 
 	UnregisterForModEvent("iWantWidgetsReset")
 	RegisterForModEvent("iWantWidgetsReset", "OnLocalEvent")
@@ -43,7 +43,7 @@ EndEvent
 Event OnLocalEvent(String EvName, String ArgStr, Float ArgInt, Form From)
 
 	If(EvName == "iWantWidgetsReset")
-		UT2.Util.PrintDebug("[WidgetBase] iWantWidgetsReset")
+		Untamed.Util.PrintDebug("[WidgetBase] iWantWidgetsReset")
 		Utility.Wait(0.25)
 		self.OnLocalReset(ArgStr, ArgInt, From)
 	EndIf
@@ -94,7 +94,7 @@ Function DynopulateItemsAsMeters(Int Needed)
 	;; we need more than we have so add additional meters.
 
 	If(Needed > self.Items.Length)
-		UT2.Util.PrintDebug("[WidgetBase] DynopulateItemsAsMeters Expand To " + Needed)
+		Untamed.Util.PrintDebug("[WidgetBase] DynopulateItemsAsMeters Expand To " + Needed)
 		ItemsNew = Utility.CreateIntArray(Needed)
 		Iter = 0
 
@@ -120,7 +120,7 @@ Function DynopulateItemsAsMeters(Int Needed)
 	;; we do not need as many meters as we used to.
 
 	If(Needed < self.Items.Length)
-		UT2.Util.PrintDebug("[WidgetBase] DynopulateItemsAsMeters Shrink To " + Needed)
+		Untamed.Util.PrintDebug("[WidgetBase] DynopulateItemsAsMeters Shrink To " + Needed)
 		ItemsNew = Utility.CreateIntArray(Needed)
 		Iter = 0
 
