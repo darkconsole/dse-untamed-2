@@ -5,7 +5,6 @@ Int Version = 1
 ;; libraries ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 dse_ut2_QuestLibAnimate   Property Anim Auto
-dse_ut2_QuestLibTrainer   Property Feat Auto
 dse_ut2_QuestLibPack      Property Pack Auto
 dse_ut2_QuestLibEncounter Property Sexl Auto
 dse_ut2_QuestLibUtil      Property Util Auto
