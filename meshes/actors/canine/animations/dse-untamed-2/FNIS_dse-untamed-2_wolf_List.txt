@@ -10,7 +10,8 @@ Version 100
 '' b  = idle
 '' o  = idle+ao
 '' -k = hkx comes from another mod.
-'' -AVbHumanoidFootIKDisable = disable foot falls
+'' -AVbHumanoidFootIKDisable = disable human foot falls
+'' -AVbFootIKDisable = disable foot falls
 '' -AVIbHeadTrackSpine = keep torso locked if head tracking enabled
 '' -h = head tracking enabled
 '' -a = acyclic (don't loop)
@@ -21,7 +22,10 @@ Version 100
 
 b -AVbFootIKDisable ut2-wolfoffset01-s1-wolf ut2-wolfoffset01-s1-wolf.hkx
 
-so -a,AVbFootIKDisable ut2-wolflove01-s1-wolf ut2-wolflove01-s1-wolf.hkx
+s -a,AVbFootIKDisable ut2-wolflove01-s1-wolf ut2-wolflove01-s1-wolf.hkx
 + ut2-wolflove01-s2-wolf ut2-wolflove01-s2-wolf.hkx
 + ut2-wolflove01-s3-wolf ut2-wolflove01-s3-wolf.hkx
-+ -a ut2-wolflove01-s4-wolf ut2-wolflove01-s4-wolf.hkx
++ -a,AVbFootIKDisable ut2-wolflove01-s4-wolf ut2-wolflove01-s4-wolf.hkx
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
