@@ -59,6 +59,27 @@ Bool Function HasOpenSlot()
 	Return (self.GetMemberCount() < self.GetMemberCountMax())
 EndFunction
 
+Float Function GetMemberExperience(Actor Who)
+{get the experience of a specific member.}
+
+	Return Untamed.Experience(Who)
+EndFunction
+
+Float[] Function GetPackExperience()
+{return an array of floats with the xp of all the pack members.}
+
+	Int Len = self.GetMemberCount()
+	Int Iter = 0
+	Float[] Output = Utility.CreateFloatArray(Len)
+
+	While(Iter < Len)
+		Output[Iter] = self.GetMemberExperience(self.Members[Iter].GetActorReference())
+		Iter += 1
+	EndWhile
+
+	Return Output
+EndFunction
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

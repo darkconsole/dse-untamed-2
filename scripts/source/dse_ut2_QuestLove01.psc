@@ -14,6 +14,7 @@ Int Property SubType Auto Hidden
 String[] Property DomStep Auto Hidden
 String[] Property SubStep Auto Hidden
 
+Int Property SeqLen = 4 Auto Hidden
 Int Property Stage = 0 Auto Hidden
 Int Property Iter = 0 Auto Hidden
 
@@ -55,7 +56,7 @@ EndFunction
 String[] Function GetAnimationSet(Int ActorType)
 {return the list of keys for the animation.}
 
-	String[] Output = Utility.CreateStringArray(4)
+	String[] Output = Utility.CreateStringArray(self.SeqLen)
 
 	If(ActorType == 0)
 		Output[0] = "ut2-wolflove01-s1-human"
@@ -204,7 +205,7 @@ Event OnKeyUp(int KeyCode, Float Dur)
 			Untamed.Anim.PlayDualAnimation(self.Dom, self.DomStep[self.Stage], self.Sub, self.SubStep[self.Stage])
 		EndIf
 	ElseIf(KeyCode == self.KeyNext)
-		If(self.Stage < (self.DomStep.Length - 1))
+		If(self.Stage < (self.SeqLen - 1))
 			self.Stage += 1
 			self.Iter = 0
 			Untamed.Anim.PlayDualAnimation(self.Dom, self.DomStep[self.Stage], self.Sub, self.SubStep[self.Stage])

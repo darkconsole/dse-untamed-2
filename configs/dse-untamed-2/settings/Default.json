@@ -1,3 +1,10 @@
 {
-	"PackLoveIterXP": 1.0
+	"PackLoveIterXP": 1.0,
+	"WidgetOffsetX": 20,
+	"WidgetOffsetY": 140,
+	"WidgetScale": 1.0,
+	"WidgetSpacing": 10,
+	"WidgetBarW": 20,
+	"WidgetBarH": 20,
+	"WidgetFontSize": 10
 }
