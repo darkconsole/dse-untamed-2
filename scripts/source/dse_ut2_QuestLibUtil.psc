@@ -426,20 +426,21 @@ EndFunction
 Function SetExperience(Actor Who, Float XP)
 {set the amount of xp this actor has.}
 
-	Float Max = self.GetExperienceMax(Who)
-	XP = PapyrusUtil.ClampFloat(XP,0.0,Max)
+	Float MaxXP = self.GetExperienceMax(Who)
+	Float ClampXP = PapyrusUtil.ClampFloat(XP, 0.0, MaxXP)
+	Bool UpdatePlayer = (Who == Untamed.Player)
 
-	StorageUtil.SetFloatValue(Who,self.KeyXP,XP)
+	StorageUtil.SetFloatValue(Who, self.KeyXP, ClampXP)
 
-	If(Who == Untamed.Player)
-		;; Untamed.XPBar.SetPercent((XP / Max) * 100)
+	;;;;;;;;
 
-		;;If(Who.HasPerk(Untamed.PerkThickHide))
-		;;	Untamed.Feat.UpdateThickHide(Who)
+	If(UpdatePlayer)
+		;;If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
+		;;	Untamed.Feat.UpdateThickHide(Untamed.Player)
 		;;EndIf
 
-		;;If(Who.HasPerk(Untamed.PerkResistantHide))
-		;;	Untamed.Feat.UpdateResistantHide(Who)
+		;;If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
+		;;	Untamed.Feat.UpdateResistantHide(Untamed.Player)
 		;;EndIf
 	EndIf
 

@@ -157,9 +157,28 @@ EndFunction
 Function OnAnimationIter()
 {watch for animation iter advancements.}
 
-	self.Iter += 1
+	Float MXP
+	FLoat PXP
 
+	self.Iter += 1
 	Untamed.Util.PrintDebug("AnimateIter " + self.Iter)
+
+	If(self.Stage > 0)
+		;; player gets full xp from love.
+		;; member gets partial xp.
+
+		PXP = Untamed.Config.GetFloat(".PackLoveIterXP")
+		MXP = PXP * Untamed.Config.GetFloat(".PackShareXP")
+
+		Untamed.Experience(self.Dom, PXP)
+		Untamed.Experience(self.Sub, MXP)
+
+		Untamed.XPBar.OnUpdateWidget()
+	EndIf
+
+	;; @todo 2022-03-09
+	;; if fast stage, chance they blow early and end it.
+
 	Return
 EndFunction
 

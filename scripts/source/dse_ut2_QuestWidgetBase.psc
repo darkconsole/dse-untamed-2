@@ -8,6 +8,9 @@ ReferenceAlias Property Target Auto
 
 iWant_Widgets Property iWant Auto Hidden
 
+Int[] Property ItemX Auto Hidden
+Int[] Property ItemY Auto Hidden
+Int[] Property Labels Auto Hidden
 Int[] Property Items Auto Hidden
 
 Int Property Title Auto Hidden
@@ -19,9 +22,7 @@ Bool Property Busy = FALSE Auto Hidden
 
 Event OnInit()
 
-	self.Items = Utility.CreateIntArray(0)
-	self.Title = 0
-	self.TitleShadow = 0
+	self.ResetItemArrays()
 
 	Untamed.Util.PrintDebug("[WidgetBase] OnInit")
 
@@ -54,6 +55,7 @@ EndEvent
 Event OnLocalReset(String ArgStr, Float ArgInt, Form From)
 
 	self.iWant = From as iWant_Widgets
+	self.ResetItemArrays()
 	self.OnUpdateWidget(TRUE)
 	Return
 EndEvent
@@ -86,8 +88,23 @@ by timer triggers or manual calls.}
 	Return
 EndFunction
 
+Function ResetItemArrays()
+
+	self.ItemX = Utility.CreateIntArray(0)
+	self.ItemY = Utility.CreateIntArray(0)
+	self.Labels = Utility.CreateIntArray(0)
+	self.Items = Utility.CreateIntArray(0)
+	self.Title = 0
+	self.TitleShadow = 0
+
+	Return
+EndFunction
+
 Function DynopulateItemsAsMeters(Int Needed)
 
+	Int[] NewX
+	Int[] NewY
+	Int[] LabelsNew
 	Int[] ItemsNew
 	Int Iter
 
@@ -95,25 +112,37 @@ Function DynopulateItemsAsMeters(Int Needed)
 
 	If(Needed > self.Items.Length)
 		Untamed.Util.PrintDebug("[WidgetBase] DynopulateItemsAsMeters Expand To " + Needed)
+		NewX = Utility.CreateIntArray(Needed)
+		NewY = Utility.CreateIntArray(Needed)
 		ItemsNew = Utility.CreateIntArray(Needed)
+		LabelsNew = Utility.CreateIntArray(Needed)
 		Iter = 0
 
 		;; retain existing meters.
 
 		While(Iter < self.Items.Length)
+			NewX[Iter] = self.ItemX[Iter]
+			NewY[Iter] = self.ItemY[Iter]
 			ItemsNew[Iter] = self.Items[Iter]
+			LabelsNew[Iter] = self.Labels[Iter]
 			Iter += 1
 		EndWhile
 
 		;; initialize addtional meters.
 
 		While(Iter < ItemsNew.Length)
+			NewX[Iter] = 0
+			NewY[Iter] = 0
 			ItemsNew[Iter] = self.iWant.loadMeter()
-			;;self.iWant.SetVisible(ItemsNew[Iter])
+			LabelsNew[Iter] = self.iWant.loadText("")
+
 			Iter += 1
 		EndWhile
 
+		self.ItemX = NewX
+		self.ItemY = NewY
 		self.Items = ItemsNew
+		self.Labels = LabelsNew
 		Return
 	EndIf
 
@@ -121,13 +150,19 @@ Function DynopulateItemsAsMeters(Int Needed)
 
 	If(Needed < self.Items.Length)
 		Untamed.Util.PrintDebug("[WidgetBase] DynopulateItemsAsMeters Shrink To " + Needed)
+		NewX = Utility.CreateIntArray(Needed)
+		NewY = Utility.CreateIntArray(Needed)
+		LabelsNew = Utility.CreateIntArray(Needed)
 		ItemsNew = Utility.CreateIntArray(Needed)
 		Iter = 0
 
 		;; retain only as many as we need.
 
 		While(Iter < ItemsNew.Length)
+			NewX[Iter] = self.ItemX[Iter]
+			NewY[Iter] = self.ItemY[Iter]
 			ItemsNew[Iter] = self.Items[Iter]
+			LabelsNew[Iter] = self.Labels[Iter]
 			Iter += 1
 		EndWhile
 
@@ -135,10 +170,14 @@ Function DynopulateItemsAsMeters(Int Needed)
 
 		While(Iter < self.Items.Length)
 			self.iWant.Destroy(self.Items[Iter])
+			self.iWant.Destroy(self.Labels[Iter])
 			Iter += 1
 		EndWhile
 
+		self.ItemX = NewX
+		self.ItemY = NewY
 		self.Items = ItemsNew
+		self.Labels = LabelsNew
 		Return
 	EndIf
 
