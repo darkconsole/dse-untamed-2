@@ -148,7 +148,10 @@ returns false under any other condition.}
 
 	;; we won't stop after the first occurrence just in case something
 	;; totally fucked happened and the same actor is in two aliases.
-	;; basically, auto self clean up just in case.
+
+	If(Who == NONE)
+		Return Found
+	EndIf
 
 	While(Iter >= 0)
 		If(self.Members[Iter].GetReference() == Who)

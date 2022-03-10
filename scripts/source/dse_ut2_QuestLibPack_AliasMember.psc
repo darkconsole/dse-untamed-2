@@ -1,4 +1,4 @@
- Scriptname dse_ut2_QuestLibPack_AliasMember extends ReferenceAlias
+Scriptname dse_ut2_QuestLibPack_AliasMember extends ReferenceAlias
 
 dse_ut2_QuestController Property Untamed Auto
 
@@ -17,12 +17,12 @@ Event OnEnterBleedout()
 	;;     consume xp to heal
 	;; else
 	;;   remove from pack
-	;;   killessential
+	;;   kill
 
 	Untamed.Pack.RemoveMember(Me)
-	Me.KillEssential()
+	Me.Kill()
+	Untamed.Util.Print(Me.GetDisplayName() + " has died!")
 
-	Untamed.Util.Print(Me.GetDisplayName() + " is down!")
 	Return
 EndEvent
 
@@ -30,7 +30,6 @@ Event OnDying(Actor Killer)
 	Actor Me = self.GetActorReference()
 
 	Untamed.Util.Print(Me.GetDisplayName() + " is dead!")
-	Untamed.Pack.RemoveMember(Me)
 	Return
 EndEvent
 
