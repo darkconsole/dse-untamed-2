@@ -15,6 +15,7 @@ dse_ut2_QuestLibUtil      Property Util Auto
 dse_ut2_QuestConfig Property Config Auto
 dse_ut2_QuestMCM Property Menu Auto
 dse_ut2_QuestInterfaceXP Property XPBar Auto
+dse_ut2_QuestInterfacePerks Property PerkUI Auto
 dse_ut2_QuestRideThings Property Ride Auto
 dse_ut2_QuestLove01 Property QuestLove01 Auto
 
@@ -114,7 +115,7 @@ Function ResetMod_Subsystems()
 {handle rebooting the libraries and subsystems.}
 
 	Int Iter = 0
-	Form[] Systems = new Form[7]
+	Form[] Systems = new Form[8]
 
 	Systems[0] = self.Menu
 	Systems[1] = self.Util
@@ -123,6 +124,7 @@ Function ResetMod_Subsystems()
 	Systems[4] = self.Pack
 	Systems[5] = self.Util
 	Systems[6] = self.XPBar
+	Systems[7] = self.PerkUI
 
 	While(Iter < Systems.Length)
 		(Systems[Iter] as Quest).Reset()

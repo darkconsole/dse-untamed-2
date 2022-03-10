@@ -4,7 +4,6 @@ Scriptname dse_ut2_QuestWidgetBase extends Quest
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 dse_ut2_QuestController Property Untamed Auto
-ReferenceAlias Property Target Auto
 
 iWant_Widgets Property iWant Auto Hidden
 
@@ -57,18 +56,6 @@ Event OnLocalReset(String ArgStr, Float ArgInt, Form From)
 	self.iWant = From as iWant_Widgets
 	self.ResetItemArrays()
 	self.OnUpdateWidget(TRUE)
-	Return
-EndEvent
-
-Event OnDataUpdate(Form Whom)
-
-	Actor Who = Whom As Actor
-
-	If(Who != self.Target.GetActorReference())
-		Return
-	EndIf
-
-	self.OnUpdateWidget()
 	Return
 EndEvent
 
