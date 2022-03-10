@@ -27,6 +27,7 @@ Function PrintDebug(String Msg)
 	;;EndIf
 
 	MiscUtil.PrintConsole("[UT2] " + Msg)
+	Debug.Trace("[UT2] " + Msg)
 	Return
 EndFunction
 
