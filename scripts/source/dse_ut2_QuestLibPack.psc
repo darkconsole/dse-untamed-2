@@ -176,10 +176,13 @@ Function FixMembers()
 need to be able to do.}
 
 	Int Iter = 0
+	Actor Who = NONE
 
 	While(Iter < self.Members.Length)
-		If(self.Members[Iter].GetActorReference() != NONE)
-			Untamed.Util.FixAnimalActor(self.Members[Iter].GetActorReference())
+		Who = self.Members[Iter].GetActorReference()
+
+		If(Who != NONE)
+			Untamed.Util.FixAnimalActor(Who)
 		EndIf
 
 		Iter += 1
