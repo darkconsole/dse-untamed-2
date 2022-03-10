@@ -141,6 +141,7 @@ EndFunction
 Event OnInit()
 {detect mod reset}
 
+	self.Util.PrintDebug("HELO")
 	self.ResetMod_Subsystems()
 
 	Return

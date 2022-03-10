@@ -177,7 +177,8 @@ Function OnAnimationIter()
 	EndIf
 
 	;; @todo 2022-03-09
-	;; if fast stage, chance they blow early and end it.
+	;; if fast stage, chance they blow early and end it. also causes debuff
+	;; to prevent doing it again for a while.
 
 	Return
 EndFunction
