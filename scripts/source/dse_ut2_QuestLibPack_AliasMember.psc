@@ -11,12 +11,24 @@ EndEvent
 
 Event OnEnterBleedout()
 	Actor Me = self.GetActorReference()
+
+	;; if player has second wind
+	;;   if player has enough xp
+	;;     consume xp to heal
+	;; else
+	;;   remove from pack
+	;;   killessential
+
+	Untamed.Pack.RemoveMember(Me)
+	Me.KillEssential()
+
 	Untamed.Util.Print(Me.GetDisplayName() + " is down!")
 	Return
 EndEvent
 
 Event OnDying(Actor Killer)
 	Actor Me = self.GetActorReference()
+
 	Untamed.Util.Print(Me.GetDisplayName() + " is dead!")
 	Untamed.Pack.RemoveMember(Me)
 	Return
@@ -54,24 +66,24 @@ EndEvent
 
 Event OnPackageStart(Package Pkg)
 	Actor Me = self.GetActorReference()
-	Untamed.Util.Print(Me.GetDisplayName() + " pkg start " + Pkg.GetFormID())
+	;;Untamed.Util.Print(Me.GetDisplayName() + " pkg start ")
 	Return
 EndEvent
 
 Event OnPackageChange(Package Pkg)
 	Actor Me = self.GetActorReference()
-	Untamed.Util.Print(Me.GetDisplayName() + " pkg change " + Pkg.GetFormID())
+	;;Untamed.Util.Print(Me.GetDisplayName() + " pkg change ")
 	Return
 EndEvent
 
 Event OnPackageEnd(Package Pkg)
 	Actor Me = self.GetActorReference()
-	Untamed.Util.Print(Me.GetDisplayName() + " pkg end " + Pkg.GetFormID())
+	;;Untamed.Util.Print(Me.GetDisplayName() + " pkg end ")
 	Return
 EndEvent
 
 Event OnPlayerFastTravelEnd(Float Time)
 	Actor Me = self.GetActorReference()
-	Untamed.Util.Print(Me.GetDisplayName() + " fast travel end.")
+	Untamed.Util.Print(Me.GetDisplayName() + " fast travel end")
 	Return
 EndEvent
