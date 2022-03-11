@@ -162,6 +162,11 @@ Event OnGameReload()
 	self.HasSLA = self.IsInstalledSexLabAroused(FALSE)
 	self.HasBWA = self.IsInstalledBlushWhenAroused(FALSE)
 
+	;;;;;;;;
+
+	Untamed.PerkUI.GotoState("Off")
+	Untamed.PerkUI.OnUpdateWidget(TRUE)
+
 	Return
 EndEvent
 
@@ -169,7 +174,7 @@ Event OnConfigInit()
 {things to do when the menu initalises (is opening)}
 
 	self.Pages = new String[2]
-	
+
 	self.Pages[0] = "$UT2_Menu_General"
 	self.Pages[1] = "$UT2_Menu_Splash"
 

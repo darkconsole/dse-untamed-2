@@ -173,8 +173,6 @@ Float Function Experience(Actor Who, Float Amount=0.0)
 		self.Util.ModExperience(Who,Amount)
 	EndIf
 
-	self.Util.PrintDebug("[XP] " + Who.GetDisplayName() + " " + self.Util.GetExperience(Who) + " (" + Amount + ")")
-
 	Return self.Util.GetExperience(Who)
 EndFunction
 

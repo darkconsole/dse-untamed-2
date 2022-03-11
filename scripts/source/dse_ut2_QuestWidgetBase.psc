@@ -171,6 +171,21 @@ Function DynopulateItemsAsMeters(Int Needed)
 	Return
 EndFunction
 
+Function Update()
+	self.OnUpdateWidget()
+	Return
+EndFunction
+
+Float Function HeightOf(Int ID)
+
+	Return self.iWant.GetYSize(ID)
+EndFunction
+
+Float Function WidthOf(Int ID)
+
+	Return self.iWant.GetXSize(ID)
+EndFunction
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; below are things that should be moved to scripts extending ;;
 ;; this one with generic prototypes added here for templates. ;;

@@ -88,6 +88,7 @@ Function OnRenderWidget()
 			self.iWant.SetSize(self.Labels[Iter], FontSize, FontSize)
 			self.iWant.SetVisible(self.Labels[Iter], 1)
 
+			self.iWant.SetMeterFillDirection(self.Items[Iter], "left")
 			self.iWant.SetMeterPercent(self.Items[Iter], 100)
 			self.iWant.SetSize(self.Items[Iter], BarH, BarW)
 			self.iWant.SetRotation(self.Items[Iter], Rot)
