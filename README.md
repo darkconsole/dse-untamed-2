@@ -2,103 +2,86 @@
 
 # Talent Trees
 
-![Talent Trees](https://raw.githubusercontent.com/darkconsole/untamed2/master/talents.png)
+Lost the original file of that flowchart so I'm just going to textualize the trees here as they are being changed a little.
 
-# Current Status
+## Tenacity
 
-## Core Mod Mechanics
+Perks from the path of the bear help the pack endure.
 
-	✔️ Untamed XP system
-	✔️ Untamed XP HUD bar
-	✔️ Config values for scaling
-	✔️ NiO Actor size equalisation
-	✔️ NiO HH canceller
-	✔️ Dual animation system
-	✔️ Sexlab integration
-	✔️ +XP for beastial encounters
-	✔️ -XP for humanoid encounters
-	✔️ Tame actors
-	❌ Tame ActorTypeAnimal
-	❌ Tame ActorTypeCreature
-	✔️ Persist hack for tamed actors
-	✔️ Pack management
-	✔️ Add actors to active pack
-	✔️ Remove actors from active pack
-	✔️ Active pack members able to open doors and talk
-	✔️ Active pack members death protected
-	✔️ Basic actor event system
-	✔️ Disable feature lol
-	❌ Shout: Mating Call? or...
-	❌ Calm/Animal Allegence Taming Dialog
+	* Damage Resist (+50, +100, +200)
+	  Increases armour.
 
-## Tenacity Talent Tree
+	* Magic Resist (+25%, +25%, +25%)
+	  Increases spell resistance.
 
-	❌ Armour 1
-	❌ Armour 2
-	❌ Armour 3
-	❌ Resist 1
-	❌ Resist 2
-	❌ Resist 3
+	* Health (+50, +100, +200)
+	  Increases health pool.
 
-## Ferocity Talent Tree
 
-	❌ Health 1
-	❌ Health 2
-	❌ Health 3
-	❌ Damage 1
-	❌ Damage 2
-	❌ Damage 3
 
-## Beast Mastery Talent Tree
+## Ferocity
 
-	❌ Natures Grace
-	❌ Pack Mule
-	❌ Load Bearing
-	❌ Shout: Stay/Come
-	❌ Shout: Attack Target
-	❌ Second Wind
-	❌ Shout: Last Stand
+Perks from the path of the wolf increase the lethality of the pack.
 
-## Essence Talent Tree
+	* Attack Damage (+20%, +35%, +50%)
+	  Increases attack damage.
 
-	✔️ Thick Hide
-	✔️ Resistant Hide
-	❌ Shout: Stampede
-	✔️ Cross Breeder
-	✔️ Experienced
-	✔️ Pack Leader 1
-	✔️ Pack Leader 2
-	✔️ Pack Leader 3
-	❌ Den Mother
+	* Stamina (+20, +40, +60)
+	  Increases stamina pool.
 
-## Trainer Dialog
+	* Bleed (1dps, 3dps, 5dps)
+	  Attacks cause bleeding effects.
 
-	❌ Not Yet Designed
 
-## Pack Member Dialog (All Beasts)
 
-	🔶 Sexy Time
-	✔️ Stay / Come
-	❌ Dismiss from active pack
-	❌ Dismiss completely
+## Beast Mastery
 
-## Pack Member Dialog (Chapter 1: Wolves)
+Perks from the path of burden provide the pack with utility abilities.
 
-	🔶 Fondle
-	❌ Pet
-	❌ Play
-	❌ Feed
+	* Pack Mule
+	  Pack members can carry things for you.
 
-## Pack Member Dialog (Chapter 2: Bears)
+	* Load Bearing (+50)
+	  Requires: Pack Mule.
+	  Increases pack member carry.
 
-	❌ Fondle
-	❌ Pet
-	❌ Play
-	❌ Feed
+	* Second Wind (20% Health + 30% UXP)
+	  Downed pack member gets revivied. 5min Cooldown per member.
 
-## Pack Member Dialog (Chapter 2: Sabrecats)
+	* Cross Breeder
+	  No penalty for laying with humanoids.
 
-	❌ Fondle
-	❌ Pet
-	❌ Play
-	❌ Feed
+
+
+## Essence
+
+	* Thick Hide (400% UXP)
+	  Natural armour while naked.
+
+	* Resistant hide (50% UXP)
+	  Resist magic while naked.
+
+	* Nature's Grace (2% UXP)
+	  Passive pack healing.
+
+	* Pack Leader (3, 6, 12)
+	  Increases maximum pack size.
+
+	* Den Mother
+	  Can become pregnant and birth new animals.
+
+	* Experienced (+10, +20, +30)
+	  Increase maximum UXP.
+
+
+## Undecided
+
+Currently undecided how to give the shouts. Originally the were all plotted
+under the various talent trees but I wonder if there is a more immersive way.
+
+	* Shouts: Stay/Come
+	* Shout: Focus Attack Target
+	* Shout: Last Stand (heal everyone 50% UXP)
+	* Shout: Stampede (summon spirits that plow through battle)
+
+
