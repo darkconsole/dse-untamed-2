@@ -1,5 +1,9 @@
 {
 	"files.exclude": {
 		"**/*.pex": true
+	},
+	"workbench.colorCustomizations": {
+		"titleBar.activeBackground": "#c257005d",
+		"titleBar.activeForeground": "#F7FCEA"
 	}
 }
