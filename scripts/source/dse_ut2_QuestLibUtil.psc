@@ -193,6 +193,8 @@ Function SetTamed(Actor Who, Bool Enable)
 		Who.RemoveFromFaction(Untamed.FactionTamed)
 		Who.SetPlayerTeammate(FALSE, FALSE)
 		Who.AllowPCDialogue(FALSE)
+		Untamed.Util.ResetActorStats(Who)
+		Untamed.Util.ForgetActorStats(Who)
 		Untamed.Util.RemoveFromClassFaction(Who)
 	EndIf
 
@@ -327,19 +329,66 @@ EndFunction
 Function BookmarkActorStats(Actor Who)
 {remember an actor's base stats when encountered.}
 
-	float Health = Who.GetActorValueMax("Health")
-	float Stam = Who.GetActorValueMax("Stamina")
-	float Mana = Who.GetActorValueMax("Magicka")
-	float Resist = Who.GetActorValueMax("MagicResist")
-	float Armour = Who.GetActorValueMax("DamageResist")
+	float Health = Who.GetActorValueMax(Untamed.KeyActorValueHealth)
+	float Stam = Who.GetActorValueMax(Untamed.KeyActorValueStamina)
+	float Mana = Who.GetActorValueMax(Untamed.KeyActorValueMana)
+	float Resist = Who.GetActorValueMax(Untamed.KeyActorValueResist)
+	float Armour = Who.GetActorValueMax(Untamed.KeyActorValueArmour)
+	float Attack = Who.GetActorValueMax(Untamed.KeyActorValueAttack)
 
-	self.PrintDebug(Who.GetDisplayName() + " Health: " + Health + ", Stam: " + Stam + ", Mana: " + Mana + ", Armour: " + Armour + ", Resist: " + Resist)
+	self.PrintDebug(Who.GetDisplayName() + " Health: " + Health + ", Stam: " + Stam + ", Mana: " + Mana + ", AttackMult: " + Attack + ", Armour: " + Armour + ", Resist: " + Resist)
 
-	StorageUtil.SetFloatValue(Who, "UT2.StatBase.Health", Health)
-	StorageUtil.SetFloatValue(Who, "UT2.StatBase.Stamina", Stam)
-	StorageUtil.SetFloatValue(Who, "UT2.StatBase.Magicka", Mana)
-	StorageUtil.SetFloatValue(Who, "UT2.StatBase.MagicResist", Resist)
-	StorageUtil.SetFloatValue(Who, "UT2.StatBase.DamageResist", Armour)
+	StorageUtil.SetFloatValue(Who, Untamed.KeyStatBaseHealth, Health)
+	StorageUtil.SetFloatValue(Who, Untamed.KeyStatBaseStamina, Stam)
+	StorageUtil.SetFloatValue(Who, Untamed.KeyStatBaseMana, Mana)
+	StorageUtil.SetFloatValue(Who, Untamed.KeyStatBaseResist, Resist)
+	StorageUtil.SetFloatValue(Who, Untamed.KeyStatBaseArmour, Armour)
+	StorageUtil.SetFloatValue(Who, Untamed.KeyStatBaseAttack, Attack)
+
+	Return
+EndFunction
+
+Function ResetActorStats(Actor Who)
+{reset an actor to how we found it.}
+
+	float Health = StorageUtil.GetFloatValue(Who, Untamed.KeyStatBaseHealth, -1.0)
+	float Stam = StorageUtil.GetFloatValue(Who, Untamed.KeyStatBaseStamina, -1.0)
+	float Mana = StorageUtil.GetFloatValue(Who, Untamed.KeyStatBaseMana, -1.0)
+	float Resist = StorageUtil.GetFloatValue(Who, Untamed.KeyStatBaseResist, -1.0)
+	float Armour = StorageUtil.GetFloatValue(Who, Untamed.KeyStatBaseArmour, -1.0)
+	float Attack = StorageUtil.GetFloatValue(Who, Untamed.KeyStatBaseAttack, -1.0)
+
+	If(Health != -1.0)
+		Who.ForceActorValue(Untamed.KeyActorValueHealth, Health)
+	EndIf
+
+	If(Stam != -1.0)
+		Who.ForceActorValue(Untamed.KeyActorValueStamina, Stam)
+	EndIf
+
+	If(Mana != -1.0)
+		Who.ForceActorValue(Untamed.KeyActorValueMana, Mana)
+	EndIf
+
+	If(Resist != -1.0)
+		Who.ForceActorValue(Untamed.KeyActorValueResist, Resist)
+	EndIf
+
+	If(Armour != -1.0)
+		Who.ForceActorValue(Untamed.KeyActorValueArmour, Armour)
+	EndIf
+
+	If(Attack != -1.0)
+		Who.ForceActorValue(Untamed.KeyActorValueAttack, Attack)
+	EndIf
+
+	Return
+EndFunction
+
+Function ForgetActorStats(Actor Who)
+{and forget the actor's original base stats.}
+
+	StorageUtil.ClearAllObjPrefix(Who, "UT2.StatBase.")
 
 	Return
 EndFunction
