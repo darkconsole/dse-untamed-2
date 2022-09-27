@@ -186,6 +186,7 @@ Function SetTamed(Actor Who, Bool Enable)
 
 		self.StopCombat(Who)
 		Untamed.Anim.ResetActor(Who)
+		Untamed.Util.BookmarkActorStats(Who)
 		Untamed.Util.AddToClassFaction(Who)
 	Else
 		self.PrintDebug("Untaming " + Who.GetDisplayName())
@@ -319,6 +320,26 @@ Function RemoveFromClassFaction(Actor Who)
 	Who.RemoveFromFaction(Untamed.FactionClassHorse)
 	Who.RemoveFromFaction(Untamed.FactionClassSaberCat)
 	Who.RemoveFromFaction(Untamed.FactionClassWolf)
+
+	Return
+EndFunction
+
+Function BookmarkActorStats(Actor Who)
+{remember an actor's base stats when encountered.}
+
+	float Health = Who.GetActorValueMax("Health")
+	float Stam = Who.GetActorValueMax("Stamina")
+	float Mana = Who.GetActorValueMax("Magicka")
+	float Resist = Who.GetActorValueMax("MagicResist")
+	float Armour = Who.GetActorValueMax("DamageResist")
+
+	self.PrintDebug(Who.GetDisplayName() + " Health: " + Health + ", Stam: " + Stam + ", Mana: " + Mana + ", Armour: " + Armour + ", Resist: " + Resist)
+
+	StorageUtil.SetFloatValue(Who, "UT2.StatBase.Health", Health)
+	StorageUtil.SetFloatValue(Who, "UT2.StatBase.Stamina", Stam)
+	StorageUtil.SetFloatValue(Who, "UT2.StatBase.Magicka", Mana)
+	StorageUtil.SetFloatValue(Who, "UT2.StatBase.MagicResist", Resist)
+	StorageUtil.SetFloatValue(Who, "UT2.StatBase.DamageResist", Armour)
 
 	Return
 EndFunction
