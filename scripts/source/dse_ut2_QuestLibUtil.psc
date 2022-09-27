@@ -336,7 +336,7 @@ Function BookmarkActorStats(Actor Who)
 	float Armour = Who.GetActorValueMax(Untamed.KeyActorValueArmour)
 	float Attack = Who.GetActorValueMax(Untamed.KeyActorValueAttack)
 
-	self.PrintDebug(Who.GetDisplayName() + " Health: " + Health + ", Stam: " + Stam + ", Mana: " + Mana + ", AttackMult: " + Attack + ", Armour: " + Armour + ", Resist: " + Resist)
+	self.PrintDebug("[" + Who.GetDisplayName() + "] BookmarkActorStats(" + " Health: " + Health + ", Stam: " + Stam + ", Mana: " + Mana + ", AttackMult: " + Attack + ", Armour: " + Armour + ", Resist: " + Resist + ")")
 
 	StorageUtil.SetFloatValue(Who, Untamed.KeyStatBaseHealth, Health)
 	StorageUtil.SetFloatValue(Who, Untamed.KeyStatBaseStamina, Stam)
@@ -357,6 +357,8 @@ Function ResetActorStats(Actor Who)
 	float Resist = StorageUtil.GetFloatValue(Who, Untamed.KeyStatBaseResist, -1.0)
 	float Armour = StorageUtil.GetFloatValue(Who, Untamed.KeyStatBaseArmour, -1.0)
 	float Attack = StorageUtil.GetFloatValue(Who, Untamed.KeyStatBaseAttack, -1.0)
+
+	self.PrintDebug("[" + Who.GetDisplayName() + "] ResetActorStats(" + " Health: " + Health + ", Stam: " + Stam + ", Mana: " + Mana + ", AttackMult: " + Attack + ", Armour: " + Armour + ", Resist: " + Resist + ")")
 
 	If(Health != -1.0)
 		Who.ForceActorValue(Untamed.KeyActorValueHealth, Health)
