@@ -171,11 +171,13 @@ Function SetTamed(Actor Who, Bool Enable)
 
 		;; stop being a dick to everything.
 
+		self.StopCombat(Who)
 		Who.RemoveFromFaction(Untamed.FactionPredator)
 		Who.SetAV("Aggression", 1)
 
 		;; stop being a dick to the player.
 
+		self.StopCombat(Who)
 		Who.AddToFaction(Untamed.FactionTamed)
 		Who.SetFactionRank(Untamed.FactionTamed, 1)
 		Who.SetRelationshipRank(Untamed.Player, 3)
@@ -183,7 +185,6 @@ Function SetTamed(Actor Who, Bool Enable)
 		Who.AllowPCDialogue(TRUE)
 
 		self.StopCombat(Who)
-
 		Untamed.Anim.ResetActor(Who)
 		Untamed.Util.AddToClassFaction(Who)
 	Else

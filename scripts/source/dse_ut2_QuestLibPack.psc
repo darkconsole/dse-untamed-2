@@ -126,7 +126,11 @@ if the pack is already full.}
 	While(Iter < MaxMemberCount)
 		If(self.Members[Iter].GetReference() == None)
 			self.Members[Iter].ForceRefTo(Who)
+
+			Who.StopCombat()
+			Who.StopCombatAlarm()
 			Who.SetDoingFavor(FALSE)
+
 			Untamed.Util.SendActorEvent(Who,"UT2.Pack.MemberJoin")
 			Untamed.Util.PrintDebug(Who.GetDisplayName() + " added to pack as Member" + Iter)
 			Untamed.Util.SetPassive(Who, FALSE)
