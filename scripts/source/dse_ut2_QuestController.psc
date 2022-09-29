@@ -148,6 +148,8 @@ Function ResetMod_Subsystems()
 		Iter += 1
 	EndWhile
 
+	self.PerkUI.OnGameReady()
+
 	Return
 EndFunction
 

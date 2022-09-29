@@ -164,8 +164,7 @@ Event OnGameReload()
 
 	;;;;;;;;
 
-	Untamed.PerkUI.GotoState("Off")
-	Untamed.PerkUI.OnUpdateWidget(TRUE)
+	Untamed.PerkUI.OnGameReady()
 
 	Return
 EndEvent
