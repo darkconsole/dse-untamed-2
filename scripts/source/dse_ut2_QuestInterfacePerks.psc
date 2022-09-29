@@ -267,8 +267,8 @@ State On
 		self.MainCur = 0
 		self.SideCur = 0
 
-		self.LoadMainMenu()
 		self.EnableKeyboardInput()
+		self.LoadMainMenu()
 
 		Return
 	EndEvent
