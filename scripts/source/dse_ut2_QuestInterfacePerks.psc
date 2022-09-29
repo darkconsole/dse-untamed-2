@@ -25,7 +25,6 @@ Int ScreenY = 720
 
 Function OnGameReady()
 
-	self.UnregisterForModEvent("iWantWidgetsReset")
 	self.iWant = Game.GetFormFromFile(0x800, "iWant Widgets.esl") as iWant_Widgets
 
 	self.UnregisterForKey(self.KeyMn)
