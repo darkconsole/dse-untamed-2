@@ -1,4 +1,4 @@
-Scriptname dse_ut2_QuestInterfacePerks extends Quest ;;extends dse_ut2_QuestWidgetBase
+Scriptname dse_ut2_QuestInterfacePerks extends Quest
 
 dse_ut2_QuestController Property Untamed Auto
 iWant_Widgets Property iWant Auto Hidden
@@ -182,6 +182,11 @@ Function LoadMainMenu()
 	Return
 EndFunction
 
+Function LoadSideMenu()
+
+	Return
+EndFunction
+
 Function UpdateMainMenu()
 
 	self.iWant.SetVisible(self.MainItems[1], 1)
@@ -266,10 +271,8 @@ State On
 
 		self.MainCur = 0
 		self.SideCur = 0
-
 		self.EnableKeyboardInput()
 		self.LoadMainMenu()
-
 		Return
 	EndEvent
 
@@ -313,4 +316,66 @@ State On
 
 EndState
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+State Tenacity
+
+	Event OnBeginState()
+		Untamed.Util.PrintDebug("[Perks:OnBeginState:Tenacity] Opened")
+
+		self.SideCur = 0
+		self.DestroySideItems()
+
+		Return
+	EndEvent
+
+EndState
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+State Ferocity
+
+	Event OnBeginState()
+		Untamed.Util.PrintDebug("[Perks:OnBeginState:Ferocity] Opened")
+
+		self.SideCur = 0
+		self.DestroySideItems()
+
+		Return
+	EndEvent
+
+EndState
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+State BeastMastery
+
+	Event OnBeginState()
+		Untamed.Util.PrintDebug("[Perks:OnBeginState:BeastMastery] Opened")
+
+		self.SideCur = 0
+		self.DestroySideItems()
+
+		Return
+	EndEvent
+
+EndState
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+State Essence
+
+	Event OnBeginState()
+		Untamed.Util.PrintDebug("[Perks:OnBeginState:Essence] Opened")
+
+		self.SideCur = 0
+		self.DestroySideItems()
+
+		Return
+	EndEvent
+
+EndState
