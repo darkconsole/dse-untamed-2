@@ -8,6 +8,7 @@ Int[] Property SideItems Auto Hidden
 
 Int Property MainCur = 0 Auto Hidden
 Int Property SideCur = 0 Auto Hidden
+String Property StateCur = "Default" Auto Hidden
 
 Int Property KeyMn = 0x40 Auto Hidden
 Int Property KeyUp = 0 Auto Hidden
@@ -30,7 +31,7 @@ Function OnGameReady()
 	self.UnregisterForKey(self.KeyMn)
 	self.RegisterForKey(self.KeyMn)
 
-	self.GotoState("Empty")
+	self.GotoState("Default")
 	self.GotoState("Off")
 
 	Untamed.Util.PrintDebug("[Perks:OnGameReady] Done")
@@ -283,11 +284,24 @@ Bool Function IsCancelKey(Int KeyCode)
 	Return (KeyCode == self.KeyMn || KeyCode == self.KeyFk)
 EndFunction
 
+Bool Function IsBackKey(Int KeyCode)
+
+	Return (KeyCode == self.KeyFk)
+EndFunction
+
+Bool Function IsMenuKey(Int KeyCode)
+
+	Return (KeyCode == self.KeyMn)
+EndFunction
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Auto State Empty
-
+Auto State Default
+	Event OnBeginState()
+		self.StateCur = "Default"
+		Return
+	EndEvent
 EndState
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -297,8 +311,11 @@ State Off
 
 	Event OnBeginState()
 		Untamed.Util.PrintDebug("[Perks:OnBeginState:Off] UI OFF")
+		self.MainCur = 0
+		self.SideCur = 0
 		self.DestroyAllItems()
 		self.DisableKeyboardInput()
+		self.StateCur = "Off"
 		Return
 	EndEvent
 
@@ -324,10 +341,18 @@ State On
 	Event OnBeginState()
 		Untamed.Util.PrintDebug("[Perks:OnBeginState:On] UI ON")
 
-		self.MainCur = 0
 		self.SideCur = 0
-		self.EnableKeyboardInput()
-		self.LoadMainMenu()
+
+		If(self.StateCur == "Off")
+			self.MainCur = 0
+			self.EnableKeyboardInput()
+			self.LoadMainMenu()
+		Else
+			self.DestroySideItems()
+			self.UpdateMainMenu()
+		EndIf
+
+		self.StateCur = "On"
 		Return
 	EndEvent
 
@@ -342,20 +367,28 @@ State On
 
 		;;;;;;;;
 
-		If(KeyCode == self.KeyDn)
+		If(self.IsDownKey(KeyCode))
 			If(self.MainCur == 0)
 				self.MainCur = 1
 			Else
 				self.MainCur = PapyrusUtil.ClampInt((self.MainCur + 1), 1, 4)
 			EndIf
-		ElseIf(KeyCode == self.KeyUp)
+		ElseIf(self.IsUpKey(KeyCode))
 			If(self.MainCur == 0)
 				self.MainCur = 4
 			Else
 				self.MainCur = PapyrusUtil.ClampInt((self.MainCur - 1), 1, 4)
 			EndIf
-		ElseIf(KeyCode == self.KeyOk)
-			;;
+		ElseIf(self.IsActivateKey(KeyCode))
+			If(self.MainCur == 1)
+				self.GotoState(Untamed.KeyTenacity)
+			ElseIf(self.MainCur == 2)
+				self.GotoState(Untamed.KeyFerocity)
+			Elseif(self.MainCur == 3)
+				self.GotoState(Untamed.KeyBeastMastery)
+			ElseIf(self.MainCur == 4)
+				self.GotoState(Untamed.KeyEssence)
+			EndIf
 		EndIf
 
 		self.UpdateMainMenu()
@@ -375,6 +408,7 @@ State Tenacity
 		self.SideCur = 0
 		self.DestroySideItems()
 		self.LoadSideMenu(Untamed.KeyTenacity)
+		self.StateCur = Untamed.KeyTenacity
 
 		Return
 	EndEvent
@@ -382,8 +416,13 @@ State Tenacity
 	Event OnKeyDown(int KeyCode)
 		Untamed.Util.PrintDebug("[Perks.OnKeyDown:Tenacity] " + KeyCode)
 
-		If(self.IsCancelKey(KeyCode))
+		If(self.IsMenuKey(KeyCode))
 			self.GoToState("Off")
+			Return
+		EndIf
+
+		If(self.IsBackKey(KeyCode))
+			self.GoToState("On")
 			Return
 		EndIf
 
@@ -412,6 +451,7 @@ State Ferocity
 		self.SideCur = 0
 		self.DestroySideItems()
 		self.LoadSideMenu(Untamed.KeyFerocity)
+		self.StateCur = Untamed.KeyFerocity
 
 		Return
 	EndEvent
@@ -419,11 +459,15 @@ State Ferocity
 	Event OnKeyDown(int KeyCode)
 		Untamed.Util.PrintDebug("[Perks.OnKeyDown:Ferocity] " + KeyCode)
 
-		If(self.IsCancelKey(KeyCode))
+		If(self.IsMenuKey(KeyCode))
 			self.GoToState("Off")
 			Return
 		EndIf
 
+		If(self.IsBackKey(KeyCode))
+			self.GoToState("On")
+			Return
+		EndIf
 		;;;;;;;;
 
 		If(KeyCode == 123456)
@@ -449,6 +493,7 @@ State BeastMastery
 		self.SideCur = 0
 		self.DestroySideItems()
 		self.LoadSideMenu(Untamed.KeyBeastMastery)
+		self.StateCur = Untamed.KeyBeastMastery
 
 		Return
 	EndEvent
@@ -456,8 +501,13 @@ State BeastMastery
 	Event OnKeyDown(int KeyCode)
 		Untamed.Util.PrintDebug("[Perks.OnKeyDown:BeastMastery] " + KeyCode)
 
-		If(self.IsCancelKey(KeyCode))
+		If(self.IsMenuKey(KeyCode))
 			self.GoToState("Off")
+			Return
+		EndIf
+
+		If(self.IsBackKey(KeyCode))
+			self.GoToState("On")
 			Return
 		EndIf
 
@@ -486,6 +536,7 @@ State Essence
 		self.SideCur = 0
 		self.DestroySideItems()
 		self.LoadSideMenu(Untamed.KeyEssence)
+		self.StateCur = Untamed.KeyEssence
 
 		Return
 	EndEvent
@@ -493,8 +544,13 @@ State Essence
 	Event OnKeyDown(int KeyCode)
 		Untamed.Util.PrintDebug("[Perks.OnKeyDown:Essence] " + KeyCode)
 
-		If(self.IsCancelKey(KeyCode))
+		If(self.IsMenuKey(KeyCode))
 			self.GoToState("Off")
+			Return
+		EndIf
+
+		If(self.IsBackKey(KeyCode))
+			self.GoToState("On")
 			Return
 		EndIf
 
