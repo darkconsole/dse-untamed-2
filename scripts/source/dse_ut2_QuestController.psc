@@ -83,6 +83,10 @@ Int Property KeyPackLeaderMax3 = 12 AutoReadOnly Hidden
 
 String Property KeyESP = "dse-soulgem-oven.esp" AutoReadOnly Hidden
 String Property KeySplashGraphic = "dse-soulgem-oven/splash.dds" AutoReadOnly Hidden
+String Property KeyTenacity = "Tenacity" AutoReadOnly Hidden
+String Property KeyFerocity = "Ferocity" AutoReadOnly Hidden
+String Property KeyBeastMastery = "BeastMastery" AutoReadOnly Hidden
+String Property KeyEssence = "Essence" AutoReadOnly Hidden
 
 String Property KeyActorValueHealth = "Health" AutoReadOnly Hidden
 String Property KeyActorValueStamina = "Stamina" AutoReadOnly Hidden
@@ -90,6 +94,7 @@ String Property KeyActorValueMana = "Magicka" AutoReadOnly Hidden
 String Property KeyActorValueResist = "MagicResist" AutoReadOnly Hidden
 String Property KeyActorValueArmour = "DamageResist" AutoReadOnly Hidden
 String Property KeyActorValueAttack = "AttackDamageMult" AutoReadOnly Hidden
+
 String Property KeyStatBaseHealth = "UT2.StatBase.Health" AutoReadOnly Hidden
 String Property KeyStatBaseStamina = "UT2.StatBase.Stamina" AutoReadOnly Hidden
 String Property KeyStatBaseMana = "UT2.StatBase.Magicka" AutoReadOnly Hidden

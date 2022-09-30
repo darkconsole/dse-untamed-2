@@ -181,10 +181,43 @@ Function LoadMainMenu()
 	Return
 EndFunction
 
-Function LoadSideMenu()
+Function LoadSideMenu(String Menu)
+
+	If(Menu == Untamed.KeyTenacity)
+		self.LoadSideMenu_Tenacity()
+	ElseIf(Menu == Untamed.KeyFerocity)
+		self.LoadSideMenu_Ferocity()
+	ElseIf(Menu == Untamed.KeyBeastMastery)
+		self.LoadSideMenu_BeastMastery()
+	ElseIf(Menu == Untamed.KeyEssence)
+		self.LoadSideMenu_Essence()
+	EndIf
 
 	Return
 EndFunction
+
+Function LoadSideMenu_Tenacity()
+
+	Return
+EndFunction
+
+Function LoadSideMenu_Ferocity()
+
+	Return
+EndFunction
+
+Function LoadSideMenu_BeastMastery()
+
+	Return
+EndFunction
+
+Function LoadSideMenu_Essence()
+
+	Return
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Function UpdateMainMenu()
 
@@ -220,6 +253,36 @@ Function UpdateSideMenu()
 	Return
 EndFunction
 
+Bool Function IsUpKey(Int KeyCode)
+
+	Return (KeyCode == self.KeyUp)
+EndFunction
+
+Bool Function IsDownKey(Int KeyCode)
+
+	Return (KeyCode == self.KeyDn)
+EndFunction
+
+Bool Function IsLeftKey(Int KeyCode)
+
+	Return (KeyCode == self.KeyLf)
+EndFunction
+
+Bool Function IsRightKey(Int KeyCode)
+
+	Return (KeyCode == self.KeyRt)
+EndFunction
+
+Bool Function IsActivateKey(Int KeyCode)
+
+	Return (KeyCode == self.KeyOk)
+EndFunction
+
+Bool Function IsCancelKey(Int KeyCode)
+
+	Return (KeyCode == self.KeyMn || KeyCode == self.KeyFk)
+EndFunction
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -247,13 +310,6 @@ State Off
 			self.GotoState("On")
 			Return
 		EndIf
-
-		Return
-	EndEvent
-
-	Event OnKeyUp(int KeyCode, float Dur)
-
-		Untamed.Util.PrintDebug("[Perks.OnKeyUp:Off] " + KeyCode)
 
 		Return
 	EndEvent
@@ -306,13 +362,6 @@ State On
 		Return
 	EndEvent
 
-	Event OnKeyUp(int KeyCode, float Dur)
-
-		Untamed.Util.PrintDebug("[Perks.OnKeyUp:On] " + KeyCode)
-
-		Return
-	EndEvent
-
 EndState
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -325,7 +374,28 @@ State Tenacity
 
 		self.SideCur = 0
 		self.DestroySideItems()
+		self.LoadSideMenu(Untamed.KeyTenacity)
 
+		Return
+	EndEvent
+
+	Event OnKeyDown(int KeyCode)
+		Untamed.Util.PrintDebug("[Perks.OnKeyDown:Tenacity] " + KeyCode)
+
+		If(self.IsCancelKey(KeyCode))
+			self.GoToState("Off")
+			Return
+		EndIf
+
+		;;;;;;;;
+
+		If(KeyCode == 123456)
+
+		EndIf
+
+		;;;;;;;;
+
+		self.UpdateSideMenu()
 		Return
 	EndEvent
 
@@ -341,7 +411,28 @@ State Ferocity
 
 		self.SideCur = 0
 		self.DestroySideItems()
+		self.LoadSideMenu(Untamed.KeyFerocity)
 
+		Return
+	EndEvent
+
+	Event OnKeyDown(int KeyCode)
+		Untamed.Util.PrintDebug("[Perks.OnKeyDown:Ferocity] " + KeyCode)
+
+		If(self.IsCancelKey(KeyCode))
+			self.GoToState("Off")
+			Return
+		EndIf
+
+		;;;;;;;;
+
+		If(KeyCode == 123456)
+
+		EndIf
+
+		;;;;;;;;
+
+		self.UpdateSideMenu()
 		Return
 	EndEvent
 
@@ -357,7 +448,28 @@ State BeastMastery
 
 		self.SideCur = 0
 		self.DestroySideItems()
+		self.LoadSideMenu(Untamed.KeyBeastMastery)
 
+		Return
+	EndEvent
+
+	Event OnKeyDown(int KeyCode)
+		Untamed.Util.PrintDebug("[Perks.OnKeyDown:BeastMastery] " + KeyCode)
+
+		If(self.IsCancelKey(KeyCode))
+			self.GoToState("Off")
+			Return
+		EndIf
+
+		;;;;;;;;
+
+		If(KeyCode == 123456)
+
+		EndIf
+
+		;;;;;;;;
+
+		self.UpdateSideMenu()
 		Return
 	EndEvent
 
@@ -373,7 +485,28 @@ State Essence
 
 		self.SideCur = 0
 		self.DestroySideItems()
+		self.LoadSideMenu(Untamed.KeyEssence)
 
+		Return
+	EndEvent
+
+	Event OnKeyDown(int KeyCode)
+		Untamed.Util.PrintDebug("[Perks.OnKeyDown:Essence] " + KeyCode)
+
+		If(self.IsCancelKey(KeyCode))
+			self.GoToState("Off")
+			Return
+		EndIf
+
+		;;;;;;;;
+
+		If(KeyCode == 123456)
+
+		EndIf
+
+		;;;;;;;;
+
+		self.UpdateSideMenu()
 		Return
 	EndEvent
 
