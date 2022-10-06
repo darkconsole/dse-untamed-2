@@ -505,17 +505,18 @@ Function SetExperience(Actor Who, Float XP)
 	Bool UpdatePlayer = (Who == Untamed.Player)
 
 	StorageUtil.SetFloatValue(Who, self.KeyXP, ClampXP)
+	Untamed.Util.PrintDebug(Who.GetDisplayName() + " UXP " + ClampXP)
 
 	;;;;;;;;
 
 	If(UpdatePlayer)
-		;;If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
-		;;	Untamed.Feat.UpdateThickHide(Untamed.Player)
-		;;EndIf
+		If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
+			self.UpdateFeatThickHide(Untamed.Player)
+		EndIf
 
-		;;If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
-		;;	Untamed.Feat.UpdateResistantHide(Untamed.Player)
-		;;EndIf
+		If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
+			self.UpdateFeatResistantHide(Untamed.Player)
+		EndIf
 	EndIf
 
 	Return
@@ -542,6 +543,7 @@ the effects given.}
 
 	Who.RemovePerk(Feat)
 	Who.AddPerk(Feat)
+
 	Return
 EndFunction
 
@@ -550,8 +552,11 @@ Function UpdateFeatThickHide(Actor Who)
 
 	Float Value = (self.GetExperience(Who) * Untamed.Menu.OptPerkThickHideMult)
 
-	Untamed.PerkThickHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
+	self.PrintDebug(Who.GetDisplayName() + " Thick Hide " + Value)
+
+	Untamed.PerkThickHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0, Value)
 	self.ReapplyPerk(Who,Untamed.PerkThickHide)
+
 	Return
 EndFunction
 
@@ -560,8 +565,11 @@ Function UpdateFeatResistantHide(Actor Who)
 
 	Float Value = (self.GetExperience(Who) * Untamed.Menu.OptPerkResistantHideMult)
 
+	self.PrintDebug(Who.GetDisplayName() + " Resistant Hide " + Value)
+
 	Untamed.PerkResistantHide.GetNthEntrySpell(0).SetNthEffectMagnitude(0,Value)
 	self.ReapplyPerk(Who,Untamed.PerkResistantHide)
+
 	Return
 EndFunction
 

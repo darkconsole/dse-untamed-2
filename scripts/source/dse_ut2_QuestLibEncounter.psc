@@ -10,7 +10,7 @@ Event OnInit()
 	self.UnregisterForModEvent("OrgasmStart")
 
 	;; apply event handlers.
-	self.RegisterForModEvent("OrgasmStart","OnEncounterEnding")
+	self.RegisterForModEvent("OrgasmStart", "OnEncounterEnding")
 
 	Return
 EndEvent
@@ -60,7 +60,7 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 
 	Float XP = (BeastCount * Untamed.Menu.OptEncounterXP)
 
-	Untamed.Experience(Untamed.Player,XP)
+	Untamed.Experience(Untamed.Player, XP)
 
 	Return
 EndFunction
@@ -122,7 +122,7 @@ Int Function CountBeastsInvolved(Actor[] Actors)
 		EndIf
 
 		Iter += 1
-	EndWhile	
+	EndWhile
 
 	Return Count
 EndFunction
