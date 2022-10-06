@@ -59,8 +59,19 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	;; involved.
 
 	Float XP = (BeastCount * Untamed.Menu.OptEncounterXP)
+	Int Iter = 0
 
 	Untamed.Experience(Untamed.Player, XP)
+
+	While(Iter < Actors.Length)
+		If(Untamed.Pack.IsMember(Actors[Iter]))
+			Untamed.Experience(Actors[Iter], XP)
+		EndIf
+
+		Iter += 1
+	EndWhile
+
+	Untamed.XPBar.UpdateUI()
 
 	Return
 EndFunction
@@ -79,7 +90,8 @@ Function OnLameEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 		XP = 0
 	EndIf
 
-	Untamed.Experience(Untamed.Player,XP)
+	Untamed.Experience(Untamed.Player, XP)
+	Untamed.XPBar.UpdateUI()
 
 	Return
 EndFunction

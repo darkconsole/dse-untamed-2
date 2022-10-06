@@ -166,6 +166,24 @@ Event OnGameReload()
 
 	Untamed.PerkUI.OnGameReady()
 
+	If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
+		Untamed.Util.UpdateFeatThickHide(Untamed.Player)
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
+		Untamed.Util.UpdateFeatResistantHide(Untamed.Player)
+	EndIf
+
+	self.RegisterForSingleUpdate(4)
+	Return
+EndEvent
+
+Event OnUpdate()
+
+	Untamed.XPBar.Reset()
+	Untamed.XPBar.Stop()
+	Untamed.XPBar.Start()
+
 	Return
 EndEvent
 

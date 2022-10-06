@@ -53,6 +53,27 @@ Int Function GetMemberCountMax()
 	Return Untamed.KeyPackLeaderMax0
 EndFunction
 
+Actor[] Function GetMemberList()
+{fetch an array of just the actors that are filled.}
+
+	Int Count = self.GetMemberCount()
+	Int Iter = self.Members.Length - 1
+
+	Actor[] Output = PapyrusUtil.ActorArray(Count)
+	Int Next = 0
+
+	While(Iter >= 0)
+		If(self.Members[Iter].GetReference() != None)
+			Output[Next] = self.Members[Iter].GetReference() As Actor
+			Next += 1
+		EndIf
+
+		Iter -= 1
+	EndWhile
+
+	Return Output
+EndFunction
+
 Bool Function HasOpenSlot()
 {determine if there is room in the pack for this.}
 
