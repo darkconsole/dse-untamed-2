@@ -165,6 +165,7 @@ Event OnGameReload()
 	;;;;;;;;
 
 	Untamed.PerkUI.OnGameReady()
+	Untamed.Util.SetExperience(Untamed.Player, 99)
 
 	If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
 		Untamed.Util.UpdateFeatThickHide(Untamed.Player)
@@ -190,10 +191,11 @@ EndEvent
 Event OnConfigInit()
 {things to do when the menu initalises (is opening)}
 
-	self.Pages = new String[2]
+	self.Pages = new String[3]
 
 	self.Pages[0] = "$UT2_Menu_General"
 	self.Pages[1] = "$UT2_Menu_Splash"
+	self.Pages[2] = "$UT2_Menu_Debug"
 
 	Return
 EndEvent
@@ -218,9 +220,58 @@ Event OnPageReset(String Page)
 
 	If(Page == "$UT2_Menu_General")
 		self.ShowPageGeneral()
+	ElseIf(Page == "$UT2_Menu_Debug")
+		self.ShowPageDebug()
 	Else
 		self.ShowPageSplash()
 	EndIf
+
+	Return
+EndEvent
+
+
+Event OnOptionSelect(Int Item)
+
+	Bool Val = FALSE
+	Int Data = -1
+	Actor Who = Game.GetCurrentCrosshairRef() as Actor
+
+	If(Who == None)
+		Who = Untamed.Player
+	EndIf
+
+	;;;;;;;;
+
+	If(Item == ItemDebugActorXP0)
+		Val = TRUE
+		Untamed.Util.SetExperience(Who, 0)
+		Untamed.XPBar.UpdateUI()
+		Return
+	ElseIf(Item == ItemDebugActorXP25)
+		Val = TRUE
+		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.25))
+		Untamed.XPBar.UpdateUI()
+		Return
+	ElseIf(Item == ItemDebugActorXP50)
+		Val = TRUE
+		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.50))
+		Untamed.XPBar.UpdateUI()
+		Return
+	ElseIf(Item == ItemDebugActorXP75)
+		Val = TRUE
+		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.75))
+		Untamed.XPBar.UpdateUI()
+		Return
+	ElseIf(Item == ItemDebugActorXP100)
+		Val = TRUE
+		Untamed.Util.SetExperience(Who, Untamed.Util.GetExperienceMax(Who))
+		Untamed.XPBar.UpdateUI()
+		Return
+	EndIf
+
+	;;;;;;;;
+
+	self.SetToggleOptionValue(Item,Val)
 
 	Return
 EndEvent
@@ -242,5 +293,49 @@ Function ShowPageSplash()
 	Selected = Utility.RandomInt(1,Graphics.Length) - 1
 
 	self.LoadCustomContent(Graphics[Selected])
+	Return
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Int ItemDebug
+Int ItemDebugActorXP0
+Int ItemDebugActorXP25
+Int ItemDebugActorXP50
+Int ItemDebugActorXP75
+Int ItemDebugActorXP100
+
+Function ShowPageDebug()
+
+	Actor Who = Game.GetCurrentCrosshairRef() as Actor
+
+	If(Who == None)
+		Who = Untamed.Player
+	EndIf
+
+	;;;;;;;;
+
+	self.SetTitleText("$UT2_Menu_Debug")
+	self.SetCursorFillMode(TOP_TO_BOTTOM)
+	self.SetCursorPosition(0)
+
+	AddHeaderOption(Who.GetDisplayName())
+	ItemDebugActorXP0 = self.AddToggleOption("Set UXP to 0", FALSE)
+	ItemDebugActorXP25 = self.AddToggleOption("Set UXP to 25%", FALSE)
+	ItemDebugActorXP50 = self.AddToggleOption("Set UXP to 50%", FALSE)
+	ItemDebugActorXP75 = self.AddToggleOption("Set UXP to 75%", FALSE)
+	ItemDebugActorXP100 = self.AddToggleOption("Set UXP to 100%", FALSE)
+
+	self.SetCursorPosition(1)
+	ItemDebug = AddToggleOption("Debugging", TRUE)
+	AddEmptyOption()
+
+	AddHeaderOption(Who.GetDisplayName())
+	self.AddTextOption("UXP",(Untamed.Experience(Who) as String))
+	self.AddTextOption("Pack Count",(Untamed.Pack.GetMemberCount() as String))
+	self.AddTextOption("Pack Max",(Untamed.Pack.GetMemberCountMax() as String))
+	AddEmptyOption()
+
 	Return
 EndFunction

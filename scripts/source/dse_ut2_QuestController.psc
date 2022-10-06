@@ -95,6 +95,8 @@ String Property KeyActorValueResist = "MagicResist" AutoReadOnly Hidden
 String Property KeyActorValueArmour = "DamageResist" AutoReadOnly Hidden
 String Property KeyActorValueAttack = "AttackDamageMult" AutoReadOnly Hidden
 
+String Property KeyXP = "UT2.Actor.Experience" Auto Hidden
+String Property KeyLevel = "UT2.Actor.Level" Auto Hidden
 String Property KeyStatBaseHealth = "UT2.StatBase.Health" AutoReadOnly Hidden
 String Property KeyStatBaseStamina = "UT2.StatBase.Stamina" AutoReadOnly Hidden
 String Property KeyStatBaseMana = "UT2.StatBase.Magicka" AutoReadOnly Hidden
@@ -195,6 +197,11 @@ Float Function Experience(Actor Who, Float Amount=0.0)
 	EndIf
 
 	Return self.Util.GetExperience(Who)
+EndFunction
+
+Int Function Level(Actor Who, Int Amount=1)
+
+	Return 0
 EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

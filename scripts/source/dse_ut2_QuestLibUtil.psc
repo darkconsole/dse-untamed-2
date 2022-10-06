@@ -464,6 +464,27 @@ EndFunction
 
 ;; actor experience api
 
+Int Function GetLevel(Actor Who)
+{get the amount of xp this actor has.}
+
+	Return StorageUtil.GetIntValue(Who, Untamed.KeyLevel, 0)
+EndFunction
+
+Int Function SetLevel(Actor Who, Int Lvl)
+{get the amount of xp this actor has.}
+
+	Return StorageUtil.SetIntValue(Who, Untamed.KeyLevel, Lvl)
+EndFunction
+
+Function ModLevel(Actor Who, Int Amount)
+{give or take away untamed xp from an actor.}
+
+	Int Lvl = self.GetLevel(Who) + Amount
+
+	self.SetLevel(Who, Lvl)
+	Return
+EndFunction
+
 Function ModExperience(Actor Who, Float Amount)
 {give or take away untamed xp from an actor.}
 
@@ -476,7 +497,7 @@ EndFunction
 Float Function GetExperience(Actor Who)
 {get the amount of xp this actor has.}
 
-	Return StorageUtil.GetFloatValue(Who,self.KeyXP)
+	Return StorageUtil.GetFloatValue(Who, Untamed.KeyXP, 0.0)
 EndFunction
 
 Float Function GetExperienceMax(Actor Who)
@@ -497,6 +518,49 @@ Float Function GetExperiencePercent(Actor Who)
 	Return (self.GetExperience(Who) / self.GetExperienceMax(Who)) * 100
 EndFunction
 
+Function SetExperienceConceptWithLeveling(Actor Who, Float NXP)
+{set the amount of xp this actor has.}
+
+	Float MXP = self.GetExperienceMax(Who)
+	Int Lvl = self.GetLevel(Who)
+	Int LvlAdjust = 0
+	Bool UpdatePlayer = (Who == Untamed.Player)
+
+	If(NXP > MXP)
+		While(NXP > MXP)
+			LvlAdjust += 1
+			NXP -= MXP
+		EndWhile
+	ElseIf(NXP < 0)
+		While(NXP < 0)
+			LvlAdjust -= 1
+
+			If((Lvl + LvlAdjust) >= 0)
+				NXP += MXP
+			Else
+				NXP = 0
+			EndIf
+		EndWhile
+	EndIf
+
+	self.PrintDebug("[SetExperience] " + Who.GetDisplayName() + " XP " + NXP + ", Lvl " + (Lvl + LvlAdjust) + " (" + LvlAdjust + ")")
+
+	StorageUtil.SetFloatValue(Who, Untamed.KeyXP, NXP)
+	StorageUtil.SetIntValue(Who, Untamed.KeyLevel, PapyrusUtil.ClampInt((Lvl + LvlAdjust), 0, 100))
+
+	If(UpdatePlayer)
+		If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
+			self.UpdateFeatThickHide(Untamed.Player)
+		EndIf
+
+		If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
+			self.UpdateFeatResistantHide(Untamed.Player)
+		EndIf
+	EndIf
+
+	Return
+EndFunction
+
 Function SetExperience(Actor Who, Float XP)
 {set the amount of xp this actor has.}
 
@@ -504,7 +568,7 @@ Function SetExperience(Actor Who, Float XP)
 	Float ClampXP = PapyrusUtil.ClampFloat(XP, 0.0, MaxXP)
 	Bool UpdatePlayer = (Who == Untamed.Player)
 
-	StorageUtil.SetFloatValue(Who, self.KeyXP, ClampXP)
+	StorageUtil.SetFloatValue(Who, Untamed.KeyXP, ClampXP)
 	Untamed.Util.PrintDebug(Who.GetDisplayName() + " UXP " + ClampXP)
 
 	;;;;;;;;
