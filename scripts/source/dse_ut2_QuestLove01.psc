@@ -173,7 +173,7 @@ Function OnAnimationIter()
 		Untamed.Experience(self.Dom, PXP)
 		Untamed.Experience(self.Sub, MXP)
 
-		Untamed.XPBar.OnUpdateWidget()
+		;;Untamed.XPBar.OnUpdateWidget()
 	EndIf
 
 	;; @todo 2022-03-09
