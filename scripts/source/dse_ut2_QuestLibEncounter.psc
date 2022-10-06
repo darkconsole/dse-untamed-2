@@ -58,14 +58,15 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	;; you get positive xp for every beast involved when there are beasts
 	;; involved.
 
-	Float XP = (BeastCount * Untamed.Menu.OptEncounterXP)
+	Float XP = (BeastCount * Untamed.Config.GetFloat(".EncounterXP"))
+	Float BXP = (XP * Untamed.Config.GetFloat(".PackShareXP"))
 	Int Iter = 0
 
 	Untamed.Experience(Untamed.Player, XP)
 
 	While(Iter < Actors.Length)
 		If(Untamed.Pack.IsMember(Actors[Iter]))
-			Untamed.Experience(Actors[Iter], XP)
+			Untamed.Experience(Actors[Iter], BXP)
 		EndIf
 
 		Iter += 1
