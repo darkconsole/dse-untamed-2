@@ -165,7 +165,17 @@ Event OnGameReload()
 	;;;;;;;;
 
 	Untamed.PerkUI.OnGameReady()
-	Untamed.Util.SetExperience(Untamed.Player, 99)
+
+	self.RegisterForSingleUpdate(4)
+	Return
+EndEvent
+
+Event OnUpdate()
+
+	Untamed.Util.PrintDebug("[QuestMCM:OnUpdate] delayed actions go")
+	Untamed.XPBar.Reset()
+	Untamed.XPBar.Stop()
+	Untamed.XPBar.Start()
 
 	If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
 		Untamed.Util.UpdateFeatThickHide(Untamed.Player)
@@ -174,16 +184,6 @@ Event OnGameReload()
 	If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
 		Untamed.Util.UpdateFeatResistantHide(Untamed.Player)
 	EndIf
-
-	self.RegisterForSingleUpdate(4)
-	Return
-EndEvent
-
-Event OnUpdate()
-
-	Untamed.XPBar.Reset()
-	Untamed.XPBar.Stop()
-	Untamed.XPBar.Start()
 
 	Return
 EndEvent

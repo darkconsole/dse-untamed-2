@@ -169,11 +169,18 @@ Function SetTamed(Actor Who, Bool Enable)
 	If(Enable)
 		self.PrintDebug("Taming " + Who.GetDisplayName())
 
+		;; turning set player teammate on and then off again is intentional
+		;; here to get them to behave asap. but then we turn it off and
+		;; allow the faction and actor values trigger them to aid in combat
+		;; without the teammate status so that they can get credit for
+		;; their own kills in the OnDying and OnDeath events.
+
 		;; stop being a dick to everything.
 
+		Who.SetPlayerTeammate(TRUE, TRUE)
 		self.StopCombat(Who)
-		Who.RemoveFromFaction(Untamed.FactionPredator)
-		Who.SetAV("Aggression", 1)
+		Who.RemoveFromAllFactions()
+		self.FixAnimalActor(Who)
 
 		;; stop being a dick to the player.
 
@@ -181,13 +188,12 @@ Function SetTamed(Actor Who, Bool Enable)
 		Who.AddToFaction(Untamed.FactionTamed)
 		Who.SetFactionRank(Untamed.FactionTamed, 1)
 		Who.SetRelationshipRank(Untamed.Player, 3)
-		Who.SetPlayerTeammate(TRUE, TRUE)
-		Who.AllowPCDialogue(TRUE)
 
 		self.StopCombat(Who)
 		Untamed.Anim.ResetActor(Who)
 		Untamed.Util.BookmarkActorStats(Who)
 		Untamed.Util.AddToClassFaction(Who)
+		Who.SetPlayerTeammate(FALSE, FALSE)
 	Else
 		self.PrintDebug("Untaming " + Who.GetDisplayName())
 		Who.RemoveFromFaction(Untamed.FactionTamed)
@@ -200,6 +206,7 @@ Function SetTamed(Actor Who, Bool Enable)
 
 	self.SetPersistHack(Who, Enable)
 	self.SetPassive(Who, Enable)
+	Untamed.XPBar.UpdateUI()
 
 	Return
 EndFunction
@@ -279,7 +286,8 @@ EndFunction
 
 Function FixAnimalActor(Actor Who)
 {animal actors have some flags set on them are problematic, but we can fix them
-without having to edit their forms causing conflicts.}
+without having to edit their forms causing conflicts. these tend to not persist
+in the save file which is another reason we have to fix them occasionally.}
 
 	;; note we should do this
 	;; 1) when a save is loaded to all pack members.
@@ -287,6 +295,12 @@ without having to edit their forms causing conflicts.}
 
 	Untamed.Util.CanOpenDoors(Who)
 	Untamed.Util.CanTalk(Who)
+	Who.AllowPCDialogue(TRUE)
+
+	Who.SetActorValue("Aggression", 1) ;; attack verified enemies
+	Who.SetActorValue("Assistance", 2) ;; aid friends and allies
+	Who.SetActorValue("Morality", 0)   ;; do crime
+	Who.SetActorValue("Confidence", 4) ;; yolo
 
 	Untamed.Util.PrintDebug("Fix Animal Actor: " + Who.GetDisplayName())
 	Return

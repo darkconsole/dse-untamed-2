@@ -8,6 +8,7 @@ dse_ut2_QuestController Property Untamed Auto
 Int[] Property Bars Auto Hidden
 Int[] Property Names Auto Hidden
 iWant_Widgets Property iWant Auto Hidden
+Bool Property Busy = FALSE Auto Hidden
 
 Int SW = 1280 ;; screen width (ce fixed hud size)
 Int SH = 720  ;; screen height (ce fixed hud size)
@@ -38,6 +39,13 @@ Function BuildUI()
 	Int Needed = 1
 	Int Iter = 0
 	Actor[] Members = Untamed.Pack.GetMemberList()
+
+	If(self.Busy)
+		Untamed.Util.PrintDebug("[Interface:BuildUI] skipped, busy atm")
+		Return
+	EndIf
+
+	self.Busy = TRUE
 
 	If(self.Bars.Length > 0)
 		self.DestroyUI()
@@ -73,6 +81,8 @@ Function BuildUI()
 		Iter += 1
 	EndWhile
 
+	self.Busy = FALSE
+
 	Return
 EndFunction
 
@@ -96,6 +106,19 @@ Function UpdateUI()
 	Int Iter = 0
 	Actor[] Members = Untamed.Pack.GetMemberList()
 
+	If(self.Busy)
+		Untamed.Util.PrintDebug("[Interface:UpdateUI] skipped, busy atm")
+		Return
+	EndIf
+
+	self.Busy = TRUE
+
+	If(!self.IsRunning())
+		self.Busy = FALSE
+		Untamed.Util.PrintDebug("[Interface:UpdateUI] skipped, ui disabled atm")
+		Return
+	EndIf
+
 	If((Members.Length + 1) != self.Bars.Length)
 		self.BuildUI()
 	EndIf
@@ -111,12 +134,14 @@ Function UpdateUI()
 		Iter += 1
 	EndWhile
 
+	self.Busy = FALSE
+
 	Return
 EndFunction
 
 Function SetBarSize(Int ID)
 
-	Untamed.Util.PrintDebug("[Interface:SetBarSize] " + ID + " " + BW + " " + BH)
+	;;Untamed.Util.PrintDebug("[Interface:SetBarSize] " + ID + " " + BW + " " + BH)
 	self.iWant.SetSize(ID, BH, BW)
 
 	Return
@@ -127,7 +152,7 @@ Function SetBarPosition(Int ID, Int Offset)
 	Int BX = ((SW - BW) + 16)
 	Int BY = (BH / 2) + ((BH + BS) * Offset)
 
-	Untamed.Util.PrintDebug("[Interface:SetBarPosition] " + ID + " " + BX + " " + BY)
+	;;Untamed.Util.PrintDebug("[Interface:SetBarPosition] " + ID + " " + BX + " " + BY)
 	self.iWant.SetPos(ID, BX, BY)
 
 	Return
@@ -138,7 +163,7 @@ Function SetNamePosition(Int ID, Int Offset)
 	Int BX = ((SW - BW) - 4) - (self.iWant.GetXSize(ID) / 2)
 	Int BY = (BH / 2) + ((BH + BS) * Offset)
 
-	Untamed.Util.PrintDebug("[Interface:SetNamePosition] " + ID + " " + BX + " " + BY)
+	;;Untamed.Util.PrintDebug("[Interface:SetNamePosition] " + ID + " " + BX + " " + BY)
 	self.iWant.SetPos(ID, BX, BY)
 
 	Return
@@ -146,7 +171,7 @@ EndFunction
 
 Function SetBarVisible(Int ID, Bool Yes=TRUE)
 
-	Untamed.Util.PrintDebug("[Interface:SetBarVisible] " + ID + " " + (Yes as Int))
+	;;Untamed.Util.PrintDebug("[Interface:SetBarVisible] " + ID + " " + (Yes as Int))
 	self.iWant.SetVisible(ID, (Yes as Int))
 
 	Return
@@ -154,7 +179,7 @@ EndFunction
 
 Function SetBarPercent(Int ID, Float Val)
 
-	Untamed.Util.PrintDebug("[Interface:SetBarPercent] " + ID + " " + Val)
+	;;Untamed.Util.PrintDebug("[Interface:SetBarPercent] " + ID + " " + Val)
 	self.iWant.SetMeterPercent(ID, Val as Int)
 
 	Return
