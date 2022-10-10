@@ -394,7 +394,10 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 	ElseIf(self.IsUpKey(KeyCode))
 		self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 1), 1, (self.SideItems.Length - 2))
 	ElseIf(self.IsActivateKey(KeyCode))
-		self.HandleBuyPerk()
+		If(!self.HandleBuyPerk())
+			Return FALSE
+		EndIf
+
 		self.DestroySideItems(TRUE)
 		self.LoadSideMenu(self.StateCur, TRUE)
 	EndIf
@@ -402,22 +405,32 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 	Return TRUE
 EndFunction
 
-Function HandleBuyPerk()
+Bool Function HandleBuyPerk()
 
 	Perk Choice = NONE
+	Int Cost = Untamed.Config.GetInt(".PerkCostXP")
+	Int UXP = Untamed.Util.GetExperience(Untamed.Player) as Int
+
+	If(UXP < Cost)
+		Untamed.Util.Print("You need " + Cost + " UXP to buy a perk.")
+		Return FALSE
+	EndIf
 
 	If(self.MainCur == 1)
 		Choice = self.GetTenacityNextPerk(self.SideCur)
 	EndIf
 
-	If(Choice != NONE)
-		Untamed.Util.Print("Perk Added: " + Choice.GetName())
-		Untamed.Player.AddPerk(Choice)
-	Else
+	If(Choice == NONE)
 		Untamed.Util.PrintDebug("No perk selected.")
+		Return FALSE
 	EndIf
 
-	Return
+	Untamed.Util.Print("Perk Added: " + Choice.GetName())
+	Untamed.Player.AddPerk(Choice)
+	Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
+	Untamed.XPBar.RegisterForSingleUpdate(0.1)
+
+	Return TRUE
 EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

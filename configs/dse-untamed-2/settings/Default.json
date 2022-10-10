@@ -2,6 +2,7 @@
 	"EncounterXP": 5.0,
 	"PackShareXP": 0.5,
 	"PackKillXP": 2.5,
+	"PerkCostXP": 90,
 
 	"PackLoveIterXP": 1.0,
 	"WidgetOffsetX": 1130,
