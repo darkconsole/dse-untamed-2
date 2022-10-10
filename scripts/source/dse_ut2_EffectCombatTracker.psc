@@ -14,7 +14,7 @@ Event OnHit(ObjectReference Whom, Form What, Projectile Bullet, Bool IsPowerful,
 	;; unarmed/creature attacks register as weapons so we can quick
 	;; bail on spells, enchantments, and cloaks for our purposes.
 
-	If((Whom == NONE) || (What == NONE) || (What as Weapon == NONE) || (Bullet != None))
+	If((Whom == NONE) || (What == NONE) || (What as Weapon == NONE) || (Bullet != NONE))
 		Return
 	EndIf
 
@@ -38,6 +38,9 @@ EndEvent
 
 Event OnDeath(Actor Killer)
 
+	Float KXP = 0.0
+	Float ShareMult = 0.0
+
 	If(Killer == NONE)
 		;;self.Dispel()
 		Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was realdeathed by... something.")
@@ -46,8 +49,12 @@ Event OnDeath(Actor Killer)
 
 	Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was realdeathed by " + Killer.GetDisplayName())
 
+	KXP = Untamed.Config.GetFloat(".PackKillXP")
+	ShareMult = Untamed.Config.GetFloat(".PackShareXP")
+
 	If(Untamed.Pack.IsMember(Killer))
-		Untamed.Experience(Killer, Untamed.Config.GetFloat(".PackKillXP"))
+		Untamed.Experience(Killer, KXP)
+		Untamed.Experience(Untamed.Player, (KXP / ShareMult))
 	EndIf
 
 	;;self.Dispel()
