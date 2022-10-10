@@ -193,6 +193,7 @@ returns false under any other condition.}
 		Untamed.Util.SendActorEvent(Who,"UT2.Pack.MemberLeave")
 	EndIf
 
+	Untamed.XPBar.RegisterForSingleUpdate(0.05)
 	Return Found
 EndFunction
 

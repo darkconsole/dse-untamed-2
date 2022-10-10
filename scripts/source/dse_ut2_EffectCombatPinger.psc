@@ -20,9 +20,9 @@ EndEvent
 
 Function EmitCombatTracker()
 
-	Untamed.Util.PrintDebug("[EmitCombatTracker] ping")
+	;;Untamed.Util.PrintDebug("[EmitCombatTracker] ping")
 	self.Tracker.Cast(self.Me, self.Me)
 
-	self.RegisterForSingleUpdate(2.0)
+	self.RegisterForSingleUpdate(5.0)
 	Return
 EndFunction

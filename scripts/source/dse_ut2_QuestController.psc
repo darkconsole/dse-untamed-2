@@ -50,6 +50,8 @@ Perk         Property PerkPackResistantHide2 Auto   ;; untamed
 Perk         Property PerkPackResistantHide3 Auto   ;; untamed
 Perk         Property PerkPackResistantHide4 Auto   ;; untamed
 Perk         Property PerkPackResistantHide5 Auto   ;; untamed
+Perk         Property PerkSecondWind1 Auto          ;; untamed
+Perk         Property PerkSecondWind2 Auto          ;; untamed
 Perk         Property PerkPackThickHide1 Auto       ;; untamed
 Perk         Property PerkPackThickHide2 Auto       ;; untamed
 Perk         Property PerkPackThickHide3 Auto       ;; untamed
@@ -105,6 +107,7 @@ String Property KeyStatBaseArmour = "UT2.StatBase.DamageResist" AutoReadOnly Hid
 String Property KeyStatBaseAttack = "UT2.StatBase.AttackDamageMult" AutoReadOnly Hidden
 
 Bool Property OptValidateActor = TRUE Auto Hidden
+Bool Property OptDebug = TRUE Auto Hidden
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; mod management api ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

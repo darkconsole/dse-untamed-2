@@ -11,17 +11,43 @@ Event OnActivate(ObjectReference By)
 EndEvent
 
 Event OnEnterBleedout()
+
 	Actor Me = self.GetActorReference()
+	Actor Source = Untamed.Player
 
-	Untamed.Util.Print(Me.GetDisplayName() + " is downed!")
+	Bool SecondWind = FALSE
+	Float XPMult = 0.0
+	Float HealMult = 0.0
 
-	;; if player has second wind
-	;;   if player has enough xp
-	;;     consume xp to heal
-	;; else
-	;;   remove from pack
-	;;   kill
+	;;;;;;;;
 
+	Me.SetNoBleedoutRecovery(TRUE)
+
+	If(Untamed.Player.HasPerk(Untamed.PerkSecondWind2))
+		If(Untamed.Util.GetExperiencePercent(Source) >= 25.0)
+			SecondWind = TRUE
+			XPMult = 0.75
+			HealMult = 0.5
+		EndIf
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkSecondWind1))
+		If(Untamed.Util.GetExperiencePercent(Source) >= 50.0)
+			SecondWind = TRUE
+			XPMult = 0.5
+			HealMult = 0.25
+		EndIf
+	Endif
+
+	;;;;;;;;
+
+	If(SecondWind)
+		Me.RestoreActorValue(Untamed.KeyActorValueHealth, (Me.GetActorValueMax(Untamed.KeyActorValueHealth) * HealMult))
+		Untamed.Util.SetExperience(Source, (Untamed.Util.GetExperience(Source) * XPMult))
+		Untamed.Util.Print(Me.GetDisplayName() + " gets second wind!")
+		Untamed.XPBar.RegisterForSingleUpdate(0.05)
+		Return
+	EndIf
+
+	Untamed.Util.Print(Me.GetDisplayName() + " has been downed!")
 	Untamed.Pack.RemoveMember(Me)
 	Me.Kill()
 
@@ -39,6 +65,8 @@ Event OnDeath(Actor Killer)
 	Actor Me = self.GetActorReference()
 
 	Untamed.Util.Print(Me.GetDisplayName() + " is dead!")
+
+	Untamed.XPBar.RegisterForSingleUpdate(0.05)
 	Return
 EndEvent
 

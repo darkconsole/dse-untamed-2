@@ -14,7 +14,7 @@ Event OnHit(ObjectReference Whom, Form What, Projectile Bullet, Bool IsPowerful,
 	;; unarmed/creature attacks register as weapons so we can quick
 	;; bail on spells, enchantments, and cloaks for our purposes.
 
-	If((What == NONE) || (What as Weapon == NONE) || (Bullet != None))
+	If((Whom == NONE) || (What == NONE) || (What as Weapon == NONE) || (Bullet != None))
 		Return
 	EndIf
 
@@ -26,17 +26,30 @@ Event OnHit(ObjectReference Whom, Form What, Projectile Bullet, Bool IsPowerful,
 EndEvent
 
 Event OnDying(Actor Killer)
+
+	If(Killer == NONE)
+		Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was pseudodeathed by... something.")
+		Return
+	EndIf
+
 	Untamed.Util.PrintDebug("[CombatTracker:OnDying] " + self.Me.GetDisplayName() + " was pseudodeathed by " + Killer.GetDisplayName())
 	Return
 EndEvent
 
 Event OnDeath(Actor Killer)
+
+	If(Killer == NONE)
+		;;self.Dispel()
+		Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was realdeathed by... something.")
+		Return
+	EndIf
+
 	Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was realdeathed by " + Killer.GetDisplayName())
 
 	If(Untamed.Pack.IsMember(Killer))
 		Untamed.Experience(Killer, Untamed.Config.GetFloat(".PackKillXP"))
 	EndIf
 
-	self.Dispel()
+	;;self.Dispel()
 	Return
 EndEvent

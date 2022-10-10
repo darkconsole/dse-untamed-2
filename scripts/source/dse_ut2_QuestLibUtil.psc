@@ -16,18 +16,23 @@ Function Print(String Msg)
 {send a message to the notification area.}
 
 	Debug.Notification("[UT2] " + Msg)
+
+	If(Untamed.OptDebug)
+		MiscUtil.PrintConsole("[UT2] " + Msg)
+		Debug.Trace("[UT2] " + Msg)
+	EndIf
+
 	Return
 EndFunction
 
 Function PrintDebug(String Msg)
 {send a message to the console.}
 
-	;;If(!self.OptDebug)
-	;;	Return
-	;;EndIf
+	If(Untamed.OptDebug)
+		MiscUtil.PrintConsole("[UT2] " + Msg)
+		Debug.Trace("[UT2] " + Msg)
+	EndIf
 
-	MiscUtil.PrintConsole("[UT2] " + Msg)
-	Debug.Trace("[UT2] " + Msg)
 	Return
 EndFunction
 
