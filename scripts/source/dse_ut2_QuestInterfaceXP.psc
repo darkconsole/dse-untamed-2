@@ -31,16 +31,22 @@ Event OnInit()
 	Return
 EndEvent
 
+Event OnUpdate()
+
+	self.UpdateUI()
+	Return
+EndEvent
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Function BuildUI()
+Function BuildUI(Bool Force=FALSE)
 
 	Int Needed = 1
 	Int Iter = 0
 	Actor[] Members = Untamed.Pack.GetMemberList()
 
-	If(self.Busy)
+	If(self.Busy && !Force)
 		Untamed.Util.PrintDebug("[Interface:BuildUI] skipped, busy atm")
 		Return
 	EndIf
@@ -93,10 +99,12 @@ Function DestroyUI()
 	While(Iter > 0)
 		Iter -= 1
 
-		self.iWant.Destroy(Iter)
+		self.iWant.Destroy(self.Bars[Iter])
+		self.iWant.Destroy(self.Names[Iter])
 	EndWhile
 
 	self.Bars = Utility.CreateIntArray(0)
+	self.Names = Utility.CreateIntArray(0)
 
 	Return
 EndFunction
@@ -119,8 +127,10 @@ Function UpdateUI()
 		Return
 	EndIf
 
+	Untamed.Util.PrintDebug("[Interface:UpdateUI] updating ui")
+
 	If((Members.Length + 1) != self.Bars.Length)
-		self.BuildUI()
+		self.BuildUI(TRUE)
 	EndIf
 
 	While(Iter < self.Bars.Length)
