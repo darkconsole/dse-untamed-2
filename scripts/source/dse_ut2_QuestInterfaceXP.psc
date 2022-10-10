@@ -115,6 +115,9 @@ Function UpdateUI()
 
 	Int Iter = 0
 	Actor[] Members = Untamed.Pack.GetMemberList()
+	Int UXP = 0
+
+	;;;;;;;;
 
 	If(self.Busy)
 		Untamed.Util.PrintDebug("[Interface:UpdateUI] skipped, busy atm")
@@ -129,22 +132,34 @@ Function UpdateUI()
 		Return
 	EndIf
 
+	;;;;;;;;
+
 	Untamed.Util.PrintDebug("[Interface:UpdateUI] updating ui")
 
 	If((Members.Length + 1) != self.Bars.Length)
 		self.BuildUI(TRUE)
 	EndIf
 
+	;;;;;;;;
+
 	While(Iter < self.Bars.Length)
 
 		If(Iter == 0)
-			self.SetBarPercent(self.Bars[Iter], Untamed.Util.GetExperiencePercent(Untamed.Player))
+			UXP = Untamed.Util.GetExperiencePercent(Untamed.Player) As Int
+			self.SetBarPercent(self.Bars[Iter], UXP)
+			self.SetNameText(self.Names[Iter], (Untamed.Player.GetDisplayName() + " (" + UXP + ")"))
+			self.SetNamePosition(self.Names[Iter], Iter)
 		Else
+			UXP = Untamed.Util.GetExperiencePercent(Members[Iter]) As Int
 			self.SetBarPercent(self.Bars[Iter], Untamed.Util.GetExperiencePercent(Members[Iter - 1]))
+			self.SetNameText(self.Names[Iter], (Members[Iter].GetDisplayName() + " (" + UXP + ")"))
+			self.SetNamePosition(self.Names[Iter], Iter)
 		EndIf
 
 		Iter += 1
 	EndWhile
+
+	;;;;;;;;
 
 	self.Busy = FALSE
 
@@ -207,6 +222,13 @@ EndFunction
 Function SetBarDir(Int ID, String Dir="right")
 
 	self.iWant.SetMeterFillDirection(ID, Dir)
+
+	Return
+EndFunction
+
+Function SetNameText(Int ID, String Msg)
+
+	self.iWant.SetText(ID, Msg)
 
 	Return
 EndFunction
