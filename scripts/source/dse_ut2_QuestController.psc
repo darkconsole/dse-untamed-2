@@ -57,6 +57,9 @@ Perk         Property PerkPackThickHide2 Auto       ;; untamed
 Perk         Property PerkPackThickHide3 Auto       ;; untamed
 Perk         Property PerkPackThickHide4 Auto       ;; untamed
 Perk         Property PerkPackThickHide5 Auto       ;; untamed
+Perk         Property PerkPackVitality1 Auto        ;; untamed
+Perk         Property PerkPackVitality2 Auto        ;; untamed
+Perk         Property PerkPackVitality3 Auto        ;; untamed
 Perk         Property PerkResistantHide Auto        ;; untamed
 Perk         Property PerkThickHide Auto            ;; untamed
 Static       Property StaticX Auto                  ;; skyrim.esm

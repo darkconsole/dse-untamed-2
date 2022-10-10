@@ -149,32 +149,32 @@ Function LoadMainMenu()
 
 	;;;;;;;;
 
-	self.MainItems[0] = self.iWant.LoadWidget("widgets/dse-untamed-2/MainMenu/Background.dds")
+	self.MainItems[0] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Background.dds")
 	self.iWant.SetPos(self.MainItems[0], CX, CY)
 	self.iWant.SetVisible(self.MainItems[0], 1)
 
-	self.MainItems[1] = self.iWant.LoadWidget("widgets/dse-untamed-2/MainMenu/Tenacity-Off.dds")
+	self.MainItems[1] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Tenacity-Off.dds")
 	self.iWant.SetPos(self.MainItems[1], (QX - 20), (RY * 1) + 50)
 
-	self.MainItems[2] = self.iWant.LoadWidget("widgets/dse-untamed-2/MainMenu/Tenacity-On.dds")
+	self.MainItems[2] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Tenacity-On.dds")
 	self.iWant.SetPos(self.MainItems[2], (QX - 20), (RY * 1) + 50)
 
-	self.MainItems[3] = self.iWant.LoadWidget("widgets/dse-untamed-2/MainMenu/Ferocity-Off.dds")
+	self.MainItems[3] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Ferocity-Off.dds")
 	self.iWant.SetPos(self.MainItems[3], (QX + 13), (RY * 2) + 50)
 
-	self.MainItems[4] = self.iWant.LoadWidget("widgets/dse-untamed-2/MainMenu/Ferocity-On.dds")
+	self.MainItems[4] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Ferocity-On.dds")
 	self.iWant.SetPos(self.MainItems[4], (QX + 13), (RY * 2) + 50)
 
-	self.MainItems[5] = self.iWant.LoadWidget("widgets/dse-untamed-2/MainMenu/BeastMastery-Off.dds")
+	self.MainItems[5] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/BeastMastery-Off.dds")
 	self.iWant.SetPos(self.MainItems[5], (QX - 2), (RY * 3) + 50)
 
-	self.MainItems[6] = self.iWant.LoadWidget("widgets/dse-untamed-2/MainMenu/BeastMastery-On.dds")
+	self.MainItems[6] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/BeastMastery-On.dds")
 	self.iWant.SetPos(self.MainItems[6], (QX - 2), (RY * 3) + 50)
 
-	self.MainItems[7] = self.iWant.LoadWidget("widgets/dse-untamed-2/MainMenu/Essence-Off.dds")
+	self.MainItems[7] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Essence-Off.dds")
 	self.iWant.SetPos(self.MainItems[7], (QX - 10), (RY * 4) + 50)
 
-	self.MainItems[8] = self.iWant.LoadWidget("widgets/dse-untamed-2/MainMenu/Essence-On.dds")
+	self.MainItems[8] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Essence-On.dds")
 	self.iWant.SetPos(self.MainItems[8], (QX - 10), (RY * 4) + 50)
 
 	self.UpdateMainMenu()
@@ -197,7 +197,78 @@ Function LoadSideMenu(String Menu)
 	Return
 EndFunction
 
+String[] Function GetTenacityFilenames()
+
+	String[] Output = Utility.CreateStringArray(4)
+
+	Output[0] = "Title.dds"
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackVitality3))
+		Output[1] = "Vitality3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackVitality2))
+		Output[1] = "Vitality2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackVitality1))
+		Output[1] = "Vitality1.dds"
+	Else
+		Output[1] = "Vitality0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackThickHide3))
+		Output[2] = "ThickHide3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackThickHide2))
+		Output[2] = "ThickHide2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackThickHide1))
+		Output[2] = "ThickHide1.dds"
+	Else
+		Output[2] = "ThickHide0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide3))
+		Output[3] = "ResistHide3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide2))
+		Output[3] = "ResistHide2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide1))
+		Output[3] = "ResistHide1.dds"
+	Else
+		Output[3] = "ResistHide0.dds"
+	EndIf
+
+	Return Output
+EndFunction
+
 Function LoadSideMenu_Tenacity()
+
+	Int Iter = 0
+	String Dir = "widgets/dse-untamed-2/MenuTenacity/"
+	String[] Files = self.GetTenacityFilenames()
+
+	;;;;;;;;
+
+	Untamed.Util.PrintDebug("[LoadSideMenu:Tenacity] loading side menu")
+	self.SideItems = Utility.CreateIntArray(Files.Length)
+
+	;;;;;;;;
+
+	self.SideItems[0] = self.iWant.LoadWidget(Dir + Files[0])
+	self.iWant.SetPos(self.SideItems[0], 950, 100)
+
+	self.SideItems[1] = self.iWant.LoadWidget(Dir + Files[1])
+	self.iWant.SetPos(self.SideItems[1], 875, 300)
+
+	self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
+	self.iWant.SetPos(self.SideItems[2], 1100, 450)
+
+	self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
+	self.iWant.SetPos(self.SideItems[3], 900, 600)
+
+	;;;;;;;;
+
+	Iter = self.SideItems.Length
+	While(Iter > 0)
+		Iter -= 1
+		Untamed.Util.PrintDebug("[LoadSideMenu:Tenacity] show " + Files[Iter])
+		self.iWant.SetVisible(self.SideItems[Iter], 1)
+	EndWhile
 
 	Return
 EndFunction

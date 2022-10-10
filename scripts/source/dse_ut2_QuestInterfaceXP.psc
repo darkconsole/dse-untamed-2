@@ -96,6 +96,8 @@ Function DestroyUI()
 
 	Int Iter = self.Bars.Length
 
+	Untamed.Util.PrintDebug("[Interface:DestroyUI] taking ui to bits")
+
 	While(Iter > 0)
 		Iter -= 1
 
