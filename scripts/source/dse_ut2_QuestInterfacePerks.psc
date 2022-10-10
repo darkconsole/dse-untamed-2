@@ -454,6 +454,8 @@ State Off
 		self.DestroyAllItems()
 		self.DisableKeyboardInput()
 		self.StateCur = "Off"
+
+		self.iWant.SetSkyrimVisible("compass", 1)
 		Return
 	EndEvent
 
@@ -490,6 +492,8 @@ State On
 
 		self.SideCur = 0
 		self.StateCur = "On"
+
+		self.iWant.SetSkyrimVisible("compass", 0)
 		Return
 	EndEvent
 
