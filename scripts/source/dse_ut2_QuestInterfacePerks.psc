@@ -110,16 +110,23 @@ Function DestroyMainItems()
 	Return
 EndFunction
 
-Function DestroySideItems()
+Function DestroySideItems(Bool Reload=FALSE)
 
 	Int Iter = self.SideItems.Length
+	Int Cap = 0
 
-	While(Iter > 0)
+	If(Reload)
+		Cap = 2
+	EndIf
+
+	While(Iter > Cap)
 		Iter -= 1
 		self.iWant.Destroy(self.SideItems[Iter])
 	EndWhile
 
-	self.SideItems = Utility.CreateIntArray(0)
+	If(!Reload)
+		self.SideItems = Utility.CreateIntArray(0)
+	EndIf
 
 	Return
 EndFunction
@@ -149,6 +156,10 @@ Function LoadMainMenu()
 
 	;;;;;;;;
 
+	;; show the default after the highlighted version loads so that the menu
+	;; feels like its progressing given how long it takes for flash to do
+	;; its shit.
+
 	self.MainItems[0] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Background.dds")
 	self.iWant.SetPos(self.MainItems[0], CX, CY)
 	self.iWant.SetVisible(self.MainItems[0], 1)
@@ -158,24 +169,28 @@ Function LoadMainMenu()
 
 	self.MainItems[2] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Tenacity-On.dds")
 	self.iWant.SetPos(self.MainItems[2], (QX - 20), (RY * 1) + 50)
+	self.iWant.SetVisible(self.MainItems[1], 1)
 
 	self.MainItems[3] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Ferocity-Off.dds")
 	self.iWant.SetPos(self.MainItems[3], (QX + 13), (RY * 2) + 50)
 
 	self.MainItems[4] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Ferocity-On.dds")
 	self.iWant.SetPos(self.MainItems[4], (QX + 13), (RY * 2) + 50)
+	self.iWant.SetVisible(self.MainItems[3], 1)
 
 	self.MainItems[5] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/BeastMastery-Off.dds")
 	self.iWant.SetPos(self.MainItems[5], (QX - 2), (RY * 3) + 50)
 
 	self.MainItems[6] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/BeastMastery-On.dds")
 	self.iWant.SetPos(self.MainItems[6], (QX - 2), (RY * 3) + 50)
+	self.iWant.SetVisible(self.MainItems[5],1)
 
 	self.MainItems[7] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Essence-Off.dds")
 	self.iWant.SetPos(self.MainItems[7], (QX - 10), (RY * 4) + 50)
 
 	self.MainItems[8] = self.iWant.LoadWidget("widgets/dse-untamed-2/MenuMain/Essence-On.dds")
 	self.iWant.SetPos(self.MainItems[8], (QX - 10), (RY * 4) + 50)
+	self.iWant.SetVisible(self.MainItems[7], 1)
 
 	;;;;;;;;
 
@@ -183,94 +198,63 @@ Function LoadMainMenu()
 	Return
 EndFunction
 
-Function LoadSideMenu(String Menu)
+Function LoadSideMenu(String Menu, Bool Reload=FALSE)
 
 	If(Menu == Untamed.KeyTenacity)
-		self.LoadSideMenu_Tenacity()
+		self.LoadSideMenu_Tenacity(Reload)
 	ElseIf(Menu == Untamed.KeyFerocity)
-		self.LoadSideMenu_Ferocity()
+		self.LoadSideMenu_Ferocity(Reload)
 	ElseIf(Menu == Untamed.KeyBeastMastery)
-		self.LoadSideMenu_BeastMastery()
+		self.LoadSideMenu_BeastMastery(Reload)
 	ElseIf(Menu == Untamed.KeyEssence)
-		self.LoadSideMenu_Essence()
+		self.LoadSideMenu_Essence(Reload)
 	EndIf
 
 	Return
 EndFunction
 
-String[] Function GetTenacityFilenames()
-
-	String[] Output = Utility.CreateStringArray(5)
-
-	Output[0] = "Title.dds"
-	Output[1] = "Circle.dds"
-
-	If(Untamed.Player.HasPerk(Untamed.PerkPackVitality3))
-		Output[2] = "Vitality3.dds"
-	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackVitality2))
-		Output[2] = "Vitality2.dds"
-	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackVitality1))
-		Output[2] = "Vitality1.dds"
-	Else
-		Output[2] = "Vitality0.dds"
-	EndIf
-
-	If(Untamed.Player.HasPerk(Untamed.PerkPackThickHide3))
-		Output[3] = "ThickHide3.dds"
-	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackThickHide2))
-		Output[3] = "ThickHide2.dds"
-	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackThickHide1))
-		Output[3] = "ThickHide1.dds"
-	Else
-		Output[3] = "ThickHide0.dds"
-	EndIf
-
-	If(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide3))
-		Output[4] = "ResistHide3.dds"
-	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide2))
-		Output[4] = "ResistHide2.dds"
-	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide1))
-		Output[4] = "ResistHide1.dds"
-	Else
-		Output[4] = "ResistHide0.dds"
-	EndIf
-
-	Return Output
-EndFunction
-
-Function LoadSideMenu_Tenacity()
+Function LoadSideMenu_Tenacity(Bool Reload=FALSE)
 
 	String Dir = "widgets/dse-untamed-2/MenuTenacity/"
 	String[] Files = self.GetTenacityFilenames()
 
 	;;;;;;;;
 
-	Untamed.Util.PrintDebug("[LoadSideMenu:Tenacity] loading side menu")
-	self.SideItems = Utility.CreateIntArray(Files.Length)
+	If(!Reload)
+		Untamed.Util.PrintDebug("[LoadSideMenu:Tenacity] loading side menu")
+		self.SideItems = Utility.CreateIntArray(Files.Length)
+	Else
+		Untamed.Util.PrintDebug("[LoadSideMenu:Tenacity] updating side menu")
+	EndIf
 
 	;;;;;;;;
 
-	;; title
-	self.SideItems[0] = self.iWant.LoadWidget(Dir + Files[0])
-	self.iWant.SetPos(self.SideItems[0], 950, 100)
-	self.iWant.SetVisible(self.SideItems[0], 1)
+	If(!Reload)
+		;; title
+		self.SideItems[0] = self.iWant.LoadWidget(Dir + Files[0])
+		self.iWant.SetPos(self.SideItems[0], 950, 100)
+		self.iWant.SetVisible(self.SideItems[0], 1)
 
-	;; circle
-	self.SideItems[1] = self.iWant.LoadWidget(Dir + Files[1])
-	self.iWant.SetPos(self.SideItems[1], 950, 100)
-	self.iWant.SetVisible(self.SideItems[1], 0)
+		;; circle
+		self.SideItems[1] = self.iWant.LoadWidget(Dir + Files[1])
+		self.iWant.SetPos(self.SideItems[1], 950, 100)
+		self.iWant.SetVisible(self.SideItems[1], 0)
+	EndIf
 
 	;; vitality
 	self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
 	self.iWant.SetPos(self.SideItems[2], 875, 300)
+	self.iWant.SetVisible(self.SideItems[2], 1)
 
 	;; thick hide
 	self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
 	self.iWant.SetPos(self.SideItems[3], 1100, 450)
+	self.iWant.SetVisible(self.SideItems[3], 1)
 
 	;; resist hide
 	self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
 	self.iWant.SetPos(self.SideItems[4], 900, 600)
+	self.iWant.SetVisible(self.SideItems[4], 1)
 
 	;;;;;;;;
 
@@ -278,17 +262,17 @@ Function LoadSideMenu_Tenacity()
 	Return
 EndFunction
 
-Function LoadSideMenu_Ferocity()
+Function LoadSideMenu_Ferocity(Bool Reload=FALSE)
 
 	Return
 EndFunction
 
-Function LoadSideMenu_BeastMastery()
+Function LoadSideMenu_BeastMastery(Bool Reload=FALSE)
 
 	Return
 EndFunction
 
-Function LoadSideMenu_Essence()
+Function LoadSideMenu_Essence(Bool Reload=FALSE)
 
 	Return
 EndFunction
@@ -342,9 +326,30 @@ EndFunction
 
 Function UpdateSideMenu_Tenacity()
 
+	;; icons
 	self.iWant.SetVisible(self.SideItems[2], 1)
 	self.iWant.SetVisible(self.SideItems[3], 1)
 	self.iWant.SetVisible(self.SideItems[4], 1)
+
+	;; cursor
+	If(self.SideCur > 0)
+		self.iWant.SetVisible(self.SideItems[1], 0)
+
+		If(self.SideCur == 1)
+			self.iWant.SetPos(self.SideItems[1], 875, 300)
+			self.iWant.setRotation(self.SideItems[1], 0)
+		ElseIf(self.SideCur == 2)
+			self.iWant.SetPos(self.SideItems[1], 1100, 450)
+			self.iWant.setRotation(self.SideItems[1], 45)
+		ElseIf(self.SideCur == 3)
+			self.iWant.SetPos(self.SideItems[1], 900, 600)
+			self.iWant.setRotation(self.SideItems[1], -45)
+		EndIf
+
+		self.iWant.SetVisible(self.SideItems[1], 1)
+	Else
+		self.iWant.SetVisible(self.SideItems[1], 0)
+	EndIf
 
 	Return
 EndFunction
@@ -364,9 +369,13 @@ Function UpdateSideMenu_Essence()
 	Return
 EndFunction
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 Bool Function HandleSideMenuKeys(Int KeyCode)
-{return false if the function callng this should bail or true if the menu
-should keep going afterwards.}
+
+	;; return false if the function callng this should bail or true if the
+	;; menu should keep going afterwards.
 
 	If(self.IsMenuKey(KeyCode))
 		self.GoToState("Off")
@@ -384,9 +393,113 @@ should keep going afterwards.}
 		self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 1), 1, (self.SideItems.Length - 2))
 	ElseIf(self.IsUpKey(KeyCode))
 		self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 1), 1, (self.SideItems.Length - 2))
+	ElseIf(self.IsActivateKey(KeyCode))
+		self.HandleBuyPerk()
+		self.DestroySideItems(TRUE)
+		self.LoadSideMenu(self.StateCur, TRUE)
 	EndIf
 
 	Return TRUE
+EndFunction
+
+Function HandleBuyPerk()
+
+	Perk Choice = NONE
+
+	If(self.MainCur == 1)
+		Choice = self.GetTenacityNextPerk(self.SideCur)
+	EndIf
+
+	If(Choice != NONE)
+		Untamed.Util.Print("Perk Added: " + Choice.GetName())
+		Untamed.Player.AddPerk(Choice)
+	Else
+		Untamed.Util.PrintDebug("No perk selected.")
+	EndIf
+
+	Return
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+String[] Function GetTenacityFilenames()
+
+	String[] Output = Utility.CreateStringArray(5)
+
+	Output[0] = "Title.dds"
+	Output[1] = "Cursor.dds"
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackVitality3))
+		Output[2] = "Vitality3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackVitality2))
+		Output[2] = "Vitality2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackVitality1))
+		Output[2] = "Vitality1.dds"
+	Else
+		Output[2] = "Vitality0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackThickHide3))
+		Output[3] = "ThickHide3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackThickHide2))
+		Output[3] = "ThickHide2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackThickHide1))
+		Output[3] = "ThickHide1.dds"
+	Else
+		Output[3] = "ThickHide0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide3))
+		Output[4] = "ResistHide3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide2))
+		Output[4] = "ResistHide2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide1))
+		Output[4] = "ResistHide1.dds"
+	Else
+		Output[4] = "ResistHide0.dds"
+	EndIf
+
+	Return Output
+EndFunction
+
+Perk Function GetTenacityNextPerk(Int Choice)
+
+	Perk Output = NONE
+
+	If(Choice == 1)
+		If(Untamed.Player.HasPerk(Untamed.PerkPackVitality3))
+			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackVitality2))
+			Output = Untamed.PerkPackVitality3
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackVitality1))
+			Output = Untamed.PerkPackVitality2
+		Else
+			Output = Untamed.PerkPackVitality1
+		EndIf
+	ElseIf(Choice == 2)
+		If(Untamed.Player.HasPerk(Untamed.PerkPackThickHide3))
+			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackThickHide2))
+			Output = Untamed.PerkPackThickHide3
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackThickHide1))
+			Output = Untamed.PerkPackThickHide2
+		Else
+			Output = Untamed.PerkPackThickHide1
+		EndIf
+	ElseIf(Choice == 3)
+		If(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide3))
+			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide2))
+			Output = Untamed.PerkPackResistantHide3
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackResistantHide1))
+			Output = Untamed.PerkPackResistantHide2
+		Else
+			Output = Untamed.PerkPackResistantHide1
+		EndIf
+	EndIf
+
+	Return Output
 EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -544,8 +657,6 @@ EndState
 State Tenacity
 
 	Event OnBeginState()
-		Untamed.Util.PrintDebug("[Perks:OnBeginState:Tenacity] Opened")
-
 		self.SideCur = 0
 		self.DestroySideItems()
 		self.LoadSideMenu(Untamed.KeyTenacity)
@@ -555,8 +666,6 @@ State Tenacity
 	EndEvent
 
 	Event OnKeyDown(int KeyCode)
-		Untamed.Util.PrintDebug("[Perks.OnKeyDown:Tenacity] " + KeyCode)
-
 		If(!self.HandleSideMenuKeys(KeyCode))
 			Return
 		EndIf
@@ -573,8 +682,6 @@ EndState
 State Ferocity
 
 	Event OnBeginState()
-		Untamed.Util.PrintDebug("[Perks:OnBeginState:Ferocity] Opened")
-
 		self.SideCur = 0
 		self.DestroySideItems()
 		self.LoadSideMenu(Untamed.KeyFerocity)
@@ -584,25 +691,9 @@ State Ferocity
 	EndEvent
 
 	Event OnKeyDown(int KeyCode)
-		Untamed.Util.PrintDebug("[Perks.OnKeyDown:Ferocity] " + KeyCode)
-
-		If(self.IsMenuKey(KeyCode))
-			self.GoToState("Off")
+		If(!self.HandleSideMenuKeys(KeyCode))
 			Return
 		EndIf
-
-		If(self.IsBackKey(KeyCode))
-			self.GoToState("On")
-			Return
-		EndIf
-
-		;;;;;;;;
-
-		If(KeyCode == 123456)
-
-		EndIf
-
-		;;;;;;;;
 
 		self.UpdateSideMenu()
 		Return
@@ -616,8 +707,6 @@ EndState
 State BeastMastery
 
 	Event OnBeginState()
-		Untamed.Util.PrintDebug("[Perks:OnBeginState:BeastMastery] Opened")
-
 		self.SideCur = 0
 		self.DestroySideItems()
 		self.LoadSideMenu(Untamed.KeyBeastMastery)
@@ -627,25 +716,9 @@ State BeastMastery
 	EndEvent
 
 	Event OnKeyDown(int KeyCode)
-		Untamed.Util.PrintDebug("[Perks.OnKeyDown:BeastMastery] " + KeyCode)
-
-		If(self.IsMenuKey(KeyCode))
-			self.GoToState("Off")
+		If(!self.HandleSideMenuKeys(KeyCode))
 			Return
 		EndIf
-
-		If(self.IsBackKey(KeyCode))
-			self.GoToState("On")
-			Return
-		EndIf
-
-		;;;;;;;;
-
-		If(KeyCode == 123456)
-
-		EndIf
-
-		;;;;;;;;
 
 		self.UpdateSideMenu()
 		Return
@@ -659,8 +732,6 @@ EndState
 State Essence
 
 	Event OnBeginState()
-		Untamed.Util.PrintDebug("[Perks:OnBeginState:Essence] Opened")
-
 		self.SideCur = 0
 		self.DestroySideItems()
 		self.LoadSideMenu(Untamed.KeyEssence)
@@ -670,25 +741,9 @@ State Essence
 	EndEvent
 
 	Event OnKeyDown(int KeyCode)
-		Untamed.Util.PrintDebug("[Perks.OnKeyDown:Essence] " + KeyCode)
-
-		If(self.IsMenuKey(KeyCode))
-			self.GoToState("Off")
+		If(!self.HandleSideMenuKeys(KeyCode))
 			Return
 		EndIf
-
-		If(self.IsBackKey(KeyCode))
-			self.GoToState("On")
-			Return
-		EndIf
-
-		;;;;;;;;
-
-		If(KeyCode == 123456)
-
-		EndIf
-
-		;;;;;;;;
 
 		self.UpdateSideMenu()
 		Return
