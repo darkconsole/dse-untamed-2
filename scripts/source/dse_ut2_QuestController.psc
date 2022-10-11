@@ -36,34 +36,50 @@ Faction      Property FactionClassWolf Auto         ;; untamed
 Package      Property PackageDoNothing Auto         ;; untamed
 Package      Property PackageFollow Auto            ;; untamed
 Package      Property PackagePackStay Auto          ;; untamed
-Perk         Property PerkCrossbreeder Auto         ;; untamed
-Perk         Property PerkDenMother Auto            ;; untamed
-Perk         Property PerkExperienced Auto          ;; untamed
-Perk         Property PerkPackLeader1 Auto          ;; untamed
-Perk         Property PerkPackLeader2 Auto          ;; untamed
-Perk         Property PerkPackLeader3 Auto          ;; untamed
-Perk         Property PerkPackFerocious1 Auto       ;; untamed
-Perk         Property PerkPackFerocious2 Auto       ;; untamed
-Perk         Property PerkPackFerocious3 Auto       ;; untamed
-Perk         Property PerkPackResistantHide1 Auto   ;; untamed
-Perk         Property PerkPackResistantHide2 Auto   ;; untamed
-Perk         Property PerkPackResistantHide3 Auto   ;; untamed
-Perk         Property PerkPackResistantHide4 Auto   ;; untamed
-Perk         Property PerkPackResistantHide5 Auto   ;; untamed
-Perk         Property PerkSecondWind1 Auto          ;; untamed
-Perk         Property PerkSecondWind2 Auto          ;; untamed
-Perk         Property PerkPackThickHide1 Auto       ;; untamed
-Perk         Property PerkPackThickHide2 Auto       ;; untamed
-Perk         Property PerkPackThickHide3 Auto       ;; untamed
-Perk         Property PerkPackThickHide4 Auto       ;; untamed
-Perk         Property PerkPackThickHide5 Auto       ;; untamed
-Perk         Property PerkPackVitality1 Auto        ;; untamed
-Perk         Property PerkPackVitality2 Auto        ;; untamed
-Perk         Property PerkPackVitality3 Auto        ;; untamed
-Perk         Property PerkResistantHide Auto        ;; untamed
-Perk         Property PerkThickHide Auto            ;; untamed
 Static       Property StaticX Auto                  ;; skyrim.esm
 VisualEffect Property VfxTeleportIn Auto            ;; untamed
+
+Perk         Property PerkPackResistantHide1 Auto   ;; untamed (tenacity)
+Perk         Property PerkPackResistantHide2 Auto   ;; untamed (tenacity)
+Perk         Property PerkPackResistantHide3 Auto   ;; untamed (tenacity)
+Perk         Property PerkPackResistantHide4 Auto   ;; untamed (tenacity)
+Perk         Property PerkPackResistantHide5 Auto   ;; untamed (tenacity)
+Perk         Property PerkPackThickHide1 Auto       ;; untamed (tenacity)
+Perk         Property PerkPackThickHide2 Auto       ;; untamed (tenacity)
+Perk         Property PerkPackThickHide3 Auto       ;; untamed (tenacity)
+Perk         Property PerkPackThickHide4 Auto       ;; untamed (tenacity)
+Perk         Property PerkPackThickHide5 Auto       ;; untamed (tenacity)
+Perk         Property PerkPackVitality1 Auto        ;; untamed (tenacity)
+Perk         Property PerkPackVitality2 Auto        ;; untamed (tenacity)
+Perk         Property PerkPackVitality3 Auto        ;; untamed (tenacity)
+
+Perk         Property PerkPackFerocious1 Auto       ;; untamed (ferocity)
+Perk         Property PerkPackFerocious2 Auto       ;; untamed (ferocity)
+Perk         Property PerkPackFerocious3 Auto       ;; untamed (ferocity)
+Perk         Property PerkPackEndurance1 Auto       ;; untamed (ferocity)
+Perk         Property PerkPackEndurance2 Auto       ;; untamed (ferocity)
+Perk         Property PerkPackEndurance3 Auto       ;; untamed (ferocity)
+Perk         Property PerkPackBleed1 Auto           ;; untamed (ferocity)
+Perk         Property PerkPackBleed2 Auto           ;; untamed (ferocity)
+Perk         Property PerkPackBleed3 Auto           ;; untamed (ferocity)
+
+Shout        Property ShoutAttack Auto              ;; untamed (beast mastery)
+Shout        Property ShoutStay Auto                ;; untamed (beast mastery)
+Shout        Property ShoutFollow Auto              ;; untamed (beast mastery)
+Perk         Property PerkDenMother Auto            ;; untamed (beast mastery)
+Perk         Property PerkLoadBearing1 Auto         ;; untamed (beast mastery)
+Perk         Property PerkLoadBearing2 Auto         ;; untamed (beast mastery)
+Perk         Property PerkSecondWind1 Auto          ;; untamed (beast mastery)
+Perk         Property PerkSecondWind2 Auto          ;; untamed (beast mastery)
+
+Perk         Property PerkCrossbreeder Auto         ;; untamed (essence)
+Perk         Property PerkExperienced Auto          ;; untamed (essence)
+Perk         Property PerkPackLeader1 Auto          ;; untamed (essence)
+Perk         Property PerkPackLeader2 Auto          ;; untamed (essence)
+Perk         Property PerkPackLeader3 Auto          ;; untamed (essence)
+Perk         Property PerkNaturesGrace Auto         ;; untamed (essence)
+Perk         Property PerkResistantHide Auto        ;; untamed (essence)
+Perk         Property PerkThickHide Auto            ;; untamed (essence)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; data lists ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

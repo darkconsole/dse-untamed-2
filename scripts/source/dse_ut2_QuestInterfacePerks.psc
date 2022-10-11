@@ -269,6 +269,50 @@ EndFunction
 
 Function LoadSideMenu_Ferocity(Bool Reload=FALSE)
 
+	String Dir = "widgets/dse-untamed-2/MenuFerocity/"
+	String[] Files = self.GetFerocityFilenames()
+
+	;;;;;;;;
+
+	If(!Reload)
+		Untamed.Util.PrintDebug("[LoadSideMenu:Ferocity] loading side menu")
+		self.SideItems = Utility.CreateIntArray(Files.Length)
+	Else
+		Untamed.Util.PrintDebug("[LoadSideMenu:Ferocity] updating side menu")
+	EndIf
+
+	;;;;;;;;
+
+	If(!Reload)
+		;; title
+		self.SideItems[0] = self.iWant.LoadWidget(Dir + Files[0])
+		self.iWant.SetPos(self.SideItems[0], 950, 100)
+		self.iWant.SetVisible(self.SideItems[0], 1)
+
+		;; circle
+		self.SideItems[1] = self.iWant.LoadWidget(Dir + Files[1])
+		self.iWant.SetPos(self.SideItems[1], 950, 100)
+		self.iWant.SetVisible(self.SideItems[1], 0)
+	EndIf
+
+	;; attack
+	self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
+	self.iWant.SetPos(self.SideItems[2], 875, 300)
+	self.iWant.SetVisible(self.SideItems[2], 1)
+
+	;; stamina
+	self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
+	self.iWant.SetPos(self.SideItems[3], 1100, 450)
+	self.iWant.SetVisible(self.SideItems[3], 1)
+
+	;; bleed
+	self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
+	self.iWant.SetPos(self.SideItems[4], 900, 600)
+	self.iWant.SetVisible(self.SideItems[4], 1)
+
+	;;;;;;;;
+
+	self.UpdateSideMenu_Ferocity()
 	Return
 EndFunction
 
@@ -361,6 +405,32 @@ EndFunction
 
 Function UpdateSideMenu_Ferocity()
 
+	;; icons
+	self.iWant.SetVisible(self.SideItems[2], 1)
+	self.iWant.SetVisible(self.SideItems[3], 1)
+	self.iWant.SetVisible(self.SideItems[4], 1)
+
+	;; cursor
+	If(self.SideCur > 0)
+		self.iWant.SetVisible(self.SideItems[1], 0)
+
+		If(self.SideCur == 1)
+			self.iWant.SetPos(self.SideItems[1], 875, 300)
+			self.iWant.setRotation(self.SideItems[1], 0)
+		ElseIf(self.SideCur == 2)
+			self.iWant.SetPos(self.SideItems[1], 1100, 450)
+			self.iWant.setRotation(self.SideItems[1], 45)
+		ElseIf(self.SideCur == 3)
+			self.iWant.SetPos(self.SideItems[1], 900, 600)
+			self.iWant.setRotation(self.SideItems[1], -45)
+		EndIf
+
+		self.iWant.SetVisible(self.SideItems[1], 1)
+	Else
+		self.iWant.SetVisible(self.SideItems[1], 0)
+	EndIf
+
+
 	Return
 EndFunction
 
@@ -400,6 +470,7 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 		self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 1), 1, (self.SideItems.Length - 2))
 	ElseIf(self.IsActivateKey(KeyCode))
 		If(!self.HandleBuyPerk() && !self.HandleGiveSpell() && !self.HandleGiveShout())
+			Untamed.Util.Print("Nothing seemed to be selected.")
 			Return FALSE
 		EndIf
 
@@ -423,6 +494,14 @@ Function HandleHelpText()
 		ElseIf(self.SideCur == 3)
 			Untamed.Util.Popup("Increases magic resistance of pack animals.")
 		EndIf
+	ElseIf(self.MainCur == 2)
+		If(self.SideCur == 1)
+			Untamed.Util.Popup("Increases damage done by pack animals.")
+		ElseIf(self.SideCur == 2)
+			Untamed.Util.Popup("Increases stamina of pack animals.")
+		ElseIf(self.SideCur == 3)
+			Untamed.Util.Popup("Pack animals inflict bleed damage.")
+		EndIf
 	EndIf
 
 	Return
@@ -441,6 +520,8 @@ Bool Function HandleBuyPerk()
 
 	If(self.MainCur == 1)
 		Choice = self.GetTenacityNextPerk(self.SideCur)
+	ElseIf(self.MainCur == 2)
+		Choice = self.GetFerocityNextPerk(self.SideCur)
 	EndIf
 
 	If(Choice == NONE)
@@ -449,8 +530,8 @@ Bool Function HandleBuyPerk()
 
 	Untamed.Util.Print("Perk Added: " + Choice.GetName())
 	Untamed.Player.AddPerk(Choice)
-	Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
-	Untamed.XPBar.RegisterForSingleUpdate(0.1)
+	;;Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
+	;;Untamed.XPBar.RegisterForSingleUpdate(0.1)
 
 	Return TRUE
 EndFunction
@@ -508,6 +589,46 @@ String[] Function GetTenacityFilenames()
 	Return Output
 EndFunction
 
+String[] Function GetFerocityFilenames()
+
+	String[] Output = Utility.CreateStringArray(5)
+
+	Output[0] = "Title.dds"
+	Output[1] = "Cursor.dds"
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackFerocious3))
+		Output[2] = "Attack3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackFerocious2))
+		Output[2] = "Attack2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackFerocious1))
+		Output[2] = "Attack1.dds"
+	Else
+		Output[2] = "Attack0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackEndurance3))
+		Output[3] = "Stamina3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackEndurance2))
+		Output[3] = "Stamina2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackEndurance1))
+		Output[3] = "Stamina1.dds"
+	Else
+		Output[3] = "Stamina0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackBleed3))
+		Output[4] = "Bleed3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackBleed2))
+		Output[4] = "Bleed2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackBleed1))
+		Output[4] = "Bleed1.dds"
+	Else
+		Output[4] = "Bleed0.dds"
+	EndIf
+
+	Return Output
+EndFunction
+
 Perk Function GetTenacityNextPerk(Int Choice)
 
 	Perk Output = NONE
@@ -541,6 +662,45 @@ Perk Function GetTenacityNextPerk(Int Choice)
 			Output = Untamed.PerkPackResistantHide2
 		Else
 			Output = Untamed.PerkPackResistantHide1
+		EndIf
+	EndIf
+
+	Return Output
+EndFunction
+
+Perk Function GetFerocityNextPerk(Int Choice)
+
+	Perk Output = NONE
+
+	If(Choice == 1)
+		If(Untamed.Player.HasPerk(Untamed.PerkPackFerocious3))
+			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackFerocious2))
+			Output = Untamed.PerkPackFerocious3
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackFerocious1))
+			Output = Untamed.PerkPackFerocious2
+		Else
+			Output = Untamed.PerkPackFerocious1
+		EndIf
+	ElseIf(Choice == 2)
+		If(Untamed.Player.HasPerk(Untamed.PerkPackEndurance3))
+			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackEndurance2))
+			Output = Untamed.PerkPackEndurance3
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackEndurance1))
+			Output = Untamed.PerkPackEndurance2
+		Else
+			Output = Untamed.PerkPackEndurance1
+		EndIf
+	ElseIf(Choice == 3)
+		If(Untamed.Player.HasPerk(Untamed.PerkPackBleed3))
+			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackBleed2))
+			Output = Untamed.PerkPackBleed3
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackBleed1))
+			Output = Untamed.PerkPackBleed2
+		Else
+			Output = Untamed.PerkPackBleed1
 		EndIf
 	EndIf
 
