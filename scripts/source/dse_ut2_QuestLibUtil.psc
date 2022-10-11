@@ -12,6 +12,18 @@ String Property FileStrings = "../../../configs/dse-untamed-2/translations/Engli
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+Function Popup(String Msg)
+
+	Debug.MessageBox(Msg)
+
+	If(Untamed.OptDebug)
+		MiscUtil.PrintConsole("[UT2] " + Msg)
+		Debug.Trace("[UT2] " + Msg)
+	EndIf
+
+	Return
+EndFunction
+
 Function Print(String Msg)
 {send a message to the notification area.}
 

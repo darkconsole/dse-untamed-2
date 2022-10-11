@@ -17,6 +17,7 @@ Int Property KeyLf = 0 Auto Hidden
 Int Property KeyRt = 0 Auto Hidden
 Int Property KeyOk = 0 Auto Hidden
 Int Property KeyFk = 0 Auto Hidden
+Int Property KeyHp = 0 Auto Hidden
 
 Int ScreenX = 1280
 Int ScreenY = 720
@@ -60,6 +61,7 @@ Function EnableKeyboardInput()
 	self.KeyDn = Input.GetMappedKey("Back")
 	self.KeyLf = Input.GetMappedKey("Strafe Left")
 	self.KeyRt = Input.GetMappedKey("Strafe Right")
+	self.KeyHp = Input.GetMappedKey("Ready Weapon")
 
 	self.RegisterForKey(self.KeyOk)
 	self.RegisterForKey(self.KeyFk)
@@ -67,6 +69,7 @@ Function EnableKeyboardInput()
 	self.RegisterForKey(self.KeyDn)
 	self.RegisterForKey(self.KeyLf)
 	self.RegisterForKey(self.KeyRt)
+	self.RegisterForKey(self.KeyHp)
 
 	Return
 EndFunction
@@ -79,6 +82,7 @@ Function DisableKeyboardInput()
 	self.UnregisterForKey(self.KeyDn)
 	self.UnregisterForKey(self.KeyLf)
 	self.UnregisterForKey(self.KeyRt)
+	self.UnregisterForKey(self.KeyHp)
 
 	self.KeyOk = 0
 	self.KeyFk = 0
@@ -86,6 +90,7 @@ Function DisableKeyboardInput()
 	self.KeyDn = 0
 	self.KeyLf = 0
 	self.KeyRt = 0
+	self.KeyHP = 0
 
 	;;;;;;;;
 
@@ -400,9 +405,27 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 
 		self.DestroySideItems(TRUE)
 		self.LoadSideMenu(self.StateCur, TRUE)
+	ElseIf(self.IsHelpKey(KeyCode))
+		self.HandleHelpText()
+		Return FALSE
 	EndIf
 
 	Return TRUE
+EndFunction
+
+Function HandleHelpText()
+
+	If(self.MainCur == 1)
+		If(self.SideCur == 1)
+			Untamed.Util.Popup("Increases health of pack animals.")
+		ElseIf(self.SideCur == 2)
+			Untamed.Util.Popup("Increases natural armour of pack animals.")
+		ElseIf(self.SideCur == 3)
+			Untamed.Util.Popup("Increases magic resistance of pack animals.")
+		EndIf
+	EndIf
+
+	Return
 EndFunction
 
 Bool Function HandleBuyPerk()
@@ -565,6 +588,11 @@ EndFunction
 Bool Function IsMenuKey(Int KeyCode)
 
 	Return (KeyCode == self.KeyMn)
+EndFunction
+
+Bool Function IsHelpKey(Int KeyCode)
+
+	Return (KeyCode == self.KeyHp)
 EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
