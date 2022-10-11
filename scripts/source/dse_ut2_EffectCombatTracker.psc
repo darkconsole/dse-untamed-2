@@ -55,6 +55,7 @@ Event OnDeath(Actor Killer)
 	If(Untamed.Pack.IsMember(Killer))
 		Untamed.Experience(Killer, KXP)
 		Untamed.Experience(Untamed.Player, (KXP / ShareMult))
+		Untamed.XPBar.RegisterForSingleUpdate(0.05)
 	EndIf
 
 	;;self.Dispel()
