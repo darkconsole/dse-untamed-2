@@ -24,6 +24,7 @@ Event OnInit()
 
 	Untamed.Util.PrintDebug("[Interface:OnInit] booting xp ui")
 	self.iWant = Game.GetFormFromFile(0x800, "iWant Widgets.esl") as iWant_Widgets
+	self.Busy = FALSE
 
 	self.BuildUI()
 	self.UpdateUI()

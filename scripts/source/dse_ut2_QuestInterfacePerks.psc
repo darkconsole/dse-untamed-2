@@ -394,7 +394,7 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 	ElseIf(self.IsUpKey(KeyCode))
 		self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 1), 1, (self.SideItems.Length - 2))
 	ElseIf(self.IsActivateKey(KeyCode))
-		If(!self.HandleBuyPerk())
+		If(!self.HandleBuyPerk() && !self.HandleGiveSpell() && !self.HandleGiveShout())
 			Return FALSE
 		EndIf
 
@@ -421,7 +421,6 @@ Bool Function HandleBuyPerk()
 	EndIf
 
 	If(Choice == NONE)
-		Untamed.Util.PrintDebug("No perk selected.")
 		Return FALSE
 	EndIf
 
@@ -431,6 +430,16 @@ Bool Function HandleBuyPerk()
 	Untamed.XPBar.RegisterForSingleUpdate(0.1)
 
 	Return TRUE
+EndFunction
+
+Bool Function HandleGiveSpell()
+
+	Return FALSE
+EndFunction
+
+Bool Function HandleGiveShout()
+
+	Return FALSE
 EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
