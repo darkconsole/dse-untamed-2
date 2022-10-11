@@ -414,6 +414,24 @@ Function ForgetActorStats(Actor Who)
 	Return
 EndFunction
 
+Function Rename(Actor Who)
+{rename this animal.}
+
+	String NewName
+
+	UIExtensions.InitMenu("UITextEntryMenu")
+	UIExtensions.SetMenuPropertyString("UITextEntryMenu", "text", Who.GetDisplayName())
+	UIExtensions.OpenMenu("UITextEntryMenu")
+	NewName = UIExtensions.GetMenuResultString("UITextEntryMenu")
+
+	If(NewName != "")
+		Who.SetDisplayName(NewName)
+		self.Print(Who.GetDisplayName()  + " the " + Who.GetRace().GetName())
+	EndIf
+
+	Return
+EndFunction
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
