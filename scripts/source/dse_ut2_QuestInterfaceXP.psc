@@ -150,9 +150,9 @@ Function UpdateUI()
 			self.SetNameText(self.Names[Iter], (Untamed.Player.GetDisplayName() + " (" + UXP + ")"))
 			self.SetNamePosition(self.Names[Iter], Iter)
 		Else
-			UXP = Untamed.Util.GetExperiencePercent(Members[Iter]) As Int
+			UXP = Untamed.Util.GetExperiencePercent(Members[Iter - 1]) As Int
 			self.SetBarPercent(self.Bars[Iter], Untamed.Util.GetExperiencePercent(Members[Iter - 1]))
-			self.SetNameText(self.Names[Iter], (Members[Iter].GetDisplayName() + " (" + UXP + ")"))
+			self.SetNameText(self.Names[Iter], (Members[Iter - 1].GetDisplayName() + " (" + UXP + ")"))
 			self.SetNamePosition(self.Names[Iter], Iter)
 		EndIf
 
