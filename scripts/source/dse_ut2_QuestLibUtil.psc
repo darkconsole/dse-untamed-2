@@ -319,6 +319,8 @@ in the save file which is another reason we have to fix them occasionally.}
 	Who.SetActorValue("Morality", 0)   ;; do crime
 	Who.SetActorValue("Confidence", 4) ;; yolo
 
+	Who.EquipItem(Untamed.WeapUnarmed, TRUE, TRUE)
+
 	Untamed.Util.PrintDebug("Fix Animal Actor: " + Who.GetDisplayName())
 	Return
 EndFunction

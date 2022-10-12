@@ -38,6 +38,7 @@ Package      Property PackageFollow Auto            ;; untamed
 Package      Property PackagePackStay Auto          ;; untamed
 Static       Property StaticX Auto                  ;; skyrim.esm
 VisualEffect Property VfxTeleportIn Auto            ;; untamed
+Weapon       Property WeapUnarmed Auto              ;; untamed
 
 Perk         Property PerkPackResistantHide1 Auto   ;; untamed (tenacity)
 Perk         Property PerkPackResistantHide2 Auto   ;; untamed (tenacity)
