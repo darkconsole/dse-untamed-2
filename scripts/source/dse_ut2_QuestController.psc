@@ -78,7 +78,7 @@ Perk         Property PerkExperienced Auto          ;; untamed (essence)
 Perk         Property PerkPackLeader1 Auto          ;; untamed (essence)
 Perk         Property PerkPackLeader2 Auto          ;; untamed (essence)
 Perk         Property PerkPackLeader3 Auto          ;; untamed (essence)
-Perk         Property PerkNaturesGrace Auto         ;; untamed (essence)
+Perk         Property PerkPackHealing1 Auto            ;; untamed (essence)
 Perk         Property PerkResistantHide Auto        ;; untamed (essence)
 Perk         Property PerkThickHide Auto            ;; untamed (essence)
 

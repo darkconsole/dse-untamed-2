@@ -446,6 +446,27 @@ Function Rename(Actor Who)
 	Return
 EndFunction
 
+Function AddShout(Actor Who, Shout Which)
+
+	Int Iter = 0
+	WordOfPower Word
+
+	Who.AddShout(Which)
+
+	While(Iter < 3)
+
+		Word = Which.GetNthWordOfPower(Iter)
+
+		If(Word != NONE)
+			Game.UnlockWord(Word)
+		EndIf
+
+		Iter += 1
+	EndWhile
+
+	Return
+EndFunction
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
