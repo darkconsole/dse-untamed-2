@@ -9,6 +9,7 @@ Int[] Property SideItems Auto Hidden
 Int Property MainCur = 0 Auto Hidden
 Int Property SideCur = 0 Auto Hidden
 String Property StateCur = "Default" Auto Hidden
+Bool Property Busy = FALSE Auto Hidden
 
 Int Property KeyMn = 0x40 Auto Hidden
 Int Property KeyUp = 0 Auto Hidden
@@ -47,11 +48,13 @@ EndEvent
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Function EnableKeyboardInput()
+Function EnableKeyboardInput(Bool Full=TRUE)
 
-	Untamed.Player.SetDontMove(TRUE)
-	Untamed.Player.SetRestrained(TRUE)
-	Game.DisablePlayerControls(FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)
+	If(Full)
+		Untamed.Player.SetDontMove(TRUE)
+		Untamed.Player.SetRestrained(TRUE)
+		Game.DisablePlayerControls(FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)
+	EndIf
 
 	;;;;;;;;
 
@@ -74,7 +77,7 @@ Function EnableKeyboardInput()
 	Return
 EndFunction
 
-Function DisableKeyboardInput()
+Function DisableKeyboardInput(Bool Full=TRUE)
 
 	self.UnregisterForKey(self.KeyOk)
 	self.UnregisterForKey(self.KeyFk)
@@ -94,9 +97,11 @@ Function DisableKeyboardInput()
 
 	;;;;;;;;
 
-	Untamed.Player.SetDontMove(FALSE)
-	Untamed.Player.SetRestrained(FALSE)
-	Game.EnablePlayerControls()
+	If(Full)
+		Untamed.Player.SetDontMove(FALSE)
+		Untamed.Player.SetRestrained(FALSE)
+		Game.EnablePlayerControls()
+	EndIf
 
 	Return
 EndFunction
@@ -117,6 +122,12 @@ EndFunction
 
 Function DestroySideItems(Bool Reload=FALSE)
 
+	If(self.Busy)
+		Return
+	EndIf
+
+	self.Busy = TRUE
+
 	Int Iter = self.SideItems.Length
 	Int Cap = 0
 
@@ -132,6 +143,8 @@ Function DestroySideItems(Bool Reload=FALSE)
 	If(!Reload)
 		self.SideItems = Utility.CreateIntArray(0)
 	EndIf
+
+	self.Busy = FALSE
 
 	Return
 EndFunction
@@ -205,6 +218,12 @@ EndFunction
 
 Function LoadSideMenu(String Menu, Bool Reload=FALSE)
 
+	If(self.Busy)
+		Return
+	EndIf
+
+	self.Busy = TRUE
+
 	If(Menu == Untamed.KeyTenacity)
 		self.LoadSideMenu_Tenacity(Reload)
 	ElseIf(Menu == Untamed.KeyFerocity)
@@ -214,6 +233,8 @@ Function LoadSideMenu(String Menu, Bool Reload=FALSE)
 	ElseIf(Menu == Untamed.KeyEssence)
 		self.LoadSideMenu_Essence(Reload)
 	EndIf
+
+	self.Busy = FALSE
 
 	Return
 EndFunction
@@ -370,6 +391,8 @@ Function UpdateSideMenu()
 		self.UpdateSideMenu_Essence()
 	EndIf
 
+
+
 	Return
 EndFunction
 
@@ -448,6 +471,10 @@ EndFunction
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Bool Function HandleSideMenuKeys(Int KeyCode)
+
+	If(self.Busy)
+		Return FALSE
+	EndIf
 
 	;; return false if the function callng this should bail or true if the
 	;; menu should keep going afterwards.
