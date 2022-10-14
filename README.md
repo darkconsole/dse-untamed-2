@@ -1,87 +1,106 @@
 # Untamed 2
 
-# Talent Trees
+	[ ] = Not done.
+	[+] = Done.
+	[-] = Technically done.
 
-Lost the original file of that flowchart so I'm just going to textualize the trees here as they are being changed a little.
+# General Abilities
+
+	[-] Add found animals to the pack.
+	[+] Command pack members to stay or follow.
+	[+] Pack members safe to bring into cities.
+	[+] Pack members aid in combat.
+	[+] Pack member that last hits gains UXP.
+	[ ] Pack members that hit anything gain some UXP.
+	[+] Percentage of pack combat xp for player.
+	[+] Give pack members names.
+	[-] Initiate SexLab encounters for UXP.
+	[-] Ride wolves.
+	[-] Ride bears.
+	[ ] Ride sabercats.
+	[ ] Pack members loot battlefield.
+	[ ] Basic aggro management akin to "I Am Your Shield" but built in.
+	[ ] Other pack member interactions for UXP like feeding.
+
+# Talent Trees
 
 ## Tenacity
 
 Perks from the path of the bear help the pack endure.
 
-	* Damage Resist (+50, +100, +200)
-	  Increases armour.
+	[+] Damage Resist (+100, +100, +100)
+	    Increases pack member armour.
 
-	* Magic Resist (+25%, +25%, +25%)
-	  Increases spell resistance.
+	[+] Magic Resist (+25%, +25%, +25%)
+	    Increases pack member spell resistance.
 
-	* Health (+50, +100, +200)
-	  Increases health pool.
-
-
+	[+] Health (+100, +100, +100)
+	    Increases pack member health pool.
 
 ## Ferocity
 
 Perks from the path of the wolf increase the lethality of the pack.
 
-	* Attack Damage (+20%, +35%, +50%)
-	  Increases attack damage.
+	[+] Attack Damage (+20%, +20%, +20%)
+	    Increases pack member attack damage.
 
-	* Stamina (+20, +40, +60)
-	  Increases stamina pool.
+	[+] Stamina (+20, +20, +20)
+	    Increases pack member stamina pool.
 
-	* Bleed (1dps, 3dps, 5dps)
-	  Attacks cause bleeding effects.
-
-
+	[+] Bleed (3dps, 6dps, 9dps)
+	    Pack member attacks cause bleed damage over time.
 
 ## Beast Mastery
 
 Perks from the path of burden provide the pack with utility abilities.
 
-	* Pack Mule
-	  Pack members can carry things for you.
+	[+] Shout: Follow
+	    Command nearby pack members that were saying to follow you.
 
-	* Load Bearing (+50)
-	  Requires: Pack Mule.
-	  Increases pack member carry.
+	[+] Shout: Stay
+	    Command nearby pack members that were following you to stay put.
 
-	* Second Wind (20% Health + 30% UXP)
-	  Downed pack member gets revivied. 5min Cooldown per member.
+	[+] Shout: Attack
+	    Command nearby pack members to focus their attacks on the target.
 
-	* Cross Breeder
-	  No penalty for laying with humanoids.
+	[+] Second Wind (1, 2)
+	    SW1 consumes 50% player UXP to restore 25% health to downed pack member.
+	    SW2 consumes 25% player UXP to restore 50% health to downed pack member.
 
+	[ ] Load Bearing (1, 2)
+	    LB1 unlocks pack member inventory.
+	    LB2 increases carry weight of pack members by 50.
 
+	[ ] Den Mother
+	    Can become pregnant and birth new animals.
 
 ## Essence
 
-	* Thick Hide (400% UXP)
-	  Natural armour while naked.
+	[+] Experienced (+20 UXP)
+	    Increase maximum UXP.
 
-	* Resistant hide (50% UXP)
-	  Resist magic while naked.
+	[+] Thick Hide (400% UXP)
+	    Player gains natural armour while naked based on current UXP level.
+	    10 UXP = 40 armour.
+	    100 UXP = 400 armour.
 
-	* Nature's Grace (2% UXP)
-	  Passive pack healing.
+	[+] Resistant hide (50% UXP)
+	    Player resists magic attacks while naked based on current UXP level.
+	    10 UXP = 5% resist.
+	    100 UXP = 50% resist.
 
-	* Pack Leader (3, 6, 12)
-	  Increases maximum pack size.
+	[ ] Nature's Grace (2hps)
+	    Pack passively heals over time.
 
-	* Den Mother
-	  Can become pregnant and birth new animals.
+	[+] Pack Leader (3, 6, 12)
+	    Increases maximum pack size.
 
-	* Experienced (+10, +20, +30)
-	  Increase maximum UXP.
+	[+] Crossbreeder
+	    No UXP penalty for laying with humanoids.
 
+## Undecided / Ideas
 
-## Undecided
-
-Currently undecided how to give the shouts. Originally the were all plotted
-under the various talent trees but I wonder if there is a more immersive way.
-
-	* Shouts: Stay/Come
-	* Shout: Focus Attack Target
-	* Shout: Last Stand (heal everyone 50% UXP)
-	* Shout: Stampede (summon spirits that plow through battle)
-
-
+	* Shout: Last Stand (heal everyone consuming 75% UXP)
+	* Shout: Spectral Stampede (spirits that plow through battle)
+	* Three tier `Experienced (+10 UXP, +10 UXP, +10 UXP)`
+	* Three tier `Nature's Grace (2hps, 4hps, 6hps)`
