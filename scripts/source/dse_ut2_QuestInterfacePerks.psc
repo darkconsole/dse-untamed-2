@@ -356,7 +356,7 @@ Function LoadSideMenu_BeastMastery(Bool Reload=FALSE)
 	If(!Reload)
 		;; title
 		self.SideItems[0] = self.iWant.LoadWidget(Dir + Files[0])
-		self.iWant.SetPos(self.SideItems[0], 950, 100)
+		self.iWant.SetPos(self.SideItems[0], 950, 120)
 		self.iWant.SetVisible(self.SideItems[0], 1)
 
 		;; circle
@@ -367,18 +367,33 @@ Function LoadSideMenu_BeastMastery(Bool Reload=FALSE)
 
 	;; stay
 	self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
-	self.iWant.SetPos(self.SideItems[2], 875, 300)
+	self.iWant.SetPos(self.SideItems[2], 710, 300)
 	self.iWant.SetVisible(self.SideItems[2], 1)
 
 	;; follow
 	self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
-	self.iWant.SetPos(self.SideItems[3], 1100, 450)
+	self.iWant.SetPos(self.SideItems[3], 730, 450)
 	self.iWant.SetVisible(self.SideItems[3], 1)
 
 	;; attack
 	self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
-	self.iWant.SetPos(self.SideItems[4], 900, 600)
+	self.iWant.SetPos(self.SideItems[4], 710, 600)
 	self.iWant.SetVisible(self.SideItems[4], 1)
+
+	;; second wind
+	self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
+	self.iWant.SetPos(self.SideItems[5], 1075, 300)
+	self.iWant.SetVisible(self.SideItems[5], 1)
+
+	;; load bearing
+	self.SideItems[6] = self.iWant.LoadWidget(Dir + Files[6])
+	self.iWant.SetPos(self.SideItems[6], 1075, 430)
+	self.iWant.SetVisible(self.SideItems[6], 1)
+
+	;; den mother
+	self.SideItems[7] = self.iWant.LoadWidget(Dir + Files[7])
+	self.iWant.SetPos(self.SideItems[7], 1075, 600)
+	self.iWant.SetVisible(self.SideItems[7], 1)
 
 	;;;;;;;;
 
@@ -514,14 +529,23 @@ Function UpdateSideMenu_BeastMastery()
 		self.iWant.SetVisible(self.SideItems[1], 0)
 
 		If(self.SideCur == 1)
-			self.iWant.SetPos(self.SideItems[1], 875, 300)
+			self.iWant.SetPos(self.SideItems[1], 710, 300)
 			self.iWant.setRotation(self.SideItems[1], 0)
 		ElseIf(self.SideCur == 2)
-			self.iWant.SetPos(self.SideItems[1], 1100, 450)
+			self.iWant.SetPos(self.SideItems[1], 730, 450)
 			self.iWant.setRotation(self.SideItems[1], 45)
 		ElseIf(self.SideCur == 3)
-			self.iWant.SetPos(self.SideItems[1], 900, 600)
+			self.iWant.SetPos(self.SideItems[1], 710, 600)
 			self.iWant.setRotation(self.SideItems[1], -45)
+		ElseIf(self.SideCur == 4)
+			self.iWant.SetPos(self.SideItems[1], 1075, 300)
+			self.iWant.setRotation(self.SideItems[1], 90)
+		ElseIf(self.SideCur == 5)
+			self.iWant.SetPos(self.SideItems[1], 1075, 430)
+			self.iWant.setRotation(self.SideItems[1], 135)
+		ElseIf(self.SideCur == 6)
+			self.iWant.SetPos(self.SideItems[1], 1075, 600)
+			self.iWant.setRotation(self.SideItems[1], -135)
 		EndIf
 
 		self.iWant.SetVisible(self.SideItems[1], 1)
@@ -565,6 +589,18 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 		self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 1), 1, (self.SideItems.Length - 2))
 	ElseIf(self.IsUpKey(KeyCode))
 		self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 1), 1, (self.SideItems.Length - 2))
+	ElseIf(self.IsRightKey(KeyCode))
+		If(self.MainCur == 3 || self.MainCur == 4)
+			self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 3), 1, (self.SideItems.Length - 2))
+		Else
+			self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 1), 1, (self.SideItems.Length - 2))
+		EndIf
+	ElseIf(self.IsLeftKey(KeyCode))
+		If(self.MainCur == 3 || self.MainCur == 4)
+			self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 3), 1, (self.SideItems.Length - 2))
+		Else
+			self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 1), 1, (self.SideItems.Length - 2))
+		EndIf
 	ElseIf(self.IsActivateKey(KeyCode))
 		If(!self.HandleBuyPerk() && !self.HandleGiveSpell() && !self.HandleGiveShout())
 			Untamed.Util.Print("Nothing seemed to be selected.")
