@@ -398,12 +398,70 @@ Function LoadSideMenu_BeastMastery(Bool Reload=FALSE)
 	;;;;;;;;
 
 	self.UpdateSideMenu_BeastMastery()
-
 	Return
 EndFunction
 
 Function LoadSideMenu_Essence(Bool Reload=FALSE)
 
+	String Dir = "widgets/dse-untamed-2/MenuEssence/"
+	String[] Files = self.GetEssenceFilenames()
+
+	;;;;;;;;
+
+	If(!Reload)
+		Untamed.Util.PrintDebug("[LoadSideMenu:Essence] loading side menu")
+		self.SideItems = Utility.CreateIntArray(Files.Length)
+	Else
+		Untamed.Util.PrintDebug("[LoadSideMenu:Essence] updating side menu")
+	EndIf
+
+	;;;;;;;;
+
+	If(!Reload)
+		;; title
+		self.SideItems[0] = self.iWant.LoadWidget(Dir + Files[0])
+		self.iWant.SetPos(self.SideItems[0], 950, 120)
+		self.iWant.SetVisible(self.SideItems[0], 1)
+
+		;; circle
+		self.SideItems[1] = self.iWant.LoadWidget(Dir + Files[1])
+		self.iWant.SetPos(self.SideItems[1], 950, 100)
+		self.iWant.SetVisible(self.SideItems[1], 0)
+	EndIf
+
+	;; experienced
+	self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
+	self.iWant.SetPos(self.SideItems[2], 710, 290)
+	self.iWant.SetVisible(self.SideItems[2], 1)
+
+	;; pack leader
+	self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
+	self.iWant.SetPos(self.SideItems[3], 740, 450)
+	self.iWant.SetVisible(self.SideItems[3], 1)
+
+	;; cross breeder
+	self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
+	self.iWant.SetPos(self.SideItems[4], 710, 610)
+	self.iWant.SetVisible(self.SideItems[4], 1)
+
+	;; thick hide
+	self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
+	self.iWant.SetPos(self.SideItems[5], 1075, 300)
+	self.iWant.SetVisible(self.SideItems[5], 1)
+
+	;; resistant hide
+	self.SideItems[6] = self.iWant.LoadWidget(Dir + Files[6])
+	self.iWant.SetPos(self.SideItems[6], 1080, 430)
+	self.iWant.SetVisible(self.SideItems[6], 1)
+
+	;; nature's grace
+	self.SideItems[7] = self.iWant.LoadWidget(Dir + Files[7])
+	self.iWant.SetPos(self.SideItems[7], 1075, 600)
+	self.iWant.SetVisible(self.SideItems[7], 1)
+
+	;;;;;;;;
+
+	self.UpdateSideMenu_Essence()
 	Return
 EndFunction
 
@@ -523,6 +581,9 @@ Function UpdateSideMenu_BeastMastery()
 	self.iWant.SetVisible(self.SideItems[2], 1)
 	self.iWant.SetVisible(self.SideItems[3], 1)
 	self.iWant.SetVisible(self.SideItems[4], 1)
+	self.iWant.SetVisible(self.SideItems[5], 1)
+	self.iWant.SetVisible(self.SideItems[6], 1)
+	self.iWant.SetVisible(self.SideItems[7], 1)
 
 	;; cursor
 	If(self.SideCur > 0)
@@ -557,6 +618,43 @@ Function UpdateSideMenu_BeastMastery()
 EndFunction
 
 Function UpdateSideMenu_Essence()
+
+	;; icons
+	self.iWant.SetVisible(self.SideItems[2], 1)
+	self.iWant.SetVisible(self.SideItems[3], 1)
+	self.iWant.SetVisible(self.SideItems[4], 1)
+	self.iWant.SetVisible(self.SideItems[5], 1)
+	self.iWant.SetVisible(self.SideItems[6], 1)
+	self.iWant.SetVisible(self.SideItems[7], 1)
+
+	;; cursor
+	If(self.SideCur > 0)
+		self.iWant.SetVisible(self.SideItems[1], 0)
+
+		If(self.SideCur == 1)
+			self.iWant.SetPos(self.SideItems[1], 710, 300)
+			self.iWant.setRotation(self.SideItems[1], 0)
+		ElseIf(self.SideCur == 2)
+			self.iWant.SetPos(self.SideItems[1], 730, 450)
+			self.iWant.setRotation(self.SideItems[1], 45)
+		ElseIf(self.SideCur == 3)
+			self.iWant.SetPos(self.SideItems[1], 710, 600)
+			self.iWant.setRotation(self.SideItems[1], -45)
+		ElseIf(self.SideCur == 4)
+			self.iWant.SetPos(self.SideItems[1], 1075, 300)
+			self.iWant.setRotation(self.SideItems[1], 90)
+		ElseIf(self.SideCur == 5)
+			self.iWant.SetPos(self.SideItems[1], 1075, 430)
+			self.iWant.setRotation(self.SideItems[1], 135)
+		ElseIf(self.SideCur == 6)
+			self.iWant.SetPos(self.SideItems[1], 1075, 600)
+			self.iWant.setRotation(self.SideItems[1], -135)
+		EndIf
+
+		self.iWant.SetVisible(self.SideItems[1], 1)
+	Else
+		self.iWant.SetVisible(self.SideItems[1], 0)
+	EndIf
 
 	Return
 EndFunction
@@ -657,6 +755,8 @@ Bool Function HandleBuyPerk()
 		Choice = self.GetFerocityNextPerk(self.SideCur)
 	ElseIf(self.MainCur == 3)
 		Choice = self.GetBeastMasteryNextPerk(self.SideCur)
+	ElseIf(self.MainCur == 4)
+		Choice = self.GetEssenceNextPerk(self.SideCur)
 	EndIf
 
 	If(Choice == NONE)
@@ -665,6 +765,13 @@ Bool Function HandleBuyPerk()
 
 	Untamed.Util.Print("Perk Added: " + Choice.GetName())
 	Untamed.Player.AddPerk(Choice)
+
+	If(Choice == Untamed.PerkThickHide)
+		Untamed.Util.UpdateFeatThickHide(Untamed.Player)
+	ElseIf(Choice == Untamed.PerkResistantHide)
+		Untamed.Util.UpdateFeatResistantHide(Untamed.Player)
+	EndIf
+
 	;;Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
 	;;Untamed.XPBar.RegisterForSingleUpdate(0.1)
 
@@ -842,6 +949,56 @@ String[] Function GetBeastMasteryFilenames()
 	Return Output
 EndFunction
 
+String[] Function GetEssenceFilenames()
+
+	String[] Output = Utility.CreateStringArray(8)
+
+	Output[0] = "Title.dds"
+	Output[1] = "Cursor.dds"
+
+	If(Untamed.Player.HasPerk(Untamed.PerkExperienced1))
+		Output[2] = "Exp3.dds"
+	Else
+		Output[2] = "Exp0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackLeader3))
+		Output[3] = "Leader3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader2))
+		Output[3] = "Leader2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader1))
+		Output[3] = "Leader1.dds"
+	Else
+		Output[3] = "Leader0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkCrossbreeder))
+		Output[4] = "Crossbreeder1.dds"
+	Else
+		Output[4] = "Crossbreeder0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
+		Output[5] = "ThickHide1.dds"
+	Else
+		Output[5] = "ThickHide0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
+		Output[6] = "ResistHide1.dds"
+	Else
+		Output[6] = "ResistHide0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkPackHealing1))
+		Output[7] = "Grace3.dds"
+	Else
+		Output[7] = "Grace0.dds"
+	EndIf
+
+	Return Output
+EndFunction
+
 Perk Function GetTenacityNextPerk(Int Choice)
 
 	Perk Output = NONE
@@ -945,6 +1102,55 @@ Perk Function GetBeastMasteryNextPerk(Int Choice)
 			Output = NONE
 		Else
 			Output = Untamed.PerkDenMother
+		EndIf
+	EndIf
+
+	Return Output
+EndFunction
+
+Perk Function GetEssenceNextPerk(Int Choice)
+
+	Perk Output = NONE
+
+	If(Choice == 1)
+		If(Untamed.Player.HasPerk(Untamed.PerkExperienced1))
+			Output = NONE
+		Else
+			Output = Untamed.PerkExperienced1
+		EndIf
+	ElseIf(Choice == 2)
+		If(Untamed.Player.HasPerk(Untamed.PerkPackLeader3))
+			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader2))
+			Output = Untamed.PerkPackLeader3
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader1))
+			Output = Untamed.PerkPackLeader2
+		Else
+			Output = Untamed.PerkPackLeader1
+		EndIf
+	ElseIf(Choice == 3)
+		If(Untamed.Player.HasPerk(Untamed.PerkCrossbreeder))
+			Output = NONE
+		Else
+			Output = Untamed.PerkCrossbreeder
+		EndIf
+	ElseIf(Choice == 4)
+		If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
+			Output = NONE
+		Else
+			Output = Untamed.PerkThickHide
+		EndIf
+	ElseIf(Choice == 5)
+		If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
+			Output = NONE
+		Else
+			Output = Untamed.PerkResistantHide
+		EndIf
+	ElseIf(Choice == 6)
+		If(Untamed.Player.HasPerk(Untamed.PerkPackHealing1))
+			Output = NONE
+		Else
+			Output = Untamed.PerkPackHealing1
 		EndIf
 	EndIf
 

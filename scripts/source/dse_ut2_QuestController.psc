@@ -74,11 +74,11 @@ Perk         Property PerkSecondWind1 Auto          ;; untamed (beast mastery)
 Perk         Property PerkSecondWind2 Auto          ;; untamed (beast mastery)
 
 Perk         Property PerkCrossbreeder Auto         ;; untamed (essence)
-Perk         Property PerkExperienced Auto          ;; untamed (essence)
+Perk         Property PerkExperienced1 Auto         ;; untamed (essence)
 Perk         Property PerkPackLeader1 Auto          ;; untamed (essence)
 Perk         Property PerkPackLeader2 Auto          ;; untamed (essence)
 Perk         Property PerkPackLeader3 Auto          ;; untamed (essence)
-Perk         Property PerkPackHealing1 Auto            ;; untamed (essence)
+Perk         Property PerkPackHealing1 Auto         ;; untamed (essence)
 Perk         Property PerkResistantHide Auto        ;; untamed (essence)
 Perk         Property PerkThickHide Auto            ;; untamed (essence)
 

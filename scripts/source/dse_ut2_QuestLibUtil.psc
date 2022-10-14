@@ -577,7 +577,7 @@ Float Function GetExperienceMax(Actor Who)
 
 	Float Max = Untamed.Menu.OptExperienceMax
 
-	If(Who.HasPerk(Untamed.PerkExperienced))
+	If(Who.HasPerk(Untamed.PerkExperienced1))
 		Max += Untamed.Menu.OptPerkExperiencedAdd
 	EndIf
 
