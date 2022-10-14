@@ -14,6 +14,8 @@ dse_ut2_QuestController Property Untamed Auto
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+ReferenceAlias Property Target Auto
+
 ReferenceAlias[] Property Members Auto
 {compiled list of the aliases on our management quest.}
 

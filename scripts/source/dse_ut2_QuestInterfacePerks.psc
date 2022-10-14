@@ -339,6 +339,51 @@ EndFunction
 
 Function LoadSideMenu_BeastMastery(Bool Reload=FALSE)
 
+	String Dir = "widgets/dse-untamed-2/MenuBeastMastery/"
+	String[] Files = self.GetBeastMasteryFilenames()
+
+	;;;;;;;;
+
+	If(!Reload)
+		Untamed.Util.PrintDebug("[LoadSideMenu:BeastMastery] loading side menu")
+		self.SideItems = Utility.CreateIntArray(Files.Length)
+	Else
+		Untamed.Util.PrintDebug("[LoadSideMenu:BeastMastery] updating side menu")
+	EndIf
+
+	;;;;;;;;
+
+	If(!Reload)
+		;; title
+		self.SideItems[0] = self.iWant.LoadWidget(Dir + Files[0])
+		self.iWant.SetPos(self.SideItems[0], 950, 100)
+		self.iWant.SetVisible(self.SideItems[0], 1)
+
+		;; circle
+		self.SideItems[1] = self.iWant.LoadWidget(Dir + Files[1])
+		self.iWant.SetPos(self.SideItems[1], 950, 100)
+		self.iWant.SetVisible(self.SideItems[1], 0)
+	EndIf
+
+	;; stay
+	self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
+	self.iWant.SetPos(self.SideItems[2], 875, 300)
+	self.iWant.SetVisible(self.SideItems[2], 1)
+
+	;; follow
+	self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
+	self.iWant.SetPos(self.SideItems[3], 1100, 450)
+	self.iWant.SetVisible(self.SideItems[3], 1)
+
+	;; attack
+	self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
+	self.iWant.SetPos(self.SideItems[4], 900, 600)
+	self.iWant.SetVisible(self.SideItems[4], 1)
+
+	;;;;;;;;
+
+	self.UpdateSideMenu_BeastMastery()
+
 	Return
 EndFunction
 
@@ -459,6 +504,31 @@ EndFunction
 
 Function UpdateSideMenu_BeastMastery()
 
+	;; icons
+	self.iWant.SetVisible(self.SideItems[2], 1)
+	self.iWant.SetVisible(self.SideItems[3], 1)
+	self.iWant.SetVisible(self.SideItems[4], 1)
+
+	;; cursor
+	If(self.SideCur > 0)
+		self.iWant.SetVisible(self.SideItems[1], 0)
+
+		If(self.SideCur == 1)
+			self.iWant.SetPos(self.SideItems[1], 875, 300)
+			self.iWant.setRotation(self.SideItems[1], 0)
+		ElseIf(self.SideCur == 2)
+			self.iWant.SetPos(self.SideItems[1], 1100, 450)
+			self.iWant.setRotation(self.SideItems[1], 45)
+		ElseIf(self.SideCur == 3)
+			self.iWant.SetPos(self.SideItems[1], 900, 600)
+			self.iWant.setRotation(self.SideItems[1], -45)
+		EndIf
+
+		self.iWant.SetVisible(self.SideItems[1], 1)
+	Else
+		self.iWant.SetVisible(self.SideItems[1], 0)
+	EndIf
+
 	Return
 EndFunction
 
@@ -549,6 +619,8 @@ Bool Function HandleBuyPerk()
 		Choice = self.GetTenacityNextPerk(self.SideCur)
 	ElseIf(self.MainCur == 2)
 		Choice = self.GetFerocityNextPerk(self.SideCur)
+	ElseIf(self.MainCur == 3)
+		Choice = self.GetBeastMasteryNextPerk(self.SideCur)
 	EndIf
 
 	If(Choice == NONE)
@@ -570,7 +642,35 @@ EndFunction
 
 Bool Function HandleGiveShout()
 
-	Return FALSE
+	Shout Choice = NONE
+	Int Cost = Untamed.Config.GetInt(".PerkCostXP")
+	Int UXP = Untamed.Util.GetExperience(Untamed.Player) as Int
+
+	If(UXP < Cost)
+		Untamed.Util.Print("You need " + Cost + " UXP to buy a perk.")
+		Return FALSE
+	EndIf
+
+	If(self.MainCur == 3)
+		If(self.SideCur == 1)
+			Choice = Untamed.ShoutFollow
+		ElseIf(self.SideCur == 2)
+			Choice = Untamed.ShoutStay
+		ElseIf(self.SideCur == 3)
+			Choice = Untamed.ShoutAttack
+		EndIf
+	EndIf
+
+	If(Choice == NONE)
+		Return FALSE
+	EndIf
+
+	Untamed.Util.Print("Shout Added: " + Choice.GetName())
+	Untamed.Util.AddShout(Untamed.Player, Choice)
+	;;Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
+	;;Untamed.XPBar.RegisterForSingleUpdate(0.1)
+
+	Return TRUE
 EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -656,6 +756,56 @@ String[] Function GetFerocityFilenames()
 	Return Output
 EndFunction
 
+String[] Function GetBeastMasteryFilenames()
+
+	String[] Output = Utility.CreateStringArray(8)
+
+	Output[0] = "Title.dds"
+	Output[1] = "Cursor.dds"
+
+	If(Untamed.Player.HasSpell(Untamed.ShoutFollow))
+		Output[2] = "Follow1.dds"
+	Else
+		Output[2] = "Follow0.dds"
+	EndIf
+
+	If(Untamed.Player.HasSpell(Untamed.ShoutStay))
+		Output[3] = "Stay1.dds"
+	Else
+		Output[3] = "Stay0.dds"
+	EndIf
+
+	If(Untamed.Player.HasSpell(Untamed.ShoutAttack))
+		Output[4] = "Attack1.dds"
+	Else
+		Output[4] = "Attack0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkSecondWind2))
+		Output[5] = "SecondWind2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkSecondWind1))
+		Output[5] = "SecondWind1.dds"
+	Else
+		Output[5] = "SecondWind0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkLoadBearing2))
+		Output[6] = "LoadBearing2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkLoadBearing1))
+		Output[6] = "LoadBearing1.dds"
+	Else
+		Output[6] = "LoadBearing0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkDenMother))
+		Output[7] = "DenMother1.dds"
+	Else
+		Output[7] = "DenMother0.dds"
+	EndIf
+
+	Return Output
+EndFunction
+
 Perk Function GetTenacityNextPerk(Int Choice)
 
 	Perk Output = NONE
@@ -728,6 +878,37 @@ Perk Function GetFerocityNextPerk(Int Choice)
 			Output = Untamed.PerkPackBleed2
 		Else
 			Output = Untamed.PerkPackBleed1
+		EndIf
+	EndIf
+
+	Return Output
+EndFunction
+
+Perk Function GetBeastMasteryNextPerk(Int Choice)
+
+	Perk Output = NONE
+
+	If(Choice == 4)
+		If(Untamed.Player.HasPerk(Untamed.PerkSecondWind2))
+			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkSecondWind1))
+			Output = Untamed.PerkSecondWind2
+		Else
+			Output = Untamed.PerkSecondWind1
+		EndIf
+	ElseIf(Choice == 5)
+		If(Untamed.Player.HasPerk(Untamed.PerkLoadBearing2))
+			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkLoadBearing1))
+			Output = Untamed.PerkLoadBearing2
+		Else
+			Output = Untamed.PerkLoadBearing1
+		EndIf
+	ElseIf(Choice == 6)
+		If(Untamed.Player.HasPerk(Untamed.PerkDenMother))
+			Output = NONE
+		Else
+			Output = Untamed.PerkDenMother
 		EndIf
 	EndIf
 
@@ -811,6 +992,10 @@ State Off
 
 	Event OnKeyDown(int KeyCode)
 
+		If(self.Busy)
+			Return
+		EndIf
+
 		Untamed.Util.PrintDebug("[Perks.OnKeyDown:Off] " + KeyCode)
 
 		If(KeyCode == self.KeyMn)
@@ -850,6 +1035,10 @@ State On
 	Event OnKeyDown(int KeyCode)
 
 		Untamed.Util.PrintDebug("[Perks.OnKeyDown:On] " + KeyCode)
+
+		If(self.Busy)
+			Return
+		EndIf
 
 		If(self.IsCancelKey(KeyCode))
 			self.GoToState("Off")
