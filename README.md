@@ -67,9 +67,9 @@ Perks from the path of burden provide the pack with utility abilities.
 	    SW1 consumes 50% player UXP to restore 25% health to downed pack member.
 	    SW2 consumes 25% player UXP to restore 50% health to downed pack member.
 
-	[ ] Load Bearing (1, 2)
+	[x] Load Bearing (1, 2)
 	    LB1 unlocks pack member inventory.
-	    LB2 increases carry weight of pack members by 50.
+	    LB2 increases carry weight of pack members by 100.
 
 	[ ] Den Mother
 	    Can become pregnant and birth new animals.
