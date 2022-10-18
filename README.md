@@ -67,7 +67,7 @@ Perks from the path of burden provide the pack with utility abilities.
 	    SW1 consumes 50% player UXP to restore 25% health to downed pack member.
 	    SW2 consumes 25% player UXP to restore 50% health to downed pack member.
 
-	[x] Load Bearing (1, 2)
+	[+] Load Bearing (1, 2)
 	    LB1 unlocks pack member inventory.
 	    LB2 increases carry weight of pack members by 100.
 
@@ -89,7 +89,7 @@ Perks from the path of burden provide the pack with utility abilities.
 	    10 UXP = 5% resist.
 	    100 UXP = 50% resist.
 
-	[ ] Nature's Grace (2hps)
+	[+] Nature's Grace (1% mhps, 2% mhps, 3% mhps)
 	    Pack passively heals over time.
 
 	[+] Pack Leader (3, 6, 12)
@@ -103,4 +103,3 @@ Perks from the path of burden provide the pack with utility abilities.
 	* Shout: Last Stand (heal everyone consuming 75% UXP)
 	* Shout: Spectral Stampede (spirits that plow through battle)
 	* Three tier `Experienced (+10 UXP, +10 UXP, +10 UXP)`
-	* Three tier `Nature's Grace (2hps, 4hps, 6hps)`

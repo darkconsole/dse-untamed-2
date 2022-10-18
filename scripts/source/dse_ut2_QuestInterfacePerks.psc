@@ -990,8 +990,12 @@ String[] Function GetEssenceFilenames()
 		Output[6] = "ResistHide0.dds"
 	EndIf
 
-	If(Untamed.Player.HasPerk(Untamed.PerkPackHealing1))
+	If(Untamed.Player.HasPerk(Untamed.PerkPackHealing3))
 		Output[7] = "Grace3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackHealing2))
+		Output[7] = "Grace2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackHealing1))
+		Output[7] = "Grace1.dds"
 	Else
 		Output[7] = "Grace0.dds"
 	EndIf
@@ -1147,8 +1151,12 @@ Perk Function GetEssenceNextPerk(Int Choice)
 			Output = Untamed.PerkResistantHide
 		EndIf
 	ElseIf(Choice == 6)
-		If(Untamed.Player.HasPerk(Untamed.PerkPackHealing1))
+		If(Untamed.Player.HasPerk(Untamed.PerkPackHealing3))
 			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackHealing2))
+			Output = Untamed.PerkPackHealing3
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackHealing1))
+			Output = Untamed.PerkPackHealing2
 		Else
 			Output = Untamed.PerkPackHealing1
 		EndIf
