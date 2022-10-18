@@ -770,6 +770,8 @@ Bool Function HandleBuyPerk()
 		Untamed.Util.UpdateFeatThickHide(Untamed.Player)
 	ElseIf(Choice == Untamed.PerkResistantHide)
 		Untamed.Util.UpdateFeatResistantHide(Untamed.Player)
+	ElseIf(Choice == Untamed.PerkPackHealing1)
+		Untamed.Pack.FixMembers()
 	EndIf
 
 	;;Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))

@@ -319,6 +319,10 @@ in the save file which is another reason we have to fix them occasionally.}
 	Who.SetActorValue("Morality", 0)   ;; do crime
 	Who.SetActorValue("Confidence", 4) ;; yolo
 
+	If(Untamed.Player.HasPerk(Untamed.PerkPackHealing1))
+		Who.SetActorValue("CombatHealthRegenMult", 1.0)
+	EndIf
+
 	Who.EquipItem(Untamed.WeapUnarmed, TRUE, TRUE)
 
 	Untamed.Util.PrintDebug("Fix Animal Actor: " + Who.GetDisplayName())

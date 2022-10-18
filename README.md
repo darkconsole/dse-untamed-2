@@ -89,7 +89,7 @@ Perks from the path of burden provide the pack with utility abilities.
 	    10 UXP = 5% resist.
 	    100 UXP = 50% resist.
 
-	[+] Nature's Grace (1% mhps, 2% mhps, 3% mhps)
+	[+] Nature's Grace (3% mhps, 6% mhps, 9% mhps)
 	    Pack passively heals over time.
 
 	[+] Pack Leader (3, 6, 12)
