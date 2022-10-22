@@ -127,6 +127,7 @@ String Property KeyStatBaseMana = "UT2.StatBase.Magicka" AutoReadOnly Hidden
 String Property KeyStatBaseResist = "UT2.StatBase.MagicResist" AutoReadOnly Hidden
 String Property KeyStatBaseArmour = "UT2.StatBase.DamageResist" AutoReadOnly Hidden
 String Property KeyStatBaseAttack = "UT2.StatBase.AttackDamageMult" AutoReadOnly Hidden
+String Property KeyPregnantBase = "UT2.Actor.DenMother.ActorBase" AutoReadOnly Hidden
 
 Bool Property OptValidateActor = TRUE Auto Hidden
 Bool Property OptDebug = TRUE Auto Hidden

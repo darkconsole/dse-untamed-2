@@ -69,6 +69,10 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 			Untamed.Experience(Actors[Iter], BXP)
 		EndIf
 
+		If(Untamed.Player.HasPerk(Untamed.PerkDenMother))
+			Untamed.Util.SetActorPregnant(Untamed.Player, Actors[Iter])
+		EndIf
+
 		Iter += 1
 	EndWhile
 
