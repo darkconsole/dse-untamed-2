@@ -471,14 +471,14 @@ Function AddShout(Actor Who, Shout Which)
 	Return
 EndFunction
 
-Race Function GetActorPregnant(Actor Who)
+ActorBase Function GetActorPregnant(Actor Who)
 
-	Return StorageUtil.GetFormValue(Who, Untamed.KeyPregnantBase) As Race
+	Return StorageUtil.GetFormValue(Who, Untamed.KeyPregnantBase) As ActorBase
 EndFunction
 
 Function SetActorPregnant(Actor Who, Actor With, Bool Force=FALSE)
 
-	Race What = self.GetActorPregnant(Who)
+	ActorBase What = self.GetActorPregnant(Who)
 
 	If(What != NONE && Force != TRUE)
 		Return
@@ -486,10 +486,10 @@ Function SetActorPregnant(Actor Who, Actor With, Bool Force=FALSE)
 
 	;;;;;;;;
 
-	What = With.GetActorBase().GetRace()
+	What = With.GetActorBase()
 
 	If(What == NONE)
-		self.PrintDebug("[SetPregnant] failed to find actor race lmao ok")
+		self.PrintDebug("[SetPregnant] failed to find actor ActorBase lmao ok")
 		Return
 	EndIf
 
