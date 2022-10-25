@@ -36,6 +36,7 @@ Faction      Property FactionClassWolf Auto         ;; untamed
 Package      Property PackageDoNothing Auto         ;; untamed
 Package      Property PackageFollow Auto            ;; untamed
 Package      Property PackagePackStay Auto          ;; untamed
+Spell        Property SpellMatingCallTracker Auto   ;; untamed
 Static       Property StaticX Auto                  ;; skyrim.esm
 VisualEffect Property VfxTeleportIn Auto            ;; untamed
 Weapon       Property WeapUnarmed Auto              ;; untamed
@@ -128,6 +129,7 @@ String Property KeyStatBaseResist = "UT2.StatBase.MagicResist" AutoReadOnly Hidd
 String Property KeyStatBaseArmour = "UT2.StatBase.DamageResist" AutoReadOnly Hidden
 String Property KeyStatBaseAttack = "UT2.StatBase.AttackDamageMult" AutoReadOnly Hidden
 String Property KeyPregnantBase = "UT2.Actor.DenMother.ActorBase" AutoReadOnly Hidden
+String Property KeyMatingCallList = "UT2.Actor.MatingCallList" AutoReadOnly Hidden
 
 Bool Property OptValidateActor = TRUE Auto Hidden
 Bool Property OptDebug = TRUE Auto Hidden

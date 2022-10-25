@@ -3,6 +3,7 @@
 	"PackShareXP": 0.5,
 	"PackKillXP": 2.5,
 	"PerkCostXP": 90,
+	"IncludeCreatures": true,
 
 	"PackLoveIterXP": 1.0,
 	"WidgetOffsetX": 1130,

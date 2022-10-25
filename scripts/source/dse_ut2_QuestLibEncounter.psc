@@ -3,6 +3,9 @@ Scriptname dse_ut2_QuestLibEncounter extends Quest
 
 dse_ut2_QuestController Property Untamed Auto
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 Event OnInit()
 {library setup.}
 
@@ -33,8 +36,8 @@ Event OnEncounterEnding(String EventName, String Args, Float Argc, Form From)
 	Return
 EndEvent
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Function OnEncounterEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 {handle what happens when a scene ends with the player involved.}
@@ -101,8 +104,42 @@ Function OnLameEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 	Return
 EndFunction
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Function BeginMatingCall(Actor Caller)
+
+	Int Found = 0
+	Int Iter = 0
+	Actor Which = NONE
+
+	;;;;;;;;
+
+	StorageUtil.FormListClear(NONE, Untamed.KeyMatingCallList)
+
+	Untamed.SpellMatingCallTracker.Cast(Caller)
+	Utility.Wait(2.0)
+
+	;;;;;;;;
+
+	Found = StorageUtil.FormListCount(NONE, Untamed.KeyMatingCallList)
+	Untamed.Util.PrintDebug("[BeginMatingCall] " + Found + " found actors")
+
+	While(Iter < Found)
+		Which = StorageUtil.FormListGet(NONE, Untamed.KeyMatingCallList, Iter) as Actor
+
+		If(Which != NONE)
+			Untamed.Util.PrintDebug("[BeginMatingCall] " + Which.GetDisplayName() + " " + Which)
+		EndIf
+
+		Iter += 1
+	EndWhile
+
+	Return
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Bool Function IsPlayerInvolved(Actor[] Actors)
 {determine if the player was involved in the scene.}
