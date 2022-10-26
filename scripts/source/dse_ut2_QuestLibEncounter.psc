@@ -68,7 +68,7 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	Untamed.Experience(Untamed.Player, XP)
 
 	While(Iter < Actors.Length)
-		If(Actors[Iter] == Untamed.Util.ActorIsBeast(Actors[Iter]))
+		If(Untamed.Util.ActorIsBeast(Actors[Iter]))
 			If(Untamed.Pack.IsMember(Actors[Iter]))
 				Untamed.Experience(Actors[Iter], BXP)
 			Else
