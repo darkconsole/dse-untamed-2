@@ -6,7 +6,7 @@
 
 # General Abilities
 
-	[-] Add found animals to the pack.
+	[+] Add found animals to the pack.
 	[+] Command pack members to stay or follow.
 	[+] Pack members safe to bring into cities.
 	[+] Pack members aid in combat.
@@ -14,13 +14,14 @@
 	[ ] Pack members that hit anything gain some UXP.
 	[+] Percentage of pack combat xp for player.
 	[+] Give pack members names.
-	[-] Initiate SexLab encounters for UXP.
+	[+] Initiate SexLab encounters for UXP.
 	[-] Ride wolves.
 	[-] Ride bears.
 	[ ] Ride sabercats.
 	[ ] Pack members loot battlefield.
 	[ ] Basic aggro management akin to "I Am Your Shield" but built in.
 	[ ] Other pack member interactions for UXP like feeding.
+	[ ] Setting for mating call to analyse collection and autoexec valid SL combos.
 
 # Talent Trees
 
