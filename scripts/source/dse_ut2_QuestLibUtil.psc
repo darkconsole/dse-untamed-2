@@ -472,43 +472,6 @@ Function AddShout(Actor Who, Shout Which)
 	Return
 EndFunction
 
-ActorBase Function GetActorPregnant(Actor Who)
-
-	Return StorageUtil.GetFormValue(Who, Untamed.KeyPregnantBase) As ActorBase
-EndFunction
-
-Function SetActorPregnant(Actor Who, Actor With, Bool Force=FALSE)
-
-	ActorBase What = self.GetActorPregnant(Who)
-
-	If(What != NONE && Force != TRUE)
-		Return
-	EndIf
-
-	;;;;;;;;
-
-	What = With.GetActorBase()
-
-	If(What == NONE)
-		self.PrintDebug("[SetPregnant] failed to find actor ActorBase lmao ok")
-		Return
-	EndIf
-
-	;;;;;;;;
-
-	StorageUtil.SetFormValue(Who, Untamed.KeyPregnantBase, What)
-	StorageUtil.SetIntValue(Who, Untamed.KeyPregnantBase, 1)
-
-	Return
-EndFunction
-
-Function ClearActorPregnant(Actor Who)
-
-	StorageUtil.UnsetFormValue(Who, Untamed.KeyPregnantBase)
-
-	Return
-EndFunction
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -797,3 +760,74 @@ Bool Function ActorIsBeast(Actor Who)
 	Return FALSE
 EndFunction
 
+Bool Function ActorIsPregnant(Actor Who)
+{determine if this actor should is pregnant.}
+
+	return (self.ActorGetPregnant(Who) != NONE)
+EndFunction
+
+ActorBase Function ActorGetPregnant(Actor Who)
+{get the actorbase actor is pregnant with or none if not.}
+
+	Return StorageUtil.GetFormValue(Who, Untamed.KeyPregnantBase) As ActorBase
+EndFunction
+
+Function ActorSetPregnant(Actor Who, Actor With, Bool Force=FALSE)
+{set an actor to become pregnant with another of the specified type. will not
+override an existing pregnancy unless forced.}
+
+	ActorBase What = self.ActorGetPregnant(Who)
+
+	If(What != NONE && Force != TRUE)
+		Return
+	EndIf
+
+	;;;;;;;;
+
+	What = With.GetActorBase()
+
+	If(What == NONE)
+		self.PrintDebug("[SetPregnant] failed to find actor ActorBase lmao ok")
+		Return
+	EndIf
+
+	;;;;;;;;
+
+	;; start the pregnancy.
+	StorageUtil.SetFormValue(Who, Untamed.KeyPregnantBase, What)
+	StorageUtil.SetIntValue(Who, Untamed.KeyPregnantBase, 1)
+
+	;; note the actor as pregnant.
+	StorageUtil.FormListAdd(NONE, Untamed.KeyPregnantBase, Who, FALSE)
+
+	Return
+EndFunction
+
+Function ActorClearPregnant(Actor Who)
+{depreggo and clean up this actor.}
+
+	StorageUtil.FormListRemove(NONE, Untamed.KeyPregnantBase, Who, TRUE)
+	StorageUtil.UnsetFormValue(Who, Untamed.KeyPregnantBase)
+
+	Return
+EndFunction
+
+Int Function CountPregnantActors()
+{return how many actors are being tracked for pregnancy.}
+
+	Return StorageUtil.FormListCount(NONE, Untamed.KeyPregnantBase)
+EndFunction
+
+Actor[] Function GetPregnantActors()
+{return an array of pregnant actors.}
+
+	Actor[] Output = PapyrusUtil.ActorArray(self.CountPregnantActors())
+	Int Iter = 0
+
+	While(Iter < Output.Length)
+		Output[Iter] = StorageUtil.FormListGet(NONE, Untamed.KeyPregnantBase, Iter) as Actor
+		Iter += 1
+	EndWhile
+
+	Return Output
+Endfunction
