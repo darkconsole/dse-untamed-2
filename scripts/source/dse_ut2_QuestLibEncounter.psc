@@ -68,19 +68,22 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	Untamed.Experience(Untamed.Player, XP)
 
 	While(Iter < Actors.Length)
-		If(Untamed.Pack.IsMember(Actors[Iter]))
-			Untamed.Experience(Actors[Iter], BXP)
-		EndIf
+		If(Actors[Iter] == Untamed.Util.ActorIsBeast(Actors[Iter]))
+			If(Untamed.Pack.IsMember(Actors[Iter]))
+				Untamed.Experience(Actors[Iter], BXP)
+			Else
+				Untamed.Pack.AddMember(Actors[Iter])
+			EndIf
 
-		If(Untamed.Player.HasPerk(Untamed.PerkDenMother))
-			Untamed.Util.SetActorPregnant(Untamed.Player, Actors[Iter])
+			If(Untamed.Player.HasPerk(Untamed.PerkDenMother))
+				Untamed.Util.SetActorPregnant(Untamed.Player, Actors[Iter])
+			EndIf
 		EndIf
 
 		Iter += 1
 	EndWhile
 
 	Untamed.XPBar.UpdateUI()
-
 	Return
 EndFunction
 
@@ -132,6 +135,9 @@ Function BeginMatingCall(Actor Caller)
 			Untamed.Util.PrintDebug("[BeginMatingCall] " + Which.GetDisplayName() + " " + Which)
 		EndIf
 
+		ActorUtil.AddPackageOverride(Which, Untamed.PackageFollow, 100)
+		Which.EvaluatePackage()
+
 		Iter += 1
 	EndWhile
 
@@ -165,14 +171,11 @@ Int Function CountBeastsInvolved(Actor[] Actors)
 	Int Count = 0
 	Int Iter = 0
 	Bool Found = FALSE
+	Bool IncludeCreatures = Untamed.Config.GetBool(".IncludeCreatures")
 
 	While(Iter < Actors.Length)
-		If(Actors[Iter].HasKeyword(Untamed.KeywordActorTypeAnimal))
+		If(Untamed.Util.ActorIsBeast(Actors[Iter]))
 			Count += 1
-		ElseIf(Untamed.Menu.OptIncludeActorTypeCreature)
-			If(Actors[Iter].HasKeyword(Untamed.KeywordActorTypeCreature))
-				Count += 1
-			EndIf
 		EndIf
 
 		Iter += 1

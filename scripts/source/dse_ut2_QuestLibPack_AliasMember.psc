@@ -120,3 +120,10 @@ Event OnPlayerFastTravelEnd(Float Time)
 	Untamed.Util.Print(Me.GetDisplayName() + " fast travel end")
 	Return
 EndEvent
+
+Event OnCombatStateChanged(Actor With, Int CombatState)
+
+	Actor Me = self.GetActorReference()
+
+	Return
+EndEvent

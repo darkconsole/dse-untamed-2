@@ -42,8 +42,8 @@ Event OnDeath(Actor Killer)
 	Float ShareMult = 0.0
 
 	If(Killer == NONE)
-		;;self.Dispel()
 		Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was realdeathed by... something.")
+		self.Dispel()
 		Return
 	EndIf
 
@@ -58,6 +58,6 @@ Event OnDeath(Actor Killer)
 		Untamed.XPBar.RegisterForSingleUpdate(0.05)
 	EndIf
 
-	;;self.Dispel()
+	self.Dispel()
 	Return
 EndEvent

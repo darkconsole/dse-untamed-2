@@ -211,6 +211,7 @@ Function SetTamed(Actor Who, Bool Enable)
 		Untamed.Util.BookmarkActorStats(Who)
 		Untamed.Util.AddToClassFaction(Who)
 		Who.SetPlayerTeammate(FALSE, FALSE)
+		self.FixAnimalActor(Who)
 	Else
 		self.PrintDebug("Untaming " + Who.GetDisplayName())
 		Who.RemoveFromFaction(Untamed.FactionTamed)
@@ -223,7 +224,7 @@ Function SetTamed(Actor Who, Bool Enable)
 
 	self.SetPersistHack(Who, Enable)
 	self.SetPassive(Who, Enable)
-	Untamed.XPBar.UpdateUI()
+	;;Untamed.XPBar.UpdateUI()
 
 	Return
 EndFunction
@@ -777,5 +778,22 @@ those races to these formlists.}
 	EndIf
 
 	Return 0
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Bool Function ActorIsBeast(Actor Who)
+{determine if this actor is one that untamed wants to deal with.}
+
+	If(Who.HasKeyword(Untamed.KeywordActorTypeAnimal))
+		Return TRUE
+	EndIf
+
+	If(Untamed.Config.GetBool(".IncludeCreatures") && Who.HasKeyword(Untamed.KeywordActorTypeCreature))
+		Return TRUE
+	EndIf
+
+	Return FALSE
 EndFunction
 
