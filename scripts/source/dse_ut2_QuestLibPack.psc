@@ -145,6 +145,10 @@ if the pack is already full.}
 		Return FALSE
 	EndIf
 
+	If(!Who.IsInFaction(Untamed.FactionTamed))
+		Untamed.Util.SetTamed(Who, TRUE)
+	EndIf
+
 	Iter = 0
 	While(Iter < MaxMemberCount)
 		If(self.Members[Iter].GetReference() == None)
