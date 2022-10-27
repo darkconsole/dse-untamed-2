@@ -22,6 +22,10 @@ Int FH = 12   ;; font height
 
 Event OnInit()
 
+	If(!Untamed.OptEnabled)
+		Return
+	EndIf
+
 	Untamed.Util.PrintDebug("[Interface:OnInit] booting xp ui")
 	self.iWant = Game.GetFormFromFile(0x800, "iWant Widgets.esl") as iWant_Widgets
 	self.Busy = FALSE

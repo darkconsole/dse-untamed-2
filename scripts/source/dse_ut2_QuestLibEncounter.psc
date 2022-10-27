@@ -21,7 +21,7 @@ EndEvent
 Event OnEncounterEnding(String EventName, String Args, Float Argc, Form From)
 {detect when a sex scene ends.}
 
-	If(!Untamed.Menu.Enabled)
+	If(!Untamed.OptEnabled)
 		Return
 	EndIf
 

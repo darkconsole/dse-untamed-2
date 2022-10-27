@@ -774,6 +774,62 @@ Function UpdateFeatResistantHide(Actor Who)
 	Return
 EndFunction
 
+Function ClearPerks(Actor Who)
+{remove all the ut2 perks from the actor.}
+
+	Who.RemoveShout(Untamed.ShoutMatingCall)
+
+	;; tenacity
+	Who.RemovePerk(Untamed.PerkPackResistantHide1)
+	Who.RemovePerk(Untamed.PerkPackResistantHide2)
+	Who.RemovePerk(Untamed.PerkPackResistantHide3)
+	Who.RemovePerk(Untamed.PerkPackResistantHide4)
+	Who.RemovePerk(Untamed.PerkPackResistantHide5)
+	Who.RemovePerk(Untamed.PerkPackThickHide1)
+	Who.RemovePerk(Untamed.PerkPackThickHide2)
+	Who.RemovePerk(Untamed.PerkPackThickHide3)
+	Who.RemovePerk(Untamed.PerkPackThickHide4)
+	Who.RemovePerk(Untamed.PerkPackThickHide5)
+	Who.RemovePerk(Untamed.PerkPackVitality1)
+	Who.RemovePerk(Untamed.PerkPackVitality2)
+	Who.RemovePerk(Untamed.PerkPackVitality3)
+
+	;; ferocity
+	Who.RemovePerk(Untamed.PerkPackFerocious1)
+	Who.RemovePerk(Untamed.PerkPackFerocious2)
+	Who.RemovePerk(Untamed.PerkPackFerocious3)
+	Who.RemovePerk(Untamed.PerkPackEndurance1)
+	Who.RemovePerk(Untamed.PerkPackEndurance2)
+	Who.RemovePerk(Untamed.PerkPackEndurance3)
+	Who.RemovePerk(Untamed.PerkPackBleed1)
+	Who.RemovePerk(Untamed.PerkPackBleed2)
+	Who.RemovePerk(Untamed.PerkPackBleed3)
+
+	;; beast mastery
+	Who.RemoveShout(Untamed.ShoutAttack)
+	Who.RemoveShout(Untamed.ShoutStay)
+	Who.RemoveShout(Untamed.ShoutFollow)
+	Who.RemovePerk(Untamed.PerkDenMother)
+	Who.RemovePerk(Untamed.PerkLoadBearing1)
+	Who.RemovePerk(Untamed.PerkLoadBearing2)
+	Who.RemovePerk(Untamed.PerkSecondWind1)
+	Who.RemovePerk(Untamed.PerkSecondWind2)
+
+	;; essence
+	Who.RemovePerk(Untamed.PerkCrossbreeder)
+	Who.RemovePerk(Untamed.PerkExperienced1)
+	Who.RemovePerk(Untamed.PerkPackLeader1)
+	Who.RemovePerk(Untamed.PerkPackLeader2)
+	Who.RemovePerk(Untamed.PerkPackLeader3)
+	Who.RemovePerk(Untamed.PerkPackHealing1)
+	Who.RemovePerk(Untamed.PerkPackHealing2)
+	Who.RemovePerk(Untamed.PerkPackHealing3)
+	Who.RemovePerk(Untamed.PerkResistantHide)
+	Who.RemovePerk(Untamed.PerkThickHide)
+
+	Return
+EndFunction
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

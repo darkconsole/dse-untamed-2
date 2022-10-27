@@ -1244,7 +1244,7 @@ State Off
 
 	Event OnKeyDown(int KeyCode)
 
-		If(self.Busy)
+		If(self.Busy || !Untamed.OptEnabled)
 			Return
 		EndIf
 

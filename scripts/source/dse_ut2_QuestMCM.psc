@@ -37,15 +37,12 @@ Bool  Property OptIncludeActorTypeCreature = FALSE Auto Hidden
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; general mod options
-
-Bool Property Enabled = TRUE Auto Hidden
+Int ModReset = 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Event OnInit()
-
 	Untamed.Util.PrintDebug("Configuration Reset")
 	Return
 EndEvent
@@ -217,6 +214,7 @@ Event OnPageReset(String Page)
 {when a different tab is selected in the menu.}
 
 	self.UnloadCustomContent()
+	ModReset = 0
 
 	If(Page == "$UT2_Menu_General")
 		self.ShowPageGeneral()
@@ -244,7 +242,33 @@ Event OnOptionSelect(Int Item)
 
 	;;;;;;;;
 
-	If(Item == ItemDebugActorXP0)
+	If(Item == ItemOptEnabled)
+		Val = !Untamed.OptEnabled
+		Untamed.OptEnabled = Val
+		Debug.MessageBox("Close all the menus to allow the mod to process.")
+		self.SetToggleOptionValue(Item, Val)
+		Utility.Wait(0.1)
+
+		If(Untamed.OptEnabled)
+			Untamed.OnModEnabled()
+		Else
+			Untamed.OnModDisabled()
+		EndIf
+
+		Return
+	ElseIf(Item == ItemDebugModReset1 || Item == ItemDebugModReset2)
+		Val = TRUE
+		ModReset += 1
+
+		If(ModReset >= 2)
+			Debug.MessageBox("Close all the menus to allow the mod to reset.")
+			self.SetToggleOptionValue(Item, Val)
+			Utility.Wait(0.1)
+
+			Untamed.OnModReset()
+			Return
+		EndIf
+	ElseIf(Item == ItemDebugActorXP0)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, 0)
 		Untamed.XPBar.UpdateUI()
@@ -279,7 +303,15 @@ EndEvent
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+Int ItemOptEnabled
+
 Function ShowPageGeneral()
+
+	self.SetTitleText("$UT2_Menu_Debug")
+	self.SetCursorFillMode(TOP_TO_BOTTOM)
+	self.SetCursorPosition(0)
+
+	ItemOptEnabled = self.AddToggleOption("Enable Mod", Untamed.OptEnabled)
 
 	Return
 EndFunction
@@ -306,6 +338,8 @@ Int ItemDebugActorXP50
 Int ItemDebugActorXP75
 Int ItemDebugActorXP100
 Int ItemDebugActorClearPreg
+Int ItemDebugModReset1
+Int ItemDebugModReset2
 
 Function ShowPageDebug()
 
@@ -336,24 +370,28 @@ Function ShowPageDebug()
 	self.SetCursorFillMode(TOP_TO_BOTTOM)
 	self.SetCursorPosition(0)
 
-	AddHeaderOption(Who.GetDisplayName())
+	self.AddHeaderOption(Who.GetDisplayName())
 	ItemDebugActorXP0 = self.AddToggleOption("Set UXP to 0", FALSE)
 	ItemDebugActorXP25 = self.AddToggleOption("Set UXP to 25%", FALSE)
 	ItemDebugActorXP50 = self.AddToggleOption("Set UXP to 50%", FALSE)
 	ItemDebugActorXP75 = self.AddToggleOption("Set UXP to 75%", FALSE)
 	ItemDebugActorXP100 = self.AddToggleOption("Set UXP to 100%", FALSE)
 	ItemDebugActorClearPreg = self.AddToggleOption("Reset Pregnancy", FALSE)
+	self.AddEmptyOption()
+
+	ItemDebugModReset1 = self.AddToggleOption("Nuclear Reset Key1", FALSE)
+	ItemDebugModReset2 = self.AddToggleOption("Nuclear Reset Key2", FALSE)
 
 	self.SetCursorPosition(1)
 	ItemDebug = AddToggleOption("Debugging", TRUE)
-	AddEmptyOption()
+	self.AddEmptyOption()
 
-	AddHeaderOption(Who.GetDisplayName())
+	self.AddHeaderOption(Who.GetDisplayName())
 	self.AddTextOption("UXP",(Untamed.Experience(Who) as String))
 	self.AddTextOption("Pack Count",(Untamed.Pack.GetMemberCount() as String))
 	self.AddTextOption("Pack Max",(Untamed.Pack.GetMemberCountMax() as String))
 	self.AddTextOption("Pregnant: ", PregRight)
-	AddEmptyOption()
+	self.AddEmptyOption()
 
 	Piter = 0
 	While(Piter < Pack.Length)

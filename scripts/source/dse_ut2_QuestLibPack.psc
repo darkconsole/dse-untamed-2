@@ -228,6 +228,21 @@ need to be able to do.}
 	Return
 EndFunction
 
+Function ClearMembers()
+{delete them all.}
+
+	Int Iter = 0
+	Actor Who = NONE
+
+	While(Iter < self.Members.Length)
+		self.Members[Iter].Clear()
+		Iter += 1
+	EndWhile
+
+	Return
+EndFunction
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

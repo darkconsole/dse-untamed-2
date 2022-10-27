@@ -19,11 +19,10 @@ dse_ut2_QuestInterfacePerks Property PerkUI Auto
 dse_ut2_QuestRideThings Property Ride Auto
 dse_ut2_QuestLove01 Property QuestLove01 Auto
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; form references ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; form references ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Actor        Property Player Auto                   ;; skyrim.esm
-ActorBase    Property ActorTrainer Auto             ;; untamed
 Keyword      Property KeywordActorTypeAnimal Auto   ;; skyrim.esm
 Keyword      Property KeywordActorTypeCreature Auto ;; skyrim.esm
 Faction      Property FactionPredator Auto          ;; skyrim.esm
@@ -38,8 +37,8 @@ Package      Property PackageDoNothing Auto         ;; untamed
 Package      Property PackageFollow Auto            ;; untamed
 Package      Property PackagePackStay Auto          ;; untamed
 Spell        Property SpellMatingCallTracker Auto   ;; untamed
+Shout        Property ShoutMatingCall Auto          ;; untamed
 Static       Property StaticX Auto                  ;; skyrim.esm
-VisualEffect Property VfxTeleportIn Auto            ;; untamed
 Weapon       Property WeapUnarmed Auto              ;; untamed
 
 Perk         Property PerkPackResistantHide1 Auto   ;; untamed (tenacity)
@@ -86,16 +85,16 @@ Perk         Property PerkPackHealing3 Auto         ;; untamed (essence)
 Perk         Property PerkResistantHide Auto        ;; untamed (essence)
 Perk         Property PerkThickHide Auto            ;; untamed (essence)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; data lists ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; data lists ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 FormList Property ListRaceWolves Auto
 FormList Property ListRaceBears Auto
 FormList Property ListRaceSabercats Auto
 FormList Property ListRaceHorses Auto
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; data keys ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; data keys ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Int Property KeyRaceWolf       = 1 AutoReadOnly Hidden
 Int Property KeyRaceBear       = 2 AutoReadOnly Hidden
@@ -134,9 +133,10 @@ String Property KeyMatingCallList = "UT2.Actor.MatingCallList" AutoReadOnly Hidd
 
 Bool Property OptValidateActor = TRUE Auto Hidden
 Bool Property OptDebug = TRUE Auto Hidden
+Bool Property OptEnabled = FALSE Auto Hidden
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; mod management api ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; mod management api ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 dse_ut2_QuestController Function Get() Global
 {Return the API object for access without binding. Primarily for use in things
@@ -189,8 +189,8 @@ Function ResetMod_Subsystems()
 	Return
 EndFunction
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Event OnInit()
 {detect mod reset}
@@ -201,8 +201,8 @@ Event OnInit()
 	Return
 EndEvent
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Function Tame(Actor Who, Bool AddToPack=TRUE)
 {shortcut for SetTamed to force an actor friendly.}
@@ -234,5 +234,45 @@ Int Function Level(Actor Who, Int Amount=1)
 	Return 0
 EndFunction
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Function OnModReset()
+
+	self.OnModDisabled()
+	self.Pack.ClearMembers()
+	self.Util.ClearPerks(self.Player)
+	self.Config.DeletePath(".")
+	StorageUtil.ClearAllPrefix("UT2.")
+
+	self.ResetMod()
+
+	Return
+EndFunction
+
+Function OnModEnabled()
+
+	self.OptEnabled = TRUE
+	self.Util.AddShout(self.Player, self.ShoutMatingCall)
+
+	self.XPBar.Reset()
+	Utility.Wait(0.50)
+	self.XPBar.Stop()
+	self.XPBar.Start()
+
+	self.Util.Print("Untamed is Ready.")
+	Return
+EndFunction
+
+Function OnModDisabled()
+
+	self.OptEnabled = FALSE
+	self.Player.RemoveShout(self.ShoutMatingCall)
+
+	self.XPBar.Reset()
+	Utility.Wait(0.50)
+	self.XPBar.Stop()
+
+	self.Util.Print("Untamed is Disabled.")
+	Return
+EndFunction
