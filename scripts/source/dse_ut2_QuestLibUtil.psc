@@ -173,6 +173,66 @@ Function PrintLookupRandom(String KeyName, String InputList="")
 	self.Print(self.StringLookupRandom(KeyName,InputList))
 EndFunction
 
+String Function DecToHex(Int Number)
+{base ten int to base sixteen string converter.}
+
+	String Output = ""
+	String[] HexChar = new String[16]
+	Int HexKey = 0
+
+	If(Number == 0)
+		Output = "0"
+	Else
+		HexChar[0] = "0"
+		HexChar[1] = "1"
+		HexChar[2] = "2"
+		HexChar[3] = "3"
+		HexChar[4] = "4"
+		HexChar[5] = "5"
+		HexChar[6] = "6"
+		HexChar[7] = "7"
+		HexChar[8] = "8"
+		HexChar[9] = "9"
+		HexChar[10] = "A"
+		HexChar[11] = "B"
+		HexChar[12] = "C"
+		HexChar[13] = "D"
+		HexChar[14] = "E"
+		HexChar[15] = "F"
+
+		While(Number != 0)
+			HexKey = Math.LogicalAnd(Number,0xF)
+			Number = Math.RightShift(Number,4)
+			Output = HexChar[HexKey] + Output
+		EndWhile
+	EndIf
+
+	Return Output
+EndFunction
+
+String Function FloatToString(Float Val, Int Dec=0)
+{"convert" a float into a string - e.g. get a printable float
+that cuts off all the ending zeroes the game adds when casting
+a float into a string directly.}
+
+	Int Last = Math.Floor(Val)
+	String Output = Last As String
+
+	If(Dec > 0 && Val != Last)
+		Output += "."
+
+		While(Dec > 0)
+			Val = (Val - Last) * 10
+			Last = Math.Floor(Val)
+			Output += Last As String
+
+			Dec -= 1
+		EndWhile
+	EndIf
+
+	Return Output
+EndFunction
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

@@ -65,7 +65,7 @@ Actor[] Function GetMemberList()
 	Int Next = 0
 
 	While(Iter >= 0)
-		If(self.Members[Iter].GetReference() != None)
+		If(self.Members[Iter].GetReference() != NONE)
 			Output[Next] = self.Members[Iter].GetReference() As Actor
 			Next += 1
 		EndIf

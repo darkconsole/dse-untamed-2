@@ -229,6 +229,8 @@ Event OnPageReset(String Page)
 	Return
 EndEvent
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Event OnOptionSelect(Int Item)
 
@@ -246,27 +248,25 @@ Event OnOptionSelect(Int Item)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, 0)
 		Untamed.XPBar.UpdateUI()
-		Return
 	ElseIf(Item == ItemDebugActorXP25)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.25))
 		Untamed.XPBar.UpdateUI()
-		Return
 	ElseIf(Item == ItemDebugActorXP50)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.50))
 		Untamed.XPBar.UpdateUI()
-		Return
 	ElseIf(Item == ItemDebugActorXP75)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.75))
 		Untamed.XPBar.UpdateUI()
-		Return
 	ElseIf(Item == ItemDebugActorXP100)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, Untamed.Util.GetExperienceMax(Who))
 		Untamed.XPBar.UpdateUI()
-		Return
+	ElseIf(Item == ItemDebugActorClearPreg)
+		Val = TRUE
+		Untamed.Util.ActorClearPregnant(Who)
 	EndIf
 
 	;;;;;;;;
@@ -276,8 +276,8 @@ Event OnOptionSelect(Int Item)
 	Return
 EndEvent
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Function ShowPageGeneral()
 
@@ -305,13 +305,29 @@ Int ItemDebugActorXP25
 Int ItemDebugActorXP50
 Int ItemDebugActorXP75
 Int ItemDebugActorXP100
+Int ItemDebugActorClearPreg
 
 Function ShowPageDebug()
 
 	Actor Who = Game.GetCurrentCrosshairRef() as Actor
 
+	Actor[] Pack = Untamed.Pack.GetMemberList()
+	Int Piter = 0
+	Float GameTimeNow = Utility.GetCurrentGameTime()
+	ActorBase PregWith
+	String PregRight = "No"
+	Float PregTime = 0.0
+	String PackLeft
+	String PackRight
+
 	If(Who == None)
 		Who = Untamed.Player
+	EndIf
+
+	If(Untamed.Util.ActorIsPregnant(Who))
+		PregWith = Untamed.Util.ActorGetPregnant(Who)
+		PregTime = GameTimeNow - StorageUtil.GetFloatValue(Who, Untamed.KeyPregnantBase)
+		PregRight = PregWith.GetRace().GetName() + " [" + Untamed.Util.DecToHex(PregWith.GetFormID()) + "] [" + (Untamed.Util.FloatToString(PregTime, 2)) + "d]"
 	EndIf
 
 	;;;;;;;;
@@ -326,6 +342,7 @@ Function ShowPageDebug()
 	ItemDebugActorXP50 = self.AddToggleOption("Set UXP to 50%", FALSE)
 	ItemDebugActorXP75 = self.AddToggleOption("Set UXP to 75%", FALSE)
 	ItemDebugActorXP100 = self.AddToggleOption("Set UXP to 100%", FALSE)
+	ItemDebugActorClearPreg = self.AddToggleOption("Reset Pregnancy", FALSE)
 
 	self.SetCursorPosition(1)
 	ItemDebug = AddToggleOption("Debugging", TRUE)
@@ -335,6 +352,17 @@ Function ShowPageDebug()
 	self.AddTextOption("UXP",(Untamed.Experience(Who) as String))
 	self.AddTextOption("Pack Count",(Untamed.Pack.GetMemberCount() as String))
 	self.AddTextOption("Pack Max",(Untamed.Pack.GetMemberCountMax() as String))
+	self.AddTextOption("Pregnant: ", PregRight)
+	AddEmptyOption()
+
+	Piter = 0
+	While(Piter < Pack.Length)
+		PackLeft = ((Piter + 1) as String) + ") " + Pack[Piter].GetDisplayName() + " [" + Untamed.Util.DecToHex(Pack[Piter].GetFormID()) + "]"
+		PackRight = Untamed.Util.GetExperience(Pack[Piter]) + " UXP"
+		self.AddTextOption(PackLeft, PackRight)
+		Piter += 1
+	EndWhile
+
 	AddEmptyOption()
 
 	Return
