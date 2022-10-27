@@ -787,15 +787,16 @@ override an existing pregnancy unless forced.}
 	What = With.GetActorBase()
 
 	If(What == NONE)
-		self.PrintDebug("[SetPregnant] failed to find actor ActorBase lmao ok")
+		self.PrintDebug("[ActorSetPregnant] failed to find actor ActorBase lmao ok")
 		Return
 	EndIf
 
 	;;;;;;;;
 
 	;; start the pregnancy.
+	self.PrintDebug("[ActorSetPregnant] " + Who.GetDisplayName() + " => " + With.GetDisplayName() + " " + What)
 	StorageUtil.SetFormValue(Who, Untamed.KeyPregnantBase, What)
-	StorageUtil.SetIntValue(Who, Untamed.KeyPregnantBase, 1)
+	StorageUtil.SetFloatValue(Who, Untamed.KeyPregnantBase, Utility.GetCurrentGameTime())
 
 	;; note the actor as pregnant.
 	StorageUtil.FormListAdd(NONE, Untamed.KeyPregnantBase, Who, FALSE)
@@ -803,11 +804,28 @@ override an existing pregnancy unless forced.}
 	Return
 EndFunction
 
+Float Function ActorUpdatePregnant(Actor Who, Int Amount=1)
+{increment an actor's pregnancy data.}
+
+	Float MaxDays = Untamed.Config.GetFloat(".PregnancyDays")
+	Float Now = Utility.GetCurrentGameTime()
+	Float Then = StorageUtil.GetFloatValue(Who, Untamed.KeyPregnantBase, Now)
+	Float Diff = Now - Then
+	Float Percent = Diff / MaxDays
+
+	self.PrintDebug("[ActorUpdatePregnant] " + Who.GetDisplayName() + " " + (Percent * 100) + "%")
+
+	;; todo - body scaling
+
+	Return Percent
+EndFunction
+
 Function ActorClearPregnant(Actor Who)
 {depreggo and clean up this actor.}
 
 	StorageUtil.FormListRemove(NONE, Untamed.KeyPregnantBase, Who, TRUE)
 	StorageUtil.UnsetFormValue(Who, Untamed.KeyPregnantBase)
+	StorageUtil.UnsetFloatValue(Who, Untamed.KeyPregnantBase)
 
 	Return
 EndFunction

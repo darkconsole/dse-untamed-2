@@ -4,6 +4,8 @@
 	"PackKillXP": 2.5,
 	"PerkCostXP": 90,
 	"IncludeCreatures": true,
+	"PregnancyDays": 10.0,
+	"PregnancyChance": 100,
 
 	"PackLoveIterXP": 1.0,
 	"WidgetOffsetX": 1130,

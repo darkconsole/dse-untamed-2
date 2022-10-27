@@ -64,6 +64,8 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	Float XP = (BeastCount * Untamed.Config.GetFloat(".EncounterXP"))
 	Float BXP = (XP * Untamed.Config.GetFloat(".PackShareXP"))
 	Int Iter = 0
+	Int PregChance = 0
+	Int PregRoll = 0
 
 	Untamed.Experience(Untamed.Player, XP)
 
@@ -76,7 +78,12 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 			EndIf
 
 			If(Untamed.Player.HasPerk(Untamed.PerkDenMother))
-				Untamed.Util.ActorSetPregnant(Untamed.Player, Actors[Iter])
+				PregChance = Untamed.Config.GetInt(".PregnancyChance")
+				PregRoll = Utility.RandomInt(1, 100)
+
+				If(PregChance > 0 && PregRoll <= PregChance)
+					Untamed.Util.ActorSetPregnant(Untamed.Player, Actors[Iter])
+				EndIf
 			EndIf
 		EndIf
 

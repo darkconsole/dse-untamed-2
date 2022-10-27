@@ -227,3 +227,39 @@ need to be able to do.}
 
 	Return
 EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Function UpdatePreggos()
+{update pregnant actor data.}
+
+	Actor[] Preggos = Untamed.Util.GetPregnantActors()
+	Int Iter = 0
+	Float Percent
+
+	While(Iter < Preggos.Length)
+
+		If(Preggos[Iter] != NONE)
+			Percent = Untamed.Util.ActorUpdatePregnant(Preggos[Iter])
+			Utility.Wait(1.25)
+		EndIf
+
+		Iter += 1
+	EndWhile
+
+	Return
+EndFunction
+
+Event OnUpdate()
+
+	If(Untamed.Util.CountPregnantActors())
+		self.UpdatePreggos()
+	EndIf
+
+	If(self.IsRunning())
+		self.RegisterForSingleUpdate(60)
+	EndIf
+
+	Return
+EndEvent
