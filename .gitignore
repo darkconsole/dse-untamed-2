@@ -1,5 +1,8 @@
 # things to ignore
 
+desktop.ini
+
 # a patch to maybe make iwant more responsive by reducing waits while but
 # technically burning more cpu.
+
 scripts/iwant_widgets.pex
