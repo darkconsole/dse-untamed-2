@@ -284,7 +284,6 @@ Function SetTamed(Actor Who, Bool Enable)
 
 	self.SetPersistHack(Who, Enable)
 	self.SetPassive(Who, Enable)
-	;;Untamed.XPBar.UpdateUI()
 
 	Return
 EndFunction

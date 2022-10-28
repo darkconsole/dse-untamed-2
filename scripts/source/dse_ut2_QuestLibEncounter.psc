@@ -90,7 +90,7 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 		Iter += 1
 	EndWhile
 
-	Untamed.XPBar.UpdateUI()
+	Untamed.XPBar.RegisterForSingleUpdate(0.1)
 	Return
 EndFunction
 
@@ -109,7 +109,7 @@ Function OnLameEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 	EndIf
 
 	Untamed.Experience(Untamed.Player, XP)
-	Untamed.XPBar.UpdateUI()
+	Untamed.XPBar.RegisterForSingleUpdate(0.1)
 
 	Return
 EndFunction

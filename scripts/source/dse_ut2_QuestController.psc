@@ -223,7 +223,7 @@ Float Function Experience(Actor Who, Float Amount=0.0)
 
 	If(Amount != 0.0)
 		self.Util.ModExperience(Who,Amount)
-		self.XPBar.UpdateUI()
+		self.XPBar.RegisterForSingleUpdate(0.1)
 	EndIf
 
 	Return self.Util.GetExperience(Who)

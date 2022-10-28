@@ -271,23 +271,23 @@ Event OnOptionSelect(Int Item)
 	ElseIf(Item == ItemDebugActorXP0)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, 0)
-		Untamed.XPBar.UpdateUI()
+		Untamed.XPBar.RegisterForSingleUpdate(0.1)
 	ElseIf(Item == ItemDebugActorXP25)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.25))
-		Untamed.XPBar.UpdateUI()
+		Untamed.XPBar.RegisterForSingleUpdate(0.1)
 	ElseIf(Item == ItemDebugActorXP50)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.50))
-		Untamed.XPBar.UpdateUI()
+		Untamed.XPBar.RegisterForSingleUpdate(0.1)
 	ElseIf(Item == ItemDebugActorXP75)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.75))
-		Untamed.XPBar.UpdateUI()
+		Untamed.XPBar.RegisterForSingleUpdate(0.1)
 	ElseIf(Item == ItemDebugActorXP100)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, Untamed.Util.GetExperienceMax(Who))
-		Untamed.XPBar.UpdateUI()
+		Untamed.XPBar.RegisterForSingleUpdate(0.1)
 	ElseIf(Item == ItemDebugActorClearPreg)
 		Val = TRUE
 		Untamed.Util.ActorClearPregnant(Who)
