@@ -11,7 +11,6 @@ dse_ut2_QuestController Untamed = dse_ut2_QuestController.Get()
 
 ActorUtil.RemovePackageOverride(akSpeaker, Untamed.PackageFollow)
 Untamed.Pack.RemoveMember(akSpeaker)
-;; Untamed.Util.SetTamed(akSpeaker, FALSE)
 akSpeaker.EvaluatePackage()
 
 Return
