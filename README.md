@@ -104,3 +104,10 @@ Perks from the path of burden provide the pack with utility abilities.
 	* Shout: Last Stand (heal everyone consuming 75% UXP)
 	* Shout: Spectral Stampede (spirits that plow through battle)
 	* Three tier `Experienced (+10 UXP, +10 UXP, +10 UXP)`
+
+## Dev Notes
+
+	* Slem (Flesh) (Mating Call: dse_ut2_Qu_dse_ut2_QuestLi_000684F9_1)
+	* Krii (Kill) (Attack Shout: dse_ut2_Qu_dse_ut2_QuestLi_0001B722_1)
+	* Nus (Statue) (Stay Shout: dse_ut2_Qu_dse_ut2_QuestLi_0001B723_1)
+	* Tah (Pack) (Follow Shout: dse_ut2_Qu_dse_ut2_QuestLi_0001B724_1)
