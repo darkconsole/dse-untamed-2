@@ -23,6 +23,10 @@ Event OnEnterBleedout()
 
 	Me.SetNoBleedoutRecovery(TRUE)
 
+	If(Untamed.Config.GetBool(".PackSecondWind"))
+		Source = Me
+	EndIf
+
 	If(Untamed.Player.HasPerk(Untamed.PerkSecondWind2))
 		If(Untamed.Util.GetExperiencePercent(Source) >= 25.0)
 			SecondWind = TRUE
