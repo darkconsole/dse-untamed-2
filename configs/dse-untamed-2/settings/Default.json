@@ -1,13 +1,19 @@
 {
+	"IncludeCreatures": true,
+
 	"PackSexXP": 5.0,
 	"PackKillXP": 5,
 	"PackSexTimeXPM": 0.1,
 	"PackShareXPM": 0.5,
 	"PackSecondWind": false,
+
+	"HumanoidSexXPM": 0.5,
 	"PerkCostXP": 90,
-	"IncludeCreatures": true,
+	"PerkThickHideMult": 4.00,
+	"PerkResistantHideMult": 0.60,
 	"PregnancyDays": 10.0,
 	"PregnancyChance": 100,
+	"PlayerExperienceMax": 100,
 
 	"PackLoveIterXP": 1.0,
 	"WidgetOffsetX": 1130,

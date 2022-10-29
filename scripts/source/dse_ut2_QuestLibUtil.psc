@@ -640,10 +640,12 @@ EndFunction
 Float Function GetExperienceMax(Actor Who)
 {get the maximum amount of xp this actor can store at once.}
 
-	Float Max = Untamed.Menu.OptExperienceMax
+	Float Max = Untamed.Config.GetFloat(".PlayerExperienceMax")
+
+	;; 20% bonus to max xp with perk.
 
 	If(Who.HasPerk(Untamed.PerkExperienced1))
-		Max += Untamed.Menu.OptPerkExperiencedAdd
+		Max += (Max * 0.20)
 	EndIf
 
 	Return Max
@@ -751,7 +753,7 @@ EndFunction
 Function UpdateFeatThickHide(Actor Who)
 {update the thick hide perk.}
 
-	Float Value = (self.GetExperience(Who) * Untamed.Menu.OptPerkThickHideMult)
+	Float Value = (self.GetExperience(Who) * Untamed.Config.GetFloat(".PerkThickHideMult"))
 
 	self.PrintDebug(Who.GetDisplayName() + " Thick Hide " + Value)
 
@@ -764,7 +766,7 @@ EndFunction
 Function UpdateFeatResistantHide(Actor Who)
 {update the resistant hide perk.}
 
-	Float Value = (self.GetExperience(Who) * Untamed.Menu.OptPerkResistantHideMult)
+	Float Value = (self.GetExperience(Who) * Untamed.Config.GetFloat(".PerkResistantHideMult"))
 
 	self.PrintDebug(Who.GetDisplayName() + " Resistant Hide " + Value)
 
