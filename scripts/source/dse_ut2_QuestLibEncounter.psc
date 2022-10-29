@@ -9,11 +9,41 @@ dse_ut2_QuestController Property Untamed Auto
 Event OnInit()
 {library setup.}
 
+	Untamed.Util.PrintDebug("[LibEncounter] on init")
+
 	;; clear out event handlers.
+	self.UnregisterForModEvent("AnimationStart")
+	self.UnregisterForModEvent("AnimationEnd")
 	self.UnregisterForModEvent("OrgasmStart")
 
 	;; apply event handlers.
-	self.RegisterForModEvent("OrgasmStart", "OnEncounterEnding")
+	self.RegisterForModEvent("AnimationStart", "OnEncounterStarting")
+	self.RegisterForModEvent("AnimationEnd", "OnEncounterEnding")
+	self.RegisterForModEvent("OrgasmStart", "OnEncounterOrgasm")
+
+	Return
+EndEvent
+
+Event OnEncounterStarting(String EventName, String Args, Float Argc, Form From)
+{detect when a sex scene ends.}
+
+	If(!Untamed.OptEnabled)
+		Return
+	EndIf
+
+	Actor[] Actors = Untamed.Anim.SexLab.HookActors(Args)
+	sslBaseAnimation Animation = Untamed.Anim.SexLab.HookAnimation(Args)
+	Int Iter = 0
+
+	If(self.IsPlayerInvolved(Actors) && self.CountBeastsInvolved(Actors) > 0)
+		While(Iter < Actors.Length)
+			If(Actors[Iter] == Untamed.Player || Untamed.Pack.IsMember(Actors[Iter]))
+				Untamed.Util.PrintDebug("[EncounterStart] " + Actors[Iter].GetDisplayName() + " has begun a bestial encounter")
+				StorageUtil.SetFloatValue(Actors[Iter], Untamed.KeyEncounterTime, Utility.GetCurrentRealTime())
+			EndIf
+			Iter += 1
+		EndWhile
+	EndIf
 
 	Return
 EndEvent
@@ -28,9 +58,43 @@ Event OnEncounterEnding(String EventName, String Args, Float Argc, Form From)
 	Actor[] Actors = Untamed.Anim.SexLab.HookActors(Args)
 	sslBaseAnimation Animation = Untamed.Anim.SexLab.HookAnimation(Args)
 	Int Iter = 0
+	Float Timer = 0.0
+	Float Diff = 0.0
+	Float UXP = 0.0
+
+	If(self.IsPlayerInvolved(Actors) && self.CountBeastsInvolved(Actors) > 0)
+		While(Iter < Actors.Length)
+			If(Actors[Iter] == Untamed.Player || Untamed.Pack.IsMember(Actors[Iter]))
+				Timer = StorageUtil.GetFloatValue(Actors[Iter], Untamed.KeyEncounterTime)
+				Diff = PapyrusUtil.ClampFloat((Utility.GetCurrentRealTime() - Timer), 0.0, 9001.0)
+				UXP = (Diff * Untamed.Config.GetFloat(".PackSexTimeXPM"))
+
+				Untamed.Util.PrintDebug("[EncounterEnd] " + Actors[Iter].GetDisplayName() + " " + UXP + " Time Based UXP")
+
+				If(UXP > 0.0)
+					Untamed.Util.ModExperience(Actors[Iter], UXP)
+				EndIf
+			EndIf
+			Iter += 1
+		EndWhile
+	EndIf
+
+	Return
+EndEvent
+
+Event OnEncounterOrgasm(String EventName, String Args, Float Argc, Form From)
+{detect when a sex scene ends.}
+
+	If(!Untamed.OptEnabled)
+		Return
+	EndIf
+
+	Actor[] Actors = Untamed.Anim.SexLab.HookActors(Args)
+	sslBaseAnimation Animation = Untamed.Anim.SexLab.HookAnimation(Args)
+	Int Iter = 0
 
 	If(self.IsPlayerInvolved(Actors))
-		self.OnEncounterEndingWithPlayer(Actors,Animation)
+		self.OnEncounterOrgasmWithPlayer(Actors,Animation)
 	EndIf
 
 	Return
@@ -39,21 +103,21 @@ EndEvent
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Function OnEncounterEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
+Function OnEncounterOrgasmWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 {handle what happens when a scene ends with the player involved.}
 
 	Int BeastCount = self.CountBeastsInvolved(Actors)
 
 	If(BeastCount > 0)
-		self.OnBeastialEndingWithPlayer(Actors,Animation,BeastCount)
+		self.OnBeastialOrgasmWithPlayer(Actors,Animation,BeastCount)
 	Else
-		self.OnLameEndingWithPlayer(Actors,Animation)
+		self.OnLameOrgasmWithPlayer(Actors,Animation)
 	EndIf
 
 	Return
 EndFunction
 
-Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, Int BeastCount)
+Function OnBeastialOrgasmWithPlayer(Actor[] Actors, sslBaseAnimation Animation, Int BeastCount)
 {handle what happens when a scene ends with the player involved with beasts.}
 
 	Untamed.Util.PrintDebug("Player Beastial Ending")
@@ -61,8 +125,8 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	;; you get positive xp for every beast involved when there are beasts
 	;; involved.
 
-	Float XP = (BeastCount * Untamed.Config.GetFloat(".EncounterXP"))
-	Float BXP = (XP * Untamed.Config.GetFloat(".PackShareXP"))
+	Float XP = (BeastCount * Untamed.Config.GetFloat(".PackSexXP"))
+	Float BXP = (XP * Untamed.Config.GetFloat(".PackShareXPM"))
 	Int Iter = 0
 	Int PregChance = 0
 	Int PregRoll = 0
@@ -94,7 +158,7 @@ Function OnBeastialEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	Return
 EndFunction
 
-Function OnLameEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
+Function OnLameOrgasmWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 {there is a reason its spelled BESTiality.}
 
 	Untamed.Util.PrintDebug("Player Humanoid Ending")
@@ -102,7 +166,7 @@ Function OnLameEndingWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 	;; you get negative xp for every humanoid involved when there are no
 	;; beasts involved, unless you have the cross breeder perk.
 
-	Float XP = ((((Actors.Length - 1) * Untamed.Menu.OptEncounterXP) * -1) * Untamed.Menu.OptEncounterHumanoidMult)
+	Float XP = ((((Actors.Length - 1) * Untamed.Config.GetFloat(".PackSexXP")) * -1) * Untamed.Menu.OptEncounterHumanoidMult)
 
 	If(Untamed.Player.HasPerk(Untamed.PerkCrossbreeder))
 		XP = 0
