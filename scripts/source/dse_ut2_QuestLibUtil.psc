@@ -383,7 +383,8 @@ in the save file which is another reason we have to fix them occasionally.}
 		Who.SetActorValue("CombatHealthRegenMult", 1.0)
 	EndIf
 
-	Who.EquipItem(Untamed.WeapUnarmed, TRUE, TRUE)
+	;;Who.EquipItem(Untamed.WeapUnarmed, TRUE, TRUE)
+	Who.EquipItemEx(Untamed.WeapUnarmed, 0, TRUE, FALSE)
 
 	Untamed.Util.PrintDebug("Fix Animal Actor: " + Who.GetDisplayName())
 	Return
