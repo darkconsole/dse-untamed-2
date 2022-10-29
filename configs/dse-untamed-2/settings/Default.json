@@ -1,7 +1,8 @@
 {
-	"EncounterXP": 5.0,
-	"PackShareXP": 0.5,
+	"PackSexXP": 5.0,
 	"PackKillXP": 5,
+	"PackSexTimeXPM": 0.1,
+	"PackShareXPM": 0.5,
 	"PackSecondWind": false,
 	"PerkCostXP": 90,
 	"IncludeCreatures": true,

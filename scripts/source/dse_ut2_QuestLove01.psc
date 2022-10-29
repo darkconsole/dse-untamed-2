@@ -168,7 +168,7 @@ Function OnAnimationIter()
 		;; member gets partial xp.
 
 		PXP = Untamed.Config.GetFloat(".PackLoveIterXP")
-		MXP = PXP * Untamed.Config.GetFloat(".PackShareXP")
+		MXP = PXP * Untamed.Config.GetFloat(".PackShareXPM")
 
 		Untamed.Experience(self.Dom, PXP)
 		Untamed.Experience(self.Sub, MXP)

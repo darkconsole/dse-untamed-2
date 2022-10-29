@@ -50,7 +50,7 @@ Event OnDeath(Actor Killer)
 	Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was realdeathed by " + Killer.GetDisplayName())
 
 	KXP = Untamed.Config.GetFloat(".PackKillXP")
-	ShareMult = Untamed.Config.GetFloat(".PackShareXP")
+	ShareMult = Untamed.Config.GetFloat(".PackShareXPM")
 
 	If(Untamed.Pack.IsMember(Killer))
 		Untamed.Experience(Killer, KXP)

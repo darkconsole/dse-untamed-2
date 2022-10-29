@@ -23,7 +23,6 @@ Int   Property Difficulty = 100 Auto Hidden
 Float Property OptExperienceMax = 100.0 Auto Hidden
 Float Property OptPerkExperiencedAdd = 20.0 Auto Hidden
 Float Property OptEncounterHumanoidMult = 0.5 Auto Hidden
-Float Property OptEncounterXP = 5.0 Auto Hidden
 Float Property OptFondleXP = 2.5 Auto Hidden
 Float Property OptPlayXP = 2.5 Auto Hidden
 Int   Property OptPerkPackLeader0 = 1 Auto Hidden
