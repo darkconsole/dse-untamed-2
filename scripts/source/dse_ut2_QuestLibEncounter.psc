@@ -125,7 +125,7 @@ Function OnBeastialOrgasmWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	;; you get positive xp for every beast involved when there are beasts
 	;; involved.
 
-	Float XP = (BeastCount * Untamed.Config.GetFloat(".PackSexXP"))
+	Float XP = (BeastCount * Untamed.Config.GetFloat(".PackOrgasmXP"))
 	Float BXP = (XP * Untamed.Config.GetFloat(".PackShareXPM"))
 	Int Iter = 0
 	Int PregChance = 0
@@ -166,7 +166,7 @@ Function OnLameOrgasmWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 	;; you get negative xp for every humanoid involved when there are no
 	;; beasts involved, unless you have the cross breeder perk.
 
-	Float XP = ((((Actors.Length - 1) * Untamed.Config.GetFloat(".PackSexXP")) * -1) * Untamed.Config.GetFloat(".HumanoidSexXPM"))
+	Float XP = ((((Actors.Length - 1) * Untamed.Config.GetFloat(".PackOrgasmXP")) * -1) * Untamed.Config.GetFloat(".HumanoidOrgasmXPM"))
 
 	If(Untamed.Player.HasPerk(Untamed.PerkCrossbreeder))
 		XP = 0
