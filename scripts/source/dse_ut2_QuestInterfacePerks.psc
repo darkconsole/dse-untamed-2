@@ -774,8 +774,8 @@ Bool Function HandleBuyPerk()
 		Untamed.Pack.FixMembers()
 	EndIf
 
-	;;Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
-	;;Untamed.XPBar.RegisterForSingleUpdate(0.1)
+	Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
+	Untamed.XPBar.RegisterForSingleUpdate(0.1)
 
 	Return TRUE
 EndFunction
@@ -812,8 +812,8 @@ Bool Function HandleGiveShout()
 
 	Untamed.Util.Print("Shout Added: " + Choice.GetName())
 	Untamed.Util.AddShout(Untamed.Player, Choice)
-	;;Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
-	;;Untamed.XPBar.RegisterForSingleUpdate(0.1)
+	Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
+	Untamed.XPBar.RegisterForSingleUpdate(0.1)
 
 	Return TRUE
 EndFunction
@@ -1244,7 +1244,12 @@ State Off
 
 	Event OnKeyDown(int KeyCode)
 
-		If(self.Busy || !Untamed.OptEnabled)
+		If(!Untamed.OptEnabled)
+			Return
+		EndIf
+
+		If(self.Busy || Untamed.XPBar.Busy)
+			Untamed.Util.Print("One of UT2's menus are busy please wait a moment.")
 			Return
 		EndIf
 
