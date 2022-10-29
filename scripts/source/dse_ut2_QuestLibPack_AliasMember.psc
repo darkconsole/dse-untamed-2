@@ -75,25 +75,25 @@ EndEvent
 
 Event OnItemAdded(Form What, Int Count, ObjectReference Obj, ObjectReference From)
 	Actor Me = self.GetActorReference()
-	Untamed.Util.Print(Me.GetDisplayName() + " added " + What.GetName())
+	;;Untamed.Util.Print(Me.GetDisplayName() + " added " + What.GetName())
 	Return
 EndEvent
 
 Event OnItemRemoved(Form What, Int Count, ObjectReference Obj, ObjectReference From)
 	Actor Me = self.GetActorReference()
-	Untamed.Util.Print(Me.GetDisplayName() + " removed " + What.GetName())
+	;;Untamed.Util.Print(Me.GetDisplayName() + " removed " + What.GetName())
 	Return
 EndEvent
 
 Event OnObjectEquipped(Form What, ObjectReference Obj)
 	Actor Me = self.GetActorReference()
-	Untamed.Util.Print(Me.GetDisplayName() + " equip " + What.GetName())
+	;;Untamed.Util.Print(Me.GetDisplayName() + " equip " + What.GetName())
 	Return
 EndEvent
 
 Event OnObjectUnequipped(Form What, ObjectReference Obj)
 	Actor Me = self.GetActorReference()
-	Untamed.Util.Print(Me.GetDisplayName() + " unequip " + What.GetName())
+	;;Untamed.Util.Print(Me.GetDisplayName() + " unequip " + What.GetName())
 	Return
 EndEvent
 

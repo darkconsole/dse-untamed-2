@@ -255,6 +255,9 @@ Function OnModEnabled()
 	self.OptEnabled = TRUE
 	self.Util.AddShout(self.Player, self.ShoutMatingCall)
 
+	;;self.Pack.Stop()
+	;;self.Pack.Start()
+
 	self.XPBar.Reset()
 	Utility.Wait(0.50)
 	self.XPBar.Stop()
@@ -268,6 +271,9 @@ Function OnModDisabled()
 
 	self.OptEnabled = FALSE
 	self.Player.RemoveShout(self.ShoutMatingCall)
+
+	;;self.Pack.Stop()
+	;;self.Pack.Start()
 
 	self.XPBar.Reset()
 	Utility.Wait(0.50)
