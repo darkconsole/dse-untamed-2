@@ -688,12 +688,20 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 	ElseIf(self.IsUpKey(KeyCode))
 		self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 1), 1, (self.SideItems.Length - 2))
 	ElseIf(self.IsRightKey(KeyCode))
+		If(self.SideCur == 0)
+			self.SideCur = 1
+		EndIf
+
 		If(self.MainCur == 3 || self.MainCur == 4)
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 3), 1, (self.SideItems.Length - 2))
 		Else
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 1), 1, (self.SideItems.Length - 2))
 		EndIf
 	ElseIf(self.IsLeftKey(KeyCode))
+		If(self.SideCur == 0)
+			self.SideCur = 1
+		EndIf
+
 		If(self.MainCur == 3 || self.MainCur == 4)
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 3), 1, (self.SideItems.Length - 2))
 		Else
