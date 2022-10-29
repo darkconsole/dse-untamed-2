@@ -710,6 +710,11 @@ Function SetExperience(Actor Who, Float XP)
 	StorageUtil.SetFloatValue(Who, Untamed.KeyXP, ClampXP)
 	Untamed.Util.PrintDebug(Who.GetDisplayName() + " UXP " + ClampXP)
 
+	If((XP > MaxXP) && (Who != Untamed.Player) && Untamed.Pack.IsMember(Who))
+		self.ModExperience(Untamed.Player, ((XP - MaxXP) * Untamed.Config.GetFloat(".PackOverflowXPM")))
+		UpdatePlayer = TRUE
+	EndIf
+
 	;;;;;;;;
 
 	If(UpdatePlayer)

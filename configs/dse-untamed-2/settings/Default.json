@@ -1,13 +1,13 @@
 {
-	"IncludeCreatures": true,
-
-	"PackSexXP": 5.0,
+	"PackOrgasmXP": 5.0,
 	"PackKillXP": 5,
 	"PackSexTimeXPM": 0.1,
 	"PackShareXPM": 0.5,
+	"PackOverflowXPM": 0.1,
 	"PackSecondWind": false,
 
-	"HumanoidSexXPM": 0.5,
+	"IncludeCreatures": true,
+	"HumanoidOrgasmXPM": 0.5,
 	"PerkCostXP": 90,
 	"PerkThickHideMult": 4.00,
 	"PerkResistantHideMult": 0.60,
