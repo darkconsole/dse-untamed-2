@@ -20,8 +20,14 @@ Event OnEffectStart(Actor Target, Actor Caster)
 				Members[Iter].AddToFaction(Untamed.FactionPackStay)
 				Members[Iter].EvaluatePackage()
 			ElseIf(self.CommandNum == 2)
+				Untamed.Pack.Target.ForceRefTo(Untamed.Player)
 				Members[Iter].RemoveFromFaction(Untamed.FactionPackStay)
 				Members[Iter].EvaluatePackage()
+
+				;; set the shout to take that long to cd.
+				Utility.Wait(3.8)
+				Untamed.Pack.Target.Clear()
+
 			ElseIf(self.CommandNum == 3)
 				Untamed.Pack.Target.ForceRefTo(Target)
 				Members[Iter].RemoveFromFaction(Untamed.FactionPackStay)
