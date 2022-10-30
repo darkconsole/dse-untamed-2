@@ -5,8 +5,8 @@ Int Property CombatState = 0 Auto Hidden
 
 Event OnActivate(ObjectReference By)
 	Actor Me = self.GetActorReference()
-	Untamed.Util.Print(Me.GetDisplayName() + " activated!")
-	Untamed.Util.FixAnimalActor(Me)
+	;;Untamed.Util.Print(Me.GetDisplayName() + " activated!")
+	;;Untamed.Util.FixAnimalActor(Me)
 	Return
 EndEvent
 

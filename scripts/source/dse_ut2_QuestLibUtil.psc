@@ -332,7 +332,10 @@ EndFunction
 Function CanTalk(Actor Who)
 {make an actor able to engage dialog...}
 
+	Who.BlockActivation(TRUE)
 	Who.AllowPCDialogue(FALSE)
+
+	Who.BlockActivation(FALSE)
 	Who.AllowPCDialogue(TRUE)
 
 	Return
