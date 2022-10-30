@@ -103,19 +103,19 @@ EndEvent
 
 Event OnPackageStart(Package Pkg)
 	Actor Me = self.GetActorReference()
-	;;Untamed.Util.Print(Me.GetDisplayName() + " pkg start ")
+	;; Untamed.Util.Print(Me.GetDisplayName() + " pkg start " + Untamed.Util.DecToHex(pkg.GetFormID()))
 	Return
 EndEvent
 
 Event OnPackageChange(Package Pkg)
 	Actor Me = self.GetActorReference()
-	;;Untamed.Util.Print(Me.GetDisplayName() + " pkg change ")
+	;; Untamed.Util.Print(Me.GetDisplayName() + " pkg change " + Untamed.Util.DecToHex(pkg.GetFormID()))
 	Return
 EndEvent
 
 Event OnPackageEnd(Package Pkg)
 	Actor Me = self.GetActorReference()
-	;;Untamed.Util.Print(Me.GetDisplayName() + " pkg end ")
+	;; Untamed.Util.Print(Me.GetDisplayName() + " pkg end " + Untamed.Util.DecToHex(pkg.GetFormID()))
 	Return
 EndEvent
 

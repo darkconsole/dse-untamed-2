@@ -154,6 +154,8 @@ if the pack is already full.}
 		If(self.Members[Iter].GetReference() == None)
 			self.Members[Iter].ForceRefTo(Who)
 
+			ActorUtil.RemovePackageOverride(Who, Untamed.PackageFollow)
+
 			Who.StopCombat()
 			Who.StopCombatAlarm()
 			Who.SetDoingFavor(FALSE)

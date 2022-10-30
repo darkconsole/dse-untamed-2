@@ -323,6 +323,7 @@ EndFunction
 Function CanOpenDoors(Actor Who)
 {make an actor able to open doors...}
 
+	Who.GetRace().SetCantOpenDoors()
 	Who.GetRace().ClearCantOpenDoors()
 
 	Return
@@ -331,6 +332,7 @@ EndFunction
 Function CanTalk(Actor Who)
 {make an actor able to engage dialog...}
 
+	Who.AllowPCDialogue(FALSE)
 	Who.AllowPCDialogue(TRUE)
 
 	Return
@@ -370,9 +372,8 @@ in the save file which is another reason we have to fix them occasionally.}
 	;; 1) when a save is loaded to all pack members.
 	;; 2) every time the pack follower ability gets reapplied by the alias.
 
-	Untamed.Util.CanOpenDoors(Who)
-	Untamed.Util.CanTalk(Who)
-	Who.AllowPCDialogue(TRUE)
+	self.CanOpenDoors(Who)
+	self.CanTalk(Who)
 
 	Who.SetActorValue("Aggression", 1) ;; attack verified enemies
 	Who.SetActorValue("Assistance", 2) ;; aid friends and allies
@@ -386,7 +387,7 @@ in the save file which is another reason we have to fix them occasionally.}
 	;;Who.EquipItem(Untamed.WeapUnarmed, TRUE, TRUE)
 	Who.EquipItemEx(Untamed.WeapUnarmed, 0, TRUE, FALSE)
 
-	Untamed.Util.PrintDebug("Fix Animal Actor: " + Who.GetDisplayName())
+	self.PrintDebug("Fix Animal Actor: " + Who.GetDisplayName())
 	Return
 EndFunction
 

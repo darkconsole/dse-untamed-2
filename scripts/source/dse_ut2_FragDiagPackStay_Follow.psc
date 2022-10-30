@@ -7,7 +7,6 @@ Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
 akSpeaker.RemoveFromFaction(dse_ut2_QuestController.Get().FactionPackStay)
-Utility.Wait(0.20)
 akSpeaker.EvaluatePackage()
 ;END CODE
 EndFunction
