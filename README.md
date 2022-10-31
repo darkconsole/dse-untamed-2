@@ -38,10 +38,10 @@ Perks from the path of the bear help the pack endure.
 	[+] Health (+100, +100, +100)
 	    Increases pack member health pool.
 
-	[-] Shout: Follow
+	[+] Shout: Follow
 	    Command nearby pack members that were saying to follow you.
 
-	[-] Shout: Stay
+	[+] Shout: Stay
 	    Command nearby pack members that were following you to stay put.
 
 ## Ferocity
@@ -57,14 +57,14 @@ Perks from the path of the wolf increase the lethality of the pack.
 	[+] Bleed (3dps, 6dps, 9dps)
 	    Pack member attacks cause bleed damage over time.
 
-	[-] Shout: Attack
+	[+] Shout: Attack
 	    Command nearby pack members to focus their attacks on the target.
 
 ## Beast Mastery
 
 Perks from the path of burden provide the pack with utility abilities.
 
-	[-] Pack Leader (3, 6, 12)
+	[+] Pack Leader (3, 6, 12)
 	    Increases maximum pack size.
 
 	[+] Second Wind (1, 2)
@@ -75,7 +75,7 @@ Perks from the path of burden provide the pack with utility abilities.
 	    LB1 unlocks pack member inventory.
 	    LB2 increases carry weight of pack members by 100.
 
-	[-] Situational Awareness
+	[-] Keen Senses
 	    In Combat: pack members glow blue while enemies glow red.
 
 	[ ] Den Mother

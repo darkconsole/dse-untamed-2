@@ -396,11 +396,14 @@ Function LoadSideMenu_BeastMastery(Bool Reload=FALSE)
 	self.iWant.SetVisible(self.SideItems[4], 1)
 
 	;; situational awareness
-
-	;; den mother
 	self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
 	self.iWant.SetPos(self.SideItems[5], 1075, 300)
 	self.iWant.SetVisible(self.SideItems[5], 1)
+
+	;; den mother
+	self.SideItems[6] = self.iWant.LoadWidget(Dir + Files[6])
+	self.iWant.SetPos(self.SideItems[6], 1075, 465)
+	self.iWant.SetVisible(self.SideItems[6], 1)
 
 	;;;;;;;;
 
@@ -596,6 +599,7 @@ Function UpdateSideMenu_BeastMastery()
 	self.iWant.SetVisible(self.SideItems[3], 1)
 	self.iWant.SetVisible(self.SideItems[4], 1)
 	self.iWant.SetVisible(self.SideItems[5], 1)
+	self.iWant.SetVisible(self.SideItems[6], 1)
 
 	;; cursor
 	If(self.SideCur > 0)
@@ -613,6 +617,9 @@ Function UpdateSideMenu_BeastMastery()
 		ElseIf(self.SideCur == 4)
 			self.iWant.SetPos(self.SideItems[1], 1075, 300)
 			self.iWant.setRotation(self.SideItems[1], 90)
+		ElseIf(self.SideCur == 5)
+			self.iWant.SetPos(self.SideItems[1], 1075, 460)
+			self.iWant.SetRotation(self.SideItems[1], 135)
 		EndIf
 
 		self.iWant.SetVisible(self.SideItems[1], 1)
@@ -649,7 +656,7 @@ Function UpdateSideMenu_Essence()
 			self.iWant.SetPos(self.SideItems[1], 1075, 300)
 			self.iWant.SetRotation(self.SideItems[1], 90)
 		ElseIf(self.SideCur == 5)
-			self.iWant.SetPos(self.SideItems[1], 1075, 430)
+			self.iWant.SetPos(self.SideItems[1], 1075, 450)
 			self.iWant.SetRotation(self.SideItems[1], 135)
 		EndIf
 
@@ -971,7 +978,7 @@ EndFunction
 
 String[] Function GetBeastMasteryFilenames()
 
-	String[] Output = Utility.CreateStringArray(6)
+	String[] Output = Utility.CreateStringArray(7)
 
 	Output[0] = "Title.dds"
 	Output[1] = "Cursor.dds"
@@ -1002,12 +1009,16 @@ String[] Function GetBeastMasteryFilenames()
 		Output[4] = "LoadBearing0.dds"
 	EndIf
 
-	;; situational awareness
+	If(Untamed.Player.HasPerk(Untamed.PerkSituationAware))
+		Output[5] = "KeenSenses1.dds"
+	Else
+		Output[5] = "KeenSenses0.dds"
+	EndIf
 
 	If(Untamed.Player.HasPerk(Untamed.PerkDenMother))
-		Output[5] = "DenMother1.dds"
+		Output[6] = "DenMother1.dds"
 	Else
-		Output[5] = "DenMother0.dds"
+		Output[6] = "DenMother0.dds"
 	EndIf
 
 	Return Output
@@ -1166,6 +1177,12 @@ Perk Function GetBeastMasteryNextPerk(Int Choice)
 			Output = Untamed.PerkLoadBearing1
 		EndIf
 	ElseIf(Choice == 4)
+		If(Untamed.Player.HasPerk(Untamed.PerkSituationAware))
+			Output = NONE
+		Else
+			Output = Untamed.PerkSituationAware
+		EndIf
+	ElseIf(Choice == 5)
 		If(Untamed.Player.HasPerk(Untamed.PerkDenMother))
 			Output = NONE
 		Else
