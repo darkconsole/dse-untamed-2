@@ -15,6 +15,7 @@
 	[+] Percentage of pack combat xp for player.
 	[+] Give pack members names.
 	[+] Initiate SexLab encounters for UXP.
+	[+] Sleep near pack members for UXP.
 	[-] Ride wolves.
 	[-] Ride bears.
 	[ ] Ride sabercats.
@@ -75,7 +76,7 @@ Perks from the path of burden provide the pack with utility abilities.
 	    LB1 unlocks pack member inventory.
 	    LB2 increases carry weight of pack members by 100.
 
-	[-] Keen Senses
+	[+] Keen Senses
 	    In Combat: pack members glow blue while enemies glow red.
 
 	[ ] Den Mother
