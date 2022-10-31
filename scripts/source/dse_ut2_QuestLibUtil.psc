@@ -655,9 +655,9 @@ Float Function GetExperienceMax(Actor Who)
 
 	Float Max = Untamed.Config.GetFloat(".PlayerExperienceMax")
 
-	;; 20% bonus to max xp with perk.
-
-	If(Who.HasPerk(Untamed.PerkExperienced1))
+	If(Who.HasPerk(Untamed.PerkExperienced2))
+		Max += (Max * 0.30)
+	ElseIf(Who.HasPerk(Untamed.PerkExperienced1))
 		Max += (Max * 0.20)
 	EndIf
 
