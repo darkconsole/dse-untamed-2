@@ -38,6 +38,12 @@ Perks from the path of the bear help the pack endure.
 	[+] Health (+100, +100, +100)
 	    Increases pack member health pool.
 
+	[-] Shout: Follow
+	    Command nearby pack members that were saying to follow you.
+
+	[-] Shout: Stay
+	    Command nearby pack members that were following you to stay put.
+
 ## Ferocity
 
 Perks from the path of the wolf increase the lethality of the pack.
@@ -51,18 +57,18 @@ Perks from the path of the wolf increase the lethality of the pack.
 	[+] Bleed (3dps, 6dps, 9dps)
 	    Pack member attacks cause bleed damage over time.
 
+	[-] Shout: Attack
+	    Command nearby pack members to focus their attacks on the target.
+
 ## Beast Mastery
 
 Perks from the path of burden provide the pack with utility abilities.
 
-	[+] Shout: Follow
-	    Command nearby pack members that were saying to follow you.
+	[-] Pack Leader (3, 6, 12)
+	    Increases maximum pack size.
 
-	[+] Shout: Stay
-	    Command nearby pack members that were following you to stay put.
-
-	[+] Shout: Attack
-	    Command nearby pack members to focus their attacks on the target.
+	[-] Situational Awareness
+	    In Combat: pack members glow blue while enemies glow red.
 
 	[+] Second Wind (1, 2)
 	    SW1 consumes 50% player UXP to restore 25% health to downed pack member.
@@ -77,8 +83,9 @@ Perks from the path of burden provide the pack with utility abilities.
 
 ## Essence
 
-	[+] Experienced (+20 UXP)
-	    Increase maximum UXP.
+	[-] Experienced (+20 UXP)
+	    E1 Increase maximum UXP.
+	    E2 percentage of pack member XP overflow rolls into you.
 
 	[+] Thick Hide (400% UXP)
 	    Player gains natural armour while naked based on current UXP level.
@@ -93,9 +100,6 @@ Perks from the path of burden provide the pack with utility abilities.
 	[+] Nature's Grace (3% mhps, 6% mhps, 9% mhps)
 	    Pack passively heals over time.
 
-	[+] Pack Leader (3, 6, 12)
-	    Increases maximum pack size.
-
 	[+] Crossbreeder
 	    No UXP penalty for laying with humanoids.
 
@@ -103,7 +107,6 @@ Perks from the path of burden provide the pack with utility abilities.
 
 	* Shout: Last Stand (heal everyone consuming 75% UXP)
 	* Shout: Spectral Stampede (spirits that plow through battle)
-	* Three tier `Experienced (+10 UXP, +10 UXP, +10 UXP)`
 
 ## Dev Notes
 
