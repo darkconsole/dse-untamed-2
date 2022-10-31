@@ -4,11 +4,13 @@ Scriptname dse_ut2_QuestInterfaceXP extends Quest
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 dse_ut2_QuestController Property Untamed Auto
+iWant_Widgets Property iWant Auto Hidden
+Bool Property Busy = FALSE Auto Hidden
+Bool Property FlashOnChange = TRUE Auto Hidden
 
 Int[] Property Bars Auto Hidden
 Int[] Property Names Auto Hidden
-iWant_Widgets Property iWant Auto Hidden
-Bool Property Busy = FALSE Auto Hidden
+Float[] Property Values Auto Hidden
 
 Int SW = 1280 ;; screen width (ce fixed hud size)
 Int SH = 720  ;; screen height (ce fixed hud size)
@@ -42,6 +44,14 @@ Event OnUpdate()
 	Return
 EndEvent
 
+Function RequestUpdate(Float When=0.1)
+
+	self.UnregisterForUpdate()
+	self.RegisterForSingleUpdate(When)
+
+	Return
+EndFunction
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -67,6 +77,8 @@ Function BuildUI(Bool Force=FALSE)
 	Needed += Untamed.Pack.GetMemberCount()
 	self.Bars = Utility.CreateIntArray(Needed)
 	self.Names = Utility.CreateIntArray(Needed)
+	self.Values = Utility.CreateFloatArray(Needed)
+	self.FlashOnChange = TRUE
 
 	Untamed.Util.PrintDebug("[Interface:BuildUI] building " + self.Bars.Length + " bars")
 
@@ -112,6 +124,7 @@ Function DestroyUI()
 
 	self.Bars = Utility.CreateIntArray(0)
 	self.Names = Utility.CreateIntArray(0)
+	self.Values = Utility.CreateFloatArray(0)
 
 	Return
 EndFunction
@@ -159,6 +172,14 @@ Function UpdateUI()
 			self.SetBarPercent(self.Bars[Iter], Untamed.Util.GetExperiencePercent(Members[Iter - 1]))
 			self.SetNameText(self.Names[Iter], (Members[Iter - 1].GetDisplayName() + " (" + UXP + ")"))
 			self.SetNamePosition(self.Names[Iter], Iter)
+		EndIf
+
+		If(UXP != self.Values[Iter])
+			self.Values[Iter] = UXP
+
+			If(self.FlashOnChange)
+				self.iWant.DoMeterFlash(self.Bars[Iter])
+			EndIf
 		EndIf
 
 		Iter += 1

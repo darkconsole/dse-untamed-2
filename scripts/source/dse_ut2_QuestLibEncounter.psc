@@ -77,6 +77,8 @@ Event OnEncounterEnding(String EventName, String Args, Float Argc, Form From)
 			EndIf
 			Iter += 1
 		EndWhile
+
+		Untamed.XPBar.RequestUpdate(1.5)
 	EndIf
 
 	Return

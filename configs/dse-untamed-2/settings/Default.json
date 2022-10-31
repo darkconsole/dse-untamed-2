@@ -1,10 +1,10 @@
 {
-	"PackOrgasmXP": 5.0,
+	"PackOrgasmXP": 10.0,
 	"PackKillXP": 5,
-	"PackSexTimeXPM": 0.1,
+	"PackSexTimeXPM": 0.15,
 	"PackShareXPM": 0.5,
 	"PackOverflowXPM": 0.1,
-	"PackSecondWind": false,
+	"PackSecondWind": true,
 
 	"IncludeCreatures": true,
 	"HumanoidOrgasmXPM": 0.5,
