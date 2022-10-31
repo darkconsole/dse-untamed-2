@@ -14,12 +14,15 @@
 	"PackOverflowXPM": 0.1,
 	"PackSecondWind": true,
 
-	"IncludeCreatures": true,
-	"PerkCostXP": 90,
+	"PerkCostXP": 80,
 	"PerkThickHideMult": 4.00,
 	"PerkResistantHideMult": 0.60,
+	"PerkExperienced1XPM": 1.20,
+	"PerkExperienced2XPM": 1.30,
+
 	"PregnancyDays": 10.0,
 	"PregnancyChance": 100,
+	"IncludeCreatures": true,
 	"PlayerExperienceMax": 100,
 	"HumanoidOrgasmXPM": 0.5,
 
