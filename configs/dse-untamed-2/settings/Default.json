@@ -10,8 +10,10 @@
 	"PackSleepDist": 350,
 	"PackSleepDurMult": 1.5,
 
+	"PackRestedXPM": 1.1,
 	"PackOverflowXPM": 0.1,
 	"PackSecondWind": true,
+
 	"IncludeCreatures": true,
 	"PerkCostXP": 90,
 	"PerkThickHideMult": 4.00,

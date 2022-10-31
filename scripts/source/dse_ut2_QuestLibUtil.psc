@@ -629,9 +629,18 @@ EndFunction
 Function ModExperience(Actor Who, Float Amount)
 {give or take away untamed xp from an actor.}
 
-	Float XP = self.GetExperience(Who) + Amount
+	Float XP = self.GetExperience(Who)
 
-	self.SetExperience(Who,XP)
+	;; xp bonus for well rested.
+
+	If(Amount > 0.0)
+		If((Who == Untamed.Player) && Untamed.Player.HasSpell(Untamed.SpellPackRested))
+			Untamed.Util.PrintDebug("[ModExperience] well rested " + Amount + " => " + (Amount * Untamed.Config.GetFloat(".PackRestedXPM")))
+			Amount = Amount * Untamed.Config.GetFloat(".PackRestedXPM")
+		EndIf
+	EndIf
+
+	self.SetExperience(Who, (XP + Amount))
 	Return
 EndFunction
 
