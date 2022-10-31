@@ -90,7 +90,7 @@ Event OnDeath(Actor Killer)
 	While(HitIter < self.HitLog.Length)
 		If(self.HitLog[HitIter] != Killer)
 			If(self.HitLog[HitIter].IsInFaction(Untamed.FactionPack) || (self.HitLog[HitIter] == Untamed.Player))
-				Untamed.Util.PrintDebug("[CombatTracker:OnDeath] hitlog entry " + self.HitLog[HitIter].GetDisplayName())
+				Untamed.Util.PrintDebug("[CombatTracker:OnDeath] >> " + self.Me.GetDisplayName() + " hitlog entry " + self.HitLog[HitIter].GetDisplayName())
 				Untamed.Util.ModExperience(self.HitLog[HitIter], (KXP * ShareMult))
 			EndIf
 		EndIf
