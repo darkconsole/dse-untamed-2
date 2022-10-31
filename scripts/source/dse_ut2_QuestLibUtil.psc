@@ -715,7 +715,7 @@ Function SetExperience(Actor Who, Float XP)
 	;; this is set directly as instructed.
 
 	StorageUtil.SetFloatValue(Who, Untamed.KeyXP, ClampXP)
-	Untamed.Util.PrintDebug("[SetExperience] " + Who.GetDisplayName() + " => " + ClampXP)
+	Untamed.Util.PrintDebug("[SetExperience] " + Who.GetDisplayName() + " => " + ClampXP + " (" + XP + ")")
 
 	;; overflow xp.
 	;; a fraction of this is given to the pack leader when a pack members

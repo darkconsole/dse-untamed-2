@@ -1,12 +1,16 @@
 Scriptname dse_ut2_QuestController_AliasPlayer extends ReferenceAlias
 
 dse_ut2_QuestController Property Untamed Auto
+Float Property SleepTimeStart = 0.0 Auto Hidden
 
 Event OnPlayerLoadGame()
 {fires when the save is loaded.}
 
 	;;PO3_SKSEfunctions.a_UnregisterForCellFullyLoaded(self)
 	;;PO3_SKSEfunctions.a_RegisterForCellFullyLoaded(self)
+
+	self.UnregisterForSleep()
+	self.RegisterForSleep()
 
 	;; make sure our pack is ready.
 	Untamed.Pack.FixMembers()
@@ -55,3 +59,66 @@ Event OnHit(ObjectReference Whom, Form What, Projectile Bullet, Bool IsPowerful,
 
 	Return
 EndEvent
+
+Event OnSleepStart(Float TimeStart, Float TimeEnd)
+
+	self.SleepTimeStart = TimeStart
+	Untamed.Util.PrintDebug("[OnSleepStart] " + TimeStart + " => " + TimeEnd)
+
+	Return
+EndEvent
+
+Event OnSleepStop(Bool Iptd)
+
+	Float TimeEnd = Utility.GetCurrentGameTime()
+	Float TimeSlept = TimeEnd - self.SleepTimeStart
+	Float TimeMin = ((Untamed.Config.GetFloat(".PackSleepMinHr") - 0.1) / 24)
+	Float HourSlept = TimeSlept * 24.0
+
+	Float SleepXPM
+	Int SleepDist
+	Actor[] Pack
+	Int Piter
+	Int Pmult
+
+	;; the tenth of a day fuckery in the min calc is to deal with how the
+	;; game will stop sleeping just a fraction before the full time that was
+	;; requested.
+
+	If(TimeSlept >= TimeMin)
+		;; give well rested for the amount of time a game day should last.
+
+		Untamed.Util.PrintDebug("[OnSleepStop] " + TimeSlept)
+		StorageUtil.SetFloatValue(Untamed.Player, Untamed.KeySleptHours, HourSlept)
+		Untamed.Player.RemoveSpell(Untamed.SpellPackRested)
+
+		;; give pack members level for sleeping near them.
+
+		SleepXPM = Untamed.Config.GetFloat(".PackSleepXPM")
+		SleepDist = Untamed.Config.GetInt(".PackSleepDist")
+		Pack = Untamed.Pack.GetMemberList()
+		Piter = 0
+		Pmult = 0
+
+		While(Piter < Pack.Length)
+			If(Pack[Piter].GetDistance(Untamed.Player) <= SleepDist)
+				Untamed.Util.ModExperience(Pack[Piter], (HourSlept * SleepXPM))
+				Pmult += 1
+			EndIf
+
+			Piter += 1
+		EndWhile
+
+		;; give player level for sleeping near pack.
+
+		If(Pmult > 0)
+			Untamed.Util.ModExperience(Untamed.Player, ((HourSlept * SleepXPM) * Pmult))
+			Untamed.Player.AddSpell(Untamed.SpellPackRested)
+		EndIf
+
+		Untamed.XPBar.RequestUpdate()
+	EndIf
+
+	Return
+EndEvent
+

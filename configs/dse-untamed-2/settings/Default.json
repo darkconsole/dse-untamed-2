@@ -1,19 +1,25 @@
 {
 	"PackKillXP": 5,
 	"PackKillShareXPM": 0.5,
+
 	"PackOrgasmXP": 10.0,
 	"PackSexTimeXPM": 0.15,
+
+	"PackSleepXPM": 0.25,
+	"PackSleepMinHr": 4,
+	"PackSleepDist": 350,
+	"PackSleepDurMult": 1.5,
+
 	"PackOverflowXPM": 0.1,
 	"PackSecondWind": true,
-
 	"IncludeCreatures": true,
-	"HumanoidOrgasmXPM": 0.5,
 	"PerkCostXP": 90,
 	"PerkThickHideMult": 4.00,
 	"PerkResistantHideMult": 0.60,
 	"PregnancyDays": 10.0,
 	"PregnancyChance": 100,
 	"PlayerExperienceMax": 100,
+	"HumanoidOrgasmXPM": 0.5,
 
 	"PackLoveIterXP": 1.0,
 	"WidgetOffsetX": 1130,

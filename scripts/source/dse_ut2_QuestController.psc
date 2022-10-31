@@ -22,71 +22,73 @@ dse_ut2_QuestLove01 Property QuestLove01 Auto
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; form references ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-Actor        Property Player Auto                   ;; skyrim.esm
-Keyword      Property KeywordActorTypeAnimal Auto   ;; skyrim.esm
-Keyword      Property KeywordActorTypeCreature Auto ;; skyrim.esm
-Faction      Property FactionPredator Auto          ;; skyrim.esm
-Faction      Property FactionTamed Auto             ;; untamed
-Faction      Property FactionPackStay Auto          ;; untamed
-Faction      Property FactionClassBear Auto         ;; untamed
-Faction      Property FactionClassHorse Auto        ;; untamed
-Faction      Property FactionClassSaberCat Auto     ;; untamed
-Faction      Property FactionClassWolf Auto         ;; untamed
-Faction      Property FactionPack Auto              ;; untamed
-Faction      Property FactionPlayerFollower Auto    ;; skyrim.esm
-Package      Property PackageDoNothing Auto         ;; untamed
-Package      Property PackageFollow Auto            ;; untamed
-Package      Property PackagePackStay Auto          ;; untamed
-Spell        Property SpellMatingCallTracker Auto   ;; untamed
-Shout        Property ShoutMatingCall Auto          ;; untamed
-Static       Property StaticX Auto                  ;; skyrim.esm
-Weapon       Property WeapUnarmed Auto              ;; untamed
+Actor          Property Player Auto                   ;; skyrim.esm
+GlobalVariable Property GlobalTimescale Auto          ;; skyrim.esm
+Keyword        Property KeywordActorTypeAnimal Auto   ;; skyrim.esm
+Keyword        Property KeywordActorTypeCreature Auto ;; skyrim.esm
+Faction        Property FactionPredator Auto          ;; skyrim.esm
+Faction        Property FactionTamed Auto             ;; untamed
+Faction        Property FactionPackStay Auto          ;; untamed
+Faction        Property FactionClassBear Auto         ;; untamed
+Faction        Property FactionClassHorse Auto        ;; untamed
+Faction        Property FactionClassSaberCat Auto     ;; untamed
+Faction        Property FactionClassWolf Auto         ;; untamed
+Faction        Property FactionPack Auto              ;; untamed
+Faction        Property FactionPlayerFollower Auto    ;; skyrim.esm
+Package        Property PackageDoNothing Auto         ;; untamed
+Package        Property PackageFollow Auto            ;; untamed
+Package        Property PackagePackStay Auto          ;; untamed
+Spell          Property SpellMatingCallTracker Auto   ;; untamed
+Spell          Property SpellPackRested Auto          ;; untamed
+Shout          Property ShoutMatingCall Auto          ;; untamed
+Static         Property StaticX Auto                  ;; skyrim.esm
+Weapon         Property WeapUnarmed Auto              ;; untamed
 
-Perk         Property PerkPackThickHide1 Auto       ;; untamed (tenacity)
-Perk         Property PerkPackThickHide2 Auto       ;; untamed (tenacity)
-Perk         Property PerkPackThickHide3 Auto       ;; untamed (tenacity)
-Perk         Property PerkPackThickHide4 Auto       ;; untamed (tenacity)
-Perk         Property PerkPackThickHide5 Auto       ;; untamed (tenacity)
-Perk         Property PerkPackResistantHide1 Auto   ;; untamed (tenacity)
-Perk         Property PerkPackResistantHide2 Auto   ;; untamed (tenacity)
-Perk         Property PerkPackResistantHide3 Auto   ;; untamed (tenacity)
-Perk         Property PerkPackResistantHide4 Auto   ;; untamed (tenacity)
-Perk         Property PerkPackResistantHide5 Auto   ;; untamed (tenacity)
-Perk         Property PerkPackVitality1 Auto        ;; untamed (tenacity)
-Perk         Property PerkPackVitality2 Auto        ;; untamed (tenacity)
-Perk         Property PerkPackVitality3 Auto        ;; untamed (tenacity)
-Shout        Property ShoutAttack Auto              ;; untamed (tenacity)
-Shout        Property ShoutStay Auto                ;; untamed (tenacity)
+Perk           Property PerkPackThickHide1 Auto       ;; untamed (tenacity)
+Perk           Property PerkPackThickHide2 Auto       ;; untamed (tenacity)
+Perk           Property PerkPackThickHide3 Auto       ;; untamed (tenacity)
+Perk           Property PerkPackThickHide4 Auto       ;; untamed (tenacity)
+Perk           Property PerkPackThickHide5 Auto       ;; untamed (tenacity)
+Perk           Property PerkPackResistantHide1 Auto   ;; untamed (tenacity)
+Perk           Property PerkPackResistantHide2 Auto   ;; untamed (tenacity)
+Perk           Property PerkPackResistantHide3 Auto   ;; untamed (tenacity)
+Perk           Property PerkPackResistantHide4 Auto   ;; untamed (tenacity)
+Perk           Property PerkPackResistantHide5 Auto   ;; untamed (tenacity)
+Perk           Property PerkPackVitality1 Auto        ;; untamed (tenacity)
+Perk           Property PerkPackVitality2 Auto        ;; untamed (tenacity)
+Perk           Property PerkPackVitality3 Auto        ;; untamed (tenacity)
+Shout          Property ShoutAttack Auto              ;; untamed (tenacity)
+Shout          Property ShoutStay Auto                ;; untamed (tenacity)
 
-Perk         Property PerkPackFerocious1 Auto       ;; untamed (ferocity)
-Perk         Property PerkPackFerocious2 Auto       ;; untamed (ferocity)
-Perk         Property PerkPackFerocious3 Auto       ;; untamed (ferocity)
-Perk         Property PerkPackEndurance1 Auto       ;; untamed (ferocity)
-Perk         Property PerkPackEndurance2 Auto       ;; untamed (ferocity)
-Perk         Property PerkPackEndurance3 Auto       ;; untamed (ferocity)
-Perk         Property PerkPackBleed1 Auto           ;; untamed (ferocity)
-Perk         Property PerkPackBleed2 Auto           ;; untamed (ferocity)
-Perk         Property PerkPackBleed3 Auto           ;; untamed (ferocity)
-Shout        Property ShoutFollow Auto              ;; untamed (ferocity)
+Perk           Property PerkPackFerocious1 Auto       ;; untamed (ferocity)
+Perk           Property PerkPackFerocious2 Auto       ;; untamed (ferocity)
+Perk           Property PerkPackFerocious3 Auto       ;; untamed (ferocity)
+Perk           Property PerkPackEndurance1 Auto       ;; untamed (ferocity)
+Perk           Property PerkPackEndurance2 Auto       ;; untamed (ferocity)
+Perk           Property PerkPackEndurance3 Auto       ;; untamed (ferocity)
+Perk           Property PerkPackBleed1 Auto           ;; untamed (ferocity)
+Perk           Property PerkPackBleed2 Auto           ;; untamed (ferocity)
+Perk           Property PerkPackBleed3 Auto           ;; untamed (ferocity)
+Shout          Property ShoutFollow Auto              ;; untamed (ferocity)
 
-Perk         Property PerkPackLeader1 Auto          ;; untamed (essence)
-Perk         Property PerkPackLeader2 Auto          ;; untamed (essence)
-Perk         Property PerkPackLeader3 Auto          ;; untamed (essence)
-Perk         Property PerkSecondWind1 Auto          ;; untamed (beast mastery)
-Perk         Property PerkSecondWind2 Auto          ;; untamed (beast mastery)
-Perk         Property PerkLoadBearing1 Auto         ;; untamed (beast mastery)
-Perk         Property PerkLoadBearing2 Auto         ;; untamed (beast mastery)
-Perk         Property PerkSituationAware Auto       ;; untamed (beast mastery)
-Perk         Property PerkDenMother Auto            ;; untamed (beast mastery)
+Perk           Property PerkPackLeader1 Auto          ;; untamed (essence)
+Perk           Property PerkPackLeader2 Auto          ;; untamed (essence)
+Perk           Property PerkPackLeader3 Auto          ;; untamed (essence)
+Perk           Property PerkSecondWind1 Auto          ;; untamed (beast mastery)
+Perk           Property PerkSecondWind2 Auto          ;; untamed (beast mastery)
+Perk           Property PerkLoadBearing1 Auto         ;; untamed (beast mastery)
+Perk           Property PerkLoadBearing2 Auto         ;; untamed (beast mastery)
+Perk           Property PerkSituationAware Auto       ;; untamed (beast mastery)
+Perk           Property PerkDenMother Auto            ;; untamed (beast mastery)
 
-Perk         Property PerkExperienced1 Auto         ;; untamed (essence)
-Perk         Property PerkExperienced2 Auto         ;; untamed (essence)
-Perk         Property PerkThickHide Auto            ;; untamed (essence)
-Perk         Property PerkResistantHide Auto        ;; untamed (essence)
-Perk         Property PerkPackHealing1 Auto         ;; untamed (essence)
-Perk         Property PerkPackHealing2 Auto         ;; untamed (essence)
-Perk         Property PerkPackHealing3 Auto         ;; untamed (essence)
-Perk         Property PerkCrossbreeder Auto         ;; untamed (essence)
+Perk           Property PerkExperienced1 Auto         ;; untamed (essence)
+Perk           Property PerkExperienced2 Auto         ;; untamed (essence)
+Perk           Property PerkThickHide Auto            ;; untamed (essence)
+Perk           Property PerkResistantHide Auto        ;; untamed (essence)
+Perk           Property PerkPackHealing1 Auto         ;; untamed (essence)
+Perk           Property PerkPackHealing2 Auto         ;; untamed (essence)
+Perk           Property PerkPackHealing3 Auto         ;; untamed (essence)
+Perk           Property PerkCrossbreeder Auto         ;; untamed (essence)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; data lists ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -134,6 +136,7 @@ String Property KeyStatBaseAttack = "UT2.StatBase.AttackDamageMult" AutoReadOnly
 String Property KeyPregnantBase = "UT2.Actor.DenMother.ActorBase" AutoReadOnly Hidden
 String Property KeyEncounterTime = "UT2.Actor.Encounter.Time" AutoReadOnly Hidden
 String Property KeyMatingCallList = "UT2.Actor.MatingCallList" AutoReadOnly Hidden
+String Property KeySleptHours = "UT2.Actor.SleptHours" AutoReadOnly Hidden
 
 Bool Property OptValidateActor = TRUE Auto Hidden
 Bool Property OptDebug = TRUE Auto Hidden
