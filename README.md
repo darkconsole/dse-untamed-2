@@ -67,9 +67,6 @@ Perks from the path of burden provide the pack with utility abilities.
 	[-] Pack Leader (3, 6, 12)
 	    Increases maximum pack size.
 
-	[-] Situational Awareness
-	    In Combat: pack members glow blue while enemies glow red.
-
 	[+] Second Wind (1, 2)
 	    SW1 consumes 50% player UXP to restore 25% health to downed pack member.
 	    SW2 consumes 25% player UXP to restore 50% health to downed pack member.
@@ -77,6 +74,9 @@ Perks from the path of burden provide the pack with utility abilities.
 	[+] Load Bearing (1, 2)
 	    LB1 unlocks pack member inventory.
 	    LB2 increases carry weight of pack members by 100.
+
+	[-] Situational Awareness
+	    In Combat: pack members glow blue while enemies glow red.
 
 	[ ] Den Mother
 	    Can become pregnant and birth new animals.

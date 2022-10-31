@@ -269,18 +269,28 @@ Function LoadSideMenu_Tenacity(Bool Reload=FALSE)
 
 	;; vitality
 	self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
-	self.iWant.SetPos(self.SideItems[2], 875, 300)
+	self.iWant.SetPos(self.SideItems[2], 720, 300)
 	self.iWant.SetVisible(self.SideItems[2], 1)
 
 	;; thick hide
 	self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
-	self.iWant.SetPos(self.SideItems[3], 1100, 450)
+	self.iWant.SetPos(self.SideItems[3], 710, 450)
 	self.iWant.SetVisible(self.SideItems[3], 1)
 
 	;; resist hide
 	self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
-	self.iWant.SetPos(self.SideItems[4], 900, 600)
+	self.iWant.SetPos(self.SideItems[4], 730, 600)
 	self.iWant.SetVisible(self.SideItems[4], 1)
+
+	;; follow
+	self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
+	self.iWant.SetPos(self.SideItems[5], 1075, 300)
+	self.iWant.SetVisible(self.SideItems[5], 1)
+
+	;; stay
+	self.SideItems[6] = self.iWant.LoadWidget(Dir + Files[6])
+	self.iWant.SetPos(self.SideItems[6], 1085, 450)
+	self.iWant.SetVisible(self.SideItems[6], 1)
 
 	;;;;;;;;
 
@@ -316,20 +326,25 @@ Function LoadSideMenu_Ferocity(Bool Reload=FALSE)
 		self.iWant.SetVisible(self.SideItems[1], 0)
 	EndIf
 
-	;; attack
+	;; attack power
 	self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
-	self.iWant.SetPos(self.SideItems[2], 875, 300)
+	self.iWant.SetPos(self.SideItems[2], 720, 300)
 	self.iWant.SetVisible(self.SideItems[2], 1)
 
 	;; stamina
 	self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
-	self.iWant.SetPos(self.SideItems[3], 1100, 450)
+	self.iWant.SetPos(self.SideItems[3], 730, 450)
 	self.iWant.SetVisible(self.SideItems[3], 1)
 
 	;; bleed
 	self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
-	self.iWant.SetPos(self.SideItems[4], 900, 600)
+	self.iWant.SetPos(self.SideItems[4], 710, 600)
 	self.iWant.SetVisible(self.SideItems[4], 1)
+
+	;; shout: attack
+	self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
+	self.iWant.SetPos(self.SideItems[5], 1075, 300)
+	self.iWant.SetVisible(self.SideItems[5], 1)
 
 	;;;;;;;;
 
@@ -365,35 +380,27 @@ Function LoadSideMenu_BeastMastery(Bool Reload=FALSE)
 		self.iWant.SetVisible(self.SideItems[1], 0)
 	EndIf
 
-	;; stay
+	;; pack leader
 	self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
 	self.iWant.SetPos(self.SideItems[2], 710, 300)
 	self.iWant.SetVisible(self.SideItems[2], 1)
 
-	;; follow
+	;; second wind
 	self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
-	self.iWant.SetPos(self.SideItems[3], 730, 450)
+	self.iWant.SetPos(self.SideItems[3], 730, 465)
 	self.iWant.SetVisible(self.SideItems[3], 1)
 
-	;; attack
+	;; load bearing
 	self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
 	self.iWant.SetPos(self.SideItems[4], 710, 600)
 	self.iWant.SetVisible(self.SideItems[4], 1)
 
-	;; second wind
+	;; situational awareness
+
+	;; den mother
 	self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
 	self.iWant.SetPos(self.SideItems[5], 1075, 300)
 	self.iWant.SetVisible(self.SideItems[5], 1)
-
-	;; load bearing
-	self.SideItems[6] = self.iWant.LoadWidget(Dir + Files[6])
-	self.iWant.SetPos(self.SideItems[6], 1075, 430)
-	self.iWant.SetVisible(self.SideItems[6], 1)
-
-	;; den mother
-	self.SideItems[7] = self.iWant.LoadWidget(Dir + Files[7])
-	self.iWant.SetPos(self.SideItems[7], 1075, 600)
-	self.iWant.SetVisible(self.SideItems[7], 1)
 
 	;;;;;;;;
 
@@ -434,30 +441,25 @@ Function LoadSideMenu_Essence(Bool Reload=FALSE)
 	self.iWant.SetPos(self.SideItems[2], 710, 290)
 	self.iWant.SetVisible(self.SideItems[2], 1)
 
-	;; pack leader
+	;; thick hide
 	self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
 	self.iWant.SetPos(self.SideItems[3], 740, 450)
 	self.iWant.SetVisible(self.SideItems[3], 1)
 
-	;; cross breeder
+	;; resist hide
 	self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
 	self.iWant.SetPos(self.SideItems[4], 710, 610)
 	self.iWant.SetVisible(self.SideItems[4], 1)
 
-	;; thick hide
+	;; nature's grace
 	self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
 	self.iWant.SetPos(self.SideItems[5], 1075, 300)
 	self.iWant.SetVisible(self.SideItems[5], 1)
 
-	;; resistant hide
+	;; crossbreeder
 	self.SideItems[6] = self.iWant.LoadWidget(Dir + Files[6])
-	self.iWant.SetPos(self.SideItems[6], 1080, 430)
+	self.iWant.SetPos(self.SideItems[6], 1080, 470)
 	self.iWant.SetVisible(self.SideItems[6], 1)
-
-	;; nature's grace
-	self.SideItems[7] = self.iWant.LoadWidget(Dir + Files[7])
-	self.iWant.SetPos(self.SideItems[7], 1075, 600)
-	self.iWant.SetVisible(self.SideItems[7], 1)
 
 	;;;;;;;;
 
@@ -520,20 +522,28 @@ Function UpdateSideMenu_Tenacity()
 	self.iWant.SetVisible(self.SideItems[2], 1)
 	self.iWant.SetVisible(self.SideItems[3], 1)
 	self.iWant.SetVisible(self.SideItems[4], 1)
+	self.iWant.SetVisible(self.SideItems[5], 1)
+	self.iWant.SetVisible(self.SideItems[6], 1)
 
 	;; cursor
 	If(self.SideCur > 0)
 		self.iWant.SetVisible(self.SideItems[1], 0)
 
 		If(self.SideCur == 1)
-			self.iWant.SetPos(self.SideItems[1], 875, 300)
-			self.iWant.setRotation(self.SideItems[1], 0)
+			self.iWant.SetPos(self.SideItems[1], 720, 300)
+			self.iWant.SetRotation(self.SideItems[1], 0)
 		ElseIf(self.SideCur == 2)
-			self.iWant.SetPos(self.SideItems[1], 1100, 450)
-			self.iWant.setRotation(self.SideItems[1], 45)
+			self.iWant.SetPos(self.SideItems[1], 710, 450)
+			self.iWant.SetRotation(self.SideItems[1], 45)
 		ElseIf(self.SideCur == 3)
-			self.iWant.SetPos(self.SideItems[1], 900, 600)
-			self.iWant.setRotation(self.SideItems[1], -45)
+			self.iWant.SetPos(self.SideItems[1], 730, 600)
+			self.iWant.SetRotation(self.SideItems[1], -45)
+		ElseIf(self.SideCur == 4)
+			self.iWant.SetPos(self.SideItems[1], 1075, 300)
+			self.iWant.SetRotation(self.SideItems[1], 90)
+		ElseIf(self.SideCur == 5)
+			self.iWant.SetPos(self.SideItems[1], 1075, 430)
+			self.iWant.SetRotation(self.SideItems[1], 135)
 		EndIf
 
 		self.iWant.SetVisible(self.SideItems[1], 1)
@@ -550,20 +560,24 @@ Function UpdateSideMenu_Ferocity()
 	self.iWant.SetVisible(self.SideItems[2], 1)
 	self.iWant.SetVisible(self.SideItems[3], 1)
 	self.iWant.SetVisible(self.SideItems[4], 1)
+	self.iWant.SetVisible(self.SideItems[5], 1)
 
 	;; cursor
 	If(self.SideCur > 0)
 		self.iWant.SetVisible(self.SideItems[1], 0)
 
 		If(self.SideCur == 1)
-			self.iWant.SetPos(self.SideItems[1], 875, 300)
-			self.iWant.setRotation(self.SideItems[1], 0)
+			self.iWant.SetPos(self.SideItems[1], 720, 300)
+			self.iWant.SetRotation(self.SideItems[1], 0)
 		ElseIf(self.SideCur == 2)
-			self.iWant.SetPos(self.SideItems[1], 1100, 450)
-			self.iWant.setRotation(self.SideItems[1], 45)
+			self.iWant.SetPos(self.SideItems[1], 710, 450)
+			self.iWant.SetRotation(self.SideItems[1], 45)
 		ElseIf(self.SideCur == 3)
-			self.iWant.SetPos(self.SideItems[1], 900, 600)
-			self.iWant.setRotation(self.SideItems[1], -45)
+			self.iWant.SetPos(self.SideItems[1], 730, 600)
+			self.iWant.SetRotation(self.SideItems[1], -45)
+		ElseIf(self.SideCur == 4)
+			self.iWant.SetPos(self.SideItems[1], 1075, 300)
+			self.iWant.SetRotation(self.SideItems[1], 90)
 		EndIf
 
 		self.iWant.SetVisible(self.SideItems[1], 1)
@@ -582,8 +596,6 @@ Function UpdateSideMenu_BeastMastery()
 	self.iWant.SetVisible(self.SideItems[3], 1)
 	self.iWant.SetVisible(self.SideItems[4], 1)
 	self.iWant.SetVisible(self.SideItems[5], 1)
-	self.iWant.SetVisible(self.SideItems[6], 1)
-	self.iWant.SetVisible(self.SideItems[7], 1)
 
 	;; cursor
 	If(self.SideCur > 0)
@@ -601,12 +613,6 @@ Function UpdateSideMenu_BeastMastery()
 		ElseIf(self.SideCur == 4)
 			self.iWant.SetPos(self.SideItems[1], 1075, 300)
 			self.iWant.setRotation(self.SideItems[1], 90)
-		ElseIf(self.SideCur == 5)
-			self.iWant.SetPos(self.SideItems[1], 1075, 430)
-			self.iWant.setRotation(self.SideItems[1], 135)
-		ElseIf(self.SideCur == 6)
-			self.iWant.SetPos(self.SideItems[1], 1075, 600)
-			self.iWant.setRotation(self.SideItems[1], -135)
 		EndIf
 
 		self.iWant.SetVisible(self.SideItems[1], 1)
@@ -625,7 +631,6 @@ Function UpdateSideMenu_Essence()
 	self.iWant.SetVisible(self.SideItems[4], 1)
 	self.iWant.SetVisible(self.SideItems[5], 1)
 	self.iWant.SetVisible(self.SideItems[6], 1)
-	self.iWant.SetVisible(self.SideItems[7], 1)
 
 	;; cursor
 	If(self.SideCur > 0)
@@ -633,22 +638,19 @@ Function UpdateSideMenu_Essence()
 
 		If(self.SideCur == 1)
 			self.iWant.SetPos(self.SideItems[1], 710, 300)
-			self.iWant.setRotation(self.SideItems[1], 0)
+			self.iWant.SetRotation(self.SideItems[1], 0)
 		ElseIf(self.SideCur == 2)
 			self.iWant.SetPos(self.SideItems[1], 730, 450)
-			self.iWant.setRotation(self.SideItems[1], 45)
+			self.iWant.SetRotation(self.SideItems[1], 45)
 		ElseIf(self.SideCur == 3)
 			self.iWant.SetPos(self.SideItems[1], 710, 600)
-			self.iWant.setRotation(self.SideItems[1], -45)
+			self.iWant.SetRotation(self.SideItems[1], -45)
 		ElseIf(self.SideCur == 4)
 			self.iWant.SetPos(self.SideItems[1], 1075, 300)
-			self.iWant.setRotation(self.SideItems[1], 90)
+			self.iWant.SetRotation(self.SideItems[1], 90)
 		ElseIf(self.SideCur == 5)
 			self.iWant.SetPos(self.SideItems[1], 1075, 430)
-			self.iWant.setRotation(self.SideItems[1], 135)
-		ElseIf(self.SideCur == 6)
-			self.iWant.SetPos(self.SideItems[1], 1075, 600)
-			self.iWant.setRotation(self.SideItems[1], -135)
+			self.iWant.SetRotation(self.SideItems[1], 135)
 		EndIf
 
 		self.iWant.SetVisible(self.SideItems[1], 1)
@@ -661,6 +663,13 @@ EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Bool Function IsTwoCol()
+
+	;; plus two for title image and x image.
+
+	Return (self.SideItems.Length >= 6) && (self.SideItems.Length <= 8)
+EndFunction
 
 Bool Function HandleSideMenuKeys(Int KeyCode)
 
@@ -692,7 +701,7 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 			self.SideCur = 1
 		EndIf
 
-		If(self.MainCur == 3 || self.MainCur == 4)
+		If(self.IsTwoCol())
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 3), 1, (self.SideItems.Length - 2))
 		Else
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 1), 1, (self.SideItems.Length - 2))
@@ -702,7 +711,7 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 			self.SideCur = 1
 		EndIf
 
-		If(self.MainCur == 3 || self.MainCur == 4)
+		If(self.IsTwoCol())
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 3), 1, (self.SideItems.Length - 2))
 		Else
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 1), 1, (self.SideItems.Length - 2))
@@ -732,6 +741,10 @@ Function HandleHelpText()
 			Untamed.Util.Popup("Increases natural armour of pack members.")
 		ElseIf(self.SideCur == 3)
 			Untamed.Util.Popup("Increases magic resistance of pack members.")
+		ElseIf(self.SideCur == 4)
+			Untamed.Util.Popup("Command pack members to stay put from range.")
+		ElseIf(self.SideCur == 5)
+			Untamed.Util.Popup("Command pack members to follow from range.")
 		EndIf
 	ElseIf(self.MainCur == 2)
 		If(self.SideCur == 1)
@@ -740,34 +753,30 @@ Function HandleHelpText()
 			Untamed.Util.Popup("Increases stamina of pack members.")
 		ElseIf(self.SideCur == 3)
 			Untamed.Util.Popup("Pack members inflict bleed damage.")
+		ElseIf(self.SideCur == 4)
+			Untamed.Util.Popup("Command pack members to attack the specified target.")
 		EndIf
 	ElseIf(self.MainCur == 3)
 		If(self.SideCur == 1)
-			Untamed.Util.Popup("Command pack members to stay put from range.")
+			Untamed.Util.Popup("Increaes maximum pack size.")
 		ElseIf(self.SideCur == 2)
-			Untamed.Util.Popup("Command pack members to follow from range.")
-		ElseIf(self.SideCur == 3)
-			Untamed.Util.Popup("Command pack members to attack the specified target.")
-		ElseIf(self.SideCur == 4)
 			Untamed.Util.Popup("Consume UXP to get healed when downed.")
-		ElseIf(self.SideCur == 5)
+		ElseIf(self.SideCur == 3)
 			Untamed.Util.Popup("Pack members will carry things for you.")
-		ElseIf(self.SideCur == 6)
+		ElseIf(self.SideCur == 4)
 			Untamed.Util.Popup("Able to become pregnant and birth new animals.")
 		EndIf
 	ElseIf(self.MainCur == 4)
 		If(self.SideCur == 1)
 			Untamed.Util.Popup("Increases maximum UXP.")
 		ElseIf(self.SideCur == 2)
-			Untamed.Util.Popup("Increaes maximum pack size.")
-		ElseIf(self.SideCur == 3)
-			Untamed.Util.Popup("Lay with humanoids without the UXP penalty.")
-		ElseIf(self.SideCur == 4)
 			Untamed.Util.Popup("Damage resist based on current UXP while nude.")
-		ElseIf(self.SideCur == 5)
+		ElseIf(self.SideCur == 3)
 			Untamed.Util.Popup("Magicka resist based on current UXP while nude.")
-		ElseIf(self.SideCur == 6)
+		ElseIf(self.SideCur == 4)
 			Untamed.Util.Popup("Pack members heal over time.")
+		ElseIf(self.SideCur == 5)
+			Untamed.Util.Popup("Lay with humanoids without the UXP penalty.")
 		EndIf
 	EndIf
 
@@ -832,12 +841,17 @@ Bool Function HandleGiveShout()
 		Return FALSE
 	EndIf
 
-	If(self.MainCur == 3)
-		If(self.SideCur == 1)
+	;; tenacity
+	If(self.MainCur == 1)
+		If(self.SideCur == 4)
 			Choice = Untamed.ShoutFollow
-		ElseIf(self.SideCur == 2)
+		ElseIf(self.SideCur == 5)
 			Choice = Untamed.ShoutStay
-		ElseIf(self.SideCur == 3)
+		EndIf
+
+	;; ferocity
+	ElseIf(self.MainCur == 2)
+		If(self.SideCur == 4)
 			Choice = Untamed.ShoutAttack
 		EndIf
 	EndIf
@@ -859,7 +873,7 @@ EndFunction
 
 String[] Function GetTenacityFilenames()
 
-	String[] Output = Utility.CreateStringArray(5)
+	String[] Output = Utility.CreateStringArray(7)
 
 	Output[0] = "Title.dds"
 	Output[1] = "Cursor.dds"
@@ -894,12 +908,24 @@ String[] Function GetTenacityFilenames()
 		Output[4] = "ResistHide0.dds"
 	EndIf
 
+	If(Untamed.Player.HasSpell(Untamed.ShoutFollow))
+		Output[5] = "Follow1.dds"
+	Else
+		Output[5] = "Follow0.dds"
+	EndIf
+
+	If(Untamed.Player.HasSpell(Untamed.ShoutStay))
+		Output[6] = "Stay1.dds"
+	Else
+		Output[6] = "Stay0.dds"
+	EndIf
+
 	Return Output
 EndFunction
 
 String[] Function GetFerocityFilenames()
 
-	String[] Output = Utility.CreateStringArray(5)
+	String[] Output = Utility.CreateStringArray(6)
 
 	Output[0] = "Title.dds"
 	Output[1] = "Cursor.dds"
@@ -934,54 +960,54 @@ String[] Function GetFerocityFilenames()
 		Output[4] = "Bleed0.dds"
 	EndIf
 
+	If(Untamed.Player.HasSpell(Untamed.ShoutAttack))
+		Output[5] = "ShoutAttack1.dds"
+	Else
+		Output[5] = "ShoutAttack0.dds"
+	EndIf
+
 	Return Output
 EndFunction
 
 String[] Function GetBeastMasteryFilenames()
 
-	String[] Output = Utility.CreateStringArray(8)
+	String[] Output = Utility.CreateStringArray(6)
 
 	Output[0] = "Title.dds"
 	Output[1] = "Cursor.dds"
 
-	If(Untamed.Player.HasSpell(Untamed.ShoutFollow))
-		Output[2] = "Follow1.dds"
+	If(Untamed.Player.HasPerk(Untamed.PerkPackLeader3))
+		Output[2] = "Leader3.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader2))
+		Output[2] = "Leader2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader1))
+		Output[2] = "Leader1.dds"
 	Else
-		Output[2] = "Follow0.dds"
-	EndIf
-
-	If(Untamed.Player.HasSpell(Untamed.ShoutStay))
-		Output[3] = "Stay1.dds"
-	Else
-		Output[3] = "Stay0.dds"
-	EndIf
-
-	If(Untamed.Player.HasSpell(Untamed.ShoutAttack))
-		Output[4] = "Attack1.dds"
-	Else
-		Output[4] = "Attack0.dds"
+		Output[2] = "Leader0.dds"
 	EndIf
 
 	If(Untamed.Player.HasPerk(Untamed.PerkSecondWind2))
-		Output[5] = "SecondWind2.dds"
+		Output[3] = "SecondWind2.dds"
 	ElseIf(Untamed.Player.HasPerk(Untamed.PerkSecondWind1))
-		Output[5] = "SecondWind1.dds"
+		Output[3] = "SecondWind1.dds"
 	Else
-		Output[5] = "SecondWind0.dds"
+		Output[3] = "SecondWind0.dds"
 	EndIf
 
 	If(Untamed.Player.HasPerk(Untamed.PerkLoadBearing2))
-		Output[6] = "LoadBearing2.dds"
+		Output[4] = "LoadBearing2.dds"
 	ElseIf(Untamed.Player.HasPerk(Untamed.PerkLoadBearing1))
-		Output[6] = "LoadBearing1.dds"
+		Output[4] = "LoadBearing1.dds"
 	Else
-		Output[6] = "LoadBearing0.dds"
+		Output[4] = "LoadBearing0.dds"
 	EndIf
 
+	;; situational awareness
+
 	If(Untamed.Player.HasPerk(Untamed.PerkDenMother))
-		Output[7] = "DenMother1.dds"
+		Output[5] = "DenMother1.dds"
 	Else
-		Output[7] = "DenMother0.dds"
+		Output[5] = "DenMother0.dds"
 	EndIf
 
 	Return Output
@@ -989,7 +1015,7 @@ EndFunction
 
 String[] Function GetEssenceFilenames()
 
-	String[] Output = Utility.CreateStringArray(8)
+	String[] Output = Utility.CreateStringArray(7)
 
 	Output[0] = "Title.dds"
 	Output[1] = "Cursor.dds"
@@ -1000,42 +1026,32 @@ String[] Function GetEssenceFilenames()
 		Output[2] = "Exp0.dds"
 	EndIf
 
-	If(Untamed.Player.HasPerk(Untamed.PerkPackLeader3))
-		Output[3] = "Leader3.dds"
-	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader2))
-		Output[3] = "Leader2.dds"
-	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader1))
-		Output[3] = "Leader1.dds"
-	Else
-		Output[3] = "Leader0.dds"
-	EndIf
-
-	If(Untamed.Player.HasPerk(Untamed.PerkCrossbreeder))
-		Output[4] = "Crossbreeder1.dds"
-	Else
-		Output[4] = "Crossbreeder0.dds"
-	EndIf
-
 	If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
-		Output[5] = "ThickHide1.dds"
+		Output[3] = "ThickHide1.dds"
 	Else
-		Output[5] = "ThickHide0.dds"
+		Output[3] = "ThickHide0.dds"
 	EndIf
 
 	If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
-		Output[6] = "ResistHide1.dds"
+		Output[4] = "ResistHide1.dds"
 	Else
-		Output[6] = "ResistHide0.dds"
+		Output[4] = "ResistHide0.dds"
 	EndIf
 
 	If(Untamed.Player.HasPerk(Untamed.PerkPackHealing3))
-		Output[7] = "Grace3.dds"
+		Output[5] = "Grace3.dds"
 	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackHealing2))
-		Output[7] = "Grace2.dds"
+		Output[5] = "Grace2.dds"
 	ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackHealing1))
-		Output[7] = "Grace1.dds"
+		Output[5] = "Grace1.dds"
 	Else
-		Output[7] = "Grace0.dds"
+		Output[5] = "Grace0.dds"
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkCrossbreeder))
+		Output[6] = "Crossbreeder1.dds"
+	Else
+		Output[6] = "Crossbreeder0.dds"
 	EndIf
 
 	Return Output
@@ -1123,7 +1139,17 @@ Perk Function GetBeastMasteryNextPerk(Int Choice)
 
 	Perk Output = NONE
 
-	If(Choice == 4)
+	If(Choice == 1)
+		If(Untamed.Player.HasPerk(Untamed.PerkPackLeader3))
+			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader2))
+			Output = Untamed.PerkPackLeader3
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader1))
+			Output = Untamed.PerkPackLeader2
+		Else
+			Output = Untamed.PerkPackLeader1
+		EndIf
+	ElseIf(Choice == 2)
 		If(Untamed.Player.HasPerk(Untamed.PerkSecondWind2))
 			Output = NONE
 		ElseIf(Untamed.Player.HasPerk(Untamed.PerkSecondWind1))
@@ -1131,7 +1157,7 @@ Perk Function GetBeastMasteryNextPerk(Int Choice)
 		Else
 			Output = Untamed.PerkSecondWind1
 		EndIf
-	ElseIf(Choice == 5)
+	ElseIf(Choice == 3)
 		If(Untamed.Player.HasPerk(Untamed.PerkLoadBearing2))
 			Output = NONE
 		ElseIf(Untamed.Player.HasPerk(Untamed.PerkLoadBearing1))
@@ -1139,7 +1165,7 @@ Perk Function GetBeastMasteryNextPerk(Int Choice)
 		Else
 			Output = Untamed.PerkLoadBearing1
 		EndIf
-	ElseIf(Choice == 6)
+	ElseIf(Choice == 4)
 		If(Untamed.Player.HasPerk(Untamed.PerkDenMother))
 			Output = NONE
 		Else
@@ -1161,34 +1187,18 @@ Perk Function GetEssenceNextPerk(Int Choice)
 			Output = Untamed.PerkExperienced1
 		EndIf
 	ElseIf(Choice == 2)
-		If(Untamed.Player.HasPerk(Untamed.PerkPackLeader3))
-			Output = NONE
-		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader2))
-			Output = Untamed.PerkPackLeader3
-		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackLeader1))
-			Output = Untamed.PerkPackLeader2
-		Else
-			Output = Untamed.PerkPackLeader1
-		EndIf
-	ElseIf(Choice == 3)
-		If(Untamed.Player.HasPerk(Untamed.PerkCrossbreeder))
-			Output = NONE
-		Else
-			Output = Untamed.PerkCrossbreeder
-		EndIf
-	ElseIf(Choice == 4)
 		If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
 			Output = NONE
 		Else
 			Output = Untamed.PerkThickHide
 		EndIf
-	ElseIf(Choice == 5)
+	ElseIf(Choice == 3)
 		If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
 			Output = NONE
 		Else
 			Output = Untamed.PerkResistantHide
 		EndIf
-	ElseIf(Choice == 6)
+	ElseIf(Choice == 4)
 		If(Untamed.Player.HasPerk(Untamed.PerkPackHealing3))
 			Output = NONE
 		ElseIf(Untamed.Player.HasPerk(Untamed.PerkPackHealing2))
@@ -1197,6 +1207,12 @@ Perk Function GetEssenceNextPerk(Int Choice)
 			Output = Untamed.PerkPackHealing2
 		Else
 			Output = Untamed.PerkPackHealing1
+		EndIf
+	ElseIf(Choice == 5)
+		If(Untamed.Player.HasPerk(Untamed.PerkCrossbreeder))
+			Output = NONE
+		Else
+			Output = Untamed.PerkCrossbreeder
 		EndIf
 	EndIf
 

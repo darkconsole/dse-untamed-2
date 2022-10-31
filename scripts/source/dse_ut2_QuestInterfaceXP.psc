@@ -44,7 +44,7 @@ Event OnUpdate()
 	Return
 EndEvent
 
-Function RequestUpdate(Float When=0.1)
+Function RequestUpdate(Float When=0.25)
 
 	self.UnregisterForUpdate()
 	self.RegisterForSingleUpdate(When)
