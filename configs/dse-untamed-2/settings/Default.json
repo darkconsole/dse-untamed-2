@@ -1,8 +1,8 @@
 {
-	"PackOrgasmXP": 10.0,
 	"PackKillXP": 5,
+	"PackKillShareXPM": 0.5,
+	"PackOrgasmXP": 10.0,
 	"PackSexTimeXPM": 0.15,
-	"PackShareXPM": 0.5,
 	"PackOverflowXPM": 0.1,
 	"PackSecondWind": true,
 

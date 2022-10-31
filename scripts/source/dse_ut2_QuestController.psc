@@ -32,6 +32,7 @@ Faction      Property FactionClassBear Auto         ;; untamed
 Faction      Property FactionClassHorse Auto        ;; untamed
 Faction      Property FactionClassSaberCat Auto     ;; untamed
 Faction      Property FactionClassWolf Auto         ;; untamed
+Faction      Property FactionPack Auto              ;; untamed
 Faction      Property FactionPlayerFollower Auto    ;; skyrim.esm
 Package      Property PackageDoNothing Auto         ;; untamed
 Package      Property PackageFollow Auto            ;; untamed

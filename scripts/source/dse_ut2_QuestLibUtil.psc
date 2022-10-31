@@ -377,6 +377,7 @@ in the save file which is another reason we have to fix them occasionally.}
 
 	self.CanOpenDoors(Who)
 	self.CanTalk(Who)
+	Who.SetNotShowOnStealthMeter(TRUE)
 
 	Who.SetActorValue("Aggression", 1) ;; attack verified enemies
 	Who.SetActorValue("Assistance", 2) ;; aid friends and allies
@@ -387,8 +388,7 @@ in the save file which is another reason we have to fix them occasionally.}
 		Who.SetActorValue("CombatHealthRegenMult", 1.0)
 	EndIf
 
-	;;Who.EquipItem(Untamed.WeapUnarmed, TRUE, TRUE)
-	Who.EquipItemEx(Untamed.WeapUnarmed, 0, TRUE, FALSE)
+	Who.EquipItem(Untamed.WeapUnarmed, TRUE, TRUE)
 
 	self.PrintDebug("Fix Animal Actor: " + Who.GetDisplayName())
 	Return
@@ -711,12 +711,21 @@ Function SetExperience(Actor Who, Float XP)
 	Float ClampXP = PapyrusUtil.ClampFloat(XP, 0.0, MaxXP)
 	Bool UpdatePlayer = (Who == Untamed.Player)
 
-	StorageUtil.SetFloatValue(Who, Untamed.KeyXP, ClampXP)
-	Untamed.Util.PrintDebug(Who.GetDisplayName() + " UXP " + ClampXP)
+	;; granted xp.
+	;; this is set directly as instructed.
 
-	If((XP > MaxXP) && (Who != Untamed.Player) && Untamed.Pack.IsMember(Who))
-		self.ModExperience(Untamed.Player, ((XP - MaxXP) * Untamed.Config.GetFloat(".PackOverflowXPM")))
-		UpdatePlayer = TRUE
+	StorageUtil.SetFloatValue(Who, Untamed.KeyXP, ClampXP)
+	Untamed.Util.PrintDebug("[SetExperience] " + Who.GetDisplayName() + " => " + ClampXP)
+
+	;; overflow xp.
+	;; a fraction of this is given to the pack leader when a pack members
+	;; xp bar is full.
+
+	If(Who != Untamed.Player)
+		If((XP > MaxXP) && Who.IsInFaction(Untamed.FactionPack))
+			Untamed.Util.PrintDebug("[SetExperience] overflow " + ((XP - MaxXP) * Untamed.Config.GetFloat(".PackOverflowXPM")))
+			self.ModExperience(Untamed.Player, ((XP - MaxXP) * Untamed.Config.GetFloat(".PackOverflowXPM")))
+		EndIf
 	EndIf
 
 	;;;;;;;;

@@ -2,6 +2,7 @@ Scriptname dse_ut2_QuestLibPack_AliasMember extends ReferenceAlias
 
 dse_ut2_QuestController Property Untamed Auto
 Int Property CombatState = 0 Auto Hidden
+Float Property CombatTime = 0 Auto Hidden
 
 Event OnActivate(ObjectReference By)
 	Actor Me = self.GetActorReference()
@@ -122,12 +123,5 @@ EndEvent
 Event OnPlayerFastTravelEnd(Float Time)
 	Actor Me = self.GetActorReference()
 	Untamed.Util.Print(Me.GetDisplayName() + " fast travel end")
-	Return
-EndEvent
-
-Event OnCombatStateChanged(Actor With, Int CombatState)
-
-	Actor Me = self.GetActorReference()
-
 	Return
 EndEvent

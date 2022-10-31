@@ -128,7 +128,7 @@ Function OnBeastialOrgasmWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	;; involved.
 
 	Float XP = (BeastCount * Untamed.Config.GetFloat(".PackOrgasmXP"))
-	Float BXP = (XP * Untamed.Config.GetFloat(".PackShareXPM"))
+	Float BXP = (XP * Untamed.Config.GetFloat(".PackKillShareXPM"))
 	Int Iter = 0
 	Int PregChance = 0
 	Int PregRoll = 0
