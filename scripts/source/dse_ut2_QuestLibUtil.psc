@@ -721,7 +721,7 @@ Function SetExperience(Actor Who, Float XP)
 	;; a fraction of this is given to the pack leader when a pack members
 	;; xp bar is full.
 
-	If(Who != Untamed.Player)
+	If(Who != Untamed.Player && Untamed.Player.HasPerk(Untamed.PerkExperienced2))
 		If((XP > MaxXP) && Who.IsInFaction(Untamed.FactionPack))
 			Untamed.Util.PrintDebug("[SetExperience] overflow " + ((XP - MaxXP) * Untamed.Config.GetFloat(".PackOverflowXPM")))
 			self.ModExperience(Untamed.Player, ((XP - MaxXP) * Untamed.Config.GetFloat(".PackOverflowXPM")))

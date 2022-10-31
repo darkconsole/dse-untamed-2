@@ -749,9 +749,9 @@ Function HandleHelpText()
 		ElseIf(self.SideCur == 3)
 			Untamed.Util.Popup("Increases magic resistance of pack members.")
 		ElseIf(self.SideCur == 4)
-			Untamed.Util.Popup("Command pack members to stay put from range.")
-		ElseIf(self.SideCur == 5)
 			Untamed.Util.Popup("Command pack members to follow from range.")
+		ElseIf(self.SideCur == 5)
+			Untamed.Util.Popup("Command pack members to stay put from range.")
 		EndIf
 	ElseIf(self.MainCur == 2)
 		If(self.SideCur == 1)
@@ -765,17 +765,19 @@ Function HandleHelpText()
 		EndIf
 	ElseIf(self.MainCur == 3)
 		If(self.SideCur == 1)
-			Untamed.Util.Popup("Increaes maximum pack size.")
+			Untamed.Util.Popup("Increaes maximum pack size.\n(3, 6, 12)")
 		ElseIf(self.SideCur == 2)
 			Untamed.Util.Popup("Consume UXP to get healed when downed.")
 		ElseIf(self.SideCur == 3)
 			Untamed.Util.Popup("Pack members will carry things for you.")
 		ElseIf(self.SideCur == 4)
+			Untamed.Util.Popup("Visual IFF during combat.")
+		ElseIf(self.SideCur == 5)
 			Untamed.Util.Popup("Able to become pregnant and birth new animals.")
 		EndIf
 	ElseIf(self.MainCur == 4)
 		If(self.SideCur == 1)
-			Untamed.Util.Popup("Increases maximum UXP.")
+			Untamed.Util.Popup("LVL1: Increase maximum UXP.\nLVL2: Pack UXP overflow goes to you.")
 		ElseIf(self.SideCur == 2)
 			Untamed.Util.Popup("Damage resist based on current UXP while nude.")
 		ElseIf(self.SideCur == 3)
@@ -1031,8 +1033,10 @@ String[] Function GetEssenceFilenames()
 	Output[0] = "Title.dds"
 	Output[1] = "Cursor.dds"
 
-	If(Untamed.Player.HasPerk(Untamed.PerkExperienced1))
-		Output[2] = "Exp3.dds"
+	If(Untamed.Player.HasPerk(Untamed.PerkExperienced2))
+		Output[2] = "Exp2.dds"
+	ElseIf(Untamed.Player.HasPerk(Untamed.PerkExperienced1))
+		Output[2] = "Exp1.dds"
 	Else
 		Output[2] = "Exp0.dds"
 	EndIf
@@ -1198,8 +1202,10 @@ Perk Function GetEssenceNextPerk(Int Choice)
 	Perk Output = NONE
 
 	If(Choice == 1)
-		If(Untamed.Player.HasPerk(Untamed.PerkExperienced1))
+		If(Untamed.Player.HasPerk(Untamed.PerkExperienced2))
 			Output = NONE
+		ElseIf(Untamed.Player.HasPerk(Untamed.PerkExperienced1))
+			Output = Untamed.PerkExperienced2
 		Else
 			Output = Untamed.PerkExperienced1
 		EndIf
