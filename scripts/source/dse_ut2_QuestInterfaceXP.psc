@@ -17,7 +17,7 @@ Int SH = 720  ;; screen height (ce fixed hud size)
 Int BW = 150  ;; bar width
 Int BH = 20   ;; bar height
 Int BS = 1    ;; bar spacing
-Int FH = 12   ;; font height
+Int FH = 11   ;; font height
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -134,6 +134,7 @@ Function UpdateUI()
 	Int Iter = 0
 	Actor[] Members = Untamed.Pack.GetMemberList()
 	Int UXP = 0
+	Float UXV = 0.0
 
 	;;;;;;;;
 
@@ -164,19 +165,21 @@ Function UpdateUI()
 
 		If(Iter == 0)
 			UXP = Untamed.Util.GetExperiencePercent(Untamed.Player) As Int
+			UXV = Untamed.Util.GetExperience(Untamed.Player)
 			self.SetBarPercent(self.Bars[Iter], UXP)
-			self.SetNameText(self.Names[Iter], (Untamed.Player.GetDisplayName() + " (" + UXP + ")"))
+			self.SetNameText(self.Names[Iter], (Untamed.Player.GetDisplayName() + " | " + (UXV as Int) + " UXP"))
 			self.SetNamePosition(self.Names[Iter], Iter)
 
-			If(Untamed.Util.GetExperience(Untamed.Player) >= Untamed.Config.GetFloat(".PerkCostXP"))
+			If(UXV >= Untamed.Config.GetFloat(".PerkCostXP"))
 				self.SetBarColour(self.Bars[Iter], 97, 158, 27)
 			Else
 				self.SetBarColour(self.Bars[Iter], 158, 96, 26)
 			EndIf
 		Else
 			UXP = Untamed.Util.GetExperiencePercent(Members[Iter - 1]) As Int
-			self.SetBarPercent(self.Bars[Iter], Untamed.Util.GetExperiencePercent(Members[Iter - 1]))
-			self.SetNameText(self.Names[Iter], (Members[Iter - 1].GetDisplayName() + " (" + UXP + ")"))
+			UXV = Untamed.Util.GetExperience(Members[Iter - 1])
+			self.SetBarPercent(self.Bars[Iter], UXP)
+			self.SetNameText(self.Names[Iter], (Members[Iter - 1].GetDisplayName() + " | " + (UXV as Int) + " UXP"))
 			self.SetNamePosition(self.Names[Iter], Iter)
 		EndIf
 
