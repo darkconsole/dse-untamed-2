@@ -167,6 +167,12 @@ Function UpdateUI()
 			self.SetBarPercent(self.Bars[Iter], UXP)
 			self.SetNameText(self.Names[Iter], (Untamed.Player.GetDisplayName() + " (" + UXP + ")"))
 			self.SetNamePosition(self.Names[Iter], Iter)
+
+			If(Untamed.Util.GetExperience(Untamed.Player) >= Untamed.Config.GetFloat(".PerkCostXP"))
+				self.SetBarColour(self.Bars[Iter], 97, 158, 27)
+			Else
+				self.SetBarColour(self.Bars[Iter], 158, 96, 26)
+			EndIf
 		Else
 			UXP = Untamed.Util.GetExperiencePercent(Members[Iter - 1]) As Int
 			self.SetBarPercent(self.Bars[Iter], Untamed.Util.GetExperiencePercent(Members[Iter - 1]))
