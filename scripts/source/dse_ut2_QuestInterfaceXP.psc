@@ -167,7 +167,7 @@ Function UpdateUI()
 			UXP = Untamed.Util.GetExperiencePercent(Untamed.Player) As Int
 			UXV = Untamed.Util.GetExperience(Untamed.Player)
 			self.SetBarPercent(self.Bars[Iter], UXP)
-			self.SetNameText(self.Names[Iter], (Untamed.Player.GetDisplayName() + " | " + (UXV as Int) + " UXP"))
+			self.SetNameText(self.Names[Iter], (Untamed.Player.GetDisplayName() + " - " + Untamed.Util.FloatToString(UXV, 1) + " UXP"))
 			self.SetNamePosition(self.Names[Iter], Iter)
 
 			If(UXV >= Untamed.Config.GetFloat(".PerkCostXP"))
@@ -179,7 +179,7 @@ Function UpdateUI()
 			UXP = Untamed.Util.GetExperiencePercent(Members[Iter - 1]) As Int
 			UXV = Untamed.Util.GetExperience(Members[Iter - 1])
 			self.SetBarPercent(self.Bars[Iter], UXP)
-			self.SetNameText(self.Names[Iter], (Members[Iter - 1].GetDisplayName() + " | " + (UXV as Int) + " UXP"))
+			self.SetNameText(self.Names[Iter], (Members[Iter - 1].GetDisplayName() + " - " + Untamed.Util.FloatToString(UXV, 1) + " UXP"))
 			self.SetNamePosition(self.Names[Iter], Iter)
 		EndIf
 

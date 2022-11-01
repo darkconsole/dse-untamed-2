@@ -19,10 +19,15 @@ Event OnEffectStart(Actor Target, Actor Caster)
 			If(self.CommandNum == 1)
 				Members[Iter].AddToFaction(Untamed.FactionPackStay)
 				Members[Iter].EvaluatePackage()
+				Untamed.Util.ModExperience(Untamed.Player, 1)
+				Untamed.Util.ModExperience(Members[Iter], 1)
+
 			ElseIf(self.CommandNum == 2)
 				Untamed.Pack.Target.ForceRefTo(Untamed.Player)
 				Members[Iter].RemoveFromFaction(Untamed.FactionPackStay)
 				Members[Iter].EvaluatePackage()
+				Untamed.Util.ModExperience(Untamed.Player, 1)
+				Untamed.Util.ModExperience(Members[Iter], 1)
 
 				;; set the shout to take that long to cd.
 				Utility.Wait(3.8)
@@ -32,6 +37,8 @@ Event OnEffectStart(Actor Target, Actor Caster)
 				Untamed.Pack.Target.ForceRefTo(Target)
 				Members[Iter].RemoveFromFaction(Untamed.FactionPackStay)
 				Members[Iter].EvaluatePackage()
+				Untamed.Util.ModExperience(Untamed.Player, 1)
+				Untamed.Util.ModExperience(Members[Iter], 1)
 			EndIf
 
 			Untamed.Util.PrintDebug(Members[Iter].GetDisplayName() + " heard your command (" + self.CommandNum + ")")

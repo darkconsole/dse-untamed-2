@@ -749,6 +749,7 @@ Function SetExperience(Actor Who, Float XP)
 		EndIf
 	EndIf
 
+	Untamed.XPBar.RequestUpdate(0.5)
 	Return
 EndFunction
 
