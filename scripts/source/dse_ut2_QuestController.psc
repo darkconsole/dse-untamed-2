@@ -39,6 +39,7 @@ Package        Property PackageDoNothing Auto         ;; untamed
 Package        Property PackageFollow Auto            ;; untamed
 Package        Property PackagePackStay Auto          ;; untamed
 Spell          Property SpellMatingCallTracker Auto   ;; untamed
+Spell          Property SpellAttackBleed Auto         ;; untamed
 Spell          Property SpellPackRested Auto          ;; untamed
 Shout          Property ShoutMatingCall Auto          ;; untamed
 Static         Property StaticX Auto                  ;; skyrim.esm
