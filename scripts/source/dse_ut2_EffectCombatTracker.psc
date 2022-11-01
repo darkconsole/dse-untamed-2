@@ -102,19 +102,17 @@ Event OnDeath(Actor Killer)
 
 	If(Killer == NONE)
 		Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was realdeathed by... something.")
-		self.Dispel()
-		Return
-	EndIf
+	Else
+		Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was realdeathed by " + Killer.GetDisplayName())
 
-	Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was realdeathed by " + Killer.GetDisplayName())
+		;; give the primary killer the last hit xp.
 
-	;; give the primary killer the last hit xp.
+		KXP = Untamed.Config.GetFloat(".PackKillXP")
+		ShareMult = Untamed.Config.GetFloat(".PackKillShareXPM")
 
-	KXP = Untamed.Config.GetFloat(".PackKillXP")
-	ShareMult = Untamed.Config.GetFloat(".PackKillShareXPM")
-
-	If(Killer.IsInFaction(Untamed.FactionPack))
-		Untamed.Util.ModExperience(Killer, KXP)
+		If(Killer.IsInFaction(Untamed.FactionPack))
+			Untamed.Util.ModExperience(Killer, KXP)
+		EndIf
 	EndIf
 
 	;; give anyone else in the log participation xp.
