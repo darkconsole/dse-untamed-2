@@ -98,14 +98,17 @@ Event OnControlUp(String Ctrl, Float Dur)
 	Actor What = self.TheMount.GetActorReference()
 
 	If(Ctrl == "Activate")
-		If(Rider.Dismount())
+		Untamed.Util.PrintDebug("[RideThings:ControlUp] dismount uptown")
+		Rider.Dismount()
+		;;If(Rider.Dismount())
+			Untamed.Util.PrintDebug("[RideThings:ControlUp] dismount downtown")
 			Debug.SendAnimationEvent(Rider, "JumpStandingStart")
 			Debug.SendAnimationEvent(Rider, "JumpLandEnd")
 			What.AllowPCDialogue(TRUE)
 			What.BlockActivation(FALSE)
 			self.UnregisterForRidingControls()
 			self.TheMount.Clear()
-		EndIf
+		;;EndIf
 	EndIf
 
 	Return
