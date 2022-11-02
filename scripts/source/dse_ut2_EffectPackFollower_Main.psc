@@ -17,7 +17,7 @@ Event OnUpdate()
 
 	Untamed.Util.Print("[PackFollower:OnUpdate] " + self.Me)
 
-	If(Untamed.Config.GetBool(".PluginEFF"))
+	If(Untamed.Menu.HasEFF)
 		Untamed.Util.AddToEFF(self.Me)
 	EndIf
 

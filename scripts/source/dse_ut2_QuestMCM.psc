@@ -13,6 +13,7 @@ Bool Property HasSL = FALSE Auto
 Bool Property HasPUtil = FALSE Auto
 Bool Property HasBWA = FALSE Auto
 Bool Property HasSLA = FALSE Auto
+Bool Property HasEFF = FALSE Auto
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -149,6 +150,7 @@ Event OnGameReload()
 	;; soft requirements
 	self.HasSLA = self.IsInstalledSexLabAroused(FALSE)
 	self.HasBWA = self.IsInstalledBlushWhenAroused(FALSE)
+	self.HasEFF = dse_ut2_ExternEFF.IsEnabled()
 
 	;;;;;;;;
 

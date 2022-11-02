@@ -165,7 +165,7 @@ if the pack is already full.}
 			Untamed.Util.SetPassive(Who, FALSE)
 			Untamed.XPBar.RegisterForSingleUpdate(0.1)
 
-			If(Untamed.Config.GetBool(".PluginEFF"))
+			If(Untamed.Menu.HasEFF)
 				Untamed.Util.AddToEFF(Who)
 			EndIf
 
@@ -206,7 +206,7 @@ returns false under any other condition.}
 		Untamed.Util.SetPassive(Who, TRUE)
 		Untamed.Util.SendActorEvent(Who,"UT2.Pack.MemberLeave")
 
-		If(Untamed.Config.GetBool(".PluginEFF"))
+		If(Untamed.Menu.HasEFF)
 			Untamed.Util.RemoveFromEFF(Who)
 		EndIf
 	EndIf
@@ -224,7 +224,6 @@ need to be able to do.}
 
 	Int Iter = 0
 	Actor Who = NONE
-	Bool ShouldEFF = dse_ut2_ExternEFF.IsEnabled()
 
 	While(Iter < self.Members.Length)
 		Who = self.Members[Iter].GetActorReference()
@@ -232,7 +231,7 @@ need to be able to do.}
 		If(Who != NONE)
 			Untamed.Util.FixAnimalActor(Who)
 
-			If(ShouldEff)
+			If(Untamed.Menu.HasEFF)
 				Untamed.Util.AddToEFF(Who)
 			EndIf
 		EndIf
