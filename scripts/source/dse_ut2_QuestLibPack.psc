@@ -224,12 +224,17 @@ need to be able to do.}
 
 	Int Iter = 0
 	Actor Who = NONE
+	Bool ShouldEFF = Untamed.Config.GetBool(".PluginEFF")
 
 	While(Iter < self.Members.Length)
 		Who = self.Members[Iter].GetActorReference()
 
 		If(Who != NONE)
 			Untamed.Util.FixAnimalActor(Who)
+
+			If(ShouldEFF)
+				Untamed.Util.AddToEFF(Who)
+			EndIf
 		EndIf
 
 		Iter += 1

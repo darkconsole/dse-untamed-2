@@ -154,16 +154,22 @@ Event OnGameReload()
 
 	Untamed.PerkUI.OnGameReady()
 
-	self.RegisterForSingleUpdate(4)
+	self.RegisterForSingleUpdate(3)
 	Return
 EndEvent
 
 Event OnUpdate()
 
 	Untamed.Util.PrintDebug("[QuestMCM:OnUpdate] delayed actions go")
+
+	;; this should kick off the ui running off in its own thread im pretty
+	;; sure such like.
+
 	Untamed.XPBar.Reset()
 	Untamed.XPBar.Stop()
 	Untamed.XPBar.Start()
+
+	;; update the player buffs.
 
 	If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
 		Untamed.Util.UpdateFeatThickHide(Untamed.Player)
@@ -171,6 +177,10 @@ Event OnUpdate()
 
 	If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
 		Untamed.Util.UpdateFeatResistantHide(Untamed.Player)
+	EndIf
+
+	If(Untamed.Config.GetBool(".PluginEFF"))
+		Untamed.Pack.FixMembers()
 	EndIf
 
 	Return
