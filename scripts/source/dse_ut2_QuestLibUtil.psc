@@ -395,6 +395,7 @@ in the save file which is another reason we have to fix them occasionally.}
 EndFunction
 
 Function AddToEFF(Actor Who)
+{add actor to the eff health tracker. just lube for the extern eff calls.}
 
 	self.PrintDebug("[AddToEFF] " + Who.GetDisplayName())
 	dse_ut2_ExternEFF.AddToPanel(Who)
@@ -403,6 +404,8 @@ Function AddToEFF(Actor Who)
 EndFunction
 
 Function RemoveFromEFF(Actor Who)
+{remove actor from the eff healtht racker. also just lube for the extern
+eff calls.}
 
 	self.PrintDebug("[RemoveFromEFF] " + Who.GetDisplayName())
 	dse_ut2_ExternEFF.RemoveFromPanel(Who)

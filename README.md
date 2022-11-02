@@ -18,7 +18,7 @@
 	[+] Sleep near pack members for UXP.
 	[-] Ride wolves.
 	[-] Ride bears.
-	[ ] Ride sabercats.
+	[-] Ride sabercats.
 	[ ] Pack members loot battlefield.
 	[ ] Basic aggro management akin to "I Am Your Shield" but built in.
 	[ ] Other pack member interactions for UXP like feeding.
