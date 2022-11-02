@@ -59,9 +59,9 @@ Function TriggerActors(Actor Rider, Actor Mount)
 {trigger mounting.}
 
 	Mount.Activate(Rider, TRUE)
+	Debug.SendAnimationEvent(Mount, "moveStart")
 
 	self.RegisterForRidingControls()
-
 	Return
 EndFunction
 
