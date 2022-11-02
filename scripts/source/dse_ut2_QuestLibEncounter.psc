@@ -61,12 +61,13 @@ Event OnEncounterEnding(String EventName, String Args, Float Argc, Form From)
 	Float Timer = 0.0
 	Float Diff = 0.0
 	Float UXP = 0.0
+	Float Now = Utility.GetCurrentRealTime()
 
 	If(self.IsPlayerInvolved(Actors) && self.CountBeastsInvolved(Actors) > 0)
 		While(Iter < Actors.Length)
 			If(Actors[Iter] == Untamed.Player || Untamed.Pack.IsMember(Actors[Iter]))
-				Timer = StorageUtil.GetFloatValue(Actors[Iter], Untamed.KeyEncounterTime)
-				Diff = PapyrusUtil.ClampFloat((Utility.GetCurrentRealTime() - Timer), 0.0, 9001.0)
+				Timer = StorageUtil.GetFloatValue(Actors[Iter], Untamed.KeyEncounterTime, Now)
+				Diff = PapyrusUtil.ClampFloat((Now - Timer), 0.0, 9001.0)
 				UXP = (Diff * Untamed.Config.GetFloat(".PackSexTimeXPM"))
 
 				Untamed.Util.PrintDebug("[EncounterEnd] " + Actors[Iter].GetDisplayName() + " " + UXP + " Time Based UXP")
