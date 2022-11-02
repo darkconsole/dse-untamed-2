@@ -11,7 +11,7 @@
 	[+] Pack members safe to bring into cities.
 	[+] Pack members aid in combat.
 	[+] Pack member that last hits gains UXP.
-	[ ] Pack members that hit anything gain some UXP.
+	[+] Pack members that hit anything gain some UXP.
 	[+] Percentage of pack combat xp for player.
 	[+] Give pack members names.
 	[+] Initiate SexLab encounters for UXP.
@@ -84,7 +84,7 @@ Perks from the path of burden provide the pack with utility abilities.
 
 ## Essence
 
-	[-] Experienced (+20 UXP)
+	[+] Experienced (+20 UXP)
 	    E1 Increase maximum UXP.
 	    E2 percentage of pack member XP overflow rolls into you.
 
