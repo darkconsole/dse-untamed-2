@@ -34,12 +34,13 @@ Event OnEncounterStarting(String EventName, String Args, Float Argc, Form From)
 	Actor[] Actors = Untamed.Anim.SexLab.HookActors(Args)
 	sslBaseAnimation Animation = Untamed.Anim.SexLab.HookAnimation(Args)
 	Int Iter = 0
+	Float Now = Utility.GetCurrentRealTime()
 
 	If(self.IsPlayerInvolved(Actors) && self.CountBeastsInvolved(Actors) > 0)
 		While(Iter < Actors.Length)
 			If(Actors[Iter] == Untamed.Player || Untamed.Pack.IsMember(Actors[Iter]))
 				Untamed.Util.PrintDebug("[EncounterStart] " + Actors[Iter].GetDisplayName() + " has begun a bestial encounter")
-				StorageUtil.SetFloatValue(Actors[Iter], Untamed.KeyEncounterTime, Utility.GetCurrentRealTime())
+				StorageUtil.SetFloatValue(Actors[Iter], Untamed.KeyEncounterTime, Now)
 			EndIf
 			Iter += 1
 		EndWhile
