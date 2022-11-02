@@ -154,6 +154,7 @@ Event OnGameReload()
 
 	;;;;;;;;
 
+	Untamed.Pack.OnGameReady()
 	Untamed.PerkUI.OnGameReady()
 
 	self.RegisterForSingleUpdate(2.22)
@@ -171,19 +172,7 @@ Event OnUpdate()
 	Untamed.XPBar.Stop()
 	Untamed.XPBar.Start()
 
-	;; update the player buffs.
-
-	If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
-		Untamed.Util.UpdateFeatThickHide(Untamed.Player)
-	EndIf
-
-	If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
-		Untamed.Util.UpdateFeatResistantHide(Untamed.Player)
-	EndIf
-
-	;; run a pack update too on a fresh load.
-
-	Untamed.Pack.FixMembers()
+	Untamed.Pack.OnGameReadyDelayed()
 
 	Return
 EndEvent
@@ -274,23 +263,23 @@ Event OnOptionSelect(Int Item)
 	ElseIf(Item == ItemDebugActorXP0)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, 0)
-		Untamed.XPBar.RegisterForSingleUpdate(0.1)
+		Untamed.XPBar.RequestUpdate()
 	ElseIf(Item == ItemDebugActorXP25)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.25))
-		Untamed.XPBar.RegisterForSingleUpdate(0.1)
+		Untamed.XPBar.RequestUpdate()
 	ElseIf(Item == ItemDebugActorXP50)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.50))
-		Untamed.XPBar.RegisterForSingleUpdate(0.1)
+		Untamed.XPBar.RequestUpdate()
 	ElseIf(Item == ItemDebugActorXP75)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, (Untamed.Util.GetExperienceMax(Who) * 0.75))
-		Untamed.XPBar.RegisterForSingleUpdate(0.1)
+		Untamed.XPBar.RequestUpdate()
 	ElseIf(Item == ItemDebugActorXP100)
 		Val = TRUE
 		Untamed.Util.SetExperience(Who, Untamed.Util.GetExperienceMax(Who))
-		Untamed.XPBar.RegisterForSingleUpdate(0.1)
+		Untamed.XPBar.RequestUpdate()
 	ElseIf(Item == ItemDebugActorClearPreg)
 		Val = TRUE
 		Untamed.Util.ActorClearPregnant(Who)

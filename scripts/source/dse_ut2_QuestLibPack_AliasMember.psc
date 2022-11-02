@@ -52,7 +52,7 @@ Event OnEnterBleedout()
 		Me.RestoreActorValue(Untamed.KeyActorValueHealth, (Me.GetActorValueMax(Untamed.KeyActorValueHealth) * HealMult))
 		Untamed.Util.SetExperience(Source, (Untamed.Util.GetExperience(Source) * XPMult))
 		Untamed.Util.Print(Me.GetDisplayName() + " gets second wind!")
-		Untamed.XPBar.RegisterForSingleUpdate(0.05)
+		Untamed.XPBar.RequestUpdate()
 		Return
 	EndIf
 
@@ -75,7 +75,7 @@ Event OnDeath(Actor Killer)
 
 	Untamed.Util.Print(Me.GetDisplayName() + " is dead!")
 
-	Untamed.XPBar.RegisterForSingleUpdate(0.05)
+	Untamed.XPBar.RequestUpdate()
 	Return
 EndEvent
 

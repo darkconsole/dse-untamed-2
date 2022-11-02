@@ -163,7 +163,7 @@ if the pack is already full.}
 			Untamed.Util.SendActorEvent(Who, "UT2.Pack.MemberJoin")
 			Untamed.Util.PrintDebug(Who.GetDisplayName() + " added to pack as Member" + Iter)
 			Untamed.Util.SetPassive(Who, FALSE)
-			Untamed.XPBar.RegisterForSingleUpdate(0.1)
+			Untamed.XPBar.RequestUpdate()
 
 			If(Untamed.Menu.HasEFF)
 				Untamed.Util.AddToEFF(Who)
@@ -211,7 +211,7 @@ returns false under any other condition.}
 		EndIf
 	EndIf
 
-	Untamed.XPBar.RegisterForSingleUpdate(0.05)
+	Untamed.XPBar.RequestUpdate()
 	Return Found
 EndFunction
 
@@ -256,10 +256,6 @@ Function ClearMembers()
 	Return
 EndFunction
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 Function UpdatePreggos()
 {update pregnant actor data.}
 
@@ -280,15 +276,56 @@ Function UpdatePreggos()
 	Return
 EndFunction
 
+Function RequestUpdate(Float Time=60.0)
+{provide for update request bashing.}
+
+	self.UnregisterForUpdate()
+	self.RegisterForSingleUpdate(Time)
+
+	Return
+EndFunction
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Function OnGameReady()
+
+	self.OnUpdate()
+
+	Return
+EndFunction
+
+Function OnGameReadyDelayed()
+
+	;; run through and fix all pack members.
+
+	self.FixMembers()
+
+	;; update player abilities.
+
+	If(Untamed.Player.HasPerk(Untamed.PerkThickHide))
+		Untamed.Util.UpdateFeatThickHide(Untamed.Player)
+	EndIf
+
+	If(Untamed.Player.HasPerk(Untamed.PerkResistantHide))
+		Untamed.Util.UpdateFeatResistantHide(Untamed.Player)
+	EndIf
+
+	Return
+EndFunction
+
 Event OnUpdate()
+
+	Untamed.Util.PrintDebug("[LibPack:OnUpdate] ping")
 
 	If(Untamed.Util.CountPregnantActors())
 		self.UpdatePreggos()
 	EndIf
 
 	If(self.IsRunning())
-		self.RegisterForSingleUpdate(60)
+		self.RegisterForSingleUpdate(120)
 	EndIf
 
 	Return
 EndEvent
+
