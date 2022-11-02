@@ -115,8 +115,6 @@ Event OnSleepStop(Bool Iptd)
 			Untamed.Util.ModExperience(Untamed.Player, ((HourSlept * SleepXPM) * Pmult))
 			Untamed.Player.AddSpell(Untamed.SpellPackRested)
 		EndIf
-
-		Untamed.XPBar.RequestUpdate()
 	EndIf
 
 	Return
