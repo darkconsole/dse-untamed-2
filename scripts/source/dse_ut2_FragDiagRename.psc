@@ -8,7 +8,7 @@ Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
 dse_ut2_QuestController Untamed = dse_ut2_QuestController.Get()
 Untamed.Util.Rename(akSpeaker)
-Untamed.XPBar.RegisterForSingleUpdate(0.1)
+Untamed.XPBar.RequestUpdate(0.1)
 ;END CODE
 EndFunction
 ;END FRAGMENT

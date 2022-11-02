@@ -138,7 +138,7 @@ Function OnBeastialOrgasmWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 	While(Iter < Actors.Length)
 		If(Untamed.Util.ActorIsBeast(Actors[Iter]))
 			If(Untamed.Pack.IsMember(Actors[Iter]))
-				Untamed.Experience(Actors[Iter], BXP)
+				Untamed.Util.ModExperience(Actors[Iter], BXP)
 			Else
 				Untamed.Pack.AddMember(Actors[Iter])
 			EndIf
@@ -156,7 +156,6 @@ Function OnBeastialOrgasmWithPlayer(Actor[] Actors, sslBaseAnimation Animation, 
 		Iter += 1
 	EndWhile
 
-	Untamed.XPBar.RegisterForSingleUpdate(0.1)
 	Return
 EndFunction
 
@@ -174,8 +173,7 @@ Function OnLameOrgasmWithPlayer(Actor[] Actors, sslBaseAnimation Animation)
 		XP = 0
 	EndIf
 
-	Untamed.Experience(Untamed.Player, XP)
-	Untamed.XPBar.RegisterForSingleUpdate(0.1)
+	Untamed.Util.ModExperience(Untamed.Player, XP)
 
 	Return
 EndFunction

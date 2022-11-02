@@ -828,8 +828,7 @@ Bool Function HandleBuyPerk()
 		Untamed.Pack.FixMembers()
 	EndIf
 
-	Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
-	Untamed.XPBar.RegisterForSingleUpdate(0.1)
+	Untamed.Util.ModExperience(Untamed.Player, (Cost * -1))
 
 	Return TRUE
 EndFunction
@@ -871,8 +870,7 @@ Bool Function HandleGiveShout()
 
 	Untamed.Util.Print("Shout Added: " + Choice.GetName())
 	Untamed.Util.AddShout(Untamed.Player, Choice)
-	Untamed.Util.SetExperience(Untamed.Player, (UXP - Cost))
-	Untamed.XPBar.RegisterForSingleUpdate(0.1)
+	Untamed.Util.ModExperience(Untamed.Player, (Cost * -1))
 
 	Return TRUE
 EndFunction
