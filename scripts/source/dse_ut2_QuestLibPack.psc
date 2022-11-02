@@ -224,7 +224,7 @@ need to be able to do.}
 
 	Int Iter = 0
 	Actor Who = NONE
-	Bool ShouldEFF = Untamed.Config.GetBool(".PluginEFF")
+	Bool ShouldEFF = dse_ut2_ExternEFF.IsEnabled()
 
 	While(Iter < self.Members.Length)
 		Who = self.Members[Iter].GetActorReference()
@@ -232,7 +232,7 @@ need to be able to do.}
 		If(Who != NONE)
 			Untamed.Util.FixAnimalActor(Who)
 
-			If(ShouldEFF)
+			If(ShouldEff)
 				Untamed.Util.AddToEFF(Who)
 			EndIf
 		EndIf

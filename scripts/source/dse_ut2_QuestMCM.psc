@@ -154,7 +154,7 @@ Event OnGameReload()
 
 	Untamed.PerkUI.OnGameReady()
 
-	self.RegisterForSingleUpdate(3)
+	self.RegisterForSingleUpdate(2.22)
 	Return
 EndEvent
 
@@ -179,9 +179,9 @@ Event OnUpdate()
 		Untamed.Util.UpdateFeatResistantHide(Untamed.Player)
 	EndIf
 
-	If(Untamed.Config.GetBool(".PluginEFF"))
-		Untamed.Pack.FixMembers()
-	EndIf
+	;; run a pack update too on a fresh load.
+
+	Untamed.Pack.FixMembers()
 
 	Return
 EndEvent
