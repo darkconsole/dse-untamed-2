@@ -207,7 +207,7 @@ returns false under any other condition.}
 		Untamed.Util.SendActorEvent(Who,"UT2.Pack.MemberLeave")
 
 		If(Untamed.Config.GetBool(".PluginEFF"))
-			Untamed.Util.AddToEFF(Who)
+			Untamed.Util.RemoveFromEFF(Who)
 		EndIf
 	EndIf
 
