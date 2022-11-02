@@ -1,4 +1,4 @@
-Scriptname dse_ut2_EffectMatingCall extends ActiveMagicEffect
+Scriptname dse_ut2_EffectMatingCallPinger extends ActiveMagicEffect
 
 dse_ut2_QuestController Property Untamed Auto
 
