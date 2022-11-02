@@ -390,7 +390,29 @@ in the save file which is another reason we have to fix them occasionally.}
 
 	Who.RemoveItem(Untamed.WeapUnarmed, 999, TRUE)
 
+	If(Untamed.Config.GetBool(".PluginEFF"))
+		self.AddToEFF(Who) ;; temporary to fix my save.
+	EndIf
+
 	self.PrintDebug("Fix Animal Actor: " + Who.GetDisplayName())
+	Return
+EndFunction
+
+Function AddToEFF(Actor Who)
+
+	int EvID = ModEvent.Create("XFL_System_AddFollower")
+	ModEvent.PushForm(EvID, Who)
+	ModEvent.Send(EvID)
+
+	Return
+EndFunction
+
+Function RemoveFromEFF(Actor Who)
+
+	int EvID = ModEvent.Create("XFL_System_Dismiss")
+	ModEvent.PushForm(EvID, Who)
+	ModEvent.Send(EvID)
+
 	Return
 EndFunction
 

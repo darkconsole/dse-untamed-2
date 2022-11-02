@@ -26,6 +26,8 @@
 	"PlayerExperienceMax": 100,
 	"HumanoidOrgasmXPM": 0.5,
 
+	"PluginEFF": true,
+
 	"PackLoveIterXP": 1.0,
 	"WidgetOffsetX": 1130,
 	"WidgetOffsetY": 20,

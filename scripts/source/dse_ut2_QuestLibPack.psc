@@ -164,6 +164,11 @@ if the pack is already full.}
 			Untamed.Util.PrintDebug(Who.GetDisplayName() + " added to pack as Member" + Iter)
 			Untamed.Util.SetPassive(Who, FALSE)
 			Untamed.XPBar.RegisterForSingleUpdate(0.1)
+
+			If(Untamed.Config.GetBool(".PluginEFF"))
+				Untamed.Util.AddToEFF(Who)
+			EndIf
+
 			Return TRUE
 		EndIf
 
@@ -200,6 +205,10 @@ returns false under any other condition.}
 	If(Found)
 		Untamed.Util.SetPassive(Who, TRUE)
 		Untamed.Util.SendActorEvent(Who,"UT2.Pack.MemberLeave")
+
+		If(Untamed.Config.GetBool(".PluginEFF"))
+			Untamed.Util.AddToEFF(Who)
+		EndIf
 	EndIf
 
 	Untamed.XPBar.RegisterForSingleUpdate(0.05)
