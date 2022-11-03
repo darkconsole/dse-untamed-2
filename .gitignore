@@ -1,6 +1,7 @@
 # things to ignore
 
 desktop.ini
+*.zip
 
 # a patch to maybe make iwant more responsive by reducing waits while but
 # technically burning more cpu.
