@@ -33,7 +33,7 @@ function CopyTheFiles(array $Input) {
 	$Prefix = getcwd();
 
 	foreach($Input as $Src => $Dest) {
-		echo PHP_EOL, "{$Src}", PHP_EOL, "=> {$Dest}", PHP_EOL;
+		echo PHP_EOL, "{$Src}", PHP_EOL, " -> {$Dest}", PHP_EOL;
 
 		copy(
 			"{$Prefix}\\{$Src}",
@@ -52,14 +52,12 @@ throw new Exception('invalid what');
 
 switch($Mode) {
 	case 'push':
-		echo "[PUSH] {$What}", PHP_EOL;
+		echo "[ PUSH 8::::::D {$What} ]", PHP_EOL;
 		CopyTheFiles(array_flip($Files[$What]));
-		echo PHP_EOL;
 	break;
 	case 'pull':
-		echo "[PUSH] {$What}", PHP_EOL;
+		echo "[ PULL 8::::::D {$What} ]", PHP_EOL;
 		CopyTheFiles($Files[$What]);
-		echo PHP_EOL;
 	break;
 	default:
 		throw new Exception('invalid mode');
