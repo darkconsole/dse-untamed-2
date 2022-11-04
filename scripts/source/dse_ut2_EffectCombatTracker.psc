@@ -10,7 +10,7 @@ Bool Property ShouldBleed Auto Hidden
 
 Event OnEffectStart(Actor Caster, Actor Target)
 	self.Me = self.GetTargetActor()
-	self.HitLog = new Actor[10]
+	self.HitLog = new Actor[6]
 
 	self.EffectBleed = Untamed.SpellAttackBleed.GetNthEffectMagicEffect(0)
 	self.ShouldBleed = Untamed.Player.HasPerk(Untamed.PerkPackBleed1)
@@ -76,7 +76,7 @@ Event OnHit(ObjectReference Whom, Form What, Projectile Bullet, Bool IsPowerful,
 
 	;;;;;;;;
 
-	Untamed.Util.PrintDebug(Me.GetDisplayName() + " hit by (" + What + ")->(" + Bullet + ") from (" + Whom.GetDisplayName() + ")")
+	;;Untamed.Util.PrintDebug(Me.GetDisplayName() + " hit by (" + What + ")->(" + Bullet + ") from (" + Whom.GetDisplayName() + ")")
 
 	Return
 EndEvent
@@ -84,11 +84,11 @@ EndEvent
 Event OnDying(Actor Killer)
 
 	If(Killer == NONE)
-		Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was pseudodeathed by... something.")
+		;;Untamed.Util.PrintDebug("[CombatTracker:OnDeath] " + self.Me.GetDisplayName() + " was pseudodeathed by... something.")
 		Return
 	EndIf
 
-	Untamed.Util.PrintDebug("[CombatTracker:OnDying] " + self.Me.GetDisplayName() + " was pseudodeathed by " + Killer.GetDisplayName())
+	;;Untamed.Util.PrintDebug("[CombatTracker:OnDying] " + self.Me.GetDisplayName() + " was pseudodeathed by " + Killer.GetDisplayName())
 	Return
 EndEvent
 
@@ -120,7 +120,7 @@ Event OnDeath(Actor Killer)
 	While(HitIter < self.HitLog.Length)
 		If(self.HitLog[HitIter] != NONE && self.HitLog[HitIter] != Killer)
 			If(self.HitLog[HitIter].IsInFaction(Untamed.FactionPack) || (self.HitLog[HitIter] == Untamed.Player))
-				Untamed.Util.PrintDebug("[CombatTracker:OnDeath] >> " + self.Me.GetDisplayName() + " hitlog entry " + self.HitLog[HitIter].GetDisplayName())
+				;;Untamed.Util.PrintDebug("[CombatTracker:OnDeath] >> " + self.Me.GetDisplayName() + " hitlog entry " + self.HitLog[HitIter].GetDisplayName())
 				Untamed.Util.ModExperience(self.HitLog[HitIter], (KXP * ShareMult))
 			EndIf
 		EndIf
