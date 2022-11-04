@@ -58,10 +58,13 @@ EndFunction
 Function TriggerActors(Actor Rider, Actor Mount)
 {trigger mounting.}
 
+	Utility.Wait(0.1)
 	Mount.Activate(Rider, TRUE)
+	self.RegisterForRidingControls()
+
+	Utility.Wait(0.1)
 	Debug.SendAnimationEvent(Mount, "moveStart")
 
-	self.RegisterForRidingControls()
 	Return
 EndFunction
 
