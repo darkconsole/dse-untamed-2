@@ -17,28 +17,37 @@ Event OnEffectStart(Actor Target, Actor Caster)
 
 		If(Members[Iter] != NONE && (Members[Iter].GetDistance(Caster) <= self.Distance))
 			If(self.CommandNum == 1)
+				;; STAY
+
 				Members[Iter].AddToFaction(Untamed.FactionPackStay)
 				Members[Iter].EvaluatePackage()
 				Untamed.Util.ModExperience(Untamed.Player, 1)
 				Untamed.Util.ModExperience(Members[Iter], 1)
+				Debug.SendAnimationEvent(Members[Iter], "moveStart")
 
 			ElseIf(self.CommandNum == 2)
+				;; FOLLOW
+
 				Untamed.Pack.Target.ForceRefTo(Untamed.Player)
 				Members[Iter].RemoveFromFaction(Untamed.FactionPackStay)
 				Members[Iter].EvaluatePackage()
 				Untamed.Util.ModExperience(Untamed.Player, 1)
 				Untamed.Util.ModExperience(Members[Iter], 1)
+				Debug.SendAnimationEvent(Members[Iter], "moveStart")
 
 				;; set the shout to take that long to cd.
 				Utility.Wait(3.8)
 				Untamed.Pack.Target.Clear()
 
 			ElseIf(self.CommandNum == 3)
+				;; ATTACK
+
 				Untamed.Pack.Target.ForceRefTo(Target)
 				Members[Iter].RemoveFromFaction(Untamed.FactionPackStay)
 				Members[Iter].EvaluatePackage()
 				Untamed.Util.ModExperience(Untamed.Player, 1)
 				Untamed.Util.ModExperience(Members[Iter], 1)
+				Debug.SendAnimationEvent(Members[Iter], "moveStart")
 			EndIf
 
 			Untamed.Util.PrintDebug(Members[Iter].GetDisplayName() + " heard your command (" + self.CommandNum + ")")
