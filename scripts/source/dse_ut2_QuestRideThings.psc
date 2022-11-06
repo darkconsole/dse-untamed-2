@@ -91,6 +91,11 @@ EndFunction
 Event OnControlDown(String Ctrl)
 {on input down}
 
+	If(Untamed.PerkUI.GetState() != "Off")
+		;; don't fuck about while the perks menu is open.
+		Return
+	EndIf
+
 	Return
 EndEvent
 
@@ -99,6 +104,11 @@ Event OnControlUp(String Ctrl, Float Dur)
 
 	Actor Rider = Game.GetPlayer()
 	Actor What = self.TheMount.GetActorReference()
+
+	If(Untamed.PerkUI.GetState() != "Off")
+		;; don't fuck about while the perks menu is open.
+		Return
+	EndIf
 
 	If(Ctrl == "Activate")
 		Untamed.Util.PrintDebug("[RideThings:ControlUp] dismount uptown")
