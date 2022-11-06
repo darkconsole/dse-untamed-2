@@ -39,11 +39,8 @@ Perks from the path of the bear help the pack endure.
 	[+] Health (+100, +100, +100)
 	    Increases pack member health pool.
 
-	[+] Shout: Follow
-	    Command nearby pack members that were saying to follow you.
-
-	[+] Shout: Stay
-	    Command nearby pack members that were following you to stay put.
+	[-] Nature's Grace (3% mhps, 6% mhps, 9% mhps)
+	    Pack passively heals over time.
 
 ## Ferocity
 
@@ -65,43 +62,56 @@ Perks from the path of the wolf increase the lethality of the pack.
 
 Perks from the path of burden provide the pack with utility abilities.
 
-	[+] Pack Leader (3, 6, 12)
+	[-] Pack Leader (3, 6, 12)
 	    Increases maximum pack size.
 
-	[+] Second Wind (1, 2)
-	    SW1 consumes 50% player UXP to restore 25% health to downed pack member.
-	    SW2 consumes 25% player UXP to restore 50% health to downed pack member.
-
-	[+] Load Bearing (1, 2)
+	[-] Load Bearing (1, 2)
 	    LB1 unlocks pack member inventory.
 	    LB2 increases carry weight of pack members by 100.
 
-	[+] Keen Senses
-	    In Combat: pack members glow blue while enemies glow red.
+	[ ] Ride Sharing
+	    Wolves, Bears, and Sabrecats can be ridden.
+
+	[-] Shouts: Command (Follow, Stay)
+	    Follow - Command nearby pack members that were saying to follow you.
+	    Stay - Command nearby pack members that were following you to stay put.
 
 	[ ] Den Mother
 	    Can become pregnant and birth new animals.
 
 ## Essence
 
-	[+] Experienced (+20 UXP)
+Perks from the path of spirit draw strength from experience.
+
+	[-] Experienced (+20 UXP)
 	    E1 Increase maximum UXP.
 	    E2 percentage of pack member XP overflow rolls into you.
 
-	[+] Thick Hide (400% UXP)
+	[-] Thick Hide (400% UXP)
 	    Player gains natural armour while naked based on current UXP level.
 	    10 UXP = 40 armour.
 	    100 UXP = 400 armour.
 
-	[+] Resistant hide (50% UXP)
+	[-] Resistant Hide (50% UXP)
 	    Player resists magic attacks while naked based on current UXP level.
 	    10 UXP = 5% resist.
 	    100 UXP = 50% resist.
 
-	[+] Nature's Grace (3% mhps, 6% mhps, 9% mhps)
-	    Pack passively heals over time.
+	[-] Second Wind (1, 2)
+	    SW1 consumes 50% UXP to restore 25% health to downed pack member.
+	    SW2 consumes 25% UXP to restore 50% health to downed pack member.
 
-	[+] Crossbreeder
+## Cunning (?)
+
+Perks from the path of cunning tune your awareness of the pack.
+
+	[-] Keen Senses
+	    In Combat: pack members glow blue while enemies glow red.
+
+	[ ] Constant Exposure
+	    Player resists disease.
+
+	[-] Crossbreeder
 	    No UXP penalty for laying with humanoids.
 
 ## Undecided / Ideas
