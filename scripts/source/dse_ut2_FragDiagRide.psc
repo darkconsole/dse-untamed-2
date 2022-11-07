@@ -6,6 +6,7 @@ Scriptname dse_ut2_FragDiagRide Extends TopicInfo Hidden
 Function Fragment_0(ObjectReference akSpeakerRef)
 Actor akSpeaker = akSpeakerRef as Actor
 ;BEGIN CODE
+Utility.Wait(0.25)
 dse_ut2_QuestController.Get().Ride.Mount(akSpeaker)
 ;END CODE
 EndFunction
