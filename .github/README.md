@@ -76,6 +76,9 @@ Perks from the path of burden provide the pack with utility abilities.
 	    Follow - Command nearby pack members that were saying to follow you.
 	    Stay - Command nearby pack members that were following you to stay put.
 
+	[ ] Constant Exposure
+	    Player resists disease.
+
 	[ ] Den Mother
 	    Can become pregnant and birth new animals.
 
@@ -97,19 +100,12 @@ Perks from the path of spirit draw strength from experience.
 	    10 UXP = 5% resist.
 	    100 UXP = 50% resist.
 
-	[-] Second Wind (1, 2)
-	    SW1 consumes 50% UXP to restore 25% health to downed pack member.
-	    SW2 consumes 25% UXP to restore 50% health to downed pack member.
-
-## Cunning (?)
-
-Perks from the path of cunning tune your awareness of the pack.
-
 	[-] Keen Senses
 	    In Combat: pack members glow blue while enemies glow red.
 
-	[ ] Constant Exposure
-	    Player resists disease.
+	[-] Second Wind (1, 2)
+	    SW1 consumes 50% UXP to restore 25% health to downed pack member.
+	    SW2 consumes 25% UXP to restore 50% health to downed pack member.
 
 	[-] Crossbreeder
 	    No UXP penalty for laying with humanoids.
