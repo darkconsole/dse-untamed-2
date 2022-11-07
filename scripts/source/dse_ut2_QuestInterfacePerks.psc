@@ -5,6 +5,8 @@ iWant_Widgets Property iWant Auto Hidden
 
 Int[] Property MainItems Auto Hidden
 Int[] Property SideItems Auto Hidden
+Int[] Property SideX Auto Hidden
+Int[] Property SideY Auto Hidden
 
 Int Property MainCur = 0 Auto Hidden
 Int Property SideCur = 0 Auto Hidden
@@ -285,6 +287,61 @@ Function UpdateSideMenu()
 	Return
 EndFunction
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Function PlotSideMenuGrid(String Dir, String[] Files)
+
+	Int ItemCount = Files.Length - 2
+
+	;; 0 is the title graphic.
+	;; 1 is the cursor graphic.
+	;; 2+ are the menu items.
+
+	;; 1 4 7
+	;; 2 5 8
+	;; 3 6 9
+
+	Int Width = 168  ;; size of perk icon
+	Int Height = 168 ;; size of perk icon
+	Int MarkX = 920  ;; position of first perk icon.
+	Int MarkY = 300  ;; position of first perk icon.
+	Int Col = -1     ;; current column iter.
+	Int Iter = 2     ;; current item iter.
+	Int PosX = MarkX ;; current perk icon position.
+	Int PosY = MarkY ;; current perk icon position.
+
+	If(ItemCount > 6)
+		Width = 200
+		MarkX = 700
+	ElseIf(ItemCount > 3)
+		Width = 300
+		MarkX = 800
+	EndIf
+
+	;;;;;;;;
+
+	While(Iter < Files.Length)
+		If(((Iter - 2) % 3) == 0)
+			Col += 1
+			PosX = MarkX + (Col * Width)
+			PosY = MarkY
+		EndIf
+
+		Untamed.Util.PrintDebug("[PlotSideMenuGrid] " + Iter + ": " + PosX + " " + PosY)
+		self.SideItems[Iter] = self.iWant.LoadWidget(Dir + Files[Iter])
+		self.SideX[Iter] = PosX
+		self.SideY[Iter] = PosY
+		self.iWant.SetPos(self.SideItems[Iter], PosX, PosY)
+		self.iWant.SetVisible(self.SideItems[Iter], 1)
+
+		PosY += Height
+		Iter += 1
+	EndWhile
+
+	Return
+EndFunction
+
 String[] Function GetFilenames()
 {prototype: return a list of image filenames for the ui to plot around the screen.}
 
@@ -307,7 +364,26 @@ Bool Function IsTwoCol()
 	Return (self.SideItems.Length >= 6) && (self.SideItems.Length <= 8)
 EndFunction
 
+Int Function GetColCount()
+
+	;; first two are title and cursor.
+
+	If((self.SideItems.Length - 2) > 6)
+		Return 3
+	EndIf
+
+	If((self.SideItems.Length - 2) > 3)
+		Return 2
+	EndIf
+
+	Return 1
+EndFunction
+
 Bool Function HandleSideMenuKeys(Int KeyCode)
+
+	Int ColCount
+
+	;;;;;;;;
 
 	If(self.Busy)
 		Return FALSE
@@ -328,6 +404,10 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 
 	;;;;;;;;
 
+	ColCount = self.GetColCount()
+
+	;;;;;;;;
+
 	If(self.IsDownKey(KeyCode))
 		self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 1), 1, (self.SideItems.Length - 2))
 	ElseIf(self.IsUpKey(KeyCode))
@@ -337,7 +417,7 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 			self.SideCur = 1
 		EndIf
 
-		If(self.IsTwoCol())
+		If(ColCount > 1)
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 3), 1, (self.SideItems.Length - 2))
 		Else
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur + 1), 1, (self.SideItems.Length - 2))
@@ -347,7 +427,7 @@ Bool Function HandleSideMenuKeys(Int KeyCode)
 			self.SideCur = 1
 		EndIf
 
-		If(self.IsTwoCol())
+		If(ColCount > 1)
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 3), 1, (self.SideItems.Length - 2))
 		Else
 			self.SideCur = PapyrusUtil.ClampInt((self.SideCur - 1), 1, (self.SideItems.Length - 2))
@@ -694,54 +774,25 @@ State Tenacity
 		;;;;;;;;
 
 		If(!Reload)
-			Untamed.Util.PrintDebug("[LoadSideMenu:Tenacity] loading side menu")
+			;; allocate.
 			self.SideItems = Utility.CreateIntArray(Files.Length)
-		Else
-			Untamed.Util.PrintDebug("[LoadSideMenu:Tenacity] updating side menu")
-		EndIf
+			self.SideX = Utility.CreateIntArray(Files.Length)
+			self.SideY = Utility.CreateIntArray(Files.Length)
 
-		;;;;;;;;
-
-		If(!Reload)
-			;; title
+			;; title.
 			self.SideItems[0] = self.iWant.LoadWidget(Dir + Files[0])
 			self.iWant.SetPos(self.SideItems[0], 950, 100)
 			self.iWant.SetVisible(self.SideItems[0], 1)
 
-			;; circle
+			;; cursor.
 			self.SideItems[1] = self.iWant.LoadWidget(Dir + Files[1])
 			self.iWant.SetPos(self.SideItems[1], 950, 100)
 			self.iWant.SetVisible(self.SideItems[1], 0)
 		EndIf
 
-		;; vitality
-		self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
-		self.iWant.SetPos(self.SideItems[2], 720, 300)
-		self.iWant.SetVisible(self.SideItems[2], 1)
-
-		;; thick hide
-		self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
-		self.iWant.SetPos(self.SideItems[3], 710, 450)
-		self.iWant.SetVisible(self.SideItems[3], 1)
-
-		;; resist hide
-		self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
-		self.iWant.SetPos(self.SideItems[4], 730, 600)
-		self.iWant.SetVisible(self.SideItems[4], 1)
-
-		;; follow
-		self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
-		self.iWant.SetPos(self.SideItems[5], 1075, 300)
-		self.iWant.SetVisible(self.SideItems[5], 1)
-
-		;; stay
-		self.SideItems[6] = self.iWant.LoadWidget(Dir + Files[6])
-		self.iWant.SetPos(self.SideItems[6], 1085, 450)
-		self.iWant.SetVisible(self.SideItems[6], 1)
-
-		;;;;;;;;
-
+		self.PlotSideMenuGrid(Dir, Files)
 		self.UpdateSideMenu()
+
 		Return
 	EndFunction
 
@@ -757,24 +808,8 @@ State Tenacity
 		;; cursor
 		If(self.SideCur > 0)
 			self.iWant.SetVisible(self.SideItems[1], 0)
-
-			If(self.SideCur == 1)
-				self.iWant.SetPos(self.SideItems[1], 720, 300)
-				self.iWant.SetRotation(self.SideItems[1], 0)
-			ElseIf(self.SideCur == 2)
-				self.iWant.SetPos(self.SideItems[1], 710, 450)
-				self.iWant.SetRotation(self.SideItems[1], 45)
-			ElseIf(self.SideCur == 3)
-				self.iWant.SetPos(self.SideItems[1], 730, 600)
-				self.iWant.SetRotation(self.SideItems[1], -45)
-			ElseIf(self.SideCur == 4)
-				self.iWant.SetPos(self.SideItems[1], 1075, 300)
-				self.iWant.SetRotation(self.SideItems[1], 90)
-			ElseIf(self.SideCur == 5)
-				self.iWant.SetPos(self.SideItems[1], 1075, 430)
-				self.iWant.SetRotation(self.SideItems[1], 135)
-			EndIf
-
+			self.iWant.SetPos( self.SideItems[1], self.SideX[( self.SideCur + 1 )], self.SideY[( self.SideCur + 1 )] )
+			self.iWant.SetRotation(self.SideItems[1], 0)
 			self.iWant.SetVisible(self.SideItems[1], 1)
 		Else
 			self.iWant.SetVisible(self.SideItems[1], 0)
@@ -909,8 +944,8 @@ State Ferocity
 		If(!Reload)
 			Untamed.Util.PrintDebug("[LoadSideMenu:Ferocity] loading side menu")
 			self.SideItems = Utility.CreateIntArray(Files.Length)
-		Else
-			Untamed.Util.PrintDebug("[LoadSideMenu:Ferocity] updating side menu")
+			self.SideX = Utility.CreateIntArray(Files.Length)
+			self.SideY = Utility.CreateIntArray(Files.Length)
 		EndIf
 
 		;;;;;;;;
@@ -927,29 +962,9 @@ State Ferocity
 			self.iWant.SetVisible(self.SideItems[1], 0)
 		EndIf
 
-		;; attack power
-		self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
-		self.iWant.SetPos(self.SideItems[2], 720, 300)
-		self.iWant.SetVisible(self.SideItems[2], 1)
-
-		;; stamina
-		self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
-		self.iWant.SetPos(self.SideItems[3], 730, 450)
-		self.iWant.SetVisible(self.SideItems[3], 1)
-
-		;; bleed
-		self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
-		self.iWant.SetPos(self.SideItems[4], 710, 600)
-		self.iWant.SetVisible(self.SideItems[4], 1)
-
-		;; shout: attack
-		self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
-		self.iWant.SetPos(self.SideItems[5], 1075, 300)
-		self.iWant.SetVisible(self.SideItems[5], 1)
-
-		;;;;;;;;
-
+		self.PlotSideMenuGrid(Dir, Files)
 		self.UpdateSideMenu()
+
 		Return
 	EndFunction
 
@@ -964,26 +979,12 @@ State Ferocity
 		;; cursor
 		If(self.SideCur > 0)
 			self.iWant.SetVisible(self.SideItems[1], 0)
-
-			If(self.SideCur == 1)
-				self.iWant.SetPos(self.SideItems[1], 720, 300)
-				self.iWant.SetRotation(self.SideItems[1], 0)
-			ElseIf(self.SideCur == 2)
-				self.iWant.SetPos(self.SideItems[1], 710, 450)
-				self.iWant.SetRotation(self.SideItems[1], 45)
-			ElseIf(self.SideCur == 3)
-				self.iWant.SetPos(self.SideItems[1], 730, 600)
-				self.iWant.SetRotation(self.SideItems[1], -45)
-			ElseIf(self.SideCur == 4)
-				self.iWant.SetPos(self.SideItems[1], 1075, 300)
-				self.iWant.SetRotation(self.SideItems[1], 90)
-			EndIf
-
+			self.iWant.SetPos( self.SideItems[1], self.SideX[( self.SideCur + 1 )], self.SideY[( self.SideCur + 1 )] )
+			self.iWant.SetRotation(self.SideItems[1], 0)
 			self.iWant.SetVisible(self.SideItems[1], 1)
 		Else
 			self.iWant.SetVisible(self.SideItems[1], 0)
 		EndIf
-
 
 		Return
 	EndFunction
@@ -1108,8 +1109,8 @@ State BeastMastery
 		If(!Reload)
 			Untamed.Util.PrintDebug("[LoadSideMenu:BeastMastery] loading side menu")
 			self.SideItems = Utility.CreateIntArray(Files.Length)
-		Else
-			Untamed.Util.PrintDebug("[LoadSideMenu:BeastMastery] updating side menu")
+			self.SideX = Utility.CreateIntArray(Files.Length)
+			self.SideY = Utility.CreateIntArray(Files.Length)
 		EndIf
 
 		;;;;;;;;
@@ -1126,34 +1127,9 @@ State BeastMastery
 			self.iWant.SetVisible(self.SideItems[1], 0)
 		EndIf
 
-		;; pack leader
-		self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
-		self.iWant.SetPos(self.SideItems[2], 710, 300)
-		self.iWant.SetVisible(self.SideItems[2], 1)
-
-		;; second wind
-		self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
-		self.iWant.SetPos(self.SideItems[3], 730, 465)
-		self.iWant.SetVisible(self.SideItems[3], 1)
-
-		;; load bearing
-		self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
-		self.iWant.SetPos(self.SideItems[4], 710, 600)
-		self.iWant.SetVisible(self.SideItems[4], 1)
-
-		;; situational awareness
-		self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
-		self.iWant.SetPos(self.SideItems[5], 1075, 300)
-		self.iWant.SetVisible(self.SideItems[5], 1)
-
-		;; den mother
-		self.SideItems[6] = self.iWant.LoadWidget(Dir + Files[6])
-		self.iWant.SetPos(self.SideItems[6], 1075, 465)
-		self.iWant.SetVisible(self.SideItems[6], 1)
-
-		;;;;;;;;
-
+		self.PlotSideMenuGrid(Dir, Files)
 		self.UpdateSideMenu()
+
 		Return
 	EndFunction
 
@@ -1169,24 +1145,8 @@ State BeastMastery
 		;; cursor
 		If(self.SideCur > 0)
 			self.iWant.SetVisible(self.SideItems[1], 0)
-
-			If(self.SideCur == 1)
-				self.iWant.SetPos(self.SideItems[1], 710, 300)
-				self.iWant.setRotation(self.SideItems[1], 0)
-			ElseIf(self.SideCur == 2)
-				self.iWant.SetPos(self.SideItems[1], 730, 450)
-				self.iWant.setRotation(self.SideItems[1], 45)
-			ElseIf(self.SideCur == 3)
-				self.iWant.SetPos(self.SideItems[1], 710, 600)
-				self.iWant.setRotation(self.SideItems[1], -45)
-			ElseIf(self.SideCur == 4)
-				self.iWant.SetPos(self.SideItems[1], 1075, 300)
-				self.iWant.setRotation(self.SideItems[1], 90)
-			ElseIf(self.SideCur == 5)
-				self.iWant.SetPos(self.SideItems[1], 1075, 460)
-				self.iWant.SetRotation(self.SideItems[1], 135)
-			EndIf
-
+			self.iWant.SetPos( self.SideItems[1], self.SideX[( self.SideCur + 1 )], self.SideY[( self.SideCur + 1 )] )
+			self.iWant.SetRotation(self.SideItems[1], 0)
 			self.iWant.SetVisible(self.SideItems[1], 1)
 		Else
 			self.iWant.SetVisible(self.SideItems[1], 0)
@@ -1325,8 +1285,8 @@ State Essence
 		If(!Reload)
 			Untamed.Util.PrintDebug("[LoadSideMenu:Essence] loading side menu")
 			self.SideItems = Utility.CreateIntArray(Files.Length)
-		Else
-			Untamed.Util.PrintDebug("[LoadSideMenu:Essence] updating side menu")
+			self.SideX = Utility.CreateIntArray(Files.Length)
+			self.SideY = Utility.CreateIntArray(Files.Length)
 		EndIf
 
 		;;;;;;;;
@@ -1343,34 +1303,9 @@ State Essence
 			self.iWant.SetVisible(self.SideItems[1], 0)
 		EndIf
 
-		;; experienced
-		self.SideItems[2] = self.iWant.LoadWidget(Dir + Files[2])
-		self.iWant.SetPos(self.SideItems[2], 710, 290)
-		self.iWant.SetVisible(self.SideItems[2], 1)
-
-		;; thick hide
-		self.SideItems[3] = self.iWant.LoadWidget(Dir + Files[3])
-		self.iWant.SetPos(self.SideItems[3], 740, 450)
-		self.iWant.SetVisible(self.SideItems[3], 1)
-
-		;; resist hide
-		self.SideItems[4] = self.iWant.LoadWidget(Dir + Files[4])
-		self.iWant.SetPos(self.SideItems[4], 710, 610)
-		self.iWant.SetVisible(self.SideItems[4], 1)
-
-		;; nature's grace
-		self.SideItems[5] = self.iWant.LoadWidget(Dir + Files[5])
-		self.iWant.SetPos(self.SideItems[5], 1075, 300)
-		self.iWant.SetVisible(self.SideItems[5], 1)
-
-		;; crossbreeder
-		self.SideItems[6] = self.iWant.LoadWidget(Dir + Files[6])
-		self.iWant.SetPos(self.SideItems[6], 1080, 470)
-		self.iWant.SetVisible(self.SideItems[6], 1)
-
-		;;;;;;;;
-
+		self.PlotSideMenuGrid(Dir, Files)
 		self.UpdateSideMenu()
+
 		Return
 	EndFunction
 
@@ -1386,24 +1321,8 @@ State Essence
 		;; cursor
 		If(self.SideCur > 0)
 			self.iWant.SetVisible(self.SideItems[1], 0)
-
-			If(self.SideCur == 1)
-				self.iWant.SetPos(self.SideItems[1], 710, 300)
-				self.iWant.SetRotation(self.SideItems[1], 0)
-			ElseIf(self.SideCur == 2)
-				self.iWant.SetPos(self.SideItems[1], 730, 450)
-				self.iWant.SetRotation(self.SideItems[1], 45)
-			ElseIf(self.SideCur == 3)
-				self.iWant.SetPos(self.SideItems[1], 710, 600)
-				self.iWant.SetRotation(self.SideItems[1], -45)
-			ElseIf(self.SideCur == 4)
-				self.iWant.SetPos(self.SideItems[1], 1075, 300)
-				self.iWant.SetRotation(self.SideItems[1], 90)
-			ElseIf(self.SideCur == 5)
-				self.iWant.SetPos(self.SideItems[1], 1075, 450)
-				self.iWant.SetRotation(self.SideItems[1], 135)
-			EndIf
-
+			self.iWant.SetPos( self.SideItems[1], self.SideX[( self.SideCur + 1 )], self.SideY[( self.SideCur + 1 )] )
+			self.iWant.SetRotation(self.SideItems[1], 0)
 			self.iWant.SetVisible(self.SideItems[1], 1)
 		Else
 			self.iWant.SetVisible(self.SideItems[1], 0)
