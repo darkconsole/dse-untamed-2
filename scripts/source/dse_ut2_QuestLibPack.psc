@@ -165,6 +165,8 @@ if the pack is already full.}
 			Untamed.Util.SetPassive(Who, FALSE)
 			Untamed.XPBar.RequestUpdate()
 
+			StorageUtil.SetFloatValue(Who, "UT2.Pack.TimeJoin", Utility.GetCurrentGameTime())
+
 			If(Untamed.Menu.HasEFF)
 				Untamed.Util.AddToEFF(Who)
 			EndIf
@@ -205,6 +207,7 @@ returns false under any other condition.}
 	If(Found)
 		Untamed.Util.SetPassive(Who, TRUE)
 		Untamed.Util.SendActorEvent(Who,"UT2.Pack.MemberLeave")
+		StorageUtil.UnsetFloatValue(Who, "UT2.Pack.TimeJoin")
 
 		If(Untamed.Menu.HasEFF)
 			Untamed.Util.RemoveFromEFF(Who)
@@ -212,6 +215,7 @@ returns false under any other condition.}
 	EndIf
 
 	Untamed.XPBar.RequestUpdate()
+
 	Return Found
 EndFunction
 
