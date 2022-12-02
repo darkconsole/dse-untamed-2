@@ -346,6 +346,8 @@ Function ShowPageDebug()
 	String PackLeft
 	String PackRight
 
+	Actor TheMount = Untamed.Ride.TheMount.GetReference() as Actor
+
 	If(Who == None)
 		Who = Untamed.Player
 	EndIf
@@ -384,6 +386,11 @@ Function ShowPageDebug()
 	self.AddTextOption("Pack Max",(Untamed.Pack.GetMemberCountMax() as String))
 	self.AddTextOption("Pregnant: ", PregRight)
 	self.AddEmptyOption()
+
+	self.AddEmptyOption()
+	self.AddHeaderOption("Mount Info")
+	self.AddTextOption("Mount", TheMount as String)
+	self.AddTextOption("Skeleton", ((Untamed.Ride.WillItMount(Untamed.Player, TheMount) As Int) As String))
 
 	Piter = 0
 	While(Piter < Pack.Length)

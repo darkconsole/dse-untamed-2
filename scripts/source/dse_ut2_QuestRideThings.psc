@@ -29,6 +29,10 @@ EndFunction
 Bool Function WillItMount(Actor Rider, Actor Mount)
 {check if conditions are ok to proceed.}
 
+	If(Mount == NONE)
+		Return FALSE
+	EndIf
+
 	If(!Untamed.Pack.IsMember(Mount))
 		Untamed.Util.Print(Mount.GetDisplayName() + " is not a member of your pack.")
 		Return FALSE
