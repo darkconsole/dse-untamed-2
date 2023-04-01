@@ -4,6 +4,22 @@
 	[+] = Done.
 	[-] = Technically done.
 
+# Default Keys
+
+* F6 - Opens perk tree menu.
+
+* WASD - Moves around the perk menu.
+  (whatever keys moves you forward backwards left right)
+
+* TAB - Close Perk Menu
+  (whatever key opens the normal Skyrim + menu, closes this menu)
+
+* R - Show a tip about what the selected perk does.
+  (whatever key sheaths your weapons)
+
+* Enter - Buy the selected perk.
+  (whatever key normally triggers Activate prompts)
+
 # General Abilities
 
 	[+] Add found animals to the pack.
