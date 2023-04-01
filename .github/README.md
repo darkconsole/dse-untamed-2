@@ -11,14 +11,27 @@
 * WASD - Moves around the perk menu.
   (whatever keys moves you forward backwards left right)
 
-* TAB - Close Perk Menu
+* TAB - Back out of a menu, and close the entire menu.
   (whatever key opens the normal Skyrim + menu, closes this menu)
 
 * R - Show a tip about what the selected perk does.
   (whatever key sheaths your weapons)
 
-* Enter - Buy the selected perk.
+* E - Buy the selected perk.
   (whatever key normally triggers Activate prompts)
+
+# Optional ESPs
+
+## dse-untamed-2-beast-tweaks.esp
+
+Tries to...
+
+* Prevent Bears and Cats from laying down while they are in active follow mode.
+  because once they do they will sit there until they feel like not sitting
+  there with nothing you can do about it.
+
+* Make wolves not howl every 3 gd seconds.
+
 
 # General Abilities
 
@@ -85,7 +98,7 @@ Perks from the path of burden provide the pack with utility abilities.
 	    LB1 unlocks pack member inventory.
 	    LB2 increases carry weight of pack members by 100.
 
-	[ ] Ride Sharing
+	[+] Ride Share
 	    Wolves, Bears, and Sabrecats can be ridden.
 
 	[-] Shouts: Command (Follow, Stay)
