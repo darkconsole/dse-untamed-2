@@ -81,6 +81,7 @@ Perk           Property PerkLoadBearing1 Auto         ;; untamed (beast mastery)
 Perk           Property PerkLoadBearing2 Auto         ;; untamed (beast mastery)
 Perk           Property PerkSituationAware Auto       ;; untamed (beast mastery)
 Perk           Property PerkDenMother Auto            ;; untamed (beast mastery)
+Perk           Property PerkRideShare Auto            ;; untamed (beast mastery)
 
 Perk           Property PerkExperienced1 Auto         ;; untamed (essence)
 Perk           Property PerkExperienced2 Auto         ;; untamed (essence)

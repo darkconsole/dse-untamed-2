@@ -1152,6 +1152,7 @@ State BeastMastery
 		self.iWant.SetVisible(self.SideItems[4], 1)
 		self.iWant.SetVisible(self.SideItems[5], 1)
 		self.iWant.SetVisible(self.SideItems[6], 1)
+		self.iWant.SetVisible(self.SideItems[7], 1)
 
 		;; cursor
 		If(self.SideCur > 0)
@@ -1168,7 +1169,7 @@ State BeastMastery
 
 	String[] Function GetFilenames()
 
-		String[] Output = Utility.CreateStringArray(7)
+		String[] Output = Utility.CreateStringArray(8)
 
 		Output[0] = "Title.dds"
 		Output[1] = "Cursor.dds"
@@ -1209,6 +1210,12 @@ State BeastMastery
 			Output[6] = "DenMother1.dds"
 		Else
 			Output[6] = "DenMother0.dds"
+		EndIf
+
+		If(Untamed.Player.HasPerk(Untamed.PerkRideShare))
+			Output[7] = "RideShare1.dds"
+		Else
+			Output[7] = "RideShare0.dds"
 		EndIf
 
 		Return Output
@@ -1255,6 +1262,12 @@ State BeastMastery
 				Output = NONE
 			Else
 				Output = Untamed.PerkDenMother
+			EndIf
+		ElseIf(Choice == 6)
+			If(Untamed.Player.HasPerk(Untamed.PerkRideShare))
+				Output = NONE
+			Else
+				Output = Untamed.PerkRideShare
 			EndIf
 		EndIf
 
