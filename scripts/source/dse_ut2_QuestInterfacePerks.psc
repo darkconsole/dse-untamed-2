@@ -28,12 +28,23 @@ Int ScreenY = 720
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+Function RegisterGameKeys()
+	self.RegisterForKey(self.KeyMn)
+	Return
+EndFunction
+
+Function UnregisterGameKeys()
+	self.UnregisterForKey(self.KeyMn)
+	Return
+EndFunction
+
 Function OnGameReady()
 
 	self.iWant = Game.GetFormFromFile(0x800, "iWant Widgets.esl") as iWant_Widgets
+	self.KeyMn = Untamed.Config.GetInt(".MenuKey")
 
-	self.UnregisterForKey(self.KeyMn)
-	self.RegisterForKey(self.KeyMn)
+	self.UnregisterGameKeys()
+	self.RegisterGameKeys()
 
 	self.GotoState("Default")
 	self.GotoState("Off")

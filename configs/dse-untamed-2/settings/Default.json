@@ -25,6 +25,7 @@
 	"IncludeCreatures": true,
 	"PlayerExperienceMax": 100,
 	"HumanoidOrgasmXPM": 0.5,
+	"MenuKey": 64,
 
 	"PluginEFF": true,
 

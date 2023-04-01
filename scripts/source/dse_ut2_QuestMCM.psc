@@ -222,6 +222,24 @@ EndEvent
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+Event OnOptionKeyMapChange(int Item, int KeyCode, string ExistCtrl, string ExistName)
+
+	;; todo - check how that conflict detection works.
+
+	If(Item == ItemMenuKey)
+		Untamed.PerkUI.UnregisterGameKeys()
+		Untamed.PerkUI.KeyMn = KeyCode
+		Untamed.Config.SetInt(".MenuKey", KeyCode)
+		self.SetKeyMapOptionValue(Item, KeyCode)
+		Untamed.PerkUI.RegisterGameKeys()
+	EndIf
+
+	Return
+EndEvent
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 Event OnOptionSelect(Int Item)
 
 	Bool Val = FALSE
@@ -296,6 +314,7 @@ EndEvent
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 Int ItemOptEnabled
+Int ItemMenuKey
 
 Function ShowPageGeneral()
 
@@ -304,6 +323,7 @@ Function ShowPageGeneral()
 	self.SetCursorPosition(0)
 
 	ItemOptEnabled = self.AddToggleOption("Enable Mod", Untamed.OptEnabled)
+	ItemMenuKey = self.AddKeymapOption("$UT2_MenuOpt_MenuKey", Untamed.Config.GetInt(".MenuKey"))
 
 	Return
 EndFunction
