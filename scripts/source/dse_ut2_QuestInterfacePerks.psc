@@ -1,3 +1,4 @@
+
 Scriptname dse_ut2_QuestInterfacePerks extends Quest
 
 dse_ut2_QuestController Property Untamed Auto
@@ -14,13 +15,19 @@ String Property StateCur = "Default" Auto Hidden
 Bool Property Busy = FALSE Auto Hidden
 
 Int Property KeyMn = 0x40 Auto Hidden
+Int Property KeyOk = 0 Auto Hidden
+Int Property KeyFk = 0 Auto Hidden
+Int Property KeyHp = 0 Auto Hidden
+
 Int Property KeyUp = 0 Auto Hidden
 Int Property KeyDn = 0 Auto Hidden
 Int Property KeyLf = 0 Auto Hidden
 Int Property KeyRt = 0 Auto Hidden
-Int Property KeyOk = 0 Auto Hidden
-Int Property KeyFk = 0 Auto Hidden
-Int Property KeyHp = 0 Auto Hidden
+
+Int Property KeyUpDPAD = 266 Auto Hidden
+Int Property KeyDnDPAD = 267 Auto Hidden
+Int Property KeyLfDPAD = 268 Auto Hidden
+Int Property KeyRtDPAD = 296 Auto Hidden
 
 Int ScreenX = 1280
 Int ScreenY = 720
@@ -81,11 +88,17 @@ Function EnableKeyboardInput(Bool Full=TRUE)
 
 	self.RegisterForKey(self.KeyOk)
 	self.RegisterForKey(self.KeyFk)
+	self.RegisterForKey(self.KeyHp)
+
 	self.RegisterForKey(self.KeyUp)
 	self.RegisterForKey(self.KeyDn)
 	self.RegisterForKey(self.KeyLf)
 	self.RegisterForKey(self.KeyRt)
-	self.RegisterForKey(self.KeyHp)
+
+	self.RegisterForKey(self.KeyUpDPAD)
+	self.RegisterForKey(self.KeyDnDPAD)
+	self.RegisterForKey(self.KeyLfDPAD)
+	self.RegisterForKey(self.KeyRtDPAD)
 
 	Return
 EndFunction
@@ -94,11 +107,17 @@ Function DisableKeyboardInput(Bool Full=TRUE)
 
 	self.UnregisterForKey(self.KeyOk)
 	self.UnregisterForKey(self.KeyFk)
+	self.UnregisterForKey(self.KeyHp)
+
 	self.UnregisterForKey(self.KeyUp)
 	self.UnregisterForKey(self.KeyDn)
 	self.UnregisterForKey(self.KeyLf)
 	self.UnregisterForKey(self.KeyRt)
-	self.UnregisterForKey(self.KeyHp)
+
+	self.UnregisterForKey(self.KeyUpDPAD)
+	self.UnregisterForKey(self.KeyDnDPAD)
+	self.UnregisterForKey(self.KeyLfDPAD)
+	self.UnregisterForKey(self.KeyRtDPAD)
 
 	self.KeyOk = 0
 	self.KeyFk = 0
@@ -594,22 +613,22 @@ EndFunction
 
 Bool Function IsUpKey(Int KeyCode)
 
-	Return (KeyCode == self.KeyUp)
+	Return (KeyCode == self.KeyUp || KeyCode == self.KeyUpDPAD)
 EndFunction
 
 Bool Function IsDownKey(Int KeyCode)
 
-	Return (KeyCode == self.KeyDn)
+	Return (KeyCode == self.KeyDn || KeyCode == self.KeyDnDPAD)
 EndFunction
 
 Bool Function IsLeftKey(Int KeyCode)
 
-	Return (KeyCode == self.KeyLf)
+	Return (KeyCode == self.KeyLf || KeyCode == self.KeyLfDPAD)
 EndFunction
 
 Bool Function IsRightKey(Int KeyCode)
 
-	Return (KeyCode == self.KeyRt)
+	Return (KeyCode == self.KeyRt || KeyCode == self.KeyRtDPAD)
 EndFunction
 
 Bool Function IsActivateKey(Int KeyCode)
