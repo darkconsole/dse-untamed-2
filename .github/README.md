@@ -4,12 +4,23 @@
 	[+] = Done.
 	[-] = Technically done.
 
+# Requirements
+
+* SexLab SE
+* iWant Widgets
+* iWant NG (Optional, makes the menu a lot faster)
+* RaceMenu/NiOverride
+* UI Extensions
+
 # Default Keys
 
 * F6 - Opens perk tree menu.
 
 * WASD - Moves around the perk menu.
   (whatever keys moves you forward backwards left right)
+
+* Gamepad DPAD - Moves around the perk menu.
+  (WASD does not work when Gamepad is plugged in)
 
 * TAB - Back out of a menu, and close the entire menu.
   (whatever key opens the normal Skyrim + menu, closes this menu)
